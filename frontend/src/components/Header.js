@@ -36,20 +36,20 @@ const Header = () => {
 
                 <li className="nav-item dropdown" onMouseEnter={() => document.getElementById("navbarDropdown").click()}>
                 <a
-                className="nav-link dropdown-toggle"
-                href="#"
-                id="navbarDropdown"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
+                    className="nav-link dropdown-toggle"
+                    href="#"
+                    id="navbarDropdown"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
                 >
-                    Complains
-                </a>
-                <ul className='dropdown-menu' aria-labelledby='navbarDropdown'>
-                    <li><NavLink to='/' className='dropdown-item'>Complains</NavLink></li>
-                    <li><NavLink to='/' className='dropdown-item'>Raids</NavLink></li>
-                    <li><NavLink to='/' className='dropdown-item'>Fine & Court</NavLink></li>
-                </ul>
+                        Complains
+                    </a>
+                    <ul className='dropdown-menu' aria-labelledby='navbarDropdown'>
+                        <li><NavLink to='/complains' className='dropdown-item'>Complains</NavLink></li>
+                        <li><NavLink to='/raids' className='dropdown-item'>Raids</NavLink></li>
+                        <li><NavLink to='/fine-and-court' className='dropdown-item'>Fine & Court</NavLink></li>
+                    </ul>
                 </li>
                 <li className='nav-item'>
                     <NavLink to= '/' className= 'nav-link'>Midwife</NavLink>
