@@ -4,3 +4,13 @@
         backdrop-filter: blur(10px);
     }
 }
+
+nav{
+    background-image: linear-gradient(to right , #63D8F1,#5BEA9D);
+}
+
+.nav-item:hover{
+
+    border-bottom: 1.5px solid black;
+    
+}
