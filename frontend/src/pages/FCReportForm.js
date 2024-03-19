@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
+import './FCReportSubmit.css'
+import Layout from '../components/Layout';
 
 const FCReportForm = () => {
+
+  
   const [raidOfficerInfo, setRaidOfficerInfo] = useState({
     name: '',
     email: '',
@@ -8,7 +12,7 @@ const FCReportForm = () => {
   });
 
   const [violationDetails, setViolationDetails] = useState({
-    dateTime: '',
+    date: '',
     location: '',
     type: '',
     description: '',
@@ -20,7 +24,7 @@ const FCReportForm = () => {
     idNumber: '',
   });
 
-  const [evidenceFile, setEvidenceFile] = useState(null);
+  const [evidenceFile, setEvidenceFiles] = useState(null);
 
   const handleRaidOfficerChange = (e) => {
     const { name, value } = e.target;
@@ -38,7 +42,8 @@ const FCReportForm = () => {
   };
 
   const handleFileChange = (e) => {
-    setEvidenceFile(e.target.files[0]);
+    const files = Array.from(e.target.files);
+    setEvidenceFiles(files);
   };
 
   const handleSubmit = (e) => {
@@ -51,64 +56,81 @@ const FCReportForm = () => {
   };
 
   return (
-    <div>
-      <h2>Report Violation</h2>
-      <form onSubmit={handleSubmit}>
-        {/* Raid Officer Information */}
-        <h3>Raid Officer Information</h3>
-        <div>
-          <label>Name:</label>
-          <input type="text" name="name" value={raidOfficerInfo.name} onChange={handleRaidOfficerChange} />
-        </div>
-        <div>
-          <label>Email:</label>
-          <input type="email" name="email" value={raidOfficerInfo.email} onChange={handleRaidOfficerChange} />
-        </div>
-        <div>
-          <label>Contact Number:</label>
-          <input type="text" name="contactNumber" value={raidOfficerInfo.contactNumber} onChange={handleRaidOfficerChange} />
-        </div>
-        {/* Violation Details */}
-        <h3>Violation Details</h3>
-        <div>
-          <label>Date and Time:</label>
-          <input type="datetime-local" name="dateTime" value={violationDetails.dateTime} onChange={handleViolationChange} />
-        </div>
-        <div>
-          <label>Location:</label>
-          <input type="text" name="location" value={violationDetails.location} onChange={handleViolationChange} />
-        </div>
-        <div>
-          <label>Violation Type:</label>
-          <input type="text" name="type" value={violationDetails.type} onChange={handleViolationChange} />
-        </div>
-        <div>
-          <label>Violation Description:</label>
-          <textarea name="description" value={violationDetails.description} onChange={handleViolationChange} />
-        </div>
-        {/* Violator Information */}
-        <h3>Violator Information</h3>
-        <div>
-          <label>Name:</label>
-          <input type="text" name="name" value={violatorInfo.name} onChange={handleViolatorChange} />
-        </div>
-        <div>
-          <label>Email:</label>
-          <input type="email" name="email" value={violatorInfo.email} onChange={handleViolatorChange} />
-        </div>
-        <div>
-          <label>ID Number:</label>
-          <input type="text" name="idNumber" value={violatorInfo.idNumber} onChange={handleViolatorChange} />
-        </div>
-        {/* Upload Evidence */}
-        <h3>Upload Evidence</h3>
-        <div>
-          <input type="file" onChange={handleFileChange} />
-        </div>
-        {/* Submit Button */}
-        <button type="submit">Submit Report</button>
-      </form>
-    </div>
+    <Layout>
+      <div className="form-container">
+        <h2>Report Violation</h2>
+        <form className='form' onSubmit={handleSubmit}>
+
+
+          <h3>Raid Officer Information</h3>
+
+          <div className='ROinfo'>
+            <div>
+              <label>Name:</label>
+              <input type="text" name="name" value={raidOfficerInfo.name} onChange={handleRaidOfficerChange} />
+            </div>
+            <div>
+              <label>Email:</label>
+              <input type="email" name="email" value={raidOfficerInfo.email} onChange={handleRaidOfficerChange} />
+            </div>
+            <div>
+              <label>Contact Number:</label>
+              <input type="Number" name="contactNumber" value={raidOfficerInfo.contactNumber} onChange={handleRaidOfficerChange} />
+            </div>
+            <div>
+              <label>Date:</label>
+              <input type="date" name="date" value={violationDetails.date} onChange={handleViolationChange} />
+            </div>
+          </div>
+
+
+          <h3>Violation Details</h3>
+          <div className='Vdetails'>
+            <div>
+              <label>Location:</label>
+              <input type="text" name="location" value={violationDetails.location} onChange={handleViolationChange} />
+            </div>
+            <div>
+              <label>Violation Type:</label>
+              <input type="text" name="type" value={violationDetails.type} onChange={handleViolationChange} />
+            </div>
+
+            <div>
+              <label>Violation Description:</label>
+              <textarea name="description" value={violationDetails.description} onChange={handleViolationChange} />
+            </div>
+          </div>
+
+
+          <h3>Violator Information</h3>
+          <div className='Vinfo'>
+            <div>
+              <label>Name:</label>
+              <input type="text" name="name" value={violatorInfo.name} onChange={handleViolatorChange} />
+            </div>
+            <div>
+              <label>Email:</label>
+              <input type="email" name="email" value={violatorInfo.email} onChange={handleViolatorChange} />
+            </div>
+            <div>
+              <label>Contact Number:</label>
+              <input type="Number" name="contactNumber" value={violatorInfo.contactNumber} onChange={handleViolatorChange} />
+            </div>
+            <div>
+              <label>ID Number:</label>
+              <input type="text" name="idNumber" value={violatorInfo.idNumber} onChange={handleViolatorChange} />
+            </div>
+          </div>
+
+
+          <h3>Upload Evidence</h3>
+          <div>
+            <input type="file" onChange={handleFileChange} multiple />
+          </div>
+          <button className='button' type="submit">Submit Report</button>
+        </form>
+      </div>
+    </Layout>
   );
 };
 
