@@ -12,10 +12,8 @@ function App() {
     <Router>
       <Routes>
         <Route path='/' element = {<Home/>}/>
-
         <Route path='/FineAndCourt' element = {<FineAndCourt/>}/>
         <Route path='/Fine-And-court-Submit-Reports' element = {<FCReportForm/>}/>
-
         <Route path='/staff' element = {<Staff/>}/>
 
       </Routes>
