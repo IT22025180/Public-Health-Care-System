@@ -1,0 +1,45 @@
+.leftflex{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+   justify-content: center;
+
+}
+.leftflex img{
+    margin-left: 20px;
+    border-radius: 50%;
+    transition: all 1s;
+    border: 2px solid rgb(0, 0, 0);
+    
+}
+.leftflex img:hover{
+    margin-left: 20px;
+    border-radius: 10%;
+    transition: all 1s;
+    border: 2px solid rgb(56, 230, 56);
+}
+.rightflex{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+   justify-content: center;
+
+}
+.rightflex img{
+    margin-right: 20px;
+    border-radius: 50%;
+    transition: all 1s;
+    border: 2px solid rgb(0, 0, 0);
+}
+
+.rightflex img:hover{
+    margin-right: 20px;
+    border-radius: 10%;
+    transition: all 1s;
+    border: 2px solid rgb(56, 230, 56);
+}
+
+.Hcontainer{
+    width: 100%;
+    
+}

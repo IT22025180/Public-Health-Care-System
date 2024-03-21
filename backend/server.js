@@ -9,7 +9,7 @@ dotenv.config();
 //rest
 const app = express();
 
-/*const uri = 'mongodb+srv://killsvans:<password>@phi24.h0zm8ky.mongodb.net/?retryWrites=true&w=majority&appName=phi24';
+const uri = 'mongodb+srv://vanuja2024:7289@phisystem.r1glzmh.mongodb.net/';
 
 const connect = async() => {
     try{
@@ -20,7 +20,7 @@ const connect = async() => {
     }
 };
 
-connect();*/
+connect();
 
 app.use(cors());
 

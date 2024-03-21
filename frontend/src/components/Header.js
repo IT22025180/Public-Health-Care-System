@@ -13,7 +13,7 @@ const Header = () => {
             <div className="collapse navbar-collapse sidebar" id="navbarTogglerDemo01">
             <div class="offcanvas-header text-white border-bottom">
             
-            <Link to="/" className="navbar-brand" ><img src='../../natLogo.png' height={50} width={40}/></Link>
+            <Link to="/" className="navbar-brand" ><img src='../../natLogo.png' alt='natlogo' height={50} width={40}/></Link>
             <Link to="/" className="navbar-brand fs-4" >Public Health Information System</Link>
             </div>
             
@@ -48,13 +48,12 @@ const Header = () => {
                     <ul className='dropdown-menu' aria-labelledby='navbarDropdown'>
                         <li><NavLink to='/complains' className='dropdown-item'>Complains</NavLink></li>
                         <li><NavLink to='/raids' className='dropdown-item'>Raids</NavLink></li>
-                        <li><NavLink to='/FineAndCourt' className='dropdown-item'>Fine & Court</NavLink></li>
+                        <li><NavLink to='/f&c' className='dropdown-item'>Fine & Court</NavLink></li>
                     </ul>
                 </li>
                 <li className='nav-item'>
                     <NavLink to= '/' className= 'nav-link'>Midwife</NavLink>
                 </li>
-                <br/>
             </ul>
             <form class="d-flex mt-3 justify-content-center align-items-center " role="search">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
