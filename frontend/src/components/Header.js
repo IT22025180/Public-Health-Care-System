@@ -54,6 +54,7 @@ const Header = () => {
                 <li className='nav-item'>
                     <NavLink to= '/' className= 'nav-link'>Midwife</NavLink>
                 </li>
+                <br/>
             </ul>
             <form class="d-flex mt-3 justify-content-center align-items-center " role="search">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
