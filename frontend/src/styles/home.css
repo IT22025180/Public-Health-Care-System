@@ -39,7 +39,99 @@
     border: 2px solid rgb(56, 230, 56);
 }
 
-.Hcontainer{
+.Lcontainer{
     width: 100%;
+    background-image: linear-gradient(to right, #63D8F1, rgb(207, 214, 69));
+    border: 1px solid black;
+    border-radius: 5px;
+}
+.Lcontainer:hover{
+    width: 100%;
+    border: 1px solid black;
+    border-radius: 20px;
+    transition: all 1s;
     
 }
+.Rcontainer{
+    width: 100%;
+    background-image: linear-gradient(to right,rgb(207, 214, 69), #63D8F1);
+    border: 1px solid black;
+    border-radius: 5px;
+}
+.Rcontainer:hover{
+    width: 100%;
+    border: 1px solid black;
+    border-radius: 20px;
+    transition: all 1s;
+    
+}
+.overlay-text {
+    background-image: blue;
+    backdrop-filter: blur(20px);
+    border-radius: 10px; /* Ensure the text appears above the slideshow */
+    
+  }
+
+.contain {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 80vh; /* Set the container to full viewport height */
+  }
+  
+  .slider-frame {
+    height: 500px; /* Set the fixed height for the slider */
+    width: 80%;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .slider-img {
+    width: 500%; /* Total width of all image containers */
+    height: 100%;
+    position: relative;
+    animation: slide_animation 20s linear infinite;
+  }
+  
+  .img-container {
+    height: 100%;
+    width: 20%; /* Width of each image container relative to the frame */
+    float: left;
+    position: relative;
+  }
+  
+  .img-container img {
+    width: 100%; /* Ensure each image fills its container */
+    height: 100%; /* Maintain aspect ratio */
+    border-radius: 20px;
+    border: 2px solid black;
+  }
+  
+  @keyframes slide_animation {
+    0% { left: 0; }
+    20% { left: 0; }
+    25% { left: -100%; } /* Slide to the second image */
+    45% { left: -100%; }
+    50% { left: -200%; } /* Slide to the third image */
+    70% { left: -200%; }
+    75% { left: -300%; } /* Slide to the fourth image */
+    95% { left: -300%; }
+    100% { left: -400%; } /* Slide back to the first image */
+  }
+
+  .btn-home{
+    
+    width: 20%;
+    
+  }
+
+  .overlay-item {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+  }
+  
+  

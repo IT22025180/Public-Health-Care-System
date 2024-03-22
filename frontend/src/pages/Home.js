@@ -7,18 +7,52 @@ import vimg from '../webImages/vacccine.jpg';
 import dimg from '../webImages/dengue.jpg';
 import cimg from '../webImages/complain.jpg';
 import rimg from '../webImages/raids.jpg';
+import Scli from '../webImages/Slideclinic.jpg';
+import Svac from '../webImages/Slidevaccine.jpg';
+import Ssta from '../webImages/Slidestaff.jpg';
+import Sdeng from '../webImages/Slidedengue.jpg';
+import Sraid from '../webImages/Slideraids.jpg';
 
 const Home = () => {
+
+  const scrollToSlideShow = () => {
+    // Scroll to the slideshow container
+    const slideShowContainer = document.getElementById('slideshow-container');
+    slideShowContainer.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  
   return (
     <div>
       <Layout>
-        <br/>
-        <br/>
-        <Container>
-          <h1>Welcome to Public Helath Care System!!</h1>
-          <div></div>
-        </Container>
-        <Container className='Hcontainer'>
+          <div className='contain'>
+            
+          <div  className='slider-frame'>
+            <div className='slider-img'>
+              <div className='img-container'>
+                <img src={Scli} width={1500} height={500}/>
+              </div>
+              <div className='img-container'>
+                <img src={Svac} width={1500} height={500}/>
+              </div>
+              <div className='img-container'>
+                <img src={Ssta} width={1500} height={500}/>
+              </div>
+              <div className='img-container'>
+                <img src={Sdeng} width={1500} height={500}/>
+              </div>
+              <div className='img-container'>
+                <img src={Sraid} width={1500} height={500}/>
+              </div>
+            </div>
+            <div className='overlay-item'>
+            <h1 className='overlay-text'>Welcome to Public Health Information System</h1>
+            <Button className='btn-home' onClick={scrollToSlideShow}>More Info</Button>
+          </div>
+          </div>
+          </div>
+        
+        <Container id = 'slideshow-container' className='Lcontainer'>
           <div className='leftflex'>
             <div className='clinicsub'>
               <br/>
@@ -32,7 +66,7 @@ const Home = () => {
           </div>
         </Container>
         <br/>
-        <Container className='container'>
+        <Container className='Rcontainer'>
           <div className='rightflex'>
           <img src={vimg} alt='vaccine' width={300} height={300}/>
             <div className='clinicsub'>
@@ -46,7 +80,7 @@ const Home = () => {
           </div>
         </Container>
         <br/>
-        <Container className='container'>
+        <Container className='Lcontainer'>
           <div className='leftflex'>
             <div className='clinicsub'>
               <br/>
@@ -60,7 +94,7 @@ const Home = () => {
           </div>
         </Container>
         <br/>
-        <Container className='container'>
+        <Container className='Rcontainer'>
           <div className='rightflex'>
           <img src={cimg} alt='complains' width={300} height={300}/>
             <div className='clinicsub'>
@@ -75,7 +109,7 @@ const Home = () => {
           </div>
         </Container>
         <br/>
-        <Container className='container'>
+        <Container className='Lcontainer'>
           <div className='leftflex'>
             <div className='clinicsub'>
             <br/>
