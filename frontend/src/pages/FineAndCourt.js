@@ -1,5 +1,5 @@
 import React from 'react';
-import './FineAndCourt.css';
+import '../styles/FineAndCourt.css';
 import Layout from '../components/Layout';
 
 const FineAndCourt = () => {

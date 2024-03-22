@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './FCReportSubmit.css'
+import '../styles/FCReportSubmit.css'
 import Layout from '../components/Layout';
 
 const FCReportForm = () => {
