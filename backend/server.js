@@ -2,6 +2,8 @@ const express = require('express');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const routerDC = require('./Manuji_DCamp/CampaignRoute');
+const routerCmp = require('./Vihanga/ComplainRoute');
 
 
 dotenv.config();
@@ -39,3 +41,7 @@ const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
     console.log(`Server is Running on ${PORT}`);
 });
+
+
+app.use('/api' , routerDC);
+app.use('/api' , routerCmp);
