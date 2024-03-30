@@ -68,7 +68,7 @@ const deleteCampaign = async (req,res) => {
 
         res.json({ success : true , message : 'Campaign deleted successfully' , data : deletedCampaign});
     }catch(error){
-        console.error('Error updating Campaign:' , error);
+        console.error('Error deleting Campaign:' , error);
         res.status(500).json({ success : false , message : 'Internal server error'});
     }
 }
