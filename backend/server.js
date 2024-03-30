@@ -4,6 +4,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const routerDC = require('./Manuji_DCamp/CampaignRoute');
 const routerCmp = require('./Vihanga/ComplainRoute');
+const routerRF = require('./Yasara_RF/RFRoute');
 
 
 dotenv.config();
@@ -45,3 +46,4 @@ app.listen(PORT, () => {
 
 app.use('/api' , routerDC);
 app.use('/api' , routerCmp);
+app.use('/api' , routerRF);
