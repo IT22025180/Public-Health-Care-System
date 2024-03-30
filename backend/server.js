@@ -5,6 +5,14 @@ const mongoose = require('mongoose');
 const routerDC = require('./Manuji_DCamp/CampaignRoute');
 const routerCmp = require('./Vihanga/ComplainRoute');
 const routerRF = require('./Yasara_RF/RFRoute');
+const routerRS = require('./Yasara_RS/RSRoute');
+const routerB = require('./KaveeshaBDetails/BDetRoute');
+const routerBV = require('./KaveeshaBVaccine/BVacRoute');
+const routerTD = require('./KaveeshaTDistribute/TDisRoute');
+const routerST = require('./Yethmi/StaffRoute');
+const routerVac = require('./HimaaVReg/VRegRoute');
+const routerVacRq = require('./HimaaaVacReq/VReqRoute');
+const routerVacApp = require('./HimaaAppointment/VAppRoute');
 
 
 dotenv.config();
@@ -47,3 +55,11 @@ app.listen(PORT, () => {
 app.use('/api' , routerDC);
 app.use('/api' , routerCmp);
 app.use('/api' , routerRF);
+app.use('/api' , routerRS);
+app.use('/api' , routerB);
+app.use('/api' , routerBV);
+app.use('/api' , routerTD);
+app.use('/api' , routerST);
+app.use('/api' , routerVac);
+app.use('/api' , routerVacRq);
+app.use('/api' , routerVacApp);

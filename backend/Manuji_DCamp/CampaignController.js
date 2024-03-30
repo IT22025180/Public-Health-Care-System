@@ -7,8 +7,6 @@ const addCampaign = async(req,res) => {
         
             const{ venue , date , time , drName} = req.body;
             const newCampaign =  new Campaigns({
-
-                c_id,
                 venue,      
                 date,
                 time,
