@@ -61,7 +61,6 @@ const FCReportForm = () => {
         <h2>Report Violation</h2>
         <form className='form' onSubmit={handleSubmit}>
 
-
           <h3>Raid Officer Information</h3>
 
           <div className='ROinfo'>
