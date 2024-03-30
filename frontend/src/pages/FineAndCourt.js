@@ -25,7 +25,7 @@ const FineAndCourt = () => {
       description: 'Streamline documentation with our robust management system. All case documents are securely stored, categorized, and easily accessible, enabling efficient collaboration and ensuring compliance with documentation requirements.',
       image: 'document.png',
       buttonText: 'Manage Documents',
-      buttonLink: '/document/manager'
+      buttonLink: '/Fine-And-court-Document-Management'
     }
   ];
 
