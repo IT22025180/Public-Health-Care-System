@@ -9,8 +9,19 @@ nav{
     background-image: linear-gradient(to right , #63D8F1,#5BEA9D);
 }
 
-.nav-item:hover{
+.active:hover{
 
-    border-bottom: 1.5px solid black;
+    border-bottom: 1.0px solid black;
+    
+}
+
+.dropdown-menu{
+    background-image: linear-gradient(to right , #63D8F1,#5BEA9D);
+}
+
+.dropdown-menu :hover{
+    border-bottom: 0.5px solid rgba(0, 0, 0, 0.105);
+    border-top: 0.5px solid rgba(0, 0, 0, 0.105);
+    background-image: linear-gradient(to right , #85d8ea,#20e57c);
     
 }

@@ -1,5 +1,6 @@
 import React from 'react';
-import './FineAndCourt.css';
+import '../styles/FineAndCourt.css';
+import Layout from '../components/Layout';
 
 const FineAndCourt = () => {
   const cards = [
@@ -30,23 +31,25 @@ const FineAndCourt = () => {
   ];
 
   return (
-    <div className="home-page">
-      <h1>Fine and Court</h1>
-      <div className="card-container">
-        {cards.map((card) => (
-          <div key={card.id} className="card">
-            <img src={card.image} alt={card.title} className="card-image" />
-            <div className="card-body">
-              <h2 className="card-title">{card.title}</h2>
-              <p className="card-text">{card.description}</p>
-              <a href={card.buttonLink} className="btn btn-primary">
-                {card.buttonText}
-              </a>
+      <Layout>
+            <div className="home-page">
+              <h1>Fine and Court</h1>
+              <div className="card-container">
+                {cards.map((card) => (
+                  <div key={card.id} className="card">
+                    <img src={card.image} alt={card.title} className="card-image" />
+                    <div className="card-body">
+                      <h2 className="card-title">{card.title}</h2>
+                      <p className="card-text">{card.description}</p>
+                      <a href={card.buttonLink} className="btn btn-primary">
+                        {card.buttonText}
+                      </a>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
-    </div>
+      </Layout>
   );
 };
 

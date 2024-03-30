@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes, Form } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 
 import FineAndCourt from './pages/FineAndCourt';
@@ -13,8 +13,7 @@ function App() {
     <Router>
       <Routes>
         <Route path='/' element = {<Home/>}/>
-        <Route path='/staff' element = {<Staff/>}/>
-        <Route path='/Fine-And-court' element = {<FineAndCourt/>}/>
+        <Route path='/FineAndCourt' element = {<FineAndCourt/>}/>
         <Route path='/Fine-And-court-Submit-Reports' element = {<FCReportForm/>}/>
         <Route path='/Fine-And-court-Document-Management' element = {<FCDocManage/>}/>
 
