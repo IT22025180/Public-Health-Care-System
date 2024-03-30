@@ -71,7 +71,7 @@ const deleteRForm = async (req,res) => {
 
         res.json({ success : true , message : 'Raid form deleted successfully' , data : deletedRF});
     }catch(error){
-        console.error('Error updating Raid form:' , error);
+        console.error('Error deleting Raid form:' , error);
         res.status(500).json({ success : false , message : 'Internal server error'});
     }
 }

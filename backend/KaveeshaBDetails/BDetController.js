@@ -70,7 +70,7 @@ const deleteBaby = async (req,res) => {
 
         res.json({ success : true , message : 'Baby details deleted successfully' , data : deletedBaby});
     }catch(error){
-        console.error('Error updating Baby details:' , error);
+        console.error('Error deleting Baby details:' , error);
         res.status(500).json({ success : false , message : 'Internal server error'});
     }
 }

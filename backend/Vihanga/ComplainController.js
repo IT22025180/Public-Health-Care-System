@@ -114,7 +114,7 @@ const deleteComplain = async (req,res) => {
 
         res.json({ success : true , message : 'Complain deleted successfully' , data : deletedComplain});
     }catch(error){
-        console.error('Error updating complain:' , error);
+        console.error('Error deleting complain:' , error);
         res.status(500).json({ success : false , message : 'Internal server error'});
     }
 }

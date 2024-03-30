@@ -66,7 +66,7 @@ const deleteTDis = async (req,res) => {
 
         res.json({ success : true , message : 'Triposha deleted successfully' , data : deletedTDis});
     }catch(error){
-        console.error('Error updating Triposha:' , error);
+        console.error('Error deleting Triposha:' , error);
         res.status(500).json({ success : false , message : 'Internal server error'});
     }
 }

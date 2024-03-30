@@ -13,6 +13,10 @@ const routerST = require('./Yethmi/StaffRoute');
 const routerVac = require('./HimaaVReg/VRegRoute');
 const routerVacRq = require('./HimaaaVacReq/VReqRoute');
 const routerVacApp = require('./HimaaAppointment/VAppRoute');
+const routerClnc = require('./Vanuja_Clinic/ClinicRoute');
+const routerVReport = require('./Maleesha_RViolation/RVRoute');
+const routerDocM = require('./Maleesha_DocM/DocMRoute');
+const routerP = require('./Vanuja_AddPatient/AddPRoute');
 
 
 dotenv.config();
@@ -63,3 +67,7 @@ app.use('/api' , routerST);
 app.use('/api' , routerVac);
 app.use('/api' , routerVacRq);
 app.use('/api' , routerVacApp);
+app.use('/api' , routerClnc);
+app.use('/api' , routerVReport);
+app.use('/api' , routerDocM);
+app.use('/api' , routerP);
