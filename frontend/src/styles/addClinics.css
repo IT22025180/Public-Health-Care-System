@@ -1,0 +1,54 @@
+.clcontainer{
+    
+    height: 80%;
+    margin-top: 50px;
+    margin-left: 20%;
+    margin-right: 20%;
+    background-image: linear-gradient(to bottom , #6ac2d5,#ea87c7);
+    border-radius: 30px;
+    padding: 25px 25px 25px 25px;
+    border: 1px solid black;
+    
+}
+
+.cl1{
+    display: flex;
+    justify-content:flex-end;
+}
+
+.rdgrp{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.rdbtn{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.rdbtn label{
+    padding-left: 5px;
+    font-size: large;
+    font-weight: 500;
+}
+
+.slcbtn{
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center; 
+}
+
+.slcbtn p{
+    padding-right: 10px;
+    font-size: large;
+    font-weight: 500;
+}
+
+.slcbtn .btn{
+    width: 30%;
+    margin-left: 50px;
+}
+

@@ -25,3 +25,7 @@ nav{
     background-image: linear-gradient(to right , #85d8ea,#20e57c);
     
 }
+
+.title{
+    font-weight: 600;
+}
