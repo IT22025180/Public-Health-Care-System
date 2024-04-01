@@ -3,8 +3,6 @@ import Home from './pages/Home';
 
 import FineAndCourt from './pages/FineAndCourt';
 import FCReportForm from './pages/FCReportForm';
-
-import Staff from './pages/Staff';
 import FCDocManage from './pages/FCDocManage';
 
 
