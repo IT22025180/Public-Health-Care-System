@@ -1,8 +1,11 @@
 .form1 {
   position: relative;
+<<<<<<< HEAD
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+=======
+>>>>>>> 8421ff9911716e93870c1e7d3f281383e656e590
   width: 500px;
   background-color: #ECECEC;
   padding: 20px;
@@ -11,6 +14,7 @@
   border: 1px solid #000000;
   margin-top: 60px;
   margin-bottom: 20px;
+  margin: 60px auto 20px;
 }
 
 .notifyBut {

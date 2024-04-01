@@ -4,81 +4,44 @@ import Layout from '../components/Layout';
 
 const FCReportForm = () => {
 
-  
-  const [raidOfficerInfo, setRaidOfficerInfo] = useState({
-    name: '',
-    email: '',
-    contactNumber: '',
-  });
-
-  const [violationDetails, setViolationDetails] = useState({
-    date: '',
-    location: '',
-    type: '',
-    description: '',
-  });
-
-  const [violatorInfo, setViolatorInfo] = useState({
-    name: '',
-    email: '',
-    idNumber: '',
-  });
-
-  const [evidenceFile, setEvidenceFiles] = useState(null);
-
-  const handleRaidOfficerChange = (e) => {
-    const { name, value } = e.target;
-    setRaidOfficerInfo({ ...raidOfficerInfo, [name]: value });
-  };
-
-  const handleViolationChange = (e) => {
-    const { name, value } = e.target;
-    setViolationDetails({ ...violationDetails, [name]: value });
-  };
-
-  const handleViolatorChange = (e) => {
-    const { name, value } = e.target;
-    setViolatorInfo({ ...violatorInfo, [name]: value });
-  };
-
-  const handleFileChange = (e) => {
-    const files = Array.from(e.target.files);
-    setEvidenceFiles(files);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Here you can handle form submission, e.g., sending data to backend
-    console.log('Raid Officer Info:', raidOfficerInfo);
-    console.log('Violation Details:', violationDetails);
-    console.log('Violator Info:', violatorInfo);
-    console.log('Evidence File:', evidenceFile);
-  };
+  const [ROname, setROname] = useState('')
+  const [Roemail, setRoemail] = useState('')
+  const [ROcontact, setROcontact] = useState('')
+  const [date, setdate] = useState('')
+  const [location, setlocation] = useState('')
+  const [foodViolation, setfoodViolation] = useState('')
+  const [dengueViolation, setdengueViolation] = useState('')
+  const [description, setdescription] = useState('')
+  const [vName, setvName] = useState('')
+  const [vEmail, setvEmail] = useState('')
+  const [vContact, setvContact] = useState('')
+  const [vId, setvId] = useState('')
+  const [document, setdocument] = useState('')
 
   return (
     <Layout>
       <div className="form-container">
-        
-        <form className='form' onSubmit={handleSubmit}>
-         <h2>Report Violation</h2>
+
+        <form className='form' onSubmit={''}>
+          <h2>Report Violation</h2>
           <h3>Raid Officer Information</h3>
 
           <div className='ROinfo'>
             <div>
               <label>Name:</label>
-              <input type="text" name="name" value={raidOfficerInfo.name} onChange={handleRaidOfficerChange} />
+              <input type="text" name="name" value={ROname} onChange={(e) => setROname(e.target.value)} />
             </div>
             <div>
               <label>Email:</label>
-              <input type="email" name="email" value={raidOfficerInfo.email} onChange={handleRaidOfficerChange} />
+              <input type="email" name="email" value={Roemail} onChange={(e) => setRoemail(e.target.value)} />
             </div>
             <div>
               <label>Contact Number:</label>
-              <input type="Number" name="contactNumber" value={raidOfficerInfo.contactNumber} onChange={handleRaidOfficerChange} />
+              <input type="Number" name="contactNumber" value={ROcontact} onChange={(e) => setROcontact(e.target.value)} />
             </div>
             <div>
               <label>Date:</label>
-              <input type="date" name="date" value={violationDetails.date} onChange={handleViolationChange} />
+              <input type="date" name="date" value={date} onChange={(e) => setdate(e.target.value)} />
             </div>
           </div>
 
@@ -87,16 +50,23 @@ const FCReportForm = () => {
           <div className='Vdetails'>
             <div>
               <label>Location:</label>
-              <input type="text" name="location" value={violationDetails.location} onChange={handleViolationChange} />
+              <input type="text" name="location" value={location} onChange={(e) => setlocation(e.target.value)} />
             </div>
             <div>
               <label>Violation Type:</label>
-              <input type="text" name="type" value={violationDetails.type} onChange={handleViolationChange} />
+              <div>
+                <input type="radio" id="foodViolation" name="type" value={foodViolation} onChange={(e) => setfoodViolation(e.target.value)} />
+                Food Violation
+              </div>
+              <div>
+                <input type="radio" id="dengueViolation" name="type" value={dengueViolation} onChange={(e) => setdengueViolation(e.target.value)} />
+                Dengue Violation
+              </div>
             </div>
 
             <div>
               <label>Violation Description:</label>
-              <textarea name="description" value={violationDetails.description} onChange={handleViolationChange} />
+              <textarea name="description" value={description} onChange={(e) => setdescription(e.target.value)} />
             </div>
           </div>
 
@@ -105,26 +75,26 @@ const FCReportForm = () => {
           <div className='Vinfo'>
             <div>
               <label>Name:</label>
-              <input type="text" name="name" value={violatorInfo.name} onChange={handleViolatorChange} />
+              <input type="text" name="name" value={vName} onChange={(e) => setvName(e.target.value)} />
             </div>
             <div>
               <label>Email:</label>
-              <input type="email" name="email" value={violatorInfo.email} onChange={handleViolatorChange} />
+              <input type="email" name="email" value={vEmail} onChange={(e) => setvEmail(e.target.value)} />
             </div>
             <div>
               <label>Contact Number:</label>
-              <input type="Number" name="contactNumber" value={violatorInfo.contactNumber} onChange={handleViolatorChange} />
+              <input type="Number" name="contactNumber" value={vContact} onChange={(e) => setvContact(e.target.value)} />
             </div>
             <div>
               <label>ID Number:</label>
-              <input type="text" name="idNumber" value={violatorInfo.idNumber} onChange={handleViolatorChange} />
+              <input type="Number" name="idNumber" value={vId} onChange={(e) => setvId(e.target.value)} />
             </div>
           </div>
 
 
           <h3>Upload Evidence</h3>
           <div>
-            <input type="file" onChange={handleFileChange} multiple />
+            <input type="file" value={document} onChange={(e) => setdocument(e.target.value)} multiple />
           </div>
           <button className='button' type="submit">Submit Report</button>
         </form>

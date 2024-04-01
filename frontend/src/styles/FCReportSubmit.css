@@ -1,7 +1,6 @@
 .form-container {
-  width: 80%; /* Adjust the width value as needed */
-  max-height: 500px;
-  margin: 0 auto; /* Center the form horizontally */
+  position: relative;
+  margin: 60px auto 20px;
 }
 
 /* Raid Officer Info */
@@ -48,7 +47,7 @@ input[type="Number"] {
 }
 
 textarea {
-  width: 350px;
+  width: 650px;
   height: 60px;
   padding: 10px;
   border: 1px solid #ccc;
