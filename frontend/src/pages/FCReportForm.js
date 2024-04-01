@@ -58,9 +58,9 @@ const FCReportForm = () => {
   return (
     <Layout>
       <div className="form-container">
-        <h2>Report Violation</h2>
+        
         <form className='form' onSubmit={handleSubmit}>
-
+         <h2>Report Violation</h2>
           <h3>Raid Officer Information</h3>
 
           <div className='ROinfo'>

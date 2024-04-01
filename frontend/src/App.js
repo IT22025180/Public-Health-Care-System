@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import FineAndCourt from './pages/FineAndCourt';
 import FCReportForm from './pages/FCReportForm';
 import FCDocManage from './pages/FCDocManage';
+import FCAnalyse from './pages/FCAnalyse';
 
 
 function App() {
@@ -11,9 +12,11 @@ function App() {
     <Router>
       <Routes>
         <Route path='/' element = {<Home/>}/>
-        <Route path='/FineAndCourt' element = {<FineAndCourt/>}/>
+        <Route path='/Fine-And-court' element = {<FineAndCourt/>}/>
         <Route path='/Fine-And-court-Submit-Reports' element = {<FCReportForm/>}/>
         <Route path='/Fine-And-court-Document-Management' element = {<FCDocManage/>}/>
+        <Route path='/Fine-And-court-Analyse' element = {<FCAnalyse/>}/>
+
 
       </Routes>
     </Router>
