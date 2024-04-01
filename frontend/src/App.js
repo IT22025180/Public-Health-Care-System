@@ -7,6 +7,7 @@ import Clinics from './pages/Clinics';
 import Dengue from './pages/DengueCli';
 import Dental from './pages/DentalCli';
 import AddClinic from './pages/AddClinic';
+import FCAnalyse from './pages/FCAnalyse';
 
 
 function App() {
@@ -14,13 +15,13 @@ function App() {
     <Router>
       <Routes>
         <Route path='/' element = {<Home/>}/>
-        <Route path='/clinics' element = {<Clinics/>}/>
-        <Route path='/dengueCli' element = {<Dengue/>}/>
-        <Route path='/dentalCli' element = {<Dental/>}/>
-        <Route path='/addclinic' element = {<AddClinic/>}/>
-        <Route path='/FineAndCourt' element = {<FineAndCourt/>}/>
+        <Route path='/Fine-And-court' element = {<FineAndCourt/>}/>
         <Route path='/Fine-And-court-Submit-Reports' element = {<FCReportForm/>}/>
         <Route path='/Fine-And-court-Document-Management' element = {<FCDocManage/>}/>
+        <Route path='/Fine-And-court-Analyse' element = {<FCAnalyse/>}/>
+        <Route path='/clinics' element = {<Clinics/>}/>
+
+
       </Routes>
     </Router>
   );

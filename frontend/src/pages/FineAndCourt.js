@@ -2,29 +2,33 @@ import React from 'react';
 import '../styles/FineAndCourt.css';
 import Layout from '../components/Layout';
 
+import img1 from '../webImages/Reportimg.jpg';
+import img2 from '../webImages/AnalyseImg.png';
+import img3 from '../webImages/documentImg.jpg';
+
 const FineAndCourt = () => {
   const cards = [
     {
       id: 1,
       title: 'Report Submit',
       description: 'Efficiently report violations with our user-friendly submission system. Raid officers can easily submit detailed reports, including evidence, to ensure swift action and enforcement of regulations.',
-      image: 'report.png',
+      image: img1,
       buttonText: 'Submit Report',
       buttonLink: '/Fine-And-court-Submit-Reports'
     },
     {
       id: 2,
       title: 'Analyse Reports',
-      description: 'Our fine and court team meticulously analyses each report to determine appropriate actions. Leveraging advanced decision-making algorithms and comprehensive data analysis, we ensure fair and just outcomes for every violation.',
-      image: 'analyse.png',
+      description: 'Our fine and court team analyses each report to determine appropriate actions. Leveraging advanced decision-making algorithms and comprehensive data analysis, we ensure fair and just outcomes for every violation.',
+      image: img2,
       buttonText: 'Analyse Now',
-      buttonLink: '/analyse'
+      buttonLink: '/Fine-And-court-Analyse'
     },
     {
       id: 3,
       title: 'Manage Documents',
-      description: 'Streamline documentation with our robust management system. All case documents are securely stored, categorized, and easily accessible, enabling efficient collaboration and ensuring compliance with documentation requirements.',
-      image: 'document.png',
+      description: 'Manage documentation with our robust management system. All case documents are securely stored, categorized, and easily accessible and ensuring compliance with documentation requirements.',
+      image: img3,
       buttonText: 'Manage Documents',
       buttonLink: '/Fine-And-court-Document-Management'
     }
