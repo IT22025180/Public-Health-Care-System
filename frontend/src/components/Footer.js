@@ -1,6 +1,6 @@
 import React from 'react'
 import './Footer.css';
-import { FaBlenderPhone, FaEnvelope, FaFacebook, FaLocationArrow, FaMailBulk, FaMailchimp, FaMap, FaMapMarked, FaMapMarkedAlt, FaMapMarker, FaMapMarkerAlt, FaMapPin, FaPhone, FaPhoneAlt, FaPhoneSquare, FaSearchLocation, FaTwitter, FaVoicemail, FaYoutube } from 'react-icons/fa'
+import { FaEnvelope, FaFacebook,  FaMapMarkerAlt, FaPhone, FaTwitter, FaYoutube } from 'react-icons/fa'
 import natlogo from '../webImages/natLogo.png';
 import fimg from '../webImages/footerimg.jpg';
 
@@ -10,7 +10,7 @@ const Footer = () => {
         <div className="footer">
             <div className="container_f">
               <div className='foothead'>
-                <img src={natlogo} width={85} height={100}/>
+                <img src={natlogo} width={85} height={100} alt='natlogo'/>
                 <h2>Ministry of Health</h2>
               </div>
                 <div className="row_f">
@@ -40,7 +40,7 @@ const Footer = () => {
                             <li><a href="/">Home</a></li>
                             <li><a href="/staff">Staff</a></li>
                             <li><a href="/vaccine">Vaccine</a></li>
-                            <li><a href="clinics">Clinic</a></li>
+                            <li><a href="/clinics">Clinic</a></li>
                             <li><a href="/complain">Complains</a></li>
                             <li><a href="/dengue">Dengue</a></li>
                             <li><a href="/raids">Raids</a></li>
@@ -52,11 +52,11 @@ const Footer = () => {
                     <div className="footer-col">
                         <h4>follow us</h4>
                         <div className="social-links">
-                            <a href="https://www.facebook.com" target='_blank' className='blue'><FaFacebook/></a>
-                            <a href="https://www.twitter.com" target='_blank' className='blue'><FaTwitter/></a>
-                            <a href="https://www.youtube.com" target='_blank' className='red'><FaYoutube/></a>
+                            <a href="https://www.facebook.com" className='blue'><FaFacebook/></a>
+                            <a href="https://www.twitter.com"  className='blue'><FaTwitter/></a>
+                            <a href="https://www.youtube.com"  className='red'><FaYoutube/></a>
                             <br/>
-                            <img src={fimg}/>
+                            <img src={fimg} alt='nikndpuimage'/>
                         </div>
                     </div>
                 </div>

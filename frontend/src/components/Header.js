@@ -14,7 +14,7 @@ const Header = () => {
             <div class="offcanvas-header text-white border-bottom">
             
             <Link to="/" className="navbar-brand" ><img src='../../natLogo.png' alt='natlogo' height={50} width={40}/></Link>
-            <Link to="/" className="navbar-brand fs-4" >Public Health Information System</Link>
+            <Link to="/" className="navbar-brand fs-4 title" >Public Health Information System</Link>
             </div>
             
             <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
@@ -22,7 +22,7 @@ const Header = () => {
                     <NavLink to= '/' className= 'nav-link'>Home</NavLink>
                 </li>
                 <li className='nav-item'>
-                    <NavLink to= '/' className= 'nav-link'>Clinic schedules</NavLink>
+                    <NavLink to= '/clinics' className= 'nav-link'>Clinic schedules</NavLink>
                 </li>
                 <li className='nav-item'>
                     <NavLink to= '/staff' className= 'nav-link'>Staff</NavLink>
