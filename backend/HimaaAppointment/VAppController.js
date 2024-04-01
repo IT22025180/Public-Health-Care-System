@@ -68,7 +68,7 @@ const deleteVacApp = async (req,res) => {
 
         res.json({ success : true , message : 'Vaccine appointment deleted successfully' , data : deletedVacApp});
     }catch(error){
-        console.error('Error updating Vaccine appointment:' , error);
+        console.error('Error deleting Vaccine appointment:' , error);
         res.status(500).json({ success : false , message : 'Internal server error'});
     }
 }

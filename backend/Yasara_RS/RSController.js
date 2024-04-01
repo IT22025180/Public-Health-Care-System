@@ -65,7 +65,7 @@ const deleteRSub = async (req,res) => {
 
         res.json({ success : true , message : 'Raid submission deleted successfully' , data : deletedRS});
     }catch(error){
-        console.error('Error updating Raid submission:' , error);
+        console.error('Error deleting Raid submission:' , error);
         res.status(500).json({ success : false , message : 'Internal server error'});
     }
 }

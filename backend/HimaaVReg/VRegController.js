@@ -70,7 +70,7 @@ const deleteVac = async (req,res) => {
 
         res.json({ success : true , message : 'Vaccine deleted successfully' , data : deletedVac});
     }catch(error){
-        console.error('Error updating Vaccine:' , error);
+        console.error('Error deleting Vaccine:' , error);
         res.status(500).json({ success : false , message : 'Internal server error'});
     }
 }

@@ -81,7 +81,7 @@ const deleteStaff = async (req,res) => {
 
         res.json({ success : true , message : 'Staff deleted successfully' , data : deletedStaff});
     }catch(error){
-        console.error('Error updating Staff:' , error);
+        console.error('Error deleting Staff:' , error);
         res.status(500).json({ success : false , message : 'Internal server error'});
     }
 }
