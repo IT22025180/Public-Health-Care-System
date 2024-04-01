@@ -1,11 +1,5 @@
 .form1 {
   position: relative;
-<<<<<<< HEAD
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-=======
->>>>>>> 8421ff9911716e93870c1e7d3f281383e656e590
   width: 500px;
   background-color: #ECECEC;
   padding: 20px;
@@ -30,5 +24,5 @@
 }
 
 .notifyBut:hover {
-  background-color: #0056b3;
+  background-color: #0056b3;
 }
