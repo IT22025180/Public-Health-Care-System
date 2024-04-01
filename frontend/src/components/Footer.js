@@ -45,7 +45,7 @@ const Footer = () => {
                             <li><a href="/dengue">Dengue</a></li>
                             <li><a href="/raids">Raids</a></li>
                             <li><a href="/midwife">Midwife</a></li>
-                            <li><a href="/F&C">Fine & Court</a></li>
+                            <li><a href="/Fine-And-court">Fine & Court</a></li>
                         </ul>
                     </div>
 

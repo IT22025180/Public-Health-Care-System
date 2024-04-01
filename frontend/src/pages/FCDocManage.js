@@ -7,7 +7,8 @@ const FCDocManage = () => {
   const [raidOfficer, setRaidOfficer] = useState('');
   const [date, setDate] = useState('');
   const [violatorName, setViolatorName] = useState('');
-  const [violationType, setViolationType] = useState('');
+  const [foodViolation, setfoodViolation] = useState('');
+  const [dengueViolation, setdengueViolation] = useState('');
   const [documents, setDocuments] = useState('');
 
 
@@ -33,8 +34,15 @@ const FCDocManage = () => {
             <input type='text' name='violator name' value={violatorName} onChange={(e) => setViolatorName(e.target.value)} />
           </div>
           <div>
-            <label>Violation Type</label>
-            <input type='text' name='violation type' value={violationType} onChange={(e) => setViolationType(e.target.value)} />
+            <label>Violation Type:</label>
+            <div>
+              <input type="radio" id="foodViolation" name="type" value={foodViolation} onChange={(e) => setfoodViolation(e.target.value)} />
+              Food Violation
+            </div>
+            <div>
+              <input type="radio" id="dengueViolation" name="type" value={dengueViolation} onChange={(e) => setdengueViolation(e.target.value)} />
+              Dengue Violation
+            </div>
           </div>
           <div>
             <label>Upload Documents</label>

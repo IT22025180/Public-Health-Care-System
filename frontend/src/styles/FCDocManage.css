@@ -3,15 +3,13 @@ h2 {
 }
 
 .DMForm {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  position: relative;
   background-color: #ECECEC;
   padding: 20px;
   border-radius: 10px;
   width: 500px;
   border: 1px solid #000000;
+  margin: 60px auto 20px;
 }
 
 .DMbut {
