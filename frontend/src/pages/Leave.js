@@ -4,7 +4,8 @@ import '../styles/Leave.css';
 
 const Leave = () => {
   return (
-    <div className="leave-container"> {/* Wrap the form in a container */}
+    <Layout>
+      <div className="leave-container"> {/* Wrap the form in a container */}
       <div className='title'>
         <h3>Leave Submission Form</h3>
       </div>
@@ -71,6 +72,7 @@ const Leave = () => {
         <button className='bsubmit' type='submit'>Submit</button>
       </form>
     </div>
+    </Layout>
   );
 }
 
