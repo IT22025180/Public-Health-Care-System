@@ -8,9 +8,9 @@ const VaccineReg = () => {
         <div>
             <Header />
     
-    <div className='title'>
+    <div className='title1'>
 
-    <h2 >Vaccine Registration</h2>
+    <h2 className="he2" >Vaccine Registration</h2>
     <form className='addvaccine'>
         <div className='input'>
             <label htmlFor='vname'>Vaccine Name</label>

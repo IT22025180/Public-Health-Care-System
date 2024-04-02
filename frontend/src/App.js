@@ -2,7 +2,6 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import Vaccines from './pages/Vaccines';
 import VaccineReg from './pages/VaccineReg';
-import { Sidebar } from "react-pro-sidebar";
 import Staff from './pages/Staff';
 import { Sidebar } from "react-pro-sidebar";
 import Leave from './pages/Leave';
