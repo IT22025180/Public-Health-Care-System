@@ -13,6 +13,7 @@ import Dengue from './pages/DengueCli';
 import Dental from './pages/DentalCli';
 import AddClinic from './pages/AddClinic';
 import FCAnalyse from './pages/FCAnalyse';
+import AddPatients from './pages/AddPatients';
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
         <Route path='/Fine-And-court-Analyse' element = {<FCAnalyse/>}/>
         <Route path='/clinics' element = {<Clinics/>}/>
         <Route path='/addclinics' element = {<AddClinic/>}/>
+        <Route path='/addpatient' element = {<AddPatients/>}/>
       </Routes>
     </Router>
   );
