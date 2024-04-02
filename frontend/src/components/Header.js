@@ -25,7 +25,7 @@ const Header = () => {
                     <NavLink to= '/' className= 'nav-link'>Clinic schedules</NavLink>
                 </li>
                 <li className='nav-item'>
-                    <NavLink to= '/' className= 'nav-link'>Staff</NavLink>
+                    <NavLink to= '/staff' className= 'nav-link'>Staff</NavLink>
                 </li>
                 <li className='nav-item'>
                     <NavLink to= '/vaccines' className= 'nav-link'>Vaccines</NavLink>
