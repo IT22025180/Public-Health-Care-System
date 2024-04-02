@@ -1,7 +1,7 @@
 import React from 'react'
 import'../styles/denguecampaignschedule.css'
 
-const DengueCampaignSchedule = () => {
+const DengueCampaigns = () => {
     return(
         <div className='title'>
             <h3>Campaign Details</h3>
@@ -33,4 +33,4 @@ const DengueCampaignSchedule = () => {
         )
     }
 
-    export default DengueCampaignSchedule
+    export default DengueCampaigns;

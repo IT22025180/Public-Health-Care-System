@@ -16,6 +16,8 @@ import Dental from './pages/DentalCli';
 import AddClinic from './pages/AddClinic';
 import FCAnalyse from './pages/FCAnalyse';
 import AddPatients from './pages/AddPatients';
+import DengueComplaints from './pages/DengueComplaints';
+import DengueCampaigns from './pages/DengueCampaignSchedule';
 
 
 function App() {
@@ -38,6 +40,9 @@ function App() {
         <Route path='/clinics' element = {<Clinics/>}/>
         <Route path='/addclinics' element = {<AddClinic/>}/>
         <Route path='/addpatient' element = {<AddPatients/>}/>
+        <Route path='/dengue' element = {<DengueComplaints/>}/>
+        <Route path='/denguecamp' element = {<DengueCampaigns/>}/>
+        
       </Routes>
     </Router>
   );
