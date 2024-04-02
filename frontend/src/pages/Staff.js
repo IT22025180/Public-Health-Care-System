@@ -15,32 +15,53 @@ const Staff = () => {
     navigate('/Allschedules');
   };
 
+  const cards = [
+    {
+      id: 1,
+      title: 'Dengue Schedules',
+      buttonText: 'View',
+      buttonLink: '/Fine-And-court-Submit-Reports'
+    },
+
+    {
+      id: 1,
+      title: 'Vaccine Schedules',
+      buttonText: 'View',
+      buttonLink: '/Fine-And-court-Submit-Reports'
+    },
+
+    {
+      id: 1,
+      title: 'Raids Schedules',
+      buttonText: 'View',
+      buttonLink: '/Fine-And-court-Submit-Reports'
+    },
+
+   
+  ];
+
+  
   return (
     <Layout>
-      <div className="home-page">
-        <h1>Staff schedules</h1>
-        <div className="card-container">
-          <Sidebar className="app">
-            <Menu>
-              <MenuItem className="menu1">
-                <h3>Staff schedules</h3>
-              </MenuItem>
-              <MenuItem onClick={goToAllSchedules}> All Schedules </MenuItem>
-              <MenuItem> Vaccine Schedules </MenuItem>
-              <MenuItem> Dengue Schedules </MenuItem>
-              <MenuItem> Raids Schedules </MenuItem>
-              <MenuItem> Staff Notices </MenuItem>
-              <MenuItem onClick={goToLeave}> Leave Submissions </MenuItem>
-              <MenuItem> Logout </MenuItem>
-            </Menu>
-          </Sidebar>
-          <div className="card-content">
-            <p>Content goes here...</p>
+          <div className="home-page">
+            <h1>Staff Schedules</h1>
+            <div className="card-container">
+              {cards.map((card) => (
+                <div key={card.id} className="card">
+                  <img src={card.image} alt={card.title} className="card-image" />
+                  <div className="card-body">
+                    <h2 className="card-title">{card.title}</h2>
+                    <p className="card-text">{card.description}</p>
+                    <a href={card.buttonLink} className="btn btn-primary">
+                      {card.buttonText}
+                    </a>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
-      </div>
     </Layout>
-  );
+);
 };
 
 export default Staff;
