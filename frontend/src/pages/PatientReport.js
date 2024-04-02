@@ -41,4 +41,4 @@ const PatientReport = () => {
   )
 }
 
-export default PatientReport
+export default PatientReport;
