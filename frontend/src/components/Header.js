@@ -13,8 +13,8 @@ const Header = () => {
             <div className="collapse navbar-collapse sidebar" id="navbarTogglerDemo01">
             <div class="offcanvas-header text-white border-bottom">
             
-            <Link to="/" className="navbar-brand" ><img src='../../natLogo.png' height={50} width={40}/></Link>
-            <Link to="/" className="navbar-brand fs-4" >Public Health Information System</Link>
+            <Link to="/" className="navbar-brand" ><img src='../../natLogo.png' alt='natlogo' height={50} width={40}/></Link>
+            <Link to="/" className="navbar-brand fs-4 title" >Public Health Information System</Link>
             </div>
             
             <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
@@ -22,7 +22,7 @@ const Header = () => {
                     <NavLink to= '/' className= 'nav-link'>Home</NavLink>
                 </li>
                 <li className='nav-item'>
-                    <NavLink to= '/' className= 'nav-link'>Clinic schedules</NavLink>
+                    <NavLink to= '/clinics' className= 'nav-link'>Clinic schedules</NavLink>
                 </li>
                 <li className='nav-item'>
                     <NavLink to= '/staff' className= 'nav-link'>Staff</NavLink>
@@ -48,7 +48,7 @@ const Header = () => {
                     <ul className='dropdown-menu' aria-labelledby='navbarDropdown'>
                         <li><NavLink to='/complains' className='dropdown-item'>Complains</NavLink></li>
                         <li><NavLink to='/raids' className='dropdown-item'>Raids</NavLink></li>
-                        <li><NavLink to='/fine-and-court' className='dropdown-item'>Fine & Court</NavLink></li>
+                        <li><NavLink to='/Fine-And-court' className='dropdown-item'>Fine & Court</NavLink></li>
                     </ul>
                 </li>
                 <li className='nav-item'>
