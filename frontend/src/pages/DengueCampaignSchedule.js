@@ -3,8 +3,8 @@ import'../styles/denguecampaignschedule.css'
 
 const DengueCampaigns = () => {
     return(
-        <div className='title'>
-            <h3>Campaign Details</h3>
+        <div className='title2'>
+            <h3 className='h23'>Campaign Details</h3>
         <form className='campaigndetails'>
             <div className="input">
                 <label htmlFor="venue">Venue</label>
