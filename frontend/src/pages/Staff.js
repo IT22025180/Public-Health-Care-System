@@ -1,11 +1,8 @@
-import React from 'react'
-import Layout from '../components/Layout'
-import '../styles/Staff.css'
-import { ProSidebarProvider } from "react-pro-sidebar";
-import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
+import React from 'react';
+import Layout from '../components/Layout';
+import '../styles/Staff.css';
+import { Sidebar, Menu, MenuItem } from 'react-pro-sidebar';
 import { useNavigate } from 'react-router-dom';
-
-
 
 const Staff = () => {
   const navigate = useNavigate();
@@ -17,36 +14,54 @@ const Staff = () => {
   const goToAllSchedules = () => {
     navigate('/Allschedules');
   };
-  
+
+  const cards = [
+    {
+      id: 1,
+      title: 'Dengue Schedules',
+      buttonText: 'View',
+      buttonLink: '/Fine-And-court-Submit-Reports'
+    },
+
+    {
+      id: 1,
+      title: 'Vaccine Schedules',
+      buttonText: 'View',
+      buttonLink: '/Fine-And-court-Submit-Reports'
+    },
+
+    {
+      id: 1,
+      title: 'Raids Schedules',
+      buttonText: 'View',
+      buttonLink: '/Fine-And-court-Submit-Reports'
+    },
+
+   
+  ];
+
   
   return (
     <Layout>
-        <div>
-      
-      <div style={{ display: "flex", height: "100vh" }}>
-      <Sidebar className="app">
-        <Menu>
-          <MenuItem className="menu1">
-            <h3>Staff schedules</h3>
-          </MenuItem>
-          <MenuItem onClick={goToAllSchedules}> All Schedules </MenuItem>
-          <MenuItem> Vaccine Shedules </MenuItem>
-          <MenuItem> Dengue schedules </MenuItem>
-          <MenuItem> Raids schedules </MenuItem>
-          <MenuItem> Staff notices </MenuItem>
-          <MenuItem onClick={goToLeave}> Leave submissions </MenuItem>
-          <MenuItem> Logout </MenuItem>
-        </Menu>
-      </Sidebar>
-      
-    </div>
-    <div>
-        <p></p>
-    </div>
-    </div>
-    
+          <div className="home-page">
+            <h1>Staff Schedules</h1>
+            <div className="card-container">
+              {cards.map((card) => (
+                <div key={card.id} className="card">
+                  <img src={card.image} alt={card.title} className="card-image" />
+                  <div className="card-body">
+                    <h2 className="card-title">{card.title}</h2>
+                    <p className="card-text">{card.description}</p>
+                    <a href={card.buttonLink} className="btn btn-primary">
+                      {card.buttonText}
+                    </a>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
     </Layout>
-  )
-}
+);
+};
 
-export default Staff
+export default Staff;

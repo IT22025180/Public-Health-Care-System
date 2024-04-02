@@ -1,64 +1,28 @@
-/* Leave.css */
-
-/* General styles */
-.leave-container {
-  height: 100vh; /* Set a fixed height to fill the entire viewport */
-  overflow-y: auto; /* Enable vertical scrolling */
+.form1 {
+  position: relative;
+  width: 500px;
+  background-color: #ECECEC;
+  padding: 20px;
+  border-radius: 10px;
+  width: 500px;
+  border: 1px solid #000000;
+  margin-top: 60px;
+  margin-bottom: 20px;
+  margin: 60px auto 20px;
 }
 
-.title {
-  text-align: center;
-}
-
-.addleave {
-  width: 50%;
-  margin: 0 auto;
-}
-
-.input {
-  margin-bottom: 15px;
-}
-
-/* Form element styles */
-label {
+.subBut {
   display: block;
-  margin-bottom: 5px;
-}
-
-input[type="text"],
-input[type="date"] {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-}
-
-/* Radio button styles */
-input[type="radio"] {
-  margin-right: 10px;
-}
-
-/* Submit button styles */
-.bsubmit {
-  background-color: #4CAF50;
-  color: white;
-  padding: 10px 20px;
+  margin: auto;
+  padding: 5px;
+  margin-top: 15px;
+  background-color: #007bff;
+  color: #ECECEC;
   border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  margin-top: 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
 }
 
-.bsubmit:hover {
-  background-color: #45a049;
-}
-
-/* Additional styling for radio buttons */
-div input[type="radio"] + label {
-  margin-right: 20px;
-}
-
-div input[type="radio"]:last-child + label {
-  margin-right: 0;
+.subBut:hover {
+  background-color: #0056b3;
 }
