@@ -8,6 +8,7 @@ const PatientReport = () => {
     <>
       <div className='ptrep'>
         <div className='formptnt'>
+            <h2>Patient report</h2>
             <p>Patient name</p>
             <Form.Group>
                 <Form.Control

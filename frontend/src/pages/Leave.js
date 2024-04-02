@@ -1,79 +1,111 @@
-import React from 'react';
+import { useState } from "react";
+import emailjs from '@emailjs/browser'
+import '../styles/Leave.css'
 import Layout from '../components/Layout';
-import '../styles/Leave.css';
 
-const Leave = () => {
+const FCAnalyse = () => {
+  const [email, setemail] = useState('');
+  const [Vname, setName] = useState('');
+  const [vdate, setvdate] = useState('');
+  const [panelty, setPanelty] = useState('');
+  const [policeStation, setpoliceStation] = useState('');
+  const [date, setdate] = useState('');
+  const [aname, setaname] = useState('');
+  const [violationType, setViolationType] = useState('');
+  const [cNumber, setcNumber] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const formattedDate = new Date(date);
+
+    const serviceID = 'service_0r9kntj';
+    const templateID = 'template_hrj18ia';
+    const publicKey = 'evKLHFlH0AuDv1opA';
+
+    const templateParams = {
+      cNumber: cNumber,
+      email: email,
+      Vname: Vname,
+      vtype: violationType,
+      vdate: formattedDate.toLocaleDateString(),
+      panelty: panelty,
+      policeStation: policeStation,
+      date: formattedDate.toLocaleDateString(),
+      aname: aname
+    };
+
+    emailjs.send(serviceID, templateID, templateParams, publicKey)
+      .then((response) => {
+        console.log('Email Sent Successfully', response);
+        setcNumber('');
+        setemail('');
+        setName('');
+        setViolationType('');
+        setvdate('');
+        setPanelty('');
+        setpoliceStation('');
+        setdate('');
+        setaname('');
+      })
+      .catch((error) => {
+        console.error('Error sending Email', error);
+      });
+  }
+
   return (
     <Layout>
-      <div className="leave-container"> {/* Wrap the form in a container */}
-      <div className='title'>
-        <h3>Leave Submission Form</h3>
-      </div>
-      <form className='addleave'>
-        <div className='input'>
-          <label htmlFor='name'>First Name</label>
-          <input type='text' id='bname' autoComplete='off' placeholder='First Name'/>
-
-          <label htmlFor='name'>Last Name</label>
-          <input type='text' id='bname' autoComplete='off' placeholder='Last Name'/>
-        </div>
-
-        <div className='input'>
-          <label htmlFor='staffid'>Staff ID</label>
-          <input type='text' id='bname' autoComplete='off' placeholder='Staff ID'/>
-        </div>
-
-        <div className='input'>
-          <label htmlFor='email'>Email</label>
-          <input type='text' id='email' autoComplete='off' placeholder='Email'/>
-        </div>
-
-        <div className='input'>
-          <label htmlFor='pnumber'>Contact number</label>
-          <input type='text' id='pnumber' autoComplete='off' placeholder='07xxxxxxxx'/>
-        </div>
-
-        <div className='input'>
-          <label htmlFor='position'>Position</label>
-          <input type='text' id='position' autoComplete='off' placeholder='Doctor/Nurse/PHI...'/>
-        </div>
-
-        <div>
-          <label htmlFor='leavefor'>Leave for</label>
-          <input type="radio" id="leaveForDays" name="leaveType" value="days" />
-          <label htmlFor="leaveForDays">Days</label>
-
-          <input type="radio" id="leaveForHours" name="leaveType" value="hours" />
-          <label htmlFor="leaveForHours">Hours</label>
-        </div>
-
-        <div className='input'>
+      <div className="form1">
+        <form onSubmit={handleSubmit} className="emailForm">
+          <h2>Leave Submission form</h2>
           <div>
-            <label htmlFor='leaveStartDate'>Leave Start Date:</label>
-            <input type="date" id="leaveStartDate" name="leaveStartDate"/>
-
-            <label htmlFor='leaveEndDate'>Leave End Date:</label>
-            <input type="date" id="leaveEndDate" name="leaveEndDate"/>
+            <label>Name:</label>
+            <input type="Number" name="sName" value={cNumber} onChange={(e) => setcNumber(e.target.value)} />
           </div>
-        </div>
-
-        <div>
-          <label>Leave Type:</label><br/>
-          <input type="radio" id="vacation" name="leaveType" value="vacation" />
-          <label htmlFor="vacation">Vacation</label><br/>
-
-          <input type="radio" id="sickLeave" name="leaveType" value="sickLeave" />
-          <label htmlFor="sickLeave">Sick Leave</label><br/>
-
-          <input type="radio" id="quitting" name="leaveType" value="quitting" />
-          <label htmlFor="quitting">Quitting</label><br/>
-        </div>
-
-        <button className='bsubmit' type='submit'>Submit</button>
-      </form>
-    </div>
+          <div>
+            <label>Staff ID:</label>
+            <input type="Email" name="staffid" value={email} onChange={(e) => setemail(e.target.value)} />
+          </div>
+          <div>
+            <label>Email:</label>
+            <input type="text" name="email" value={Vname} onChange={(e) => setName(e.target.value)} />
+          </div>
+          <div>
+            <label>Position:</label>
+            <div>
+              <input type="radio" id="Position" name="vtype" value="Food Violation" checked={violationType === "Food Violation"} onChange={(e) => setViolationType(e.target.value)} />
+              Food Violation
+            </div>
+            <div>
+              <input type="radio" id="dengueViolation" name="vtype" value="Dengue Violation" checked={violationType === "Dengue Violation"} onChange={(e) => setViolationType(e.target.value)} />
+              Dengue Violation
+            </div>
+          </div>
+          <div>
+            <label>Violated Date:</label>
+            <input type="Date" name="vdate" value={vdate} onChange={(e) => setvdate(e.target.value)} />
+          </div>
+          <div>
+            <label>Panelty Action:</label>
+            <input type="text" name="panelty" value={panelty} onChange={(e) => setPanelty(e.target.value)} />
+          </div>
+          <div>
+            <label>Police Station:</label>
+            <input type="text" name="policeStation" value={policeStation} onChange={(e) => setpoliceStation(e.target.value)} />
+          </div>
+          <div>
+            <label>Due Date:</label>
+            <input type="Date" name="date" value={date} onChange={(e) => setdate(e.target.value)} />
+          </div>
+          <div>
+            <label>Analyse By:</label>
+            <input type="text" name="aname" value={aname} onChange={(e) => setaname(e.target.value)} />
+          </div>
+          <button className='notifyBut' type="submit">Send Email</button>
+        </form>
+      </div>
     </Layout>
-  );
+  )
 }
 
-export default Leave;
+export default FCAnalyse;

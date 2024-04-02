@@ -36,6 +36,7 @@ function App() {
         <Route path='/Fine-And-court-Document-Management' element = {<FCDocManage/>}/>
         <Route path='/Fine-And-court-Analyse' element = {<FCAnalyse/>}/>
         <Route path='/clinics' element = {<Clinics/>}/>
+        <Route path='/addclinics' element = {<AddClinic/>}/>
       </Routes>
     </Router>
   );
