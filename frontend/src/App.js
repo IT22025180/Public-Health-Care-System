@@ -1,5 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
+import Vaccines from './pages/Vaccines';
+import VaccineReg from './pages/VaccineReg';
 import Staff from './pages/Staff';
 import { Sidebar } from "react-pro-sidebar";
 import Leave from './pages/Leave';
@@ -20,12 +22,19 @@ import Thriposha from './pages/thriposha';
 import Babytable from './pages/Babytable';
 import Bvaccinetable from './pages/Bvaccinetable';
 import Thriposhatable from './pages/Thriposhatable';
+import AddPatients from './pages/AddPatients';
+import DengueComplaints from './pages/DengueComplaints';
+import DengueCampaigns from './pages/DengueCampaignSchedule';
+
 
 function App() {
   return (
     <Router>
       <Routes>
         <Route path='/' element = {<Home/>}/>
+        <Route path='/vaccines' element = {<Vaccines/>}/>
+        <Route path='/vaccinereg' element = {<VaccineReg/>}/>
+        
         <Route path='/staff' element = {<Staff/>}/>
         <Route path='/Leave' element = {<Leave/>}/>
         <Route path='/Allschedules' element = {<Allschedules/>}/>
@@ -47,6 +56,11 @@ function App() {
 
 
 
+        <Route path='/addclinics' element = {<AddClinic/>}/>
+        <Route path='/addpatient' element = {<AddPatients/>}/>
+        <Route path='/dengue' element = {<DengueComplaints/>}/>
+        <Route path='/denguecamp' element = {<DengueCampaigns/>}/>
+        
       </Routes>
     </Router>
   );
