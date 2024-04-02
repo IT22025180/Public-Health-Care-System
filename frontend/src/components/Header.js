@@ -25,7 +25,7 @@ const Header = () => {
                     <NavLink to= '/' className= 'nav-link'>Clinic schedules</NavLink>
                 </li>
                 <li className='nav-item'>
-                    <NavLink to= '/' className= 'nav-link'>Staff</NavLink>
+                    <NavLink to= '/staff' className= 'nav-link'>Staff</NavLink>
                 </li>
                 <li className='nav-item'>
                     <NavLink to= '/' className= 'nav-link'>Vaccines</NavLink>
@@ -52,7 +52,7 @@ const Header = () => {
                     </ul>
                 </li>
                 <li className='nav-item'>
-                    <NavLink to= '/' className= 'nav-link'>Midwife</NavLink>
+                    <NavLink to= '/mainMidwife' className= 'nav-link'>Midwife</NavLink>
                 </li>
             </ul>
             <form class="d-flex mt-3 justify-content-center align-items-center " role="search">

@@ -1,0 +1,49 @@
+.mainmidwife{
+    width: 38%;
+    background-color:rgb(225,217,241);
+    box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.065);
+    border-radius: 5px;
+    margin: 50px auto;
+    padding: 50px;
+    text-align: center;
+}
+
+.bdetailsbutton{
+  margin-left: 5px;
+    margin-right: 125px;
+    margin-bottom: 45px;
+    margin-top: 30px;
+    border: 0;
+    outline: none;
+    background-color: rgb(10, 75, 75);
+    padding: 20px 20px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.thriposhabutton{
+   margin-left: 100px;
+   margin-right: 100px;
+    border: 0;
+    outline: none;
+    background-color:rgb(10, 75, 75);
+    padding: 20px 20px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.vaccinebutton{
+
+    border: 0;
+    outline: none;
+    background-color:rgb(10, 75, 75);
+    padding: 20px 20px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+   
+}
+
+
