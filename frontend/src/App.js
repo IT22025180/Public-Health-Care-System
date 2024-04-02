@@ -3,6 +3,20 @@ import Home from './pages/Home';
 import Vaccines from './pages/Vaccines';
 import VaccineReg from './pages/VaccineReg';
 import { Sidebar } from "react-pro-sidebar";
+import Staff from './pages/Staff';
+import { Sidebar } from "react-pro-sidebar";
+import Leave from './pages/Leave';
+import  Allschedules  from './pages/Allschedules';
+
+import FineAndCourt from './pages/FineAndCourt';
+import FCReportForm from './pages/FCReportForm';
+import FCDocManage from './pages/FCDocManage';
+import Clinics from './pages/Clinics';
+import Dengue from './pages/DengueCli';
+import Dental from './pages/DentalCli';
+import AddClinic from './pages/AddClinic';
+import FCAnalyse from './pages/FCAnalyse';
+
 
 function App() {
   return (
@@ -12,6 +26,16 @@ function App() {
         <Route path='/vaccines' element = {<Vaccines/>}/>
         <Route path='/vaccinereg' element = {<VaccineReg/>}/>
         
+        <Route path='/staff' element = {<Staff/>}/>
+        <Route path='/Leave' element = {<Leave/>}/>
+        <Route path='/Allschedules' element = {<Allschedules/>}/>
+
+
+        <Route path='/Fine-And-court' element = {<FineAndCourt/>}/>
+        <Route path='/Fine-And-court-Submit-Reports' element = {<FCReportForm/>}/>
+        <Route path='/Fine-And-court-Document-Management' element = {<FCDocManage/>}/>
+        <Route path='/Fine-And-court-Analyse' element = {<FCAnalyse/>}/>
+        <Route path='/clinics' element = {<Clinics/>}/>
       </Routes>
     </Router>
   );

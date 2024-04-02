@@ -1,0 +1,24 @@
+.ptrep{
+    margin-top: 30px;
+    margin-left: 20%;
+    margin-right: 20%;
+    background-image: linear-gradient(to right , #e1e945,#25b1d7);
+    border-radius: 30px;
+    padding: 25px 25px 25px 25px;
+    border: 1px solid black;
+}
+
+.formptnt{
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.formptnt p{
+    font-weight: 600
+}
+
+.btnpatient{
+    align-items: center;
+}
