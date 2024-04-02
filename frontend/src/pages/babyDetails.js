@@ -4,13 +4,13 @@ import '../styles/babydetails.css'
 import Header from '../components/Header'; 
 import { Link, useHistory } from 'react-router-dom';
 
-const babyDetails = () => {
+const BabyDetails = () => {
   return (
     <div>
     <Header />
-    <div className='title'>
+    <div className='bdtitle'>
 
-    <h3 >Baby Details</h3>
+    <h3 className='he3'>Baby Details</h3>
     <form className='addbaby'>
         <div className='input'>
             <label htmlFor='bname'>Baby Name</label>
@@ -38,11 +38,11 @@ const babyDetails = () => {
         </div>
 
         
-            <button className='bsubmit' type='submit'>Cancel</button>
+            <button className='bdsubmit' type='submit'>Cancel</button>
 
             
         <Link to="/Babytable">
-            <button className='bsave'type='submit'>Save</button>
+            <button className='bdsave'type='submit'>Save</button>
         </Link>
 
 
@@ -54,5 +54,5 @@ const babyDetails = () => {
   ) 
 }
 
-export default babyDetails
+export default BabyDetails
 

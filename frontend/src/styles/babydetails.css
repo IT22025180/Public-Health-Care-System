@@ -1,5 +1,4 @@
-.title{
-   
+.bdtitle{   
     width: 38%;
     background-color:rgb(225,217,241);
     box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.065);
@@ -8,7 +7,7 @@
     padding: 50px;
 }
 
-h3{
+.he3{
     text-align: center;
     font-family: Arial, sans-serif;
 
@@ -44,7 +43,7 @@ h3{
 
 }
 
-.bsubmit{
+.bdsubmit{
     border: 0;
     outline: none;
     background-color: purple;
@@ -58,10 +57,10 @@ h3{
     width: 100px;
     height: 30;
     margin-left: 160px;
-    margin-right: 55px;
+    margin-right: 50px;
 }
 
-.bsave{
+.bdsave{
     border: 0;
     outline: none;
     background-color: purple;

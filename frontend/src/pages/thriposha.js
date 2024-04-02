@@ -3,11 +3,11 @@ import Header from '../components/Header';
 import '../styles/thriposha.css'
 import { Link, useHistory } from 'react-router-dom';
 
-const thriposha = () => {
+const Thriposha = () => {
   return (
     <div>
     <Header/>
-    <div className='title'>
+    <div className='Ttitle'>
 
     <h3 >Thriposha Destribution</h3>
     <form className='addbaby'>
@@ -40,4 +40,4 @@ const thriposha = () => {
   )
 }
 
-export default thriposha
+export default Thriposha

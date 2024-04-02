@@ -3,7 +3,7 @@ import Header from '../components/Header';
 import { Link } from 'react-router-dom'; 
 import '../styles/mainmidwife.css'
 
-const mainMidwife = () => {
+const MainMidwife = () => {
   return (
     <div>
         <Header/>
@@ -29,4 +29,4 @@ const mainMidwife = () => {
   )
 }
 
-export default mainMidwife
+export default MainMidwife

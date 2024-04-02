@@ -1,4 +1,4 @@
-.title{
+.bvtitle{
    
     width: 38%;
     background-color:rgb(225,217,241);
@@ -44,7 +44,7 @@ h3{
 
 }
 
-.bsubmit{
+.bvsubmit{
     border: 0;
     outline: none;
     background-color: purple;
@@ -58,10 +58,11 @@ h3{
     width: 100px;
     height: 30;
     margin-left: 160px;
-    margin-right: 55px;
+    margin-right: 50px;
+
 }
 
-.bsave{
+.bvsave{
     border: 0;
     outline: none;
     background-color: purple;

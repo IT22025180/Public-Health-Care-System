@@ -3,12 +3,12 @@ import Header from '../components/Header';
 import '../styles/babyvaccination.css'
 import { Link, useHistory } from 'react-router-dom'; 
 
-const babyVaccination = () => {
+const BabyVaccination = () => {
     
   return (
     <div>
     <Header />
-    <div className='title'>
+    <div className='bvtitle'>
     <h3 >Baby Vaccination</h3>
     <form className='addbaby'>
         <div className='input'>
@@ -27,10 +27,10 @@ const babyVaccination = () => {
         </div>
 
 
-        <button className='bsubmit' type='submit'>Cancel</button>
+        <button className='bvsubmit' type='submit'>Cancel</button>
 
         <Link to="/Bvaccinetable">
-            <button className='bsave'type='submit'>Save</button>
+            <button className='bvsave'type='submit'>Save</button>
         </Link>
 
     </form>
@@ -41,4 +41,4 @@ const babyVaccination = () => {
   )
 }
 
-export default babyVaccination
+export default BabyVaccination
