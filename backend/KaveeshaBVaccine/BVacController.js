@@ -5,10 +5,10 @@ const BVaccine = require('./BVacModel');
 const addBabyVac = async(req,res) => {
     try{
         
-            const{ type, est_Date, quantity} = req.body;
+            const{ type, esti_Date, quantity} = req.body;
             const newBabyVac =  new BVaccine({
                 type,      
-                est_Date,
+                esti_Date,
                 quantity       
             });
 
@@ -35,11 +35,11 @@ const updateBabyVac = async (req,res) => {
 
     try{
 
-        const { _id, type, est_Date, quantity} = req.body;
+        const { _id, type, esti_Date, quantity} = req.body;
 
         const updatedBabyVac = await BVaccine.findOneAndUpdate({_id} ,{
                 type,      
-                est_Date,
+                esti_Date,
                 quantity 
         }, { new : true});
 
