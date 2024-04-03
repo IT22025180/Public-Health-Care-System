@@ -24,7 +24,7 @@ const FCReportForm = () => {
 
         <form className='form' onSubmit={''}>
           <h2>Report Violation</h2>
-          <h3>Raid Officer Information</h3>
+          <h4>Raid Officer Information</h4>
 
           <div className='ROinfo'>
             <div>
@@ -46,7 +46,7 @@ const FCReportForm = () => {
           </div>
 
 
-          <h3>Violation Details</h3>
+          <h4>Violation Details</h4>
           <div className='Vdetails'>
             <div>
               <label>Location:</label>
@@ -71,7 +71,7 @@ const FCReportForm = () => {
           </div>
 
 
-          <h3>Violator Information</h3>
+          <h4>Violator Information</h4>
           <div className='Vinfo'>
             <div>
               <label>Name:</label>
@@ -92,7 +92,7 @@ const FCReportForm = () => {
           </div>
 
 
-          <h3>Upload Evidence</h3>
+          <h4>Upload Evidence</h4>
           <div>
             <input type="file" value={document} onChange={(e) => setdocument(e.target.value)} multiple />
           </div>
