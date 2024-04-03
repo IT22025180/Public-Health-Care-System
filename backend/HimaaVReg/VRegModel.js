@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const AddVac = new mongoose.Schema({
     vname : String,
     manf_date : String,
-    exp_Date: String,
+    expi_Date: String,
     quantity: Number,
     notes : String,
 },

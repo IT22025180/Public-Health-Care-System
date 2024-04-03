@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const AddReqVac = new mongoose.Schema({
-    vname : String, 
+    vName : String, 
     quantity: Number,
 },
 {

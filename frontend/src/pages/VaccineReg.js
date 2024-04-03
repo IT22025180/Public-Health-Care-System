@@ -35,7 +35,6 @@ const VaccineReg = () => {
         </div>
 
         
-        
 
         
             <button className='bsubmit' type='submit'>Cancel</button>
