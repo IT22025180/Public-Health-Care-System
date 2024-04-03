@@ -15,7 +15,7 @@ const FineAndCourt = () => {
       image: img1,
       buttonText: 'Submit Report',
       buttonLink: '/Fine-And-court-Submit-Reports'
-    },
+    }, 
     {
       id: 2,
       title: 'Analyse Reports',
