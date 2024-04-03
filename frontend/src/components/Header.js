@@ -31,7 +31,7 @@ const Header = () => {
                     <NavLink to= '/vaccines' className= 'nav-link'>Vaccines</NavLink>
                 </li>
                 <li className='nav-item'>
-                    <NavLink to= '/' className= 'nav-link'>Dengue</NavLink>
+                    <NavLink to= '/denguecamp' className= 'nav-link'>Dengue</NavLink>
                 </li>
 
                 <li className="nav-item dropdown" onMouseEnter={() => document.getElementById("navbarDropdown").click()}>
@@ -52,7 +52,7 @@ const Header = () => {
                     </ul>
                 </li>
                 <li className='nav-item'>
-                    <NavLink to= '/' className= 'nav-link'>Midwife</NavLink>
+                    <NavLink to= '/mainMidwife' className= 'nav-link'>Midwife</NavLink>
                 </li>
             </ul>
             <form class="d-flex mt-3 justify-content-center align-items-center " role="search">

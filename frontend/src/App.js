@@ -15,6 +15,15 @@ import Dengue from './pages/DengueCli';
 import Dental from './pages/DentalCli';
 import AddClinic from './pages/AddClinic';
 import FCAnalyse from './pages/FCAnalyse';
+import MainMidwife from './pages/mainMidwife';
+import BabyDetails from './pages/babyDetails';
+import BabyVaccination from './pages/babyVaccination';
+import Thriposha from './pages/thriposha';
+import Babytable from './pages/Babytable';
+import Bvaccinetable from './pages/Bvaccinetable';
+import Thriposhatable from './pages/Thriposhatable';
+import AddPatients from './pages/AddPatients';
+import DengueCampaigns from './pages/DengueCampaignSchedule';
 
 
 function App() {
@@ -35,7 +44,22 @@ function App() {
         <Route path='/Fine-And-court-Document-Management' element = {<FCDocManage/>}/>
         <Route path='/Fine-And-court-Analyse' element = {<FCAnalyse/>}/>
         <Route path='/clinics' element = {<Clinics/>}/>
+        <Route path='/mainMidwife' element={<MainMidwife/>}/>
+        <Route path='/babyDetails' element={<BabyDetails/>}/>
+        <Route path='/babyVaccination' element={<BabyVaccination/>}/>
+        <Route path='/thriposha' element={<Thriposha/>}/>
+        <Route path='/Babytable' element={<Babytable/>}/>
+        <Route path='/Bvaccinetable' element={<Bvaccinetable/>}/>
+        <Route path='/Thriposhatable' element={<Thriposhatable/>}/>
+
+
+
+
         <Route path='/addclinics' element = {<AddClinic/>}/>
+        <Route path='/addpatient' element = {<AddPatients/>}/>
+        
+        <Route path='/denguecamp' element = {<DengueCampaigns/>}/>
+        
       </Routes>
     </Router>
   );
