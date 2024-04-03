@@ -23,7 +23,6 @@ import Babytable from './pages/Babytable';
 import Bvaccinetable from './pages/Bvaccinetable';
 import Thriposhatable from './pages/Thriposhatable';
 import AddPatients from './pages/AddPatients';
-import DengueComplaints from './pages/DengueComplaints';
 import DengueCampaigns from './pages/DengueCampaignSchedule';
 
 
@@ -58,7 +57,7 @@ function App() {
 
         <Route path='/addclinics' element = {<AddClinic/>}/>
         <Route path='/addpatient' element = {<AddPatients/>}/>
-        <Route path='/dengue' element = {<DengueComplaints/>}/>
+        
         <Route path='/denguecamp' element = {<DengueCampaigns/>}/>
         
       </Routes>
