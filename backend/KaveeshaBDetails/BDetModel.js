@@ -4,7 +4,7 @@ const AddBaby = new mongoose.Schema({
     bname : String,
     age : Number,
     weight: Number,
-    c_no : String,
+    co_no : String,
     notes : String
 },
 {

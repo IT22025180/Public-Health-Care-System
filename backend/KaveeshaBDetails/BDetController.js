@@ -5,12 +5,12 @@ const { error } = require('console');
 const addBaby = async(req,res) => {
     try{
         
-            const{ bname, age, weight, c_no, notes} = req.body;
+            const{ bname, age, weight, co_no, notes} = req.body;
             const newBaby =  new Baby({
                 bname,      
                 age,
                 weight,
-                c_no,
+                co_no,
                 notes          
             });
 
@@ -37,13 +37,13 @@ const updateBaby = async (req,res) => {
 
     try{
 
-        const { _id, bname, age, weight, c_no, notes} = req.body;
+        const { _id, bname, age, weight, co_no, notes} = req.body;
 
         const updatedBaby = await Baby.findOneAndUpdate({_id} ,{
             bname,      
             age,
             weight,
-            c_no,
+            co_no,
             notes   
         }, { new : true});
 
@@ -74,6 +74,7 @@ const deleteBaby = async (req,res) => {
         res.status(500).json({ success : false , message : 'Internal server error'});
     }
 }
+
 exports.addBaby = addBaby;
 exports.getBaby = getBaby;
 exports.updateBaby = updateBaby;
