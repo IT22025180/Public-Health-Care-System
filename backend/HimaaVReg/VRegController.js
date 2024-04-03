@@ -5,11 +5,11 @@ const Vaccine = require('./VRegModel');
 const addVac = async(req,res) => {
     try{
         
-            const{ vname, manf_date, exp_Date, quantity, notes} = req.body;
+            const{ vname, manf_date, expi_Date, quantity, notes} = req.body;
             const newVaccine =  new Vaccine({
                 vname,      
                 manf_date,
-                exp_Date,
+                expi_Date,
                 quantity,
                 notes      
             });
@@ -37,12 +37,12 @@ const updateVac = async (req,res) => {
 
     try{
 
-        const { _id, vname, manf_date, exp_Date, quantity, notes} = req.body;
+        const { _id, vname, manf_date, expi_Date, quantity, notes} = req.body;
 
         const updatedVac = await Staff.findOneAndUpdate({_id} ,{
                 vname,      
                 manf_date,
-                exp_Date,
+                expi_Date,
                 quantity,
                 notes  
         }, { new : true});
