@@ -20,14 +20,14 @@ const Staff = () => {
       id: 1,
       title: 'Dengue Schedules',
       buttonText: 'View',
-      buttonLink: '/Fine-And-court-Submit-Reports'
+      buttonLink: '/Dengueshedules'
     },
 
     {
       id: 1,
       title: 'Vaccine Schedules',
       buttonText: 'View',
-      buttonLink: '/Fine-And-court-Submit-Reports'
+      buttonLink: '/'
     },
 
     {
