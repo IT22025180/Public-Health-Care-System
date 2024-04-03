@@ -2,12 +2,13 @@ import React from 'react'
 import Header from '../components/Header'; 
 import '../styles/babyvaccination.css'
 import { Link, useHistory } from 'react-router-dom'; 
+import Layout from '../components/Layout';
 
 const BabyVaccination = () => {
     
   return (
+    <Layout>
     <div>
-    <Header />
     <div className='bvtitle'>
     <h3 >Baby Vaccination</h3>
     <form className='addbaby'>
@@ -37,6 +38,7 @@ const BabyVaccination = () => {
     
     </div>
     </div>
+    </Layout>
     
   )
 }

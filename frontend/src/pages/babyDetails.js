@@ -3,11 +3,13 @@ import React from 'react'
 import '../styles/babydetails.css'
 import Header from '../components/Header'; 
 import { Link, useHistory } from 'react-router-dom';
+import Layout from '../components/Layout';
 
 const BabyDetails = () => {
   return (
+    <Layout>
+
     <div>
-    <Header />
     <div className='bdtitle'>
 
     <h3 className='he3'>Baby Details</h3>
@@ -50,7 +52,8 @@ const BabyDetails = () => {
     
     </div>
     </div>
-    
+    </Layout>
+
   ) 
 }
 

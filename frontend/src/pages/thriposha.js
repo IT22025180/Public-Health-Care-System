@@ -2,11 +2,12 @@ import React from 'react'
 import Header from '../components/Header'; 
 import '../styles/thriposha.css'
 import { Link, useHistory } from 'react-router-dom';
+import Layout from '../components/Layout';
 
 const Thriposha = () => {
   return (
+    <Layout>
     <div>
-    <Header/>
     <div className='Ttitle'>
 
     <h3 >Thriposha Destribution</h3>
@@ -27,16 +28,17 @@ const Thriposha = () => {
         </div>
 
 
-        <button className='bsubmit' type='submit'>Cancel</button>
+        <button className='tbsubmit' type='submit'>Cancel</button>
 
         <Link to="/Thriposhatable">
-            <button className='bsave'type='submit'>Save</button>
+            <button className='tbsave'type='submit'>Save</button>
         </Link>
 
     </form>
     
     </div>
     </div>
+    </Layout>
   )
 }
 
