@@ -6,9 +6,11 @@ const addClinic = async(req,res) => {
     try{
         
             const{ ctype, date , time, drName , venue} = req.body;
+
+            formattedDate = Array.isArray(date) ?  date.join(', ') : date;
             const newClinic =  new Clinics({
                 ctype,        
-                date,
+                date : formattedDate,
                 time,
                 drName,
                 venue    

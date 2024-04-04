@@ -24,6 +24,10 @@ import Bvaccinetable from './pages/Bvaccinetable';
 import Thriposhatable from './pages/Thriposhatable';
 import AddPatients from './pages/AddPatients';
 import DengueCampaigns from './pages/DengueCampaignSchedule';
+import Dengueschedules from './pages/Dengueschedules';
+import Vaccineschedules from './pages/Vaccineschedules';
+import Raidsschedules from './pages/Raidsschedules';
+import LeaveTable from './pages/LeaveTable';
 
 
 function App() {
@@ -37,6 +41,11 @@ function App() {
         <Route path='/staff' element = {<Staff/>}/>
         <Route path='/Leave' element = {<Leave/>}/>
         <Route path='/Allschedules' element = {<Allschedules/>}/>
+        <Route path='/Dengueschedules' element = {<Dengueschedules/>}/>
+        <Route path='/Vaccineschedules' element = {<Vaccineschedules/>}/>
+        <Route path='/Raidsschedules' element = {<Raidsschedules/>}/>
+        <Route path='/LeaveTable' element={<LeaveTable/>}/>
+        
 
 
         <Route path='/Fine-And-court' element = {<FineAndCourt/>}/>
