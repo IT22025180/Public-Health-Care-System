@@ -2,7 +2,7 @@ const express = require('express');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const mongoose = require('mongoose');
-/*const routerDC = require('./Manuji_DCamp/CampaignRoute');
+const routerDC = require('./Manuji_DCamp/CampaignRoute');
 const routerCmp = require('./Vihanga/ComplainRoute');
 const routerRF = require('./Yasara_RF/RFRoute');
 const routerRS = require('./Yasara_RS/RSRoute');
@@ -16,7 +16,7 @@ const routerVacApp = require('./HimaaAppointment/VAppRoute');
 const routerClnc = require('./Vanuja_Clinic/ClinicRoute');
 const routerVReport = require('./Maleesha_RViolation/RVRoute');
 const routerDocM = require('./Maleesha_DocM/DocMRoute');
-const routerP = require('./Vanuja_AddPatient/AddPRoute');*/
+const routerP = require('./Vanuja_AddPatient/AddPRoute');
 
 dotenv.config();
 
@@ -55,7 +55,7 @@ app.listen(PORT, () => {
 });
 
 
-/*app.use('/api' , routerDC);
+app.use('/api' , routerDC);
 app.use('/api' , routerCmp);
 app.use('/api' , routerRF);
 app.use('/api' , routerRS);
@@ -69,4 +69,4 @@ app.use('/api' , routerVacApp);
 app.use('/api' , routerClnc);
 app.use('/api' , routerVReport);
 app.use('/api' , routerDocM);
-app.use('/api' , routerP);*/
+app.use('/api' , routerP);
