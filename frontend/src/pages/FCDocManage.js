@@ -14,39 +14,6 @@ const FCDocManage = () => {
   const [documents, setDocuments] = useState('');
   const [subbmited, setSubbmted] = useState(false);
 
-
-  const addDoc = (data) => {
-    setSubbmted(true);
-
-    const payload ={
-      r_id: data.r_id,
-      ro_name: data.ro_name,
-      date: data.date,
-      v_name: data.v_name,
-      v_type: data.v_type,
-      documents: data.documents,
-    }
-
-    Axios.post('https://localhost:4000/api/addDocM', payload)
-      .then(() => {
-        setSubbmted(false)       
-      })
-      .catch(error => {
-        console.error("Axios Error : ", error);
-      });
-  }
-
-  const getFCDocManage = () => {
-    Axios.post('https://localhost:4000/api/addDocM', payload)
-      .then(() => {
-        setDocs(response.data?.response || []);        
-      })
-      .catch(error => {
-        console.error("Axios Error : ", error);
-      });
-  }
-
-
   return (
     <Layout>
       <div className="formContainer">
