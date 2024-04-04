@@ -45,7 +45,7 @@ const DengueCampaigns = ({submitted,data}) => {
             <h3 className='h23'>Campaign Details</h3>
         <form className='campaigndetails'>
             <div className="input">
-                <label htmlFor="venue">Venue</label>
+                <label className='venue'htmlFor="venue">Venue</label>
                 <input onChange={e=>setvenue(e.target.value)}type="text" id="venue" name="venue" autoComplete='off' placeholder='Venue' /> 
             </div>
             <div className="input">
@@ -53,11 +53,11 @@ const DengueCampaigns = ({submitted,data}) => {
                 <input onChange={e=>setdate(e.target.value.toString())}type="date" id="date" name="date" autoComplete='off' placeholder='Date' />
             </div>
             <div className="input">
-                <label htmlFor="stime">Starting Time</label>
+                <label className='stime'htmlFor="stime">Starting Time</label>
                 <input onChange={e=>settime(e.target.value)}type="stime" id="stime" name="stime" autoComplete='off' placeholder='Starting Time' />
             </div>
             <div className="input">
-                <label htmlFor="conductedby">Conducted by</label>
+                <label className='drname'htmlFor="conductedby">Conducted by</label>
                 <input onChange={e=>setdrName(e.target.value)}type="conductedby" id="conductedby" name="conductedby" autoComplete='off' placeholder='Conductedby' />
             </div>
             <div className="input">
