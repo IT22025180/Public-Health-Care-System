@@ -1,7 +1,24 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import '../styles/babytable.css'
-
+import  Axios  from 'axios';
 const Babytable = () => {
+
+    const [babydata,setbabydata]=useState([]);
+
+    useEffect(()=>{
+        getbabydata();
+    },[]);
+
+    const getbabydata =()=>{
+        Axios.get('http://localhost:4000/api/baby')
+        .then(response=>{
+            console.log('data from sever',response.data);
+            setbabydata(response.data.allBabies);
+        })
+        .catch(error=>{
+            console.error("Axios error:",error);
+        })
+    }
   return (
     <div className='babytable'>
         
@@ -22,12 +39,14 @@ const Babytable = () => {
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>fernando v.j</td>
-                    <td>2 </td>
-                    <td>6 </td>
-                    <td>0771234567</td>
-                    <td>Low weight</td>
+                {babydata && babydata.length > 0 ?(
+                    babydata.map((baby)=>(
+                <tr key={baby._id}>
+                    <td>{baby.bname}</td>
+                    <td>{baby.age} </td>
+                    <td>{baby.weight}</td>
+                    <td>{baby.co_no}</td>
+                    <td>{baby.notes}</td>
                     <td className='actionButtons'>
                         <button>Edit</button>
                     </td>
@@ -35,6 +54,13 @@ const Babytable = () => {
                         <button>Delete</button>
                     </td>
                 </tr>
+                    ))
+                    ):(
+                        <tr>
+                            <td>You have not baby data</td>
+                        </tr>  
+                )}
+
             </tbody>
         </table>
     </div>

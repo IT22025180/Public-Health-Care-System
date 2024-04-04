@@ -6,9 +6,11 @@ const addCampaign = async(req,res) => {
     try{
         
             const{ venue , date , time , drName} = req.body;
+
+            const formatteddate = Array.isArray(date) ? date.join(', ') : date;
             const newCampaign =  new Campaigns({
                 venue,      
-                date,
+                date : formatteddate,
                 time,
                 drName          
             });
