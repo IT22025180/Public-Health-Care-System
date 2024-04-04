@@ -5,9 +5,9 @@ const VacAppointment = require('./VAppModel');
 const addVacApp = async(req,res) => {
     try{
         
-            const{ vname, quantity , date, location} = req.body;
+            const{ v_name, quantity , date, location} = req.body;
             const newVaccineApp =  new VacAppointment({
-                vname,        
+                v_name,        
                 quantity,
                 date,
                 location    
@@ -36,10 +36,10 @@ const updateVacApp = async (req,res) => {
 
     try{
 
-        const { _id, vname, quantity , date , location} = req.body;
+        const { _id, v_name, quantity , date , location} = req.body;
 
         const updatedVacApp = await VacAppointment.findOneAndUpdate({_id} ,{
-                vname,                      
+                v_name,                      
                 quantity,
                 date,
                 location  

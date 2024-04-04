@@ -5,9 +5,9 @@ const VaccineRq = require('./VReqModel');
 const addVacRq = async(req,res) => {
     try{
         
-            const{ vname, quantity} = req.body;
+            const{ vName, quantity} = req.body;
             const newVaccineRq =  new VaccineRq({
-                vname,        
+                vName,        
                 quantity    
             });
 
@@ -34,10 +34,10 @@ const updateVacRq = async (req,res) => {
 
     try{
 
-        const { _id, vname, quantity} = req.body;
+        const { _id, vName, quantity} = req.body;
 
         const updatedVacRq = await VaccineRq.findOneAndUpdate({_id} ,{
-                vname,                      
+                vName,                      
                 quantity  
         }, { new : true});
 

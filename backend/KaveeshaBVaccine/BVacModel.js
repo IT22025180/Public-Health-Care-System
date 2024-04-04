@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const AddBVac = new mongoose.Schema({
     type : String,
-    est_Date : String,
+    esti_Date : String,
     quantity: Number,
 },
 {

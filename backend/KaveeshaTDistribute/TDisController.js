@@ -5,10 +5,10 @@ const Triposha = require('./TDisModel');
 const addTDis = async(req,res) => {
     try{
         
-            const{ type, est_Date, quantity} = req.body;
+            const{ type, esti_Date, quantity} = req.body;
             const newTDis =  new Triposha({
                 type,      
-                est_Date,
+                esti_Date,
                 quantity       
             });
 
@@ -35,11 +35,11 @@ const updateTDis = async (req,res) => {
 
     try{
 
-        const { _id, type, est_Date, quantity} = req.body;
+        const { _id, type, esti_Date, quantity} = req.body;
 
         const updatedTDis = await Triposha.findOneAndUpdate({_id} ,{
                 type,      
-                est_Date,
+                esti_Date,
                 quantity 
         }, { new : true});
 
