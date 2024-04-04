@@ -1,12 +1,61 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Layout from '../components/Layout'
 import { FaUser } from 'react-icons/fa'
 import { Button, Form } from 'react-bootstrap'
 import '../styles/addClinics.css'
 import PatientReport from './PatientReport'
+import Axios from 'axios'
+import Swal from 'sweetalert2'
 
+const AddClinic = ({submitted,data}) => {
 
-const AddClinic = () => {
+    const[ctype , setCtype] = useState('');
+    const[date , setDate] = useState('');
+    const[time , setTime] = useState('');
+    const[venue , setVenue] = useState('');
+
+    useEffect(() => {
+        if(!submitted){
+            setCtype('');
+            setDate('');
+            setTime('');
+            setVenue('');
+        }
+    }, [submitted]);
+
+    useEffect(() => {
+        if(data?.id && data.id !==0){
+            setCtype(data.ctype);
+            setDate(data.date);
+            setTime(data.time);
+            setVenue(data.venue);
+        }
+    }, [data]);
+
+    const addClnics = async() => {
+        try{
+
+            const response = await Axios.post('http://localhost:4000/api/addClinic',{
+
+            ctype : ctype,
+            date : date,
+            time : time,
+            venue : venue,
+            });
+
+            console.log("Clinic adding is successful" , response.data);
+            Swal.fire({
+                title: "Success !",
+                text: "Clinic added successfully",
+                icon: "success"
+              });
+            
+            
+        }catch(error){
+            console.error('error' , error);
+        }
+    }
+
   return (
     <Layout>
       <div className='clcontainer'>
@@ -19,13 +68,19 @@ const AddClinic = () => {
             <br/>
             <div className='rdgrp'>
                 <div className='rdbtn'>
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"/>
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"
+                   value='Dengue'
+                   checked={ctype === 'Dengue'}
+                   onChange={e => setCtype(e.target.value)}/>
                 <label class="form-check-label" for="flexRadioDefault1">
                     Dengue
                 </label>
                 </div>
                 <div className='rdbtn'>
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked/>
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" 
+                 value='Dental'
+                 checked={ctype === 'Dental'}
+                 onChange={e => setCtype(e.target.value)}/>
                 <label class="form-check-label" for="flexRadioDefault2">
                     Dental
                 </label>
@@ -38,7 +93,8 @@ const AddClinic = () => {
                     <Form.Group>
                         <Form.Control
                         type='date'
-                        />
+                        value={date}
+                        onChange={e=> setDate(e.target.value.toString())}/>
                     </Form.Group>
                 </Form>
             </div>
@@ -46,7 +102,7 @@ const AddClinic = () => {
             <div className='slcbtn'>
                 <p>Select time : </p>
                 <Form.Group>
-                    <Form.Control as='select' size='sm'>
+                    <Form.Control as='select' size='sm' onChange={e => setTime(e.target.value)}>
                         <option disabled>Select time</option>
                         <option >07 : 00</option>
                         <option >07 : 30</option>
@@ -83,6 +139,8 @@ const AddClinic = () => {
                     <Form.Group>
                         <Form.Control
                         type='text'
+                        value={venue}
+                        onChange={e => setVenue(e.target.value)}
                         />
                     </Form.Group>
                 </Form>
@@ -90,7 +148,7 @@ const AddClinic = () => {
                 <Button className='btn'>Generate report</Button>
             </div>
             <br/>
-            <Button>Submit</Button>
+            <Button onClick={addClnics}>Submit</Button>
         </div>
       </div>
     </Layout>

@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import '../styles/FCDocManage.css';
 import Layout from '../components/Layout';
+import Axios from "axios";
 
 const FCDocManage = () => {
+  const [Docs, setDocs] = useState([]);
   const [reportid, setID] = useState('');
   const [raidOfficer, setRaidOfficer] = useState('');
   const [date, setDate] = useState('');
@@ -10,7 +12,7 @@ const FCDocManage = () => {
   const [foodViolation, setfoodViolation] = useState('');
   const [dengueViolation, setdengueViolation] = useState('');
   const [documents, setDocuments] = useState('');
-
+  const [subbmited, setSubbmted] = useState(false);
 
   return (
     <Layout>
@@ -35,14 +37,11 @@ const FCDocManage = () => {
           </div>
           <div>
             <label>Violation Type:</label>
-            <div>
               <input type="radio" id="foodViolation" name="type" value={foodViolation} onChange={(e) => setfoodViolation(e.target.value)} />
-              Food Violation
-            </div>
-            <div>
+              Food Violation   
+              <span style={{ marginRight: '40px' }}></span>
               <input type="radio" id="dengueViolation" name="type" value={dengueViolation} onChange={(e) => setdengueViolation(e.target.value)} />
               Dengue Violation
-            </div>
           </div>
           <div>
             <label>Upload Documents</label>

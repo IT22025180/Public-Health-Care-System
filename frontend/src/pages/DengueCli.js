@@ -1,8 +1,14 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {} from 'react-bootstrap';
 import Layout from '../components/Layout';
 
 const Dengue = () => {
+
+    const [dgClinic , setdgClinic] = useState([]);
+
+    useEffect = (() => {
+
+    });
   return (
     <Layout>
         <div>

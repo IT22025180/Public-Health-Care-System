@@ -1,3 +1,21 @@
 .title{
     text-align: center;
 }
+
+.dengue-card {
+    background-color: #ffcccc;
+    border: 1px solid #ff0000;
+  }
+  
+  .vaccine-card {
+    background-color: #ccffcc;
+    border: 1px solid #00ff00;
+  }
+  
+  .raids-card {
+    background-color: #ccccff;
+    border: 1px solid #0000ff;
+  }
+
+  
+  

@@ -4,6 +4,10 @@ import '../styles/Staff.css';
 import { Sidebar, Menu, MenuItem } from 'react-pro-sidebar';
 import { useNavigate } from 'react-router-dom';
 
+import image1 from '../webImages/den.png'
+import image2 from '../webImages/vaccines.png'
+import image3 from '../webImages/raids.png'
+
 const Staff = () => {
   const navigate = useNavigate();
 
@@ -20,21 +24,28 @@ const Staff = () => {
       id: 1,
       title: 'Dengue Schedules',
       buttonText: 'View',
-      buttonLink: '/Dengueshedules'
+      buttonLink: '/Dengueschedules',
+      className: 'dengue-card',
+      image:image1
+      
     },
 
     {
-      id: 1,
+      id: 2,
       title: 'Vaccine Schedules',
       buttonText: 'View',
-      buttonLink: '/'
+      buttonLink: '/Vaccineschedules',
+      className: 'vaccine-card',
+      image:image2
     },
 
     {
-      id: 1,
+      id: 3,
       title: 'Raids Schedules',
       buttonText: 'View',
-      buttonLink: '/Fine-And-court-Submit-Reports'
+      buttonLink: '/Raidsschedules',
+      className: 'raids-card',
+      image:image3
     },
 
   

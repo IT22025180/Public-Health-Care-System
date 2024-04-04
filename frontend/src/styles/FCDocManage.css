@@ -21,9 +21,14 @@ h2 {
   border: none;
   border-radius: 5px;
   transition: background-color 0.3s ease;
+  margin-top: 20px;
 }
 
 .DMbut:hover {
   background-color: #0056b3;
+}
+
+div {
+  margin-top: 15px;
 }
 
