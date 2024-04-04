@@ -128,8 +128,9 @@ const Leave = ({submitted,data}) => {
               Quititing
             </div>
           
+          <Link to='/LeaveTable'>
           <button onClick = {addLeave} className='subBut' type="submit">Submit</button>
-          
+          </Link>
         </form>
       </div>
     </Layout>
