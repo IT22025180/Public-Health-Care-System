@@ -2,20 +2,52 @@
     text-align: center;
 }
 
+/* Styles for Dengue Schedules card */
 .dengue-card {
-    background-color: #ffcccc;
-    border: 1px solid #ff0000;
-  }
-  
-  .vaccine-card {
-    background-color: #ccffcc;
-    border: 1px solid #00ff00;
-  }
-  
-  .raids-card {
-    background-color: #ccccff;
-    border: 1px solid #0000ff;
-  }
+  background-color: #f8d7da;
+}
 
+/* Styles for Vaccine Schedules card */
+.vaccine-card {
+  background-color: #d4edda;
+}
+
+/* Styles for Raids Schedules card */
+.raids-card {
+  background-color: #cce5ff;
+}
+
+/* Styles for card image */
+.card-image {
+  width: 100%;
+  height: auto;
+}
+
+/* Styles for button */
+.btnview {
+  display: block; /* Change display to block */
+  margin: 0 auto; /* Set margin to auto */
+  padding: 10px 20px;
+  background-color: #074562;
+  color: #fff;
+  text-decoration: none;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-align: center;
+}
+
+
+.btnview:hover {
+  background-color: #346498;
+}
+  
+.image2 {
+  width: 100%; /* Ensure the image fills its container */
+  border-radius: 5px; /* Add rounded corners */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+  margin-top: 100px
+}
   
   

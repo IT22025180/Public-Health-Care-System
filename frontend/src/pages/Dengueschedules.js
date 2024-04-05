@@ -4,7 +4,7 @@ import Layout from '../components/Layout'
 const Dengueschedules = () => {
   return (
     <Layout>
-        <div>Dengueschedules</div>
+        <div className='denguesche'>Dengueschedules</div>
     </Layout>
   )
 }
