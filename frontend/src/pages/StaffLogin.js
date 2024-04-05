@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import '../styles/StaffLogin.css';
 import Layout  from '../components/Layout';
+import { useNavigate } from 'react-router-dom';
 
 
 const StaffLogin = () => {
@@ -9,28 +10,18 @@ const StaffLogin = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  // Function to handle form submission
-  const handleSubmit = (event) => {
-    event.preventDefault(); // Prevent form submission
+  const navigate = useNavigate();
 
-    // Basic validation
-    if (username === 'staff' && password === 'password') {
-      // Redirect or perform any action upon successful login
-      alert('Login successful!');
-      // For example, redirect to another page
-      // history.push('/dashboard');
-    } else {
-      // Display error message
-      setError('Invalid username or password.');
-    }
-  };
+  const navtostaff = () => {
+    navigate('/Staff')
+  }
 
   return (
     <Layout>
         <div className="login-container"> {/* Add a class for styling */}
       <h2>Staff Login</h2>
-      {error && <div className="error-message">{error}</div>} {/* Add a class for styling */}
-      <form onSubmit={handleSubmit}>
+      
+      <form >
         <div className="form-group"> {/* Add a class for styling */}
           <label htmlFor="username">Username:</label>
           <input
@@ -51,7 +42,7 @@ const StaffLogin = () => {
             required
           />
         </div>
-        <button type="submit" className="login-button">Login</button> {/* Add a class for styling */}
+        <button onClick={navtostaff}  type="submit" className="login-button">Login</button> {/* Add a class for styling */}
       </form>
     </div>
     </Layout>
