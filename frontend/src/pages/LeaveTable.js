@@ -12,6 +12,13 @@ const LeaveTable = () => {
 
     const getleavedata = ()=> {
         Axios.get('http://localhost:4000/api/Leave')
+        .then(response=>{
+            console.log('data from server',response.data);
+            setleavedata(response.data.allLeave);
+        })
+        .catch(error=>{
+            console.error("Axios error :",error);
+        })
     }
   return (
     <div className='LeaveTable'>
@@ -29,15 +36,19 @@ const LeaveTable = () => {
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                <td>Chaminda Liyanaarchchi</td>
-                    <td>D-1003</td>
-                    <td>chamindaliyanaarachchi@gmail.com</td>
-                    <td>Doctor</td>
-                    <td>Days</td>
-                    <td>2024/04/05</td>
-                    <td>2024/04/07</td>
-                    <td>Sick</td>
+                
+                {
+                    leavedata && leavedata.length>0?(
+                        leavedata.map((leave)=>(
+                            <tr key={leave._id}>
+                    <td>{leave.name}</td>
+                    <td>{leave.staffid}</td>
+                    <td>{leave.email}</td>
+                    <td>{leave.position}</td>
+                    <td>{leave.doleave}</td>
+                    <td>{leave.leavestrt}</td>
+                    <td>{leave.leaveend}</td>
+                    <td>{leave.leaveType}</td>
                     <td className='actionButtons'>
                         <button  >Edit</button>
                     </td>
@@ -46,6 +57,15 @@ const LeaveTable = () => {
                     </td>
 
                 </tr>
+                        ))
+                    ):(
+                        <tr>
+                        <td>You have not leave data</td>
+                        </tr>
+                    )}
+                    
+                    
+                
             </tbody>
         </table>
         </div>
