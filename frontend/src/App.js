@@ -57,7 +57,8 @@ function App() {
 
         <Route path='/addclinics' element = {<AddClinic/>}/>
         <Route path='/addpatient' element = {<AddPatients/>}/>
-        
+        <Route path='/dengueCli' element = {<Dengue/>}/>
+
         <Route path='/denguecamp' element = {<DengueCampaigns/>}/>
         
       </Routes>
