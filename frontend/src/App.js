@@ -25,6 +25,14 @@ import Thriposhatable from './pages/Thriposhatable';
 import AddPatients from './pages/AddPatients';
 import DengueCampaigns from './pages/DengueCampaignSchedule';
 import VaccineRegTab from './pages/VaccineRegTab';
+import DengCampTab from './pages/DengCampTab';
+import Dengueschedules from './pages/Dengueschedules';
+import Vaccineschedules from './pages/Vaccineschedules';
+import Raidsschedules from './pages/Raidsschedules';
+import LeaveTable from './pages/LeaveTable';
+import StaffLogin from './pages/StaffLogin';
+import ComplaintForm from './pages/Complains';
+import RaidForm from './pages/RaidForm';
 
 
 function App() {
@@ -38,8 +46,12 @@ function App() {
         <Route path='/staff' element = {<Staff/>}/>
         <Route path='/Leave' element = {<Leave/>}/>
         <Route path='/Allschedules' element = {<Allschedules/>}/>
-
-
+        <Route path='/Dengueschedules' element = {<Dengueschedules/>}/>
+        <Route path='/Vaccineschedules' element = {<Vaccineschedules/>}/>
+        <Route path='/Raidsschedules' element = {<Raidsschedules/>}/>
+        <Route path='/LeaveTable' element={<LeaveTable/>}/>
+        <Route path='/StaffLogin' element={<StaffLogin/>}/>
+        
         <Route path='/Fine-And-court' element = {<FineAndCourt/>}/>
         <Route path='/Fine-And-court-Submit-Reports' element = {<FCReportForm/>}/>
         <Route path='/Fine-And-court-Document-Management' element = {<FCDocManage/>}/>
@@ -55,10 +67,15 @@ function App() {
         <Route path='/VaccineRegTab' element={<VaccineRegTab/>}/>
 
 
+        <Route path='/DengCampTab' element={<DengCampTab/>}/>
+        <Route path='/RF' element={<RaidForm/>}/>
+        
 
         <Route path='/addclinics' element = {<AddClinic/>}/>
         <Route path='/addpatient' element = {<AddPatients/>}/>
+        <Route path='/dengueCli' element = {<Dengue/>}/>
         
+        <Route path='/Complains' element = {<ComplaintForm/>}/>
         <Route path='/denguecamp' element = {<DengueCampaigns/>}/>
         
       </Routes>

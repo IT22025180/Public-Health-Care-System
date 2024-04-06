@@ -1,7 +1,7 @@
 .title2{
     text-align: center;
-    width: 30%;
-    background-color: white;
+    width: 34%;
+    background-color: rgb(229, 235, 246);
     box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.065);
     border-radius: 5px;
     margin: 50px auto;
@@ -22,11 +22,21 @@
     display: flex;
     justify-content: space-between;
     margin: 20px;
+    
+}
+.venue{
+    padding-right: 40px;
+}
+.stime{
+    padding-right: 40px;
+}
+.drname{
+    padding-right: 40px;
 }
 .campaigndetails .input button{
     border: 0;
     outline: none;
-    background-color: purple;
+    background-color: rgba(179, 174, 174, 0.881);
     color: white;
     font-weight: 600;
     padding: 5px 10px;

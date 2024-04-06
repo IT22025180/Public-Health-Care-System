@@ -1,21 +1,61 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import '../styles/FCDocManage.css';
 import Layout from '../components/Layout';
+import Axios from "axios";
 
-const FCDocManage = () => {
+const FCDocManage = ({ submitted, data }) => {
   const [reportid, setID] = useState('');
   const [raidOfficer, setRaidOfficer] = useState('');
   const [date, setDate] = useState('');
   const [violatorName, setViolatorName] = useState('');
-  const [foodViolation, setfoodViolation] = useState('');
-  const [dengueViolation, setdengueViolation] = useState('');
+  const [foodViolation, setFoodViolation] = useState(false);
+  const [dengueViolation, setDengueViolation] = useState(false);
   const [documents, setDocuments] = useState('');
 
+  useEffect(() => {
+    if (!submitted) {
+      setID('');
+      setRaidOfficer('');
+      setDate('');
+      setViolatorName('');
+      setFoodViolation(false);
+      setDengueViolation(false);
+      setDocuments('');
+    }
+  }, [submitted]);
+
+  useEffect(() => {
+    if (data?.id && data.id !== 0) {
+      setID(data.id);
+      setRaidOfficer(data.raidOfficer);
+      setDate(data.date);
+      setViolatorName(data.violatorName);
+      setFoodViolation(data.foodViolation);
+      setDengueViolation(data.dengueViolation);
+      setDocuments(data.documents);
+    }
+  }, [data]);
+
+  const addDocm = async () => {
+    try {
+      const response = await Axios.post('http://localhost:4000/api/addDocM', {
+        r_id: reportid,
+        ro_name: raidOfficer,
+        date: date,
+        v_name: violatorName,
+        v_type: foodViolation ? 'Food Violation' : 'Dengue Violation',
+        documents: documents,
+      });
+      console.log('Successful', response.data);
+    } catch (error) {
+      console.error('Error', error);
+    }
+  };
 
   return (
     <Layout>
       <div className="formContainer">
-        <form className="DMForm" onSubmit={''}>
+        <form className="DMForm">
           <h2>Document Management</h2>
           <div>
             <label>Report ID</label>
@@ -35,20 +75,18 @@ const FCDocManage = () => {
           </div>
           <div>
             <label>Violation Type:</label>
-            <div>
-              <input type="radio" id="foodViolation" name="type" value={foodViolation} onChange={(e) => setfoodViolation(e.target.value)} />
-              Food Violation
-            </div>
-            <div>
-              <input type="radio" id="dengueViolation" name="type" value={dengueViolation} onChange={(e) => setdengueViolation(e.target.value)} />
-              Dengue Violation
-            </div>
+            <input type="radio" id="foodViolation" name="type" value='foodViolation' checked={foodViolation} onChange={() => { setFoodViolation(true); setDengueViolation(false); }} />
+            Food Violation
+            <span style={{ marginRight: '40px' }}></span>
+            <input type="radio" id="dengueViolation" name="type" value='dengueViolation' checked={dengueViolation} onChange={() => { setDengueViolation(true); setFoodViolation(false); }} />
+            Dengue Violation
           </div>
+
           <div>
             <label>Upload Documents</label>
             <input type='file' value={documents} onChange={(e) => setDocuments(e.target.value)} multiple />
           </div>
-          <button className='DMbut' type='submit'>Submit</button>
+          <button className='DMbut' type='submit' onClick={addDocm}>Submit</button>
         </form>
       </div>
     </Layout>

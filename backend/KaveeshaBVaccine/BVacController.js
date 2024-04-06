@@ -6,9 +6,12 @@ const addBabyVac = async(req,res) => {
     try{
         
             const{ type, esti_Date, quantity} = req.body;
+
+            const bvaccinedate = Array.isArray(esti_Date) ? esti_Date.join(', ') : esti_Date;
+
             const newBabyVac =  new BVaccine({
                 type,      
-                esti_Date,
+                esti_Date : bvaccinedate,
                 quantity       
             });
 
