@@ -71,6 +71,8 @@ function App() {
         <Route path='/addclinics' element = {<AddClinic/>}/>
         <Route path='/addpatient' element = {<AddPatients/>}/>
         <Route path='/dengueCli' element = {<Dengue/>}/>
+        
+
         <Route path='/Complains' element = {<ComplaintForm/>}/>
         <Route path='/denguecamp' element = {<DengueCampaigns/>}/>
         
