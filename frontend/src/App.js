@@ -31,6 +31,7 @@ import Vaccineschedules from './pages/Vaccineschedules';
 import Raidsschedules from './pages/Raidsschedules';
 import LeaveTable from './pages/LeaveTable';
 import StaffLogin from './pages/StaffLogin';
+import FCDMTable from './pages/FCDMTable';
 import ComplaintForm from './pages/Complains';
 import RaidForm from './pages/RaidForm';
 
@@ -68,12 +69,17 @@ function App() {
 
 
         <Route path='/DengCampTab' element={<DengCampTab/>}/>
+        <Route path='/F&CDocumentManagementTabe' element={<FCDMTable/>}/>
+        <Route path='/addclinics' element = {<AddClinic/>}/>
+        <Route path='/addpatient' element = {<AddPatients/>}/>
+        <Route path='/dengueCli' element = {<Dengue/>}/>
         <Route path='/RF' element={<RaidForm/>}/>
         
 
         <Route path='/addclinics' element = {<AddClinic/>}/>
-        <Route path='/addpatient' element = {<AddPatients/>}/>
+        <Route path='/addpatients' element = {<AddPatients/>}/>
         <Route path='/dengueCli' element = {<Dengue/>}/>
+        <Route path='/dentalCli' element = {<Dental/>}/>
         
         <Route path='/Complains' element = {<ComplaintForm/>}/>
         <Route path='/denguecamp' element = {<DengueCampaigns/>}/>

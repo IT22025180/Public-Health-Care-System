@@ -3,7 +3,9 @@ import { Button, Form } from 'react-bootstrap'
 import Layout from '../components/Layout'
 import '../styles/addPatient.css';
 
-const AddPatients = () => {
+const AddPatients = ({submitted , data}) => {
+
+  //const []
   return (
     <Layout>
     <div className='addform'>
