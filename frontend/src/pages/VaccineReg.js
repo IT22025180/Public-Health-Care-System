@@ -3,6 +3,7 @@ import Layout from "../components/Layout";
 import Header from '../components/Header'; 
 import '../styles/VaccineReg.css'
 import Axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
 const VaccineReg = ({submitted,data}) => {
     const[vname,setvname]=useState('');
@@ -10,6 +11,8 @@ const VaccineReg = ({submitted,data}) => {
     const[expi_Date,setexpi_Date]=useState('');
     const[quantity,setquantity]=useState('');
     const[notes,setnotes]=useState('');
+
+    const navigate = useNavigate();
 
     useEffect(()=>{
         if(!submitted){
@@ -32,6 +35,9 @@ const VaccineReg = ({submitted,data}) => {
         }
     },[data]);
 
+    const navtoTable = () => {
+        navigate('/VaccineRegTab');
+    }
 
     const addvacc = async()=>{
         try{
@@ -44,6 +50,7 @@ const VaccineReg = ({submitted,data}) => {
             });
 
             console.log('Successfully',response.data);
+            
         }catch(error){
             console.error('error',error);
         }
@@ -88,8 +95,13 @@ const VaccineReg = ({submitted,data}) => {
         
 
         
-            <button className='bsubmit' type='submit'>Cancel</button>
+            <button onClick={navtoTable} className='bsubmit' type='submit'>View vaccines</button>
+            
             <button onClick={addvacc} className='bsave'type='submit'>Save</button>
+             
+
+            
+            
 
 
 
