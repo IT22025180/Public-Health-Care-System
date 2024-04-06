@@ -40,51 +40,51 @@ const getLeave = async (req,res) => {
     }
 }
 
-const updateLeave = async (req,res) => {
+const updateLeave = async (req, res) => {
+    try {
+        const { _id, name, email, staffid, position, doleave, leavestrt, leaveend, leaveType } = req.body;
 
-    try{
-
-        const { _id, name, email,staffid, position,doleave, leavestrt, leaveend, leaveType} = req.body;
-
-       
-        const updatedLeave = await Leave.findOneAndUpdate({_id} ,{
-            name,      
+        const updatedLeave = await Leave.findOneAndUpdate({ _id }, {
+            name,
             email,
             staffid,
             position,
             doleave,
-            leavestrt:formatleavedate,
-            leaveend:formatleaveend,
-            leaveType    
-        }, { new : true});
+            leavestrt: formatleavedate,
+            leaveend: formatleaveend,
+            leaveType
+        }, { new: true });
 
-        if(!updatedLeave){
-            return res.status(404).json({ success : false, message :'Selected leave not found'});
+        if (!updatedLeave) {
+            return res.status(404).json({ success: false, message: 'Selected leave not found' });
         }
 
-        res.json({ success : true, message : 'leave updated successfully' , data : updatedLeave});
-    }catch(error){
-        console.error('Error updating Leave:' , error);
-        res.status(500).json({ success : false , message : 'Internal server error'});
+        res.json({ success: true, message: 'Leave updated successfully', data: updatedLeave });
+    } catch (error) {
+        console.error('Error updating Leave:', error);
+        res.status(500).json({ success: false, message: 'Internal server error' });
     }
-}
+};
 
-const deleteLeave = async (req,res) => {
-    try{
-        const {_id} = req.body;
+const deleteLeave = async (req, res) => {
+    try {
+        const { _id } = req.body;
 
-        const deletedLeave = await Baby.findOneAndDelete({_id});
+        const deletedLeave = await Leave.findOneAndDelete({ _id });
 
-        if(!deletedStaff){
-            return res.status(404).json({ success: false , message : 'Leave not found'});
+        if (!deletedLeave) {
+            return res.status(404).json({ success: false, message: 'Leave not found' });
         }
 
-        res.json({ success : true , message : 'Leave deleted successfully' , data : deletedLeave});
-    }catch(error){
-        console.error('Error deleting Leave:' , error);
-        res.status(500).json({ success : false , message : 'Internal server error'});
+        res.json({ success: true, message: 'Leave deleted successfully', data: deletedLeave });
+    } catch (error) {
+        console.error('Error deleting Leave:', error);
+        res.status(500).json({ success: false, message: 'Internal server error' });
     }
-}
+};
+
+
+
 exports.addLeave = addLeave;
 exports.getLeave = getLeave;
 exports.updateLeave = updateLeave;

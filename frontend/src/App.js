@@ -49,6 +49,7 @@ function App() {
         <Route path='/LeaveTable' element={<LeaveTable/>}/>
         <Route path='/StaffLogin' element={<StaffLogin/>}/>
         
+        
 
 
         <Route path='/Fine-And-court' element = {<FineAndCourt/>}/>
