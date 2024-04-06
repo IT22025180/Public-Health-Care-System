@@ -50,8 +50,6 @@ function App() {
         <Route path='/LeaveTable' element={<LeaveTable/>}/>
         <Route path='/StaffLogin' element={<StaffLogin/>}/>
         
-
-
         <Route path='/Fine-And-court' element = {<FineAndCourt/>}/>
         <Route path='/Fine-And-court-Submit-Reports' element = {<FCReportForm/>}/>
         <Route path='/Fine-And-court-Document-Management' element = {<FCDocManage/>}/>
@@ -66,13 +64,10 @@ function App() {
         <Route path='/Thriposhatable' element={<Thriposhatable/>}/>
         <Route path='/DengCampTab' element={<DengCampTab/>}/>
 
-
-
         <Route path='/addclinics' element = {<AddClinic/>}/>
         <Route path='/addpatient' element = {<AddPatients/>}/>
         <Route path='/dengueCli' element = {<Dengue/>}/>
         
-
         <Route path='/Complains' element = {<ComplaintForm/>}/>
         <Route path='/denguecamp' element = {<DengueCampaigns/>}/>
         
