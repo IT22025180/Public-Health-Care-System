@@ -24,6 +24,7 @@ import Bvaccinetable from './pages/Bvaccinetable';
 import Thriposhatable from './pages/Thriposhatable';
 import AddPatients from './pages/AddPatients';
 import DengueCampaigns from './pages/DengueCampaignSchedule';
+import VaccineRegTab from './pages/VaccineRegTab';
 
 
 function App() {
@@ -51,7 +52,7 @@ function App() {
         <Route path='/Babytable' element={<Babytable/>}/>
         <Route path='/Bvaccinetable' element={<Bvaccinetable/>}/>
         <Route path='/Thriposhatable' element={<Thriposhatable/>}/>
-
+        <Route path='/VaccineRegTab' element={<VaccineRegTab/>}/>
 
 
 
