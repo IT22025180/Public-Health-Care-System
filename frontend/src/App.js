@@ -30,6 +30,7 @@ import Vaccineschedules from './pages/Vaccineschedules';
 import Raidsschedules from './pages/Raidsschedules';
 import LeaveTable from './pages/LeaveTable';
 import StaffLogin from './pages/StaffLogin';
+import ComplaintForm from './pages/Complains';
 
 
 function App() {
@@ -70,7 +71,7 @@ function App() {
         <Route path='/addclinics' element = {<AddClinic/>}/>
         <Route path='/addpatient' element = {<AddPatients/>}/>
         <Route path='/dengueCli' element = {<Dengue/>}/>
-
+        <Route path='/Complains' element = {<ComplaintForm/>}/>
         <Route path='/denguecamp' element = {<DengueCampaigns/>}/>
         
       </Routes>
