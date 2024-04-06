@@ -13,7 +13,7 @@ const DengCampTab = () => {
         Axios.get('http://localhost:4000/api/camp')
         .then(response => {
             console.log('data from server',response.data);
-            setcampdata(response.data.allCampaign); //methna
+            setcampdata(response.data.allCampaign);
         })
         .catch(error=>{
             console.error("Axios error: ",error);
