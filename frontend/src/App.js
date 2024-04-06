@@ -31,6 +31,7 @@ import Raidsschedules from './pages/Raidsschedules';
 import LeaveTable from './pages/LeaveTable';
 import StaffLogin from './pages/StaffLogin';
 import ComplaintForm from './pages/Complains';
+import RaidForm from './pages/RaidForm';
 
 
 function App() {
@@ -65,8 +66,8 @@ function App() {
         <Route path='/Bvaccinetable' element={<Bvaccinetable/>}/>
         <Route path='/Thriposhatable' element={<Thriposhatable/>}/>
         <Route path='/DengCampTab' element={<DengCampTab/>}/>
-
-
+        <Route path='/RF' element={<RaidForm/>}/>
+        
 
         <Route path='/addclinics' element = {<AddClinic/>}/>
         <Route path='/addpatient' element = {<AddPatients/>}/>
