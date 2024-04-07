@@ -21,6 +21,18 @@ const Thriposhatable = () => {
         })
     }
 
+    //delete
+    const thriposhaDelete = (id) => {
+        Axios.post('http://localhost:4000/api/deleteTDis', { _id: id })
+            .then(response => {
+                console.log('thriposha deleted successfully');
+                setthriposhadata(prevData => prevData.filter(thriposha => thriposha._id !== id));
+            })
+            .catch(error => {
+                console.error('Error deleting thriposha:', error);
+      });
+};
+
   return (
     <div className='thriposhatable'>
         <table border ={1} cellPadding={10} cellSpacing={0}>
@@ -45,7 +57,7 @@ const Thriposhatable = () => {
                         <button>Edit</button>
                     </td>
                     <td className='deleteButtons'>
-                        <button>Delete</button>
+                        <button onClick={() => thriposhaDelete(thriposha._id)} >Delete</button>
                     </td>
                 </tr>
                     ))
@@ -57,7 +69,7 @@ const Thriposhatable = () => {
             </tbody>
         </table>
 
-        <button className='generate'>Generate Report</button>
+        <button  className='generate'>Generate Report</button>
     </div>
   )
 }

@@ -20,6 +20,18 @@ const Bvaccinetable = () => {
         })
     }
 
+    //delete
+    const bvaccineDelete = (id) => {
+        Axios.post('http://localhost:4000/api/deleteBabyVac', { _id: id })
+            .then(response => {
+                console.log('Baby vaccine deleted successfully');
+                setbvaccinedata(prevData => prevData.filter(bvaccine => bvaccine._id !== id));
+            })
+            .catch(error => {
+                console.error('Error deleting Baby vaccine:', error);
+      });
+};
+
   return (
     <div className='Bvaccinetable'>
         <table border ={1} cellPadding={10} cellSpacing={0}>
@@ -44,7 +56,9 @@ const Bvaccinetable = () => {
                         <button>Edit</button>
                     </td>
                     <td className='deleteButtons'>
-                        <button>Delete</button>
+                        
+                        <button onClick={() => bvaccineDelete(bvaccine._id)} >Delete</button>
+
                     </td>
                 </tr>
                     ))

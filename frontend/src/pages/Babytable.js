@@ -4,7 +4,7 @@ import  Axios  from 'axios';
 const Babytable = () => {
 
     const [babydata,setbabydata]=useState([]);
-
+    
     useEffect(()=>{
         getbabydata();
     },[]);
@@ -19,6 +19,20 @@ const Babytable = () => {
             console.error("Axios error:",error);
         })
     }
+
+    //delete
+    const babyDdelete = (id) => {
+        Axios.post('http://localhost:4000/api/deleteBaby', { _id: id })
+            .then(response => {
+                console.log('Babydata deleted successfully');
+                setbabydata(prevData => prevData.filter(baby => baby._id !== id));
+            })
+            .catch(error => {
+                console.error('Error deleting babydata:', error);
+      });
+};
+    
+
   return (
     <div className='babytable'>
         
@@ -47,11 +61,14 @@ const Babytable = () => {
                     <td>{baby.weight}</td>
                     <td>{baby.co_no}</td>
                     <td>{baby.notes}</td>
+
+                  
                     <td className='actionButtons'>
-                        <button>Edit</button>
+                        <button >Edit</button>
                     </td>
-                    <td className='deleteButtons'>
-                        <button>Delete</button>
+                    
+                    <td  className='deleteButtons'>
+                        <button onClick={()=> babyDdelete(baby._id)}>Delete</button>
                     </td>
                 </tr>
                     ))

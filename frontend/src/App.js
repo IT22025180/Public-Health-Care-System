@@ -24,12 +24,14 @@ import Bvaccinetable from './pages/Bvaccinetable';
 import Thriposhatable from './pages/Thriposhatable';
 import AddPatients from './pages/AddPatients';
 import DengueCampaigns from './pages/DengueCampaignSchedule';
+import VaccineRegTab from './pages/VaccineRegTab';
 import DengCampTab from './pages/DengCampTab';
 import Dengueschedules from './pages/Dengueschedules';
 import Vaccineschedules from './pages/Vaccineschedules';
 import Raidsschedules from './pages/Raidsschedules';
 import LeaveTable from './pages/LeaveTable';
 import StaffLogin from './pages/StaffLogin';
+import FCDMTable from './pages/FCDMTable';
 import ComplaintForm from './pages/Complains';
 import RaidForm from './pages/RaidForm';
 import EditLeave from './pages/EditLeave';
@@ -66,13 +68,21 @@ function App() {
         <Route path='/Babytable' element={<Babytable/>}/>
         <Route path='/Bvaccinetable' element={<Bvaccinetable/>}/>
         <Route path='/Thriposhatable' element={<Thriposhatable/>}/>
+        <Route path='/VaccineRegTab' element={<VaccineRegTab/>}/>
+
+
         <Route path='/DengCampTab' element={<DengCampTab/>}/>
+        <Route path='/F&CDocumentManagementTabe' element={<FCDMTable/>}/>
+        <Route path='/addclinics' element = {<AddClinic/>}/>
+        <Route path='/addpatient' element = {<AddPatients/>}/>
+        <Route path='/dengueCli' element = {<Dengue/>}/>
         <Route path='/RF' element={<RaidForm/>}/>
         
 
         <Route path='/addclinics' element = {<AddClinic/>}/>
-        <Route path='/addpatient' element = {<AddPatients/>}/>
+        <Route path='/addpatients' element = {<AddPatients/>}/>
         <Route path='/dengueCli' element = {<Dengue/>}/>
+        <Route path='/dentalCli' element = {<Dental/>}/>
         
         <Route path='/Complains' element = {<ComplaintForm/>}/>
         <Route path='/denguecamp' element = {<DengueCampaigns/>}/>

@@ -6,6 +6,7 @@ import '../styles/addClinics.css'
 import PatientReport from './PatientReport'
 import Axios from 'axios'
 import Swal from 'sweetalert2'
+import AdminClinic from './AdminClinic'
 
 const AddClinic = ({submitted,data}) => {
 
@@ -151,6 +152,7 @@ const AddClinic = ({submitted,data}) => {
             <Button onClick={addClnics}>Submit</Button>
         </div>
       </div>
+      <AdminClinic/>
     </Layout>
   )
 }
