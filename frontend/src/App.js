@@ -32,6 +32,7 @@ import LeaveTable from './pages/LeaveTable';
 import StaffLogin from './pages/StaffLogin';
 import ComplaintForm from './pages/Complains';
 import RaidForm from './pages/RaidForm';
+import EditLeave from './pages/EditLeave';
 
 
 function App() {
@@ -50,6 +51,8 @@ function App() {
         <Route path='/Raidsschedules' element = {<Raidsschedules/>}/>
         <Route path='/LeaveTable' element={<LeaveTable/>}/>
         <Route path='/StaffLogin' element={<StaffLogin/>}/>
+        <Route path="/" element={<LeaveTable />} />
+        <Route path="/EditLeave/:id" element={<EditLeave />} />
         
         <Route path='/Fine-And-court' element = {<FineAndCourt/>}/>
         <Route path='/Fine-And-court-Submit-Reports' element = {<FCReportForm/>}/>
