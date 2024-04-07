@@ -58,7 +58,7 @@ const deleteTDis = async (req,res) => {
     try{
         const {_id} = req.body;
 
-        const deletedTDis = await Baby.findOneAndDelete({_id});
+        const deletedTDis = await Triposha.findOneAndDelete({_id});
 
         if(!deletedTDis){
             return res.status(404).json({ success: false , message : 'Triposha not found'});

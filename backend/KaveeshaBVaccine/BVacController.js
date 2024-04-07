@@ -61,7 +61,7 @@ const deleteBabyVac = async (req,res) => {
     try{
         const {_id} = req.body;
 
-        const deletedBabyVac = await Baby.findOneAndDelete({_id});
+        const deletedBabyVac = await BVaccine.findOneAndDelete({_id});
 
         if(!deletedBabyVac){
             return res.status(404).json({ success: false , message : 'Baby vaccine not found'});

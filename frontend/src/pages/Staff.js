@@ -20,7 +20,7 @@ const Staff = () => {
       buttonText: 'View',
       buttonLink: '/Dengueschedules',
       className: 'dengue-card',
-      image:image1
+      image: image1
       
     },
 
@@ -30,7 +30,7 @@ const Staff = () => {
       buttonText: 'View',
       buttonLink: '/Vaccineschedules',
       className: 'vaccine-card',
-      image:image2,
+      image: image2,
       
       
     },
@@ -41,36 +41,41 @@ const Staff = () => {
       buttonText: 'View',
       buttonLink: '/Raidsschedules',
       className: 'raids-card',
-      image:image3
+      image: image3
     },
-
-  
-       
   ];
 
+  const ApplyLeave = () => {
+    // Navigate to the leave application page
+    navigate('/Leave');
+  };
   
   return (
     <Layout>
-
-          <div className="home-page">
-            <h3>Staff Schedules</h3>
-            <div className="card-container">
-              {cards.map((card) => (
-                <div key={card.id} className="card">
-                  <img src={card.image} alt={card.title} className="card-image" />
-                  <div className="card-body">
-                    <h2 className="card-title">{card.title}</h2>
-                    <p className="card-text">{card.description}</p>
-                    <a href={card.buttonLink} className="btnview">
-                      {card.buttonText}
-                    </a>
-                  </div>
-                </div>
-              ))}
+      <div className="home-page">
+        <h3>Staff Schedules</h3>
+        <div className="card-container">
+          {cards.map((card) => (
+            <div key={card.id} className="card">
+              <img src={card.image} alt={card.title} className="card-image" />
+              <div className="card-body">
+                <h2 className="card-title">{card.title}</h2>
+                <p className="card-text">{card.description}</p>
+                <a href={card.buttonLink} className="btnview">
+                  {card.buttonText}
+                </a>
+              </div>
             </div>
-          </div>
+          ))}
+        </div>
+        <hr className="horizontal-line" />
+
+        <div className="apply-leave-box">
+          <button onClick={ApplyLeave}>Apply for Leave</button>
+        </div>
+      </div>
     </Layout>
-);
+  );
 };
 
 export default Staff;

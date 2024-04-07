@@ -9,8 +9,8 @@ const FCReportForm = () => {
   const [ROcontact, setROcontact] = useState('')
   const [date, setdate] = useState('')
   const [location, setlocation] = useState('')
-  const [foodViolation, setfoodViolation] = useState('')
-  const [dengueViolation, setdengueViolation] = useState('')
+  const [foodViolation, setFoodViolation] = useState('')
+  const [dengueViolation, setDengueViolation] = useState('')
   const [description, setdescription] = useState('')
   const [vName, setvName] = useState('')
   const [vEmail, setvEmail] = useState('')
@@ -53,16 +53,13 @@ const FCReportForm = () => {
               <input type="text" name="location" value={location} onChange={(e) => setlocation(e.target.value)} />
             </div>
             <div>
-              <label>Violation Type:</label>
-              <div>
-                <input type="radio" id="foodViolation" name="type" value={foodViolation} onChange={(e) => setfoodViolation(e.target.value)} />
-                Food Violation
-              </div>
-              <div>
-                <input type="radio" id="dengueViolation" name="type" value={dengueViolation} onChange={(e) => setdengueViolation(e.target.value)} />
-                Dengue Violation
-              </div>
-            </div>
+            <label>Violation Type:</label>
+            <input type="radio" id="foodViolation" name="type" value='foodViolation' checked={foodViolation} onChange={() => { setFoodViolation(true); setDengueViolation(false); }} />
+            Food Violation
+            <span style={{ marginRight: '40px' }}></span>
+            <input type="radio" id="dengueViolation" name="type" value='dengueViolation' checked={dengueViolation} onChange={() => { setDengueViolation(true); setFoodViolation(false); }} />
+            Dengue Violation
+          </div>
 
             <div>
               <label>Violation Description:</label>

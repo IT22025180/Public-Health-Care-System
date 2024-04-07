@@ -6,7 +6,6 @@ import { Link,useHistory } from "react-router-dom";
 import Axios from 'axios';
 
 
-
 const Leave = ({submitted,data}) => {
 
   const[name,setname]=useState('');
@@ -63,12 +62,6 @@ const Leave = ({submitted,data}) => {
       console.error('error',error);
     }
   }
-
-  
-
-
-   
-
 
   return (
     <Layout>

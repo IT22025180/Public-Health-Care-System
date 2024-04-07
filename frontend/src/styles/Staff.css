@@ -49,5 +49,34 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
   margin-top: 100px
 }
-  
-  
+
+.apply-leave-box {
+  background-color: #f0f0f0;
+  padding: 200px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  background: #ffffff url(../webImages/st1.jpg) 
+  center center/cover no-repeat;
+}
+
+.apply-leave-box button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.apply-leave-box button:hover {
+  background-color: #0056b3;
+}
+
+.horizontal-line {
+  border: none;
+  height: 10px;
+  background-color: #848181; /* Adjust color as needed */
+  margin: 20px 0; /* Adjust margin as needed */
+}
+
