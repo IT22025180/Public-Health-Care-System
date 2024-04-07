@@ -4,20 +4,19 @@ import Layout from '../components/Layout';
 import Axios from 'axios';
 
 const FCReportForm = ({ submitted, data }) => {
-
-  const [ROname, setROname] = useState('')
-  const [Roemail, setRoemail] = useState('')
-  const [ROcontact, setROcontact] = useState('')
-  const [date, setdate] = useState('')
-  const [location, setlocation] = useState('')
-  const [foodViolation, setFoodViolation] = useState('')
-  const [dengueViolation, setDengueViolation] = useState('')
-  const [description, setdescription] = useState('')
-  const [vName, setvName] = useState('')
-  const [vEmail, setvEmail] = useState('')
-  const [vContact, setvContact] = useState('')
-  const [vId, setvId] = useState('')
-  const [document, setdocument] = useState('')
+  const [ROname, setROname] = useState('');
+  const [Roemail, setRoemail] = useState('');
+  const [ROcontact, setROcontact] = useState('');
+  const [date, setdate] = useState('');
+  const [location, setlocation] = useState('');
+  const [foodViolation, setFoodViolation] = useState(false);
+  const [dengueViolation, setDengueViolation] = useState(false);
+  const [description, setdescription] = useState('');
+  const [vName, setvName] = useState('');
+  const [vEmail, setvEmail] = useState('');
+  const [vContact, setvContact] = useState('');
+  const [vId, setvId] = useState('');
+  const [evidenceFile, setEvidenceFile] = useState(null);
 
   useEffect(() => {
     if (!submitted) {
@@ -33,7 +32,7 @@ const FCReportForm = ({ submitted, data }) => {
       setvEmail('');
       setvContact('');
       setvId('');
-      setdocument('');
+      setEvidenceFile(null);
     }
   }, [submitted]);
 
@@ -51,25 +50,29 @@ const FCReportForm = ({ submitted, data }) => {
       setvEmail(data.vEmail);
       setvContact(data.vContact);
       setvId(data.vId);
-      setdocument(data.document);
     }
   }, [data]);
 
   const addFCReport = async () => {
     try {
-      const response = await Axios.post('http://localhost:4000/api/addVioR', {
-        ro_name: ROname,
-        ro_email: Roemail,
-        ro_mobile: ROcontact,
-        date: date,
-        v_location: location,
-        v_type: foodViolation ? 'foodViolation' : 'dengueViolation',
-        v_description: description,
-        v_name: vName,
-        v_nic: vId,
-        v_mobile: vContact,
-        v_email: vEmail,
-        evidance: document,
+      const formData = new FormData();
+      formData.append('ro_name', ROname);
+      formData.append('ro_email', Roemail);
+      formData.append('ro_mobile', ROcontact);
+      formData.append('date', date);
+      formData.append('v_location', location);
+      formData.append('v_type', foodViolation ? 'foodViolation' : 'dengueViolation');
+      formData.append('v_description', description);
+      formData.append('v_name', vName);
+      formData.append('v_email', vEmail);
+      formData.append('v_mobile', vContact);
+      formData.append('v_nic', vId);
+      formData.append('evidence', evidenceFile);
+
+      const response = await Axios.post('http://localhost:4000/api/addVioR', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
       });
       console.log('Successful', response.data);
     } catch (error) {
@@ -150,9 +153,11 @@ const FCReportForm = ({ submitted, data }) => {
 
           <h4>Upload Evidence</h4>
           <div>
-            <input type="file" value={document} onChange={(e) => setdocument(e.target.value)} multiple />
+          <input type="file" onChange={(e) => setEvidenceFile(e.target.files[0])} />
           </div>
-          <button className='button' type="button" onChange={addFCReport}>Submit Report</button>
+          <button className="button" type="button" onClick={addFCReport}>
+            Submit Report
+          </button>
         </form>
       </div>
     </Layout>

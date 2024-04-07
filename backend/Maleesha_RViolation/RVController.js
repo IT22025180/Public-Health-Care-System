@@ -21,8 +21,13 @@ const addVioReport = async (req, res) => {
         upload.single('evidence')(req, res, async (error) => {
             if (error) {
                 console.error('Error uploading image:', error);
-                return res.status(500).json({ success: false, message: 'Error uploading image' });
+                return res.status(500).json({ success: false, message: 'Error uploading image', error: error.message });
             }
+            
+            if (!req.file) {
+                return res.status(400).json({ success: false, message: 'No file uploaded' });
+            }
+
             console.log('req.file:', req.file);
             const imageFileName = req.file.filename;
             const {
@@ -59,9 +64,10 @@ const addVioReport = async (req, res) => {
         });
     } catch (error) {
         console.error('Error adding Violation report:', error);
-        res.status(500).json({ success: false, message: 'Internal server error' });
+        res.status(500).json({ success: false, message: 'Internal server error', error: error.message });
     }
 };
+
 
 const getVioReport = async (req, res) => {
     try {

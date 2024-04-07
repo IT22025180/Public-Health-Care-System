@@ -35,6 +35,7 @@ import FCDMTable from './pages/FCDMTable';
 import ComplaintForm from './pages/Complains';
 import RaidForm from './pages/RaidForm';
 import EditLeave from './pages/EditLeave';
+import FCRVTable from './pages/FCRVTable';
 
 
 function App() {
@@ -77,6 +78,7 @@ function App() {
         <Route path='/addpatient' element = {<AddPatients/>}/>
         <Route path='/dengueCli' element = {<Dengue/>}/>
         <Route path='/RF' element={<RaidForm/>}/>
+        <Route path='/F&CDReportViolationTabe' element={<FCRVTable/>}/>
         
 
         <Route path='/addclinics' element = {<AddClinic/>}/>
