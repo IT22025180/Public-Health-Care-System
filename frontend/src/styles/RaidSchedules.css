@@ -1,7 +1,7 @@
 
 
-.layout-container1 {
-    background-image: url('../webImages/d1.jpg'); 
+.layout-container3 {
+    background-image: url('../webImages/st1.jpg'); /* Replace '../path/to/d2.png' with the actual path to your image */
     background-size: cover;
     background-position: center;
   }
@@ -10,7 +10,7 @@
     max-width: 600px;
     margin: 0 auto;
     padding: 20px;
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(255, 255, 255, 0.8); /* Add a semi-transparent white background for better readability */
   }
   
   .assign-staff-container h2 {

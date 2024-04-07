@@ -5,7 +5,7 @@ import VaccineReg from './pages/VaccineReg';
 import Staff from './pages/Staff';
 import { Sidebar } from "react-pro-sidebar";
 import Leave from './pages/Leave';
-import  Allschedules  from './pages/Allschedules';
+import  DengueAssignTable  from './pages/DengueAssignTable';
 
 import FineAndCourt from './pages/FineAndCourt';
 import FCReportForm from './pages/FCReportForm';
@@ -47,7 +47,6 @@ function App() {
         
         <Route path='/staff' element = {<Staff/>}/>
         <Route path='/Leave' element = {<Leave/>}/>
-        <Route path='/Allschedules' element = {<Allschedules/>}/>
         <Route path='/Dengueschedules' element = {<Dengueschedules/>}/>
         <Route path='/Vaccineschedules' element = {<Vaccineschedules/>}/>
         <Route path='/Raidsschedules' element = {<Raidsschedules/>}/>
@@ -55,6 +54,7 @@ function App() {
         <Route path='/StaffLogin' element={<StaffLogin/>}/>
         <Route path="/" element={<LeaveTable />} />
         <Route path="/EditLeave/:id" element={<EditLeave />} />
+        <Route path='/DengueAssignTable' element={<DengueAssignTable/>}/>
         
         <Route path='/Fine-And-court' element = {<FineAndCourt/>}/>
         <Route path='/Fine-And-court-Submit-Reports' element = {<FCReportForm/>}/>
