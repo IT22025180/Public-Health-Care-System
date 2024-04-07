@@ -6,7 +6,6 @@ import { Link,useHistory } from "react-router-dom";
 import Axios from 'axios';
 
 
-
 const Leave = ({submitted,data}) => {
 
   const[name,setname]=useState('');

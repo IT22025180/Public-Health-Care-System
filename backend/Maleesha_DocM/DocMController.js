@@ -60,22 +60,23 @@ const updateDocM = async (req,res) => {
     }
 }
 
-const deleteDocM = async (req,res) => {
-    try{
-        const {_id} = req.body;
-
-        const deletedDocM = await DocM.findOneAndDelete({_id});
-
-        if(!deletedDocM){
-            return res.status(404).json({ success: false , message : 'Document not found'});
-        }
-
-        res.json({ success : true , message : 'Document deleted successfully' , data : deletedDocM});
-    }catch(error){
-        console.error('Error deleting Document:' , error);
-        res.status(500).json({ success : false , message : 'Internal server error'});
+const deleteDocM = async (req, res) => {
+    try {
+      const { _id } = req.params;
+  
+      const deletedDocM = await DocM.findOneAndDelete({ _id });
+  
+      if (!deletedDocM) {
+        return res.status(404).json({ success: false, message: 'Document not found' });
+      }
+  
+      res.json({ success: true, message: 'Document deleted successfully', data: deletedDocM });
+    } catch (error) {
+      console.error('Error deleting Document:', error);
+      res.status(500).json({ success: false, message: 'Internal server error' });
     }
-}
+  };
+
 exports.addDocM = addDocM;
 exports.getDocM = getDocM;
 exports.updateDocM = updateDocM;

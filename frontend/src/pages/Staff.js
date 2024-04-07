@@ -3,6 +3,7 @@ import Layout from '../components/Layout';
 import '../styles/Staff.css';
 import { Sidebar, Menu, MenuItem } from 'react-pro-sidebar';
 import { useNavigate } from 'react-router-dom';
+import '../styles/Staff.css'
 
 import image1 from '../webImages/den.png'
 import image2 from '../webImages/va2.png'
@@ -50,7 +51,7 @@ const Staff = () => {
   
   return (
     <Layout>
-      
+
           <div className="home-page">
             <h3>Staff Schedules</h3>
             <div className="card-container">
