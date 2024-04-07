@@ -62,7 +62,7 @@ const updateDocM = async (req,res) => {
 
 const deleteDocM = async (req, res) => {
     try {
-      const { _id } = req.params;
+      const { _id } = req.body;
   
       const deletedDocM = await DocM.findOneAndDelete({ _id });
   

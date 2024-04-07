@@ -4,6 +4,7 @@ import Layout from '../components/Layout';
 import Axios from "axios";
 
 const FCDocManage = ({ submitted, data }) => {
+  
   const [reportid, setID] = useState('');
   const [raidOfficer, setRaidOfficer] = useState('');
   const [date, setDate] = useState('');

@@ -34,7 +34,7 @@
   text-align: center;
 }
 
-.edtBtn button{
+.edtBtn {
   border: 0;
   outline: none;
   background-color: green;
@@ -44,7 +44,7 @@
   cursor: pointer;
 }
 
-.deleteBtn button{
+.deleteBtn {
   border: 0;
   outline: none;
   background-color: red;

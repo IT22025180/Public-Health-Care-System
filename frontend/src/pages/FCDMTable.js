@@ -25,8 +25,11 @@ const FCDMTable = () => {
     Axios.post('http://localhost:4000/api/deleteDocM',{_id: id})
     .then(response => {
       console.log('Document delete successfully');
-      
+      setDMdata(prevData => prevData.filter(ddata => ddata._id !== id));
     })
+    .catch(error => {
+      console.error('Error Delete Document', error)
+    });
   }
   
 
@@ -55,17 +58,17 @@ const FCDMTable = () => {
                 <td>{ddata.v_name}</td>
                 <td>{ddata.v_type}</td>
                 <td>{ddata.documents}</td>
-                <td className="edtBtn">
-                  <button>Edit</button>
+                <td>
+                  <button className="edtBtn">Edit</button>
                 </td>
-                <td className="deleteBtn">
-                  <button onClick={() => deleteDocument(ddata._id)}>Delete</button>
+                <td>
+                  <button className="deleteBtn" onClick={() => deleteDocument(ddata._id)}>Delete</button>
                 </td>
               </tr>
             ))
           ) : (
             <tr>
-              <td colSpan="7">No Data Available</td>
+              <td colSpan="8">No Data Available</td>
             </tr>
           )}
         </tbody>

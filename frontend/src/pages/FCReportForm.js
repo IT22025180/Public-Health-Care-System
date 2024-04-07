@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../styles/FCReportSubmit.css'
 import Layout from '../components/Layout';
+import Axios from 'axios';
 
-const FCReportForm = () => {
+const FCReportForm = ({ submitted, data }) => {
 
   const [ROname, setROname] = useState('')
   const [Roemail, setRoemail] = useState('')
@@ -18,11 +19,69 @@ const FCReportForm = () => {
   const [vId, setvId] = useState('')
   const [document, setdocument] = useState('')
 
+  useEffect(() => {
+    if (!submitted) {
+      setROname('');
+      setRoemail('');
+      setROcontact('');
+      setdate('');
+      setlocation('');
+      setFoodViolation(false);
+      setDengueViolation(false);
+      setdescription('');
+      setvName('');
+      setvEmail('');
+      setvContact('');
+      setvId('');
+      setdocument('');
+    }
+  }, [submitted]);
+
+  useEffect(() => {
+    if (data?.id && data.id !== 0) {
+      setROname(data.ROname);
+      setRoemail(data.Roemail);
+      setROcontact(data.ROcontact);
+      setdate(data.date);
+      setlocation(data.location);
+      setFoodViolation(data.foodViolation);
+      setDengueViolation(data.dengueViolation);
+      setdescription(data.description);
+      setvName(data.vName);
+      setvEmail(data.vEmail);
+      setvContact(data.vContact);
+      setvId(data.vId);
+      setdocument(data.document);
+    }
+  }, [data]);
+
+  const addFCReport = async () => {
+    try {
+      const response = await Axios.post('http://localhost:4000/api/addVioR', {
+        ro_name: ROname,
+        ro_email: Roemail,
+        ro_mobile: ROcontact,
+        date: date,
+        v_location: location,
+        v_type: foodViolation ? 'foodViolation' : 'dengueViolation',
+        v_description: description,
+        v_name: vName,
+        v_nic: vId,
+        v_mobile: vContact,
+        v_email: vEmail,
+        evidance: document,
+      });
+      console.log('Successful', response.data);
+    } catch (error) {
+      console.error('Error', error);
+    }
+  };
+
   return (
     <Layout>
       <div className="form-container">
 
-        <form className='form' onSubmit={''}>
+        <form className='form'>
           <h2>Report Violation</h2>
           <h4>Raid Officer Information</h4>
 
@@ -53,13 +112,13 @@ const FCReportForm = () => {
               <input type="text" name="location" value={location} onChange={(e) => setlocation(e.target.value)} />
             </div>
             <div>
-            <label>Violation Type:</label>
-            <input type="radio" id="foodViolation" name="type" value='foodViolation' checked={foodViolation} onChange={() => { setFoodViolation(true); setDengueViolation(false); }} />
-            Food Violation
-            <span style={{ marginRight: '40px' }}></span>
-            <input type="radio" id="dengueViolation" name="type" value='dengueViolation' checked={dengueViolation} onChange={() => { setDengueViolation(true); setFoodViolation(false); }} />
-            Dengue Violation
-          </div>
+              <label>Violation Type:</label>
+              <input type="radio" id="foodViolation" name="type" value='foodViolation' checked={foodViolation} onChange={() => { setFoodViolation(true); setDengueViolation(false); }} />
+              Food Violation
+              <span style={{ marginRight: '40px' }}></span>
+              <input type="radio" id="dengueViolation" name="type" value='dengueViolation' checked={dengueViolation} onChange={() => { setDengueViolation(true); setFoodViolation(false); }} />
+              Dengue Violation
+            </div>
 
             <div>
               <label>Violation Description:</label>
@@ -93,7 +152,7 @@ const FCReportForm = () => {
           <div>
             <input type="file" value={document} onChange={(e) => setdocument(e.target.value)} multiple />
           </div>
-          <button className='button' type="submit">Submit Report</button>
+          <button className='button' type="button" onChange={addFCReport}>Submit Report</button>
         </form>
       </div>
     </Layout>

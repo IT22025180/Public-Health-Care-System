@@ -4,14 +4,15 @@ const AddReportVio = new mongoose.Schema({
     ro_name : String, 
     ro_email : String,
     ro_mobile : Number,
+    date : String,
     v_location : String,
     v_type : String,
     v_description : String,
     v_name : String ,
-    v_nic : Number,
-    v_mobile : Number,
     v_email : String,
-    evidance : String
+    v_mobile : Number,    
+    evidance : String,
+    v_nic : Number
 },
 {
     collection : "ViolationReport"
