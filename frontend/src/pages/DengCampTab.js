@@ -19,6 +19,18 @@ const DengCampTab = () => {
             console.error("Axios error: ",error);
         })
     }
+
+    const campDelete = (id) => {
+        Axios.post('http://localhost:4000/api/deleteCamp', { _id: id })
+            .then(response => {
+                console.log('Campaign data deleted successfully');
+                setcampdata(prevData => prevData.filter(camp => camp._id !== id));
+            })
+            .catch(error => {
+                console.error('Error deleting campdata:', error);
+            });
+    };
+
   return (
     <div className='Dcamptable'>
         <table border ={1} cellPadding={10} cellSpacing={0}>
@@ -44,7 +56,7 @@ const DengCampTab = () => {
                         <button  >Edit</button>
                     </td>
                     <td className='deleteButtons'>
-                        <button >Delete</button>
+                        <button onClick={()=> campDelete(camp._id)}>Delete</button>
                     </td>
    
                 </tr>))

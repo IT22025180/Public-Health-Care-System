@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import '../styles/LeaveTable.css';
 import Axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Layout from '../components/Layout';
 
 const LeaveTable = () => {
 
@@ -31,8 +32,7 @@ const LeaveTable = () => {
 
 
     const handleEdit = (id) => {
-        // Navigate to edit page or open a modal for editing
-        console.log('Edit leave with ID:', id);
+        navigate(`/EditLeave/${id}`); // Navigate to the EditLeave page with the leave ID
     };
 
     const handleDelete = (id) => {
@@ -47,7 +47,8 @@ const LeaveTable = () => {
     };
 
     return (
-        <div className='LeaveTable'>
+        <Layout>
+            <div className='LeaveTable'>
             <table border={1} cellPadding={10} cellSpacing={0}>
                 <thead>
                     <tr>
@@ -91,6 +92,7 @@ const LeaveTable = () => {
                 </tbody>
             </table>
         </div>
+        </Layout>
     );
 };
 
