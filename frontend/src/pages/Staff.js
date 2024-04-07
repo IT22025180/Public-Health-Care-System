@@ -20,12 +20,7 @@ const Staff = () => {
       buttonText: 'View',
       buttonLink: '/Dengueschedules',
       className: 'dengue-card',
-<<<<<<< HEAD
       image: image1
-      
-=======
-      image:image1
->>>>>>> a9947246 (Yethmi)
     },
 
     {
@@ -34,12 +29,8 @@ const Staff = () => {
       buttonText: 'View',
       buttonLink: '/Vaccineschedules',
       className: 'vaccine-card',
-<<<<<<< HEAD
-      image: image2,
-=======
       image:image2
       
->>>>>>> a9947246 (Yethmi)
       
       
     },
@@ -50,12 +41,8 @@ const Staff = () => {
       buttonText: 'View',
       buttonLink: '/Raidsschedules',
       className: 'raids-card',
-<<<<<<< HEAD
       image: image3
-=======
-      image:image3
       
->>>>>>> a9947246 (Yethmi)
     },
   ];
 
@@ -85,12 +72,9 @@ const Staff = () => {
         <hr className="horizontal-line" />
 
         <div className="apply-leave-box">
-<<<<<<< HEAD
           <button onClick={ApplyLeave}>Apply for Leave</button>
-=======
           <h3 className='applyleave'>Please fill this form to apply for your leave.</h3>
           <button onClick={ApplyLeave}>Click here</button>
->>>>>>> a9947246 (Yethmi)
         </div>
       </div>
     </Layout>
