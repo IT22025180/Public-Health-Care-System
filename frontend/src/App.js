@@ -82,7 +82,7 @@ function App() {
         
 
         <Route path='/addclinics' element = {<AddClinic/>}/>
-        <Route path='/addpatients' element = {<AddPatients/>}/>
+        <Route path='/addpatients/:_id/:date/:time/:venue/:ctype' element = {<AddPatients/>}/>
         <Route path='/dengueCli' element = {<Dengue/>}/>
         <Route path='/dentalCli' element = {<Dental/>}/>
         

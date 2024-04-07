@@ -27,10 +27,6 @@ const Dental = () => {
       getDtClinics();
   },[]);
 
-  const navtoAddp = () => {
-    navigate('/addpatients');
-  }
-
   return (
     <Layout>
         <div>
@@ -56,7 +52,7 @@ const Dental = () => {
                                 <TableCell>{clinic.time}</TableCell>
                                 <TableCell>{clinic.venue}</TableCell>
                                 <TableCell>
-                                  <Button onClick={navtoAddp}>Join</Button>
+                                  <Button onClick={() => navigate(`/addpatients/${clinic._id}/${clinic.date}/${clinic.time}/${clinic.venue}/${clinic.ctype}`)}>Join</Button>
                                 </TableCell>
                             </TableRow>
                         ))

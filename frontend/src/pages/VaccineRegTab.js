@@ -32,8 +32,6 @@ const VaccineRegTab = () => {
         })
     }
 
-    //delete
-
     //update
 
     

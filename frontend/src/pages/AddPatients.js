@@ -4,8 +4,15 @@ import Layout from '../components/Layout'
 import '../styles/addPatient.css';
 import Swal from 'sweetalert2'
 import Axios from 'axios';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const AddPatients = ({ submitted, data }) => {
+  
+
+  const navigate = useNavigate();
+
+  const {_id , date , time , venue , ctype} = useParams();
+
   const [name, setName] = useState('');
   const [gender, setGender] = useState('');
   const [age, setAge] = useState(0);
@@ -39,20 +46,37 @@ const AddPatients = ({ submitted, data }) => {
         sex: gender,
         age,
         address,
-        mobile
+        mobile,
+        clinicID : _id
       });
 
       console.log('Patient added to queue successfully', response.data);
-      Swal.fire({
-        title: "Success!",
-        text: "Added to queue successfully",
-        icon: "success"
-      });
-
       
     } catch (error) {
       console.error('Error:', error);
     }
+  }
+
+  const confirmJoin = () => {
+
+    Swal.fire({
+      title: "Are you sure?",
+      text: name + " you will join " + ctype + " clinic on " + date + " at " + time,
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "It's ok Join me!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: "Success",
+          text: "Successfully joined to " + ctype + " clinic on " + date + " at " + time,
+          icon: "success"
+        });
+        addPatient();
+      }
+    });
   }
 
   return (
@@ -109,7 +133,7 @@ const AddPatients = ({ submitted, data }) => {
             />
           </Form.Group>
           <br />
-          <Button onClick={addPatient}>Submit</Button>
+          <Button onClick={confirmJoin}>Submit</Button>
         </Form>
       </div>
     </Layout>
