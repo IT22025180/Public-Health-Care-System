@@ -34,17 +34,6 @@ const VaccineRegTab = () => {
 
     //delete
 
-    const deletevaccinedata = (id) => {
-        Axios.post('http://localhost:4000/api/deleteVac',{_id: id})
-        .then(response =>{
-            console.log('Vaccine Data deleted successfully');
-            setvaccinedata(prevData => prevData.filter(vaccine => vaccine._id !== id));
-        })
-        .catch(error =>{
-            console.error('Error deleting vaccinedata:',error);
-        })
-    }
-
     //update
 
     
@@ -80,10 +69,7 @@ const VaccineRegTab = () => {
                         <td className='actionButtons'>
                             <button  >Edit</button>
                         </td>
-<<<<<<< HEAD
 
-=======
->>>>>>> 14c780fc (hima)
                         <td onClick={() => deletevaccinedata(vaccine._id)} className='deleteButtons'>
                             <button >Delete</button>
                         </td>
