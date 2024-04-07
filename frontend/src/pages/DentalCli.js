@@ -56,7 +56,7 @@ const Dental = () => {
                                 <TableCell>{clinic.time}</TableCell>
                                 <TableCell>{clinic.venue}</TableCell>
                                 <TableCell>
-                                  <Button onClick={navtoAddp}>Join</Button>
+                                  <Button onClick={navtoAddp}>Add</Button>
                                 </TableCell>
                             </TableRow>
                         ))
