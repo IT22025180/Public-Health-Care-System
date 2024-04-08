@@ -3,7 +3,13 @@ import '../styles/VaccineRegTab.css'
 import Axios from 'axios';
 
 const VaccineRegTab = () => {
+    //state variables
     const[vaccinedata,setvaccinedata]=useState([]);
+    const[searchQuery, setSearchQuery] = useState('');//search
+
+    
+
+
 
     useEffect(()=>{
         getvaccinedata();
@@ -32,17 +38,29 @@ const VaccineRegTab = () => {
         })
     }
 
+
+
     //update
 
-    
-
-    
 
 
+
+    //search
+    const filteredVaccineData = vaccinedata.filter(vaccine => {
+        return vaccine.vname.toLowerCase().includes(searchQuery.toLowerCase());
+    });
 
 
   return (
     <div className='VaccineRegTab'>
+
+        <form>
+            <label>Search</label>          
+
+            <input type='text' value={searchQuery} onChange={e=> setSearchQuery(e.target.value)} />     
+        </form>
+
+
         <table border ={1} cellPadding={10} cellSpacing={0}>
             <thead>
                 <tr>
@@ -51,11 +69,13 @@ const VaccineRegTab = () => {
                     <th>Expire Date</th>
                     <th>Quantity</th>
                     <th>Notes</th>
+                    <th>Update</th>
+                    <th>Delete</th>
                 </tr>
             </thead>
             <tbody>
-                {vaccinedata && vaccinedata.length > 0 ?(
-                    vaccinedata.map((vaccine)=>(
+                {filteredVaccineData && filteredVaccineData.length > 0 ?(                   /*search */
+                    filteredVaccineData.map((vaccine)=>(
                         <tr key={vaccine._id}>
                             <td>{vaccine.vname}</td>
                             <td>{vaccine.manf_date}</td>
@@ -78,7 +98,7 @@ const VaccineRegTab = () => {
 
                 ):(
                     <tr>
-                        <td>You have not vaccine data</td>
+                        <td>You have not added any vaccine data</td>
                     </tr>
                 )}
                
