@@ -6,6 +6,7 @@ import Staff from './pages/Staff';
 import { Sidebar } from "react-pro-sidebar";
 import Leave from './pages/Leave';
 import DengueAssignTable from './pages/DengueAssignTable';
+
 import  VaccineAssignTable  from './pages/VaccineAssignTable';
 import  RaidsAssign from './pages/RaidsAssign';
 import FineAndCourt from './pages/FineAndCourt';
