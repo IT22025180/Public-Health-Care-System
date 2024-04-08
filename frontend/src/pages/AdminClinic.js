@@ -4,6 +4,7 @@ import Axios  from 'axios';
 import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import { Unstable_Popup as BasePopup } from '@mui/base/Unstable_Popup';
 import { styled } from '@mui/system';
+import Swal from 'sweetalert2';
 
 const PopupBody = styled('div')({
   padding: '10px',
@@ -68,6 +69,28 @@ const AdminClinic = () => {
       });
 };
 
+const confirmDelete = (id) => {
+
+    Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+      }).then((result) => {
+        if (result.isConfirmed) {
+            deleteClinic(id);
+          Swal.fire({
+            title: "Deleted!",
+            text: "Your file has been deleted.",
+            icon: "success"
+          });
+        }
+      });
+}
+
 
   return (
     <>
@@ -97,7 +120,7 @@ const AdminClinic = () => {
                                 <TableCell>{cli.venue}</TableCell>
                                 <TableCell>
                                     <Button>Update</Button>
-                                    <Button onClick={() =>deleteClinic(cli._id) }>Delete</Button>
+                                    <Button onClick={() =>confirmDelete(cli._id) }>Delete</Button>
                                     <Button onClick={() => handleClickViewPatients(cli._id)}>View joined patients</Button>
                                 </TableCell>
                             </TableRow>
