@@ -70,10 +70,13 @@ const ComplaintForm = () => {
       formData.append('location', formData.location);
 
       // Append each image file to FormData
-     for (let i = 0; i < formData.photos.length; i++) {
-       formData.append('images', formData.photos[i]);
-       console.log(formData.photos[i])
-      }
+      if (formData.photos && formData.photos.length > 0) {
+        for (let i = 0; i < formData.photos.length; i++) {
+            formData.append('images', formData.photos[i]);
+            console.log(formData.photos[i])
+        }
+    }
+    
 
       // Make Axios POST request to the backend API endpoint
       const response = await Axios.post('http://localhost:4000/api/addComplain', formData, {
