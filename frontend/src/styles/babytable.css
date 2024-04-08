@@ -70,3 +70,7 @@
     border-color: #007bff; /* Change border color when focused */
 }
 
+.babysearch_bar{
+  width: 25%;
+  margin-left: 75%;
+}

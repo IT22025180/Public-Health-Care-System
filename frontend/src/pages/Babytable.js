@@ -4,7 +4,9 @@ import  Axios  from 'axios';
 const Babytable = () => {
 
     const [babydata,setbabydata]=useState([]);
-    
+    //search
+    const [searchQuery, setSearchQuery] = useState('');
+
     useEffect(()=>{
         getbabydata();
     },[]);
@@ -31,13 +33,18 @@ const Babytable = () => {
                 console.error('Error deleting babydata:', error);
       });
 };
-    
+   
+//search
+const filteredBabyData = babydata.filter(baby => {
+    return baby.bname.toLowerCase().includes(searchQuery.toLowerCase());
+});
 
   return (
     <div className='babytable'>
         
-        <form >
-        <button type="submit" class="search-button">Search</button>
+        <form className= "babysearch_bar">
+        
+        <input  placeholder="Search name" type='text' value={searchQuery} onChange={e => setSearchQuery(e.target.value)} />
     </form>
  
         <table border ={1} cellPadding={10} cellSpacing={0}>
@@ -53,8 +60,8 @@ const Babytable = () => {
                 </tr>
             </thead>
             <tbody>
-                {babydata && babydata.length > 0 ?(
-                    babydata.map((baby)=>(
+            {filteredBabyData && filteredBabyData.length > 0 ? (
+                        filteredBabyData.map((baby) =>(
                 <tr key={baby._id}>
                     <td>{baby.bname}</td>
                     <td>{baby.age} </td>
