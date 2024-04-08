@@ -7,49 +7,20 @@ import Swal from 'sweetalert2'
 
 const ComplaintForm = () => {
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
+    fname: '',
+    lname: '',
     mobile: '',
     email: '',
-    nic: '',
+    NIC: '',
     date: '',
-    address: '',
-    photos: [],
-    complainType: '',
+    yaddress: '',
+    images: [],
+    ctype: '',
     /*otherDocument: [],*/
-    complainDetails: '',
+    cdesc: '',
     area: '',
     location : ''
   });
-
-  /*const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value
-    });
-  };
-
-  const handlePhotoChange = (e) => {
-    setFormData({
-      ...formData,
-      photos: e.target.files
-    });
-  };
-
-  const handleDocumentChange = (e) => {
-    setFormData({
-      ...formData,
-      otherDocument: e.target.files
-    });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // You can handle form submission logic here, such as sending data to the server
-    console.log(formData);
-    alert('Complaint submitted successfully!');
-  };*/
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -57,23 +28,23 @@ const ComplaintForm = () => {
     try {
       // Prepare the request payload
       const formData = new FormData();
-      formData.append('fname', formData.firstName);
-      formData.append('lname', formData.lastName);
+      formData.append('fname', formData.fname);
+      formData.append('lname', formData.lname);
       formData.append('mobile', formData.mobile);
       formData.append('email', formData.email);
-      formData.append('NIC', formData.nic);
+      formData.append('NIC', formData.NIC);
       formData.append('date', formData.date);
-      formData.append('yaddress', formData.address);
-      formData.append('ctype', formData.complainType);
-      formData.append('cdesc', formData.complainDetails);
+      formData.append('yaddress', formData.yaddress);
+      formData.append('ctype', formData.ctype);
+      formData.append('cdesc', formData.cdesc);
       formData.append('area', formData.area);
       formData.append('location', formData.location);
 
       // Append each image file to FormData
-      if (formData.photos && formData.photos.length > 0) {
-        for (let i = 0; i < formData.photos.length; i++) {
-            formData.append('images', formData.photos[i]);
-            console.log(formData.photos[i])
+      if (formData.images && formData.images.length > 0) {
+        for (let i = 0; i < formData.images.length; i++) {
+            formData.append('images', formData.images[i]);
+            console.log(formData.images[i])
         }
     }
     
@@ -87,17 +58,17 @@ const ComplaintForm = () => {
 
       // Clear the form after successful submission
       setFormData({
-        firstName: '',
-    lastName: '',
+        fname: '',
+        lname: '',
     mobile: '',
     email: '',
-    nic: '',
+    NIC: '',
     date: '',
-    address: '',
-    photos: [],
-    complainType: '',
+    yaddress: '',
+    images: [],
+    ctype: '',
     /*otherDocument: [],*/
-    complainDetails: '',
+    cdesc: '',
     area: '',
     location : ''
       });
@@ -105,7 +76,7 @@ const ComplaintForm = () => {
       console.log('Data stored successfully', response.data);
       Swal.fire({
         title: "Success !",
-        text: "Clinic added successfully",
+        text: "Complain added successfully",
         icon: "success"
       })
     } catch (error) {
@@ -117,7 +88,7 @@ const ComplaintForm = () => {
     const files = Array.from(e.target.files).slice(0, 4);
     setFormData((prevData) => ({
       ...prevData,
-      photos: files,
+      images: files,
     }));
   };
 
@@ -127,15 +98,15 @@ const ComplaintForm = () => {
       <Form onSubmit={handleSubmit}>
         <Row>
           <Col>
-            <Form.Group controlId="firstName">
+            <Form.Group controlId="fname">
               <Form.Label>First Name:</Form.Label>
-              <Form.Control type="text" name="firstName" value={formData.firstName} onChange={(e) => setFormData({ ...formData, firstName: e.target.value })} required />
+              <Form.Control type="text" name="fname" value={formData.fname} onChange={(e) => setFormData({ ...formData, fname: e.target.value })} required />
             </Form.Group>
           </Col>
           <Col>
-            <Form.Group controlId="lastName">
+            <Form.Group controlId="lname">
               <Form.Label>Last Name:</Form.Label>
-              <Form.Control type="text" name="lastName" value={formData.lastName} onChange={(e) => setFormData({ ...formData, lastName: e.target.value })} required />
+              <Form.Control type="text" name="lname" value={formData.lname} onChange={(e) => setFormData({ ...formData, lname: e.target.value })} required />
             </Form.Group>
           </Col>
         </Row>
@@ -155,15 +126,15 @@ const ComplaintForm = () => {
         </Row>
         <Row>
           <Col>
-            <Form.Group controlId="nic">
+            <Form.Group controlId="NIC">
               <Form.Label>NIC:</Form.Label>
-              <Form.Control type="text" name="nic" value={formData.nic} onChange={(e) => setFormData({ ...formData, nic: e.target.value })} required />
+              <Form.Control type="text" name="NIC" value={formData.NIC} onChange={(e) => setFormData({ ...formData, NIC: e.target.value })} required />
             </Form.Group>
           </Col>
           <Col>
             <Form.Group controlId="address">
               <Form.Label>Address:</Form.Label>
-              <Form.Control type="text" name="address" value={formData.address} onChange={(e) => setFormData({ ...formData, address: e.target.value })} required />
+              <Form.Control type="text" name="address" value={formData.yaddress} onChange={(e) => setFormData({ ...formData, yaddress: e.target.value })} required />
             </Form.Group>
           </Col>
         </Row>
@@ -185,7 +156,7 @@ const ComplaintForm = () => {
           <Col>
             <Form.Group controlId="complainType">
               <Form.Label>Complain Type:</Form.Label>
-              <Form.Control as="select" name="complainType" value={formData.complainType} onChange={(e) => setFormData({ ...formData, complainType: e.target.value })} required>
+              <Form.Control as="select" name="complainType" value={formData.ctype} onChange={(e) => setFormData({ ...formData, ctype: e.target.value })} required>
                 <option value="dengue">Dengue</option>
                 <option value="food">Food</option>
               </Form.Control>
@@ -202,7 +173,7 @@ const ComplaintForm = () => {
           <Col>
             <Form.Group controlId="complainDetails">
               <Form.Label>Complain Details:</Form.Label>
-              <Form.Control as="textarea" rows={4} name="complainDetails" value={formData.complainDetails} onChange={(e) => setFormData({ ...formData, complainDetails: e.target.value })} required />
+              <Form.Control as="textarea" rows={4} name="complainDetails" value={formData.cdesc} onChange={(e) => setFormData({ ...formData, cdesc: e.target.value })} required />
             </Form.Group>
           </Col>
           <Col>
