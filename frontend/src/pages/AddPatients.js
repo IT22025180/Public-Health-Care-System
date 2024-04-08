@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Form } from 'react-bootstrap'
+import { Button, Form , Alert } from 'react-bootstrap' //add alert
 import Layout from '../components/Layout'
 import '../styles/addPatient.css';
 import Swal from 'sweetalert2'
@@ -18,6 +18,7 @@ const AddPatients = ({ submitted, data }) => {
   const [age, setAge] = useState(0);
   const [address, setAddress] = useState('');
   const [mobile, setMobile] = useState(0);
+  const [errorMessage , setErrorMessage] = useState('');//required
 
   useEffect(() => {
     if (!submitted) {
@@ -40,6 +41,13 @@ const AddPatients = ({ submitted, data }) => {
   }, [data]);
 
   const addPatient = async () => {
+
+    //required this condition
+    if(!name || !gender || !address || !mobile){
+      setErrorMessage('Please fill all fields');
+    }
+
+
     try {
       const response = await Axios.post('http://localhost:4000/api/addPatients', {
         name,
@@ -75,6 +83,7 @@ const AddPatients = ({ submitted, data }) => {
           icon: "success"
         });
         addPatient();
+        window.location.reload();
       }
     });
   }
@@ -82,6 +91,7 @@ const AddPatients = ({ submitted, data }) => {
   return (
     <Layout>
       <div className='addform'>
+      {errorMessage && <Alert variant='danger'>{errorMessage}</Alert>} 
         <h2>Admission form</h2>
         <Form>
           <Form.Group className='padd'>

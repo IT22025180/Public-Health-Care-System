@@ -1,6 +1,6 @@
 .clcontainer{
     
-    height: 80%;
+    height: auto;
     margin-top: 50px;
     margin-left: 30%;
     margin-right: 30%;
@@ -47,8 +47,8 @@
     font-weight: 500;
 }
 
-.slcbtn .btn{
-    width: 30%;
-    margin-left: 50px;
+.btn{
+    
+    margin-top: 1%;
 }
 

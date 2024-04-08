@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Layout from '../components/Layout'
 import { FaUser } from 'react-icons/fa'
-import { Button, Form } from 'react-bootstrap'
+import { Button, Form ,Alert} from 'react-bootstrap'
 import '../styles/addClinics.css'
 import PatientReport from './PatientReport'
 import Axios from 'axios'
@@ -17,6 +17,7 @@ const AddClinic = ({submitted,data}) => {
     const[date , setDate] = useState('');
     const[time , setTime] = useState('');
     const[venue , setVenue] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
 
     useEffect(() => {
         if(!submitted){
@@ -37,6 +38,11 @@ const AddClinic = ({submitted,data}) => {
     }, [data]);
 
     const addClnics = async() => {
+
+        if(!ctype || !date || !time || !venue){
+            setErrorMessage('Please fill in all required fields');
+            return;
+        }
         try{
 
             const response = await Axios.post('http://localhost:4000/api/addClinic',{
@@ -52,6 +58,11 @@ const AddClinic = ({submitted,data}) => {
                 title: "Success !",
                 text: "Clinic added successfully",
                 icon: "success"
+              })
+              .then((result) => {
+                if(result.isConfirmed){
+                    window.location.reload();
+                }
               });
             
             
@@ -66,12 +77,14 @@ const AddClinic = ({submitted,data}) => {
 
   return (
     <Layout>
+        
       <div className='clcontainer'>
         <div className='cl1'>
             <FaUser/>
             <p>Dr. kk</p>
         </div>
         <div className='frm'>
+            {errorMessage && <Alert variant='danger'>{errorMessage}</Alert>}
             <h2>Add a Clinic appointment</h2>
             <br/>
             <div className='rdgrp'>
@@ -111,7 +124,7 @@ const AddClinic = ({submitted,data}) => {
                 <p>Select time : </p>
                 <Form.Group>
                     <Form.Control as='select' size='sm' onChange={e => setTime(e.target.value)}>
-                        <option disabled>Select time</option>
+                        <option >Select time</option>
                         <option >07 : 00</option>
                         <option >07 : 30</option>
                         <option >08 : 00</option>
@@ -153,12 +166,17 @@ const AddClinic = ({submitted,data}) => {
                     </Form.Group>
                 </Form>
 
-                <Button className='btn'>Generate report</Button>
+                
             </div>
             <br/>
             <Button onClick={addClnics}>Submit</Button>
-            <Button onClick={navtoClinics}></Button>
+            <br/>
+            <hr/>
+            <br/>
+            <Button onClick={navtoClinics}>View clinics</Button>
+            <Button className='btn'>Generate report</Button>
         </div>
+        
       </div>
     </Layout>
   )

@@ -56,6 +56,19 @@ const AdminClinic = () => {
       };
 
 
+      const deleteClinic = async(id) => {
+        Axios.post('http://localhost:4000/api/deleteClinic', { _id: id })
+            .then(response => {
+                setClinics(prevData => prevData.filter(clinics => clinics._id !== id))
+                console.log('Clinic deleted successfully');
+                
+            })
+            .catch(error => {
+                console.error('Error deleting Clinic:', error);
+      });
+};
+
+
   return (
     <>
         <Layout>
@@ -84,7 +97,7 @@ const AdminClinic = () => {
                                 <TableCell>{cli.venue}</TableCell>
                                 <TableCell>
                                     <Button>Update</Button>
-                                    <Button>Delete</Button>
+                                    <Button onClick={() =>deleteClinic(cli._id) }>Delete</Button>
                                     <Button onClick={() => handleClickViewPatients(cli._id)}>View joined patients</Button>
                                 </TableCell>
                             </TableRow>
