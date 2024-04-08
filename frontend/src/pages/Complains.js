@@ -3,6 +3,7 @@ import '../styles/Complains.css'
 import React, { useState } from 'react';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import Axios from 'axios'
+import Swal from 'sweetalert2'
 
 const ComplaintForm = () => {
   const [formData, setFormData] = useState({
@@ -99,9 +100,13 @@ const ComplaintForm = () => {
       });
 
       console.log('Data stored successfully', response.data);
-      alert('Event data added successfully!');
+      Swal.fire({
+        title: "Success !",
+        text: "Clinic added successfully",
+        icon: "success"
+      })
     } catch (error) {
-      console.error('Error submitting event data:', error.message);
+      console.error('Error submitting complain data:', error);
     }
   };
 
@@ -135,7 +140,7 @@ const ComplaintForm = () => {
           <Col>
             <Form.Group controlId="mobile">
               <Form.Label>Mobile:</Form.Label>
-              <Form.Control type="tel" name="mobile" pattern="[0-9]{10}" value={formData.mobile} onChange={(e) => setFormData({ ...formData, mobile: e.target.value })} required />
+              <Form.Control type="number" name="mobile" pattern="[0-9]{10}" value={formData.mobile} onChange={(e) => setFormData({ ...formData, mobile: e.target.value })} required />
             </Form.Group>
           </Col>
           <Col>
@@ -163,7 +168,7 @@ const ComplaintForm = () => {
           <Col>
             <Form.Group controlId="date">
               <Form.Label>Date:</Form.Label>
-              <Form.Control type="date" name="date" value={formData.date} onChange={(e) => setFormData({ ...formData, date: e.target.value })} required />
+              <Form.Control type="date" name="date" value={formData.date} onChange={(e) => setFormData({ ...formData, date: e.target.value.toString() })} required />
             </Form.Group>
           </Col>
           <Col>

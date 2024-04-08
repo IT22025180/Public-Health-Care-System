@@ -8,6 +8,10 @@ const addComplain = async(req,res) => {
     try{
         
             const{fname, lname , mobile, email, NIC, date, yaddress, ctype, cdesc, area, location} = req.body;
+
+            formattedDate = Array.isArray(date) ?  date.join(', ') : date;
+
+
             const imagesData = req.files.map(file => ({
                 data: file.buffer.toString('base64'),
                 contentType: file.mimetype,
@@ -20,7 +24,7 @@ const addComplain = async(req,res) => {
                 mobile,
                 email,
                 NIC,
-                date,
+                date: formattedDate,
                 yaddress,
                 ctype,
                 cdesc,
