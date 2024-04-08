@@ -7,8 +7,11 @@ import PatientReport from './PatientReport'
 import Axios from 'axios'
 import Swal from 'sweetalert2'
 import AdminClinic from './AdminClinic'
+import { useNavigate } from 'react-router-dom';
 
 const AddClinic = ({submitted,data}) => {
+
+    const navigate = useNavigate();
 
     const[ctype , setCtype] = useState('');
     const[date , setDate] = useState('');
@@ -55,6 +58,10 @@ const AddClinic = ({submitted,data}) => {
         }catch(error){
             console.error('error' , error);
         }
+    }
+
+    const navtoClinics = async() => {
+        navigate('/adminClinics');
     }
 
   return (
@@ -150,9 +157,9 @@ const AddClinic = ({submitted,data}) => {
             </div>
             <br/>
             <Button onClick={addClnics}>Submit</Button>
+            <Button onClick={navtoClinics}></Button>
         </div>
       </div>
-      <AdminClinic/>
     </Layout>
   )
 }

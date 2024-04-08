@@ -107,6 +107,7 @@ const AddPatients = ({ submitted, data }) => {
           <Form.Group className='padd'>
             <p>Sex</p>
             <Form.Control as='select' size='sm' value={gender} onChange={e => setGender(e.target.value)}>
+              <option>Select Gender</option>
               <option>Male</option>
               <option>Female</option>
               <option>Other</option>

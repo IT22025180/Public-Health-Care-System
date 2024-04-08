@@ -36,6 +36,7 @@ import ComplaintForm from './pages/Complains';
 import RaidForm from './pages/RaidForm';
 import EditLeave from './pages/EditLeave';
 import FCRVTable from './pages/FCRVTable';
+import AdminClinic from './pages/AdminClinic';
 
 
 function App() {
@@ -74,9 +75,6 @@ function App() {
 
         <Route path='/DengCampTab' element={<DengCampTab/>}/>
         <Route path='/F&CDocumentManagementTabe' element={<FCDMTable/>}/>
-        <Route path='/addclinics' element = {<AddClinic/>}/>
-        <Route path='/addpatient' element = {<AddPatients/>}/>
-        <Route path='/dengueCli' element = {<Dengue/>}/>
         <Route path='/RF' element={<RaidForm/>}/>
         <Route path='/F&CDReportViolationTabe' element={<FCRVTable/>}/>
         
@@ -85,6 +83,7 @@ function App() {
         <Route path='/addpatients/:_id/:date/:time/:venue/:ctype' element = {<AddPatients/>}/>
         <Route path='/dengueCli' element = {<Dengue/>}/>
         <Route path='/dentalCli' element = {<Dental/>}/>
+        <Route path='/adminClinics' element = {<AdminClinic/>}/>
         
         <Route path='/Complains' element = {<ComplaintForm/>}/>
         <Route path='/denguecamp' element = {<DengueCampaigns/>}/>

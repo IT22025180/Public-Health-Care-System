@@ -2,9 +2,18 @@ import React, { useEffect, useState } from 'react'
 import Layout from '../components/Layout'
 import Axios  from 'axios';
 import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
+import { Unstable_Popup as BasePopup } from '@mui/base/Unstable_Popup';
+import { styled } from '@mui/system';
+
+const PopupBody = styled('div')({
+  padding: '10px',
+});
 
 const AdminClinic = () => {
+
     const [clinics,setClinics] = useState([]);
+    const [patients,setPatients] = useState([]);
+    const [joinedPatients, setJoinedPatients] = useState([]);
 
     const getClinics = async() => {
         try{
@@ -22,6 +31,31 @@ const AdminClinic = () => {
     useEffect(() => {
         getClinics();
     },[]);
+
+    const getPatients = async() => {
+        try{
+            const response = await Axios.get('http://localhost:4000/api/Patients')
+
+            console.log('Patients data from server :' , response)
+            setPatients(response.data.allPatient);
+            
+            console.log('Patients : ' , patients.length);
+        }catch(error){
+            console.error('Axios error : ' , error);
+        }
+    }
+
+    useEffect(() => {
+        getPatients();
+    },[]);
+
+    const handleClickViewPatients = (id) => {
+    
+        const filteredPatients = patients.filter(patient => patient._id === id);
+        setJoinedPatients(filteredPatients);
+      };
+
+
   return (
     <>
         <Layout>
@@ -47,8 +81,9 @@ const AdminClinic = () => {
                                 <TableCell>{cli.ctype}</TableCell>
                                 <TableCell>{cli.venue}</TableCell>
                                 <TableCell>
-                                    <Button >Update</Button>
-                                    <Button >Delete</Button>
+                                    <Button>Update</Button>
+                                    <Button>Delete</Button>
+                                    <Button onClick={() => handleClickViewPatients(cli._id)}>View joined patients</Button>
                                 </TableCell>
                             </TableRow>
                         ))
@@ -61,6 +96,20 @@ const AdminClinic = () => {
             </Table>
         </TableContainer>
         </div>
+        <BasePopup open={joinedPatients.length > 0} onClose={() => setJoinedPatients([])} anchor={null}>
+        <PopupBody>
+          <h2>Patients joined for Clinic</h2>
+          {joinedPatients.length > 0 ? (
+            <ul>
+              {joinedPatients.map((patient) => (
+                <li key={patient._id}>{patient.name},{patient.sex},{patient.age},{patient.address},{patient.mobile}</li>
+              ))}
+            </ul>
+          ) : (
+            <p>No patients joined for any clinic.</p>
+          )}
+        </PopupBody>
+      </BasePopup>
         </Layout>
     </>
   )
