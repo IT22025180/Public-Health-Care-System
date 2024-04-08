@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import Vaccines from './pages/Vaccines';
 import VaccineReg from './pages/VaccineReg';
+import VaccineApp from './pages/VaccineApp';
 import Staff from './pages/Staff';
 import { Sidebar } from "react-pro-sidebar";
 import Leave from './pages/Leave';
@@ -27,6 +28,7 @@ import Thriposhatable from './pages/Thriposhatable';
 import AddPatients from './pages/AddPatients';
 import DengueCampaigns from './pages/DengueCampaignSchedule';
 import VaccineRegTab from './pages/VaccineRegTab';
+import VaccineAppTab from './pages/VaccineAppTab';
 import DengCampTab from './pages/DengCampTab';
 import Dengueschedules from './pages/Dengueschedules';
 import Vaccineschedules from './pages/Vaccineschedules';
@@ -47,6 +49,9 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/vaccines' element={<Vaccines />} />
         <Route path='/vaccinereg' element={<VaccineReg />} />
+        <Route path='/vaccineapp' element={<VaccineApp />} />
+        <Route path='/VaccineRegTab' element={<VaccineRegTab />} />
+        <Route path='/vaccineapptab' element={<VaccineAppTab />} />
 
         <Route path='/staff' element={<Staff />} />
         <Route path='/Leave' element={<Leave />} />
@@ -111,7 +116,7 @@ function App() {
         <Route path='/Babytable' element={<Babytable />} />
         <Route path='/Bvaccinetable' element={<Bvaccinetable />} />
         <Route path='/Thriposhatable' element={<Thriposhatable />} />
-        <Route path='/VaccineRegTab' element={<VaccineRegTab />} />
+        
 
 
         <Route path='/DengCampTab' element={<DengCampTab />} />

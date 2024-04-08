@@ -28,7 +28,7 @@ const Vaccines = () => {
         id: 2,
         title: 'Vaccine Appointments',
         buttonText: 'Add',
-        buttonLink: '/Vaccineschedules',
+        buttonLink: '/VaccineApp',
         className: 'vaccine-card',
         image:image2
         
