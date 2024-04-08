@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import '../styles/FCDocManage.css';
 import Layout from '../components/Layout';
 import Axios from "axios";
+import Swal from "sweetalert2";
+
 
 const FCDocManage = ({ submitted, data }) => {
   
@@ -38,8 +40,18 @@ const FCDocManage = ({ submitted, data }) => {
   }, [data]);
 
   const addDocm = async () => {
+
+    if (!reportid || !raidOfficer || !date || !violatorName || (!foodViolation && !dengueViolation) || !documents) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error!',
+        text: 'Please fill in all fields.',
+      });
+      return;
+    }
+
     try {
-      const response = await Axios.post('http://localhost:4000/api/addDocM', {
+      await Axios.post('http://localhost:4000/api/addDocM', {
         r_id: reportid,
         ro_name: raidOfficer,
         date: date,
@@ -47,9 +59,19 @@ const FCDocManage = ({ submitted, data }) => {
         v_type: foodViolation ? 'Food Violation' : 'Dengue Violation',
         documents: documents,
       });
-      console.log('Successful', response.data);
+      Swal.fire({
+        icon: 'success',
+        title: 'Success!',
+        text: 'Document added successfully.',
+      }).then(() => {
+        window.location.href = '/F&CDocumentManagementTabe';
+      });
     } catch (error) {
-      console.error('Error', error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error!',
+        text: 'An error occurred while adding the document.',
+      });
     }
   };
 
@@ -87,7 +109,7 @@ const FCDocManage = ({ submitted, data }) => {
             <label>Upload Documents</label>
             <input type='file' value={documents} onChange={(e) => setDocuments(e.target.value)} multiple />
           </div>
-          <button className='DMbut' type='submit' onClick={addDocm}>Submit</button>
+          <button className='DMbut' type='button' onClick={addDocm}>Submit</button>
         </form>
       </div>
     </Layout>

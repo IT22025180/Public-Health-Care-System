@@ -5,7 +5,7 @@ import VaccineReg from './pages/VaccineReg';
 import Staff from './pages/Staff';
 import { Sidebar } from "react-pro-sidebar";
 import Leave from './pages/Leave';
-import  DengueAssignTable  from './pages/DengueAssignTable';
+import DengueAssignTable from './pages/DengueAssignTable';
 
 import FineAndCourt from './pages/FineAndCourt';
 import FCReportForm from './pages/FCReportForm';
@@ -38,39 +38,24 @@ import EditLeave from './pages/EditLeave';
 import FCRVTable from './pages/FCRVTable';
 import AdminClinic from './pages/AdminClinic';
 
-
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path='/' element = {<Home/>}/>
-        <Route path='/vaccines' element = {<Vaccines/>}/>
-        <Route path='/vaccinereg' element = {<VaccineReg/>}/>
-        
-        <Route path='/staff' element = {<Staff/>}/>
-        <Route path='/Leave' element = {<Leave/>}/>
-        <Route path='/Dengueschedules' element = {<Dengueschedules/>}/>
-        <Route path='/Vaccineschedules' element = {<Vaccineschedules/>}/>
-        <Route path='/Raidsschedules' element = {<Raidsschedules/>}/>
-        <Route path='/LeaveTable' element={<LeaveTable/>}/>
-        <Route path='/StaffLogin' element={<StaffLogin/>}/>
+        <Route path='/' element={<Home />} />
+        <Route path='/vaccines' element={<Vaccines />} />
+        <Route path='/vaccinereg' element={<VaccineReg />} />
+
+        <Route path='/staff' element={<Staff />} />
+        <Route path='/Leave' element={<Leave />} />
+        <Route path='/Dengueschedules' element={<Dengueschedules />} />
+        <Route path='/Vaccineschedules' element={<Vaccineschedules />} />
+        <Route path='/Raidsschedules' element={<Raidsschedules />} />
+        <Route path='/LeaveTable' element={<LeaveTable />} />
+        <Route path='/StaffLogin' element={<StaffLogin />} />
         <Route path="/" element={<LeaveTable />} />
         <Route path="/EditLeave/:id" element={<EditLeave />} />
-        <Route path='/DengueAssignTable' element={<DengueAssignTable/>}/>
-        
-        <Route path='/Fine-And-court' element = {<FineAndCourt/>}/>
-        <Route path='/Fine-And-court-Submit-Reports' element = {<FCReportForm/>}/>
-        <Route path='/Fine-And-court-Document-Management' element = {<FCDocManage/>}/>
-        <Route path='/Fine-And-court-Analyse' element = {<FCAnalyse/>}/>
-        <Route path='/clinics' element = {<Clinics/>}/>
-        <Route path='/mainMidwife' element={<MainMidwife/>}/>
-        <Route path='/babyDetails' element={<BabyDetails/>}/>
-        <Route path='/babyVaccination' element={<BabyVaccination/>}/>
-        <Route path='/thriposha' element={<Thriposha/>}/>
-        <Route path='/Babytable' element={<Babytable/>}/>
-        <Route path='/Bvaccinetable' element={<Bvaccinetable/>}/>
-        <Route path='/Thriposhatable' element={<Thriposhatable/>}/>
-        <Route path='/VaccineRegTab' element={<VaccineRegTab/>}/>
+        <Route path='/DengueAssignTable' element={<DengueAssignTable />} />
 
 
         <Route path='/DengCampTab' element={<DengCampTab/>}/>
@@ -88,6 +73,40 @@ function App() {
         <Route path='/Complains' element = {<ComplaintForm/>}/>
         <Route path='/denguecamp' element = {<DengueCampaigns/>}/>
         
+        <Route path='/clinics' element={<Clinics />} />
+        <Route path='/mainMidwife' element={<MainMidwife />} />
+        <Route path='/babyDetails' element={<BabyDetails />} />
+        <Route path='/babyVaccination' element={<BabyVaccination />} />
+        <Route path='/thriposha' element={<Thriposha />} />
+        <Route path='/Babytable' element={<Babytable />} />
+        <Route path='/Bvaccinetable' element={<Bvaccinetable />} />
+        <Route path='/Thriposhatable' element={<Thriposhatable />} />
+        <Route path='/VaccineRegTab' element={<VaccineRegTab />} />
+
+
+        <Route path='/DengCampTab' element={<DengCampTab />} />
+        <Route path='/addclinics' element={<AddClinic />} />
+        <Route path='/addpatient' element={<AddPatients />} />
+        <Route path='/dengueCli' element={<Dengue />} />
+        <Route path='/RF' element={<RaidForm />} />
+
+
+        <Route path='/addclinics' element={<AddClinic />} />
+        <Route path='/addpatients' element={<AddPatients />} />
+        <Route path='/dengueCli' element={<Dengue />} />
+        <Route path='/dentalCli' element={<Dental />} />
+
+        <Route path='/Complains' element={<ComplaintForm />} />
+        <Route path='/denguecamp' element={<DengueCampaigns />} />
+
+        <Route path='/Fine-And-court' element={<FineAndCourt />} />
+        <Route path='/Fine-And-court-Submit-Reports' element={<FCReportForm />} />
+        <Route path='/Fine-And-court-Document-Management' element={<FCDocManage />} />
+        <Route path='/F&CDReportViolationTabe' element={<FCRVTable />} />
+        <Route path='/F&CDocumentManagementTabe' element={<FCDMTable />} />
+        <Route path='/Fine-And-court-Analyse' element={<FCAnalyse />} />
+
+
       </Routes>
     </Router>
   );

@@ -4,6 +4,7 @@ import Layout from '../components/Layout';
 import Axios from 'axios';
 
 const FCReportForm = ({ submitted, data }) => {
+  
   const [ROname, setROname] = useState('');
   const [Roemail, setRoemail] = useState('');
   const [ROcontact, setROcontact] = useState('');
