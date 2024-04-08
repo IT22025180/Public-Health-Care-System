@@ -1,5 +1,12 @@
 const mongoose = require('mongoose');
 
+const imageSchema = new mongoose.Schema({
+    filename: String,
+    data: String,
+    contentType: String,
+    image: Buffer,
+  });
+
 const AddComplain = new mongoose.Schema({
 
     fname: String,
@@ -10,7 +17,8 @@ const AddComplain = new mongoose.Schema({
     yaddress: String,
     ctype: String,
     cdesc: String,
-    images: String,
+    date: String,
+    images: [imageSchema],
     area: String,
     location: String
 },
