@@ -5,14 +5,9 @@ import VaccineReg from './pages/VaccineReg';
 import Staff from './pages/Staff';
 import { Sidebar } from "react-pro-sidebar";
 import Leave from './pages/Leave';
-<<<<<<< HEAD
 import DengueAssignTable from './pages/DengueAssignTable';
-
-=======
-import  DengueAssignTable  from './pages/DengueAssignTable';
 import  VaccineAssignTable  from './pages/VaccineAssignTable';
 import  RaidsAssign from './pages/RaidsAssign';
->>>>>>> fa0db7ce (Yethmi)
 import FineAndCourt from './pages/FineAndCourt';
 import FCReportForm from './pages/FCReportForm';
 import FCDocManage from './pages/FCDocManage';
@@ -48,7 +43,6 @@ function App() {
   return (
     <Router>
       <Routes>
-<<<<<<< HEAD
         <Route path='/' element={<Home />} />
         <Route path='/vaccines' element={<Vaccines />} />
         <Route path='/vaccinereg' element={<VaccineReg />} />
@@ -65,7 +59,6 @@ function App() {
         <Route path='/DengueAssignTable' element={<DengueAssignTable />} />
 
 
-=======
         <Route path='/' element = {<Home/>}/>
         <Route path='/vaccines' element = {<Vaccines/>}/>
         <Route path='/vaccinereg' element = {<VaccineReg/>}/> 
@@ -94,25 +87,18 @@ function App() {
         <Route path='/Bvaccinetable' element={<Bvaccinetable/>}/>
         <Route path='/Thriposhatable' element={<Thriposhatable/>}/>
         <Route path='/VaccineRegTab' element={<VaccineRegTab/>}/>
->>>>>>> fa0db7ce (Yethmi)
         <Route path='/DengCampTab' element={<DengCampTab/>}/>
         <Route path='/F&CDocumentManagementTabe' element={<FCDMTable/>}/>
         <Route path='/RF' element={<RaidForm/>}/>
-<<<<<<< HEAD
         <Route path='/F&CDReportViolationTabe' element={<FCRVTable/>}/>
         
 
-=======
->>>>>>> fa0db7ce (Yethmi)
         <Route path='/addclinics' element = {<AddClinic/>}/>
         <Route path='/addpatients/:_id/:date/:time/:venue/:ctype' element = {<AddPatients/>}/>
         <Route path='/dengueCli' element = {<Dengue/>}/>
         <Route path='/dentalCli' element = {<Dental/>}/>
-<<<<<<< HEAD
         <Route path='/adminClinics' element = {<AdminClinic/>}/>
         
-=======
->>>>>>> fa0db7ce (Yethmi)
         <Route path='/Complains' element = {<ComplaintForm/>}/>
         <Route path='/denguecamp' element = {<DengueCampaigns/>}/>
         
