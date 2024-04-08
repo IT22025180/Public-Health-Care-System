@@ -17,6 +17,7 @@ const routerClnc = require('./Vanuja_Clinic/ClinicRoute');
 const routerVReport = require('./Maleesha_RViolation/RVRoute');
 const routerDocM = require('./Maleesha_DocM/DocMRoute');
 const routerP = require('./Vanuja_AddPatient/AddPRoute');
+const routerDS = require('./Yethmi/AssignDengueRoute');
 
 dotenv.config();
 
@@ -70,3 +71,4 @@ app.use('/api' , routerClnc);
 app.use('/api' , routerVReport);
 app.use('/api' , routerDocM);
 app.use('/api' , routerP);
+app.use('/api' , routerDS);

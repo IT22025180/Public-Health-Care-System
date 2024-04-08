@@ -1,61 +1,66 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Layout from '../components/Layout';
-import '../styles/DengueAssignTable.css'
+import '../styles/DengueAssignTable.css';
+import { useNavigate } from 'react-router-dom';
+import Axios from 'axios';
 
 const DengueAssignTable = () => {
-    const assignedStaff = [
-        {
-          id: 1,
-          programType: 'Dengue Prevention Program',
-          staffMember: 'John Doe',
-          date: '2024-04-10',
-          location: 'Colombo',
-          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-        },
-        {
-          id: 2,
-          programType: 'Dengue Awareness Campaign',
-          staffMember: 'Jane Smith',
-          date: '2024-04-15',
-          location: 'Kandy',
-          description: 'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-        },
-      ];
+  const [denguestaff, setDenguestaff] = useState([]);
 
-    return (
-        <Layout>
-            <div className="assigned-staff-table">
-          <h3>Assigned Staff</h3>
-          <table>
-            <thead>
-              <tr>
-                <th>Program Type</th>
-                <th>Staff Member</th>
-                <th>Date</th>
-                <th>Location</th>
-                <th>Description</th>
-                <th>Edit</th>
-                <th>Delete</th>
-              </tr>
-            </thead>
-            <tbody>
-              {assignedStaff.map((staff) => (
-                <tr key={staff.id}>
-                  <td>{staff.programType}</td>
-                  <td>{staff.staffMember}</td>
+  useEffect(() => {
+    getDengueStaff();
+  }, []);
+
+  const getDengueStaff = () => {
+    Axios.get('http://localhost:4000/api/getstaffdengue')
+      .then(response => {
+        console.log('data from server', response.data);
+        setDenguestaff(response.data.allstaffdengue);
+      })
+      .catch(error => {
+        console.error("Axios error", error);
+      });
+  }
+
+  return (
+    <Layout>
+      <div className="assigned-staff-table">
+        <h3>Assigned Staff</h3>
+        <table border={1} cellPadding={10} cellSpacing={0}>
+          <thead>
+            <tr>
+              <th>Program Type</th>
+              <th>Staff Member</th>
+              <th>Date</th>
+              <th>Location</th>
+              <th>Description</th>
+              <th>Edit</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            {denguestaff && denguestaff.length > 0 ? (
+              denguestaff.map(staff => (
+                <tr key={staff._id}>
+                  <td>{staff.type}</td>
+                  <td>{staff.staffmember}</td>
                   <td>{staff.date}</td>
                   <td>{staff.location}</td>
                   <td>{staff.description}</td>
                   <td><button className="edit-button">Edit</button></td>
                   <td><button className="delete-button">Delete</button></td>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        </Layout>
-        
-    );
+              ))
+            ) : (
+              <tr>
+                <td colSpan="7">No staff assigned</td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
+    </Layout>
+  );
 };
 
 export default DengueAssignTable;

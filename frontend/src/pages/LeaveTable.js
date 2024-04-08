@@ -32,7 +32,7 @@ const LeaveTable = () => {
 
 
     const handleEdit = (id) => {
-        navigate(`/EditLeave/${id}`); // Navigate to the EditLeave page with the leave ID
+        navigate(`/EditLeave/${id}`); 
     };
 
     const handleDelete = (id) => {

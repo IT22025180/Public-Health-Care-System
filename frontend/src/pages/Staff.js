@@ -72,7 +72,6 @@ const Staff = () => {
         <hr className="horizontal-line" />
 
         <div className="apply-leave-box">
-          <button onClick={ApplyLeave}>Apply for Leave</button>
           <h3 className='applyleave'>Please fill this form to apply for your leave.</h3>
           <button onClick={ApplyLeave}>Click here</button>
         </div>

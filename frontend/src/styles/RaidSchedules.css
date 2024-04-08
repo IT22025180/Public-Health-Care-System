@@ -4,6 +4,7 @@
     background-image: url('../webImages/st1.jpg'); /* Replace '../path/to/d2.png' with the actual path to your image */
     background-size: cover;
     background-position: center;
+    margin-top: 10px;
   }
   
   .assign-staff-container {

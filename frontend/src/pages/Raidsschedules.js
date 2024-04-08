@@ -36,7 +36,7 @@ const RaidSchedules = () => {
                 <textarea name="description" />
               </div>
               <button type="submit">Schedule Raid</button> {/* Updated button label */}
-              <Link to="/RaidScheduleTable">
+              <Link to="/RaidsAssign">
                 <button className="view-programs">View Scheduled Raids</button> {/* Updated button label */}
               </Link>
             </form>

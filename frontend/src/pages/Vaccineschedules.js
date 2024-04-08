@@ -36,7 +36,7 @@ const Vaccineschedules = () => {
                 <textarea name="description" />
               </div>
               <button type="submit">Assign Staff</button>
-              <Link to="/DengueAssignTable">
+              <Link to="/VaccineAssignTable">
                 <button className="view-programs">View Scheduled Programs</button>
               </Link>
             </form>
