@@ -6,3 +6,46 @@
     width: 100%;
     height: 100opx;
 }
+
+
+/* Styles for Dengue Schedules card */
+.dengueC-card {
+    background-color: #f8d7da;
+}
+    /* Styles for Raids Schedules card */
+.dentalC-card {
+    background-color: #cce5ff;
+}
+    
+    /* Styles for card image */
+.cardC-image {
+    width: 100%;
+    height: auto;
+    }
+    
+    /* Styles for button */
+.btnviewC {
+    display: block; /* Change display to block */
+    margin: 0 auto; /* Set margin to auto */
+    padding: 10px 20px;
+    background-color: #074562;
+    color: #fff;
+    text-decoration: none;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: center;
+    }
+    
+    
+.btnviewC:hover {
+    background-color: #346498;
+    }
+    
+.imageDgC {
+    width: 100%; /* Ensure the image fills its container */
+    border-radius: 5px; /* Add rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+    margin-top: 100px
+}

@@ -49,7 +49,7 @@ const AdminClinic = () => {
         getPatients();
     },[]);
 
-    const handleClickViewPatients = (id) => {
+    const handleClickViewPatients = async(id) => {
     
         const filteredPatients = patients.filter(patient => patient._id === id);
         setJoinedPatients(filteredPatients);
@@ -64,6 +64,7 @@ const AdminClinic = () => {
             <Table>
                 <TableHead>
                     <TableRow>
+                        <TableCell>#</TableCell>
                         <TableCell>Date</TableCell>
                         <TableCell>Time</TableCell>
                         <TableCell>Type</TableCell>
@@ -73,9 +74,10 @@ const AdminClinic = () => {
                 </TableHead>
                 <TableBody>
                     {clinics && clinics.length > 0 ? (
-                        clinics.map((cli) => (
+                        clinics.map((cli , index) => (
                             <TableRow key={cli._id} sx = {{'&:last-child id, &:last-child th' : { border: 1}}}>
 
+                                <TableCell>{index + 1}</TableCell>
                                 <TableCell>{cli.date}</TableCell>
                                 <TableCell>{cli.time}</TableCell>
                                 <TableCell>{cli.ctype}</TableCell>
@@ -99,15 +101,39 @@ const AdminClinic = () => {
         <BasePopup open={joinedPatients.length > 0} onClose={() => setJoinedPatients([])} anchor={null}>
         <PopupBody>
           <h2>Patients joined for Clinic</h2>
-          {joinedPatients.length > 0 ? (
-            <ul>
-              {joinedPatients.map((patient) => (
-                <li key={patient._id}>{patient.name},{patient.sex},{patient.age},{patient.address},{patient.mobile}</li>
-              ))}
-            </ul>
-          ) : (
-            <p>No patients joined for any clinic.</p>
-          )}
+          <TableContainer component={Paper}>
+            <Table>
+                <TableHead>
+                    <TableRow>
+                        <TableCell>Number</TableCell>
+                        <TableCell>Name</TableCell>
+                        <TableCell>Gender</TableCell>
+                        <TableCell>Age</TableCell>
+                        <TableCell>Email</TableCell>
+                        <TableCell>Mobile</TableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    {joinedPatients && joinedPatients.length > 0 ? (
+                        joinedPatients.map((patient,index) => (
+                            <TableRow key={patient._id} sx = {{'&:last-child id, &:last-child th' : { border: 1}}}>
+                                <TableCell>{index + 1}</TableCell>
+                                <TableCell>{patient.name}</TableCell>
+                                <TableCell>{patient.sex}</TableCell>
+                                <TableCell>{patient.age}</TableCell>
+                                <TableCell>{patient.email}</TableCell>
+                                <TableCell>{patient.mobile}</TableCell>
+                            </TableRow>
+                        ))
+                    ) : (
+                        <TableRow>
+                            <TableCell colSpan={7}>You have no patients to this clinic yet!!</TableCell>
+                        </TableRow>
+                    ) }
+                </TableBody>
+            </Table>
+        </TableContainer>
+          
         </PopupBody>
       </BasePopup>
         </Layout>
