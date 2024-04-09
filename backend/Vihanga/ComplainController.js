@@ -12,14 +12,15 @@ const addComplain = async(req,res) => {
             formattedDate = Array.isArray(date) ?  date.join(', ') : date;
 
 
-            let imagesData = [];
-            if (req.files && req.files.length > 0) {
-                imagesData = req.files.map(file => ({
+        
+            console.log(req.files);
+                const imagesData = req.files.map(file => ({
                     data: file.buffer.toString('base64'),
                     contentType: file.mimetype,
-                }));
-            }
-
+                }  
+            ));
+            
+            console.log(imagesData);
             const newComplain = new Complain({
 
                 fname,

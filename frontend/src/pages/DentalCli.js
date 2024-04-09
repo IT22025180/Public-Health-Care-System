@@ -8,6 +8,8 @@ const Dental = () => {
 
     const [dtClinics , setdtClinics]=useState([]);
 
+    const[searchQuery , setSearchQuery] = useState('');
+
     const navigate = useNavigate();
 
     const getDtClinics = async() => {
@@ -27,12 +29,16 @@ const Dental = () => {
       getDtClinics();
   },[]);
 
+  const filteredDTClinicData = dtClinics.filter(clinic => {
+    return clinic.venue.toLowerCase().includes(searchQuery.toLowerCase());
+  })
+
   return (
     <Layout>
         <div>
         <div className='titles'>
-            <h3>Dengue</h3>
-
+            <h3>Dengue</h3><br/>
+            <input  placeholder="Search doctor name" type='text' value={searchQuery} onChange={e => setSearchQuery(e.target.value)} /><br/>
             <TableContainer component={Paper}>
             <Table>
                 <TableHead>
@@ -44,8 +50,8 @@ const Dental = () => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {dtClinics && dtClinics.length > 0 ? (
-                        dtClinics.map((clinic) => (
+                    {filteredDTClinicData && filteredDTClinicData.length > 0 ? (
+                        filteredDTClinicData.map((clinic) => (
                             <TableRow key={clinic._id} sx = {{'&:last-child id, &:last-child th' : { border: 1}}}>
 
                                 <TableCell>{clinic.date}</TableCell>
