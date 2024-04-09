@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import '../styles/thriposhatable.css'
 import Axios from 'axios';
+import jsPDF from 'jspdf';
 
 const Thriposhatable = () => {
 
@@ -32,6 +33,21 @@ const Thriposhatable = () => {
                 console.error('Error deleting thriposha:', error);
       });
 };
+//generate report
+    const generatePDF = () => {
+        if (thriposhadata.length === 0) {
+            console.log("No data to generate PDF.");
+            return;
+        }
+        const doc = new jsPDF();
+        let y = 10;
+        thriposhadata.forEach((thriposha, index) => {
+            const thriposhaText = `Thriposha Type: ${thriposha.type}\nEstimated Date: ${thriposha.esti_Date}\nQuantity: ${thriposha.quantity}\n\n`;
+            doc.text(thriposhaText, 10, y);
+            y += 30;
+        });
+        doc.save("thriposha_report.pdf");
+    };
 
   return (
     <div className='thriposhatable'>
@@ -69,7 +85,7 @@ const Thriposhatable = () => {
             </tbody>
         </table>
 
-        <button  className='generate'>Generate Report</button>
+        <button className='generate' onClick={generatePDF}>Generate Report</button>
     </div>
   )
 }

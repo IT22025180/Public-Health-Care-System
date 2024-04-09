@@ -5,7 +5,7 @@ import Header from '../components/Header';
 import { Link, useHistory } from 'react-router-dom';
 import Layout from '../components/Layout';
 import Axios  from 'axios';
-
+import {Alert} from 'react-bootstrap';
 
 const BabyDetails = ({submitted,data}) => {
     const [bname,setbname]=useState('');
@@ -14,7 +14,6 @@ const BabyDetails = ({submitted,data}) => {
     const[contactnumber,setbcontactnumber]=useState('');
     const[specialnotes,setbspecialnotes]=useState('');
 
-    
 
     useEffect(()=>{
         if(!submitted){
@@ -39,6 +38,8 @@ const BabyDetails = ({submitted,data}) => {
 
     
     const addbaby =async()=>{
+
+        
         try{
         const response =await Axios.post('http://localhost:4000/api/addBaby',{
             bname : bname,
@@ -81,7 +82,7 @@ const BabyDetails = ({submitted,data}) => {
 
     <div>
     <div className='bdtitle'>
-
+   
     <h3 className='he3'>Baby Details</h3>
     <form className='addbaby'>
         <div className='input'>
