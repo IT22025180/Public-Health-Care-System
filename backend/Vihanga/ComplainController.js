@@ -7,7 +7,7 @@ const { error } = require('console');
 const addComplain = async(req,res) => {
     try{
         
-            const{fname, lname , mobile, email, NIC, date, yaddress, ctype, cdesc, area, location} = req.body;
+            const{fname, lname , mobile, email, NIC, date, yaddress, ctype, cdesc, area} = req.body;
 
             formattedDate = Array.isArray(date) ?  date.join(', ') : date;
 
@@ -32,7 +32,6 @@ const addComplain = async(req,res) => {
                 ctype,
                 cdesc,
                 area,
-                location,
                 images : imagesData,
                 
             });

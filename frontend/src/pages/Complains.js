@@ -22,7 +22,8 @@ const ComplaintForm = () => {
     location : ''
   });
 
-  const handleSubmit = async (e) => {
+
+  const addComplain = async (e) => {
     e.preventDefault();
 
     try {
@@ -59,7 +60,7 @@ const ComplaintForm = () => {
       // Clear the form after successful submission
       setFormData({
         fname: '',
-        lname: '',
+    lname: '',
     mobile: '',
     email: '',
     NIC: '',
@@ -76,7 +77,7 @@ const ComplaintForm = () => {
       console.log('Data stored successfully', response.data);
       Swal.fire({
         title: "Success !",
-        text: "Complain added successfully",
+        text: "Clinic added successfully",
         icon: "success"
       })
     } catch (error) {
@@ -88,25 +89,25 @@ const ComplaintForm = () => {
     const files = Array.from(e.target.files).slice(0, 4);
     setFormData((prevData) => ({
       ...prevData,
-      images: files,
+      photos: files,
     }));
   };
 
   return (
     <Container>
       <h1>Public Health Complaint Form</h1>
-      <Form onSubmit={handleSubmit}>
+      <Form>
         <Row>
           <Col>
-            <Form.Group controlId="fname">
+            <Form.Group controlId="firstName">
               <Form.Label>First Name:</Form.Label>
-              <Form.Control type="text" name="fname" value={formData.fname} onChange={(e) => setFormData({ ...formData, fname: e.target.value })} required />
+              <Form.Control type="text" name="firstName" value={formData.fname} onChange={(e) => setFormData({ ...formData, fname: e.target.value })} required />
             </Form.Group>
           </Col>
           <Col>
-            <Form.Group controlId="lname">
+            <Form.Group controlId="lastName">
               <Form.Label>Last Name:</Form.Label>
-              <Form.Control type="text" name="lname" value={formData.lname} onChange={(e) => setFormData({ ...formData, lname: e.target.value })} required />
+              <Form.Control type="text" name="lastName" value={formData.lname} onChange={(e) => setFormData({ ...formData, lname: e.target.value })} required />
             </Form.Group>
           </Col>
         </Row>
@@ -126,9 +127,9 @@ const ComplaintForm = () => {
         </Row>
         <Row>
           <Col>
-            <Form.Group controlId="NIC">
+            <Form.Group controlId="nic">
               <Form.Label>NIC:</Form.Label>
-              <Form.Control type="text" name="NIC" value={formData.NIC} onChange={(e) => setFormData({ ...formData, NIC: e.target.value })} required />
+              <Form.Control type="text" name="nic" value={formData.NIC} onChange={(e) => setFormData({ ...formData, NIC: e.target.value })} required />
             </Form.Group>
           </Col>
           <Col>
@@ -184,7 +185,7 @@ const ComplaintForm = () => {
             </Form.Group>
           </Col>
         </Row>
-        <Button variant="primary" type="submit">
+        <Button variant="primary" type="submit" onClick={addComplain}>
           Submit
         </Button>
       </Form>

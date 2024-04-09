@@ -20,7 +20,7 @@ const AddComplain = new mongoose.Schema({
     date: String,
     images: [imageSchema],
     area: String,
-    location: String
+    //location: String
 },
 {
     collection : "Complains"
