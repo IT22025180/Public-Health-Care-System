@@ -67,13 +67,13 @@ const FCDMTable = () => {
   // Report Generate
   const GenReport = () => {
     const doc = jsPDF();
-    const title = "Fine And Court Document Management Report"
+    const title = "Fine And Court Document Management Report";
     const titleMargin = 20;
     const tableMargin = 20;
     const titleWidth = doc.getTextWidth(title);
-    const center = (doc.internal.pageSize.width / 2) - (titleWidth / 2)
+    const center = (doc.internal.pageSize.width / 2) - (titleWidth / 2);
 
-    doc.text(title, center, titleMargin)
+    doc.text(title, center, titleMargin);
 
     doc.autoTable({
       head: [['Report ID', 'Raid Officer', 'Date', 'Violator Name', 'Violation Type', 'Documents',]],

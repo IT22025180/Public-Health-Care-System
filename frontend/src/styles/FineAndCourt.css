@@ -50,3 +50,24 @@ h1 {
 .btn {
   width: 100%;
 }
+
+.tabBtn {
+  text-align: center;
+} 
+
+.tabBtn button {
+  border: none;
+  outline: none;
+  background-color: #007bff;
+  padding: 12px;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 0 100px;
+  width: 200px;
+  margin-bottom: 50px;
+}
+
+.tabBtn button:hover {
+  background-color: #0056b3;
+}

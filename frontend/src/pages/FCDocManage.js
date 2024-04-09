@@ -40,16 +40,11 @@ const FCDocManage = ({ submitted, data }) => {
   }, [data]);
 
   const validateSchema = Yup.object().shape({
-    reportid: Yup.string().required('Report ID is required'),
-    raidOfficer: Yup.string().required('Raid Officer is required'),
-    date: Yup.date().required('Date is required').nullable(),
-    violatorName: Yup.string().required('Violator Name is required'),
-    documents: Yup.string().required('Documents required'),
-    violationType: Yup.string().test(
-      'violationType',
-      'Violation Type is required',
-      value => value === 'foodViolation' || value === 'dengueViolation'
-    ),
+    reportid: Yup.string().required('Report ID is required').matches(/^[A-Za-z0-9]+$/, 'Report ID must contain only letters and numbers'),
+    raidOfficer: Yup.string().required('Report ID is Required').matches(/^[A-Za-z\s]+$/, 'Name must contain only letters'),
+    date: Yup.date().required('Date is required'),
+    violatorName: Yup.string().required('Report ID is Required').matches(/^[A-Za-z\s]+$/, 'Name must contain only letters'),
+    documents: Yup.mixed().required('Documents required'),
   });
 
   const addDocm = async () => {
@@ -60,7 +55,6 @@ const FCDocManage = ({ submitted, data }) => {
         date,
         violatorName,
         documents,
-        violationType: foodViolation ? 'foodViolation' : (dengueViolation ? 'dengueViolation' : ''),
       }, { abortEarly: false });
 
       await Axios.post('http://localhost:4000/api/addDocM', {
@@ -108,7 +102,7 @@ const FCDocManage = ({ submitted, data }) => {
           <div>
             <label>Date</label>
             <input type='date' name='date' value={date} onChange={(e) => setDate(e.target.value)} />
-            {errorMessage.date && date === '' && <div className="errorMessage">Invalid Date</div>}
+            {errorMessage.date && <div className="errorMessage">{errorMessage.date}</div>}
           </div>
           <div>
             <label>Violator Name</label>
@@ -122,7 +116,6 @@ const FCDocManage = ({ submitted, data }) => {
             <span style={{ marginRight: '40px' }}></span>
             <input type="radio" id="dengueViolation" name="type" value='dengueViolation' checked={dengueViolation} onChange={() => { setDengueViolation(true); setFoodViolation(false); }} />
             Dengue Violation
-            {errorMessage.violationType && <div className="errorMessage">{errorMessage.violationType}</div>}
           </div>
           <div>
             <label>Upload Documents</label>

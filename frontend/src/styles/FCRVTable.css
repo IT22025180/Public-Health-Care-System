@@ -13,6 +13,7 @@
 .FCRVTable th, .FCRVTable td {
   padding: 8px;
   text-align: center;
+  font-size: 14px;
   border: 1px solid #000;
 }
 
@@ -26,8 +27,7 @@
 
 .rvedtBtn {
   padding: 5px 10px;
-  background-color: green;
-  color: white;
+  background-color: #4CAF50;
   border: none;
   border-radius: 3px;
   cursor: pointer;
@@ -36,8 +36,7 @@
 
 .rvdeleteBtn {
   padding: 5px 10px;
-  background-color: red;
-  color: white;
+  background-color: #e74c3c;
   border: none;
   border-radius: 3px;
   cursor: pointer;
@@ -45,10 +44,19 @@
 }
 
 .rvdeleteBtn:hover {
-  background-color: #f44336;
+  background-color: #c0392b;
 }
 
-.rvedtBtn:hover {
+.rvedtBtn:hover { 
   background-color: #45a049;
 }
 
+.searchvr {
+  width: 100%;
+  text-align: right;
+}
+
+.searchvr input {
+  width: 300px;
+  display: inline-block;
+}
