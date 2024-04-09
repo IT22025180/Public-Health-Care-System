@@ -1,30 +1,26 @@
 const mongoose = require('mongoose');
 const Vaccinestaff = require('./AssignVaccineModel'); 
 
-const addstaffvaccine = async(req,res) => {
-    try{
-    const{type,staffmember,date,location,description}=req.body;
-
-    const d_assigndate = Array.isArray(date)?date.join(', '):date;
-    
-
-
-            const newassignforvaccine =  new Vaccinestaffstaff({
-                type,  
-                staffmember,    
-                date:d_assigndate,
-                location,
-                description,       
-            });
-
-            await newassignforvaccine.save();
-            res.json({ success : true , message : 'staff added successfully'});
-        }
-    catch(error){
-        console.error('Error adding staff: ' , error);
-        res.status(500).json({ success : false , message : 'Internal server error'});
+const addstaffvaccine = async (req, res) => {
+    try {
+      const { type, staffmember, date, location, description } = req.body;
+      const d_assigndate = Array.isArray(date) ? date.join(', ') : date;
+      
+      const newassignforvaccine = new Vaccinestaff({
+        type,
+        staffmember,
+        date: d_assigndate,
+        location,
+        description,
+      });
+  
+      await newassignforvaccine.save();
+      res.json({ success: true, message: 'Staff added successfully' });
+    } catch (error) {
+      console.error('Error adding staff: ', error);
+      res.status(500).json({ success: false, message: 'Internal server error' });
     }
-}
+  };
 
 const getstaffvaccine = async (req,res) => {
     try{
@@ -40,7 +36,7 @@ const updatestaffvaccine = async (req, res) => {
     try {
         const{type,staffmember,date,location,description}=req.body;
 
-        const updatedstaffvaccine= await Denguestaff.findOneAndUpdate({ _id }, {
+        const updatedstaffvaccine= await Vaccinestaff.findOneAndUpdate({ _id }, {
             type,  
             staffmember,    
             date:d_assigndate,
@@ -63,7 +59,7 @@ const deletestaffvaccine = async (req, res) => {
     try {
         const { _id } = req.body;
 
-        const deletedstaffvaccine= await vaccinestaff.findOneAndDelete({ _id });
+        const deletedstaffvaccine= await Vaccinestaff.findOneAndDelete({ _id });
 
         if (!deletedvaccine) {
             return res.status(404).json({ success: false, message: 'Staff not found' });

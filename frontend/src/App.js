@@ -68,8 +68,8 @@ function App() {
         <Route path="/" element={<LeaveTable />} />
         <Route path="/EditLeave/:id" element={<EditLeave />} />
         <Route path='/DengueAssignTable' element={<DengueAssignTable />} />
-
-
+        <Route path='/VaccineAssignTable' element={<VaccineAssignTable />} />
+        
         <Route path='/' element = {<Home/>}/>
         <Route path='/vaccines' element = {<Vaccines/>}/>
         <Route path='/vaccinereg' element = {<VaccineReg/>}/> 

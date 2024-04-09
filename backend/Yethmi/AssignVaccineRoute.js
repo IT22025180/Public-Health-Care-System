@@ -2,9 +2,9 @@ const express = require('express');
 const routerVS = express.Router();
 const Vaccine_staffcontroller = require('./AssignVaccineController');
 
-routerDS.post('/addstaffvaccine' , Vaccine_staffcontroller.addstaffvaccine);
-routerDS.get('/getstaffvaccine' , Vaccine_staffcontroller.getstaffvaccine);
-routerDS.post('/updatestaffvaccine' , Vaccine_staffcontroller.updatestaffvaccine);
-routerDS.post('/deletestaffvaccine' , Vaccine_staffcontroller.deletestaffvaccine);
+routerVS.post('/api/addstaffvaccine' , Vaccine_staffcontroller.addstaffvaccine);
+routerVS.get('/api/getstaffvaccine' , Vaccine_staffcontroller.getstaffvaccine);
+routerVS.post('/api/updatestaffvaccine' , Vaccine_staffcontroller.updatestaffvaccine);
+routerVS.post('/api/deletestaffvaccine' , Vaccine_staffcontroller.deletestaffvaccine);
 
 module.exports = routerVS;
