@@ -40,7 +40,7 @@ const Vaccines = () => {
         id: 3,
         title: 'Vaccine Requests',
         buttonText: 'Request',
-        buttonLink: '/Raidsschedules',
+        buttonLink: '/VaccineRequest',
         className: 'raids-card',
         image: image3
         

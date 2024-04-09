@@ -3,6 +3,7 @@ import Home from './pages/Home';
 import Vaccines from './pages/Vaccines';
 import VaccineReg from './pages/VaccineReg';
 import VaccineApp from './pages/VaccineApp';
+import VaccineRequest from './pages/VaccineRequest';      //////////
 import Staff from './pages/Staff';
 import { Sidebar } from "react-pro-sidebar";
 import Leave from './pages/Leave';
@@ -49,7 +50,9 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/vaccines' element={<Vaccines />} />
         <Route path='/vaccinereg' element={<VaccineReg />} />
-        <Route path='/vaccineapp' element={<VaccineApp />} />
+        <Route path='/VaccineApp' element={<VaccineApp />} />
+        <Route path='/VaccineRequest' element={<VaccineRequest />} />                  
+
         <Route path='/VaccineRegTab' element={<VaccineRegTab />} />
         <Route path='/vaccineapptab' element={<VaccineAppTab />} />
 
