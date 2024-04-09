@@ -30,6 +30,7 @@ import AddPatients from './pages/AddPatients';
 import DengueCampaigns from './pages/DengueCampaignSchedule';
 import VaccineRegTab from './pages/VaccineRegTab';
 import VaccineAppTab from './pages/VaccineAppTab';
+import VaccineRequestTab from './pages/VaccineRequestTab';          /////////
 import DengCampTab from './pages/DengCampTab';
 import Dengueschedules from './pages/Dengueschedules';
 import Vaccineschedules from './pages/Vaccineschedules';
@@ -55,6 +56,7 @@ function App() {
 
         <Route path='/VaccineRegTab' element={<VaccineRegTab />} />
         <Route path='/vaccineapptab' element={<VaccineAppTab />} />
+        <Route path='/VaccineRequestTab' element={<VaccineRequestTab />} />
 
         <Route path='/staff' element={<Staff />} />
         <Route path='/Leave' element={<Leave />} />
