@@ -5,13 +5,10 @@ import { Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import PatientReport from './PatientReport';
 import '../styles/Clinics.css';
-import imageDgC from '../webImages/dentalC.jpg';
-import imageDtC from '../webImages/dngC.jpg';
-
-
+import imageDgC from '../webImages/dentalC.png';
+import imageDtC from '../webImages/dngC.png';
 
 const Clinics = () => {
-
   const navigate = useNavigate();
 
   const cards = [
@@ -21,36 +18,37 @@ const Clinics = () => {
       buttonText: 'Click here',
       buttonLink: '/dengueCli',
       className: 'dengueC-card',
-      image: imageDgC
+      image: imageDtC,
     },
-
     {
       id: 2,
       title: 'Dental Clinics',
       buttonText: 'Click here',
       buttonLink: '/dentalCli',
       className: 'dentalC-card',
-      image:imageDtC
+      image: imageDgC,
     }
   ];
 
   return (
     <Layout>
-      <div className="card-container">
+      <div className="home-page">
+        <div className="card-container">
           {cards.map((card) => (
-            <div key={card.id} className="card">
-              <img src={card.image} alt={card.title} className="cardC-image" />
-              <div className="card-body">
-                <h2 className="card-title">{card.title}</h2>
-                <p className="card-text">{card.description}</p>
-                <a href={card.buttonLink} className="btnviewC">
+            <div key={card.id} className="Ccard">
+              <img src={card.image} alt={card.title} className="Ccard-image" />
+              <div className="Ccard-body">
+                <h2 className="Ccard-title">{card.title}</h2>
+                <p className="Ccard-text">{card.description}</p>
+                <a href={card.buttonLink} className="btn btn-primary">
                   {card.buttonText}
                 </a>
               </div>
             </div>
           ))}
         </div>
-      <PatientReport/>
+      </div>
+      <PatientReport />
     </Layout>
   )
 }
