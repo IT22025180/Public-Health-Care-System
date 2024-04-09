@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Layout from '../components/Layout'
 import { FaUser } from 'react-icons/fa'
 import { Button, Form ,Alert} from 'react-bootstrap'
 import '../styles/addClinics.css'
-import PatientReport from './PatientReport'
+
 import Axios from 'axios'
 import Swal from 'sweetalert2'
 import { useNavigate ,useParams } from 'react-router-dom';
@@ -43,7 +43,7 @@ const UpdateClinic = () => {
             const response = await updateClnics(id_u,date_u,time_u,venue_u ,ctype_u);
 
         console.log(response);
-
+            setID(_id);
             setCtype('');
             setDate('');
             setTime('');
@@ -90,6 +90,7 @@ const UpdateClinic = () => {
         <div className='frm'>
             {errorMessage && <Alert variant='danger'>{errorMessage}</Alert>}
             <h2>Update clinic appointment</h2>
+            <p>ID : {_id}</p>
             <br/>
             <div className='rdgrp'>
                 <div className='rdbtn'>
@@ -171,7 +172,7 @@ const UpdateClinic = () => {
                 </Form>    
             </div>
             <br/>
-            <p>{_id}</p>
+            
             <Button onClick={confirmUpdate}>Update</Button>
             <br/>
             <hr/>

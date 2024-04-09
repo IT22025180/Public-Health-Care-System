@@ -94,6 +94,7 @@ const ComplaintForm = () => {
   };
 
   return (
+    <Layout>
     <Container>
       <h1>Public Health Complaint Form</h1>
       <Form>
@@ -190,6 +191,7 @@ const ComplaintForm = () => {
         </Button>
       </Form>
     </Container>
+    </Layout>
   );
 };
 

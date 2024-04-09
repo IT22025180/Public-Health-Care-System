@@ -3,9 +3,8 @@ import Home from './pages/Home';
 import Vaccines from './pages/Vaccines';
 import VaccineReg from './pages/VaccineReg';
 import VaccineApp from './pages/VaccineApp';
-import VaccineRequest from './pages/VaccineRequest';      //////////
+import VaccineRequest from './pages/VaccineRequest';
 import Staff from './pages/Staff';
-import { Sidebar } from "react-pro-sidebar";
 import Leave from './pages/Leave';
 import DengueAssignTable from './pages/DengueAssignTable';
 
@@ -44,6 +43,7 @@ import EditLeave from './pages/EditLeave';
 import FCRVTable from './pages/FCRVTable';
 import AdminClinic from './pages/AdminClinic';
 import UpdateClinic from './pages/UpdateClinic';
+import PatientReport from './pages/PatientReport';
 
 function App() {
   return (
@@ -111,9 +111,12 @@ function App() {
         <Route path='/dengueCli' element = {<Dengue/>}/>
         <Route path='/dentalCli' element = {<Dental/>}/>
         <Route path='/adminClinics' element = {<AdminClinic/>}/>
+        <Route path='/genPatientReport' element = {<PatientReport/>}/>
         
         <Route path='/Complains' element = {<ComplaintForm/>}/>
         <Route path='/denguecamp' element = {<DengueCampaigns/>}/>
+        
+
         
         <Route path='/clinics' element={<Clinics />} />
         <Route path='/mainMidwife' element={<MainMidwife />} />

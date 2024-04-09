@@ -8,9 +8,9 @@ const LeaveTable = () => {
 
     const navigate = useNavigate();
 
-    const editleave = () => {
+    /*const editleave = () => {
         navigate('/EditLeave')
-      }
+      }*/
 
     
     const [leavedata, setleavedata] = useState([]);

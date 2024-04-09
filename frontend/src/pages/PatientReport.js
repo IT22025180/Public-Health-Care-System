@@ -5,7 +5,7 @@ import '../styles/patientsReport.css';
 
 const PatientReport = () => {
   return (
-    <>
+    <Layout>
       <div className='ptrep'>
         <div className='formptnt'>
             <h2>Patient report</h2>
@@ -38,7 +38,7 @@ const PatientReport = () => {
         <br/>
         <Button>Generate report</Button>
       </div>
-      </>
+      </Layout>
   )
 }
 

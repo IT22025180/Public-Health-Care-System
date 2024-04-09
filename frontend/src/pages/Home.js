@@ -30,19 +30,19 @@ const Home = () => {
           <div  className='slider-frame'>
             <div className='slider-img'>
               <div className='img-container'>
-                <img src={Scli} width={1500} height={500}/>
+                <img src={Scli} alt='clinic' width={1500} height={500}/>
               </div>
               <div className='img-container'>
-                <img src={Svac} width={1500} height={500}/>
+                <img src={Svac} alt='vaccine' width={1500} height={500}/>
               </div>
               <div className='img-container'>
-                <img src={Ssta} width={1500} height={500}/>
+                <img src={Ssta} alt='Stafff' width={1500} height={500}/>
               </div>
               <div className='img-container'>
-                <img src={Sdeng} width={1500} height={500}/>
+                <img src={Sdeng} alt='dengue' width={1500} height={500}/>
               </div>
               <div className='img-container'>
-                <img src={Sraid} width={1500} height={500}/>
+                <img src={Sraid} alt='raid' width={1500} height={500}/>
               </div>
             </div>
             <div className='overlay-item'>

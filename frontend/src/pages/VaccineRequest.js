@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Layout from "../components/Layout";
-import Header from '../components/Header'; 
+import Layout from "../components/Layout"; 
 import '../styles/VaccineRequest.css'
 import Axios from 'axios';
 import { useNavigate } from "react-router-dom";
@@ -49,24 +48,25 @@ const VaccineRequest = ({submitted,data}) => {
     }
 
     return(
+        <Layout>
+
         <div>
-            <Header />
-    
-    <div className='title1'>
+            
+            <div className='title1'>
 
-    <h2 className="he2" >Vaccine Requests</h2>
-    <form className='addvaccineRequests'>
-        <div className='input'>
-            <label htmlFor='vName'>Vaccine Name :</label>
-            <input onChange={e=>setvName(e.target.value)} type='text' id='vName' autoComplete='off' placeholder='Vaccine Name'/>
-        </div>
-
+            <h2 className="he2" >Vaccine Requests</h2>
+            <form className='addvaccineRequests'>
+                <div className='input'>
+                    <label htmlFor='vName'>Vaccine Name :</label>
+                    <input onChange={e=>setvName(e.target.value)} type='text' id='vName' autoComplete='off' placeholder='Vaccine Name'/>
+                </div>
 
 
-        <div className='input'>
-            <label htmlFor='quantity'>Quantity :</label>
-            <input onChange={e=>setQuantity(e.target.value)} type='text' id='quantity' autoComplete='off' placeholder='Quantity'/>
-        </div>
+
+                <div className='input'>
+                    <label htmlFor='quantity'>Quantity :</label>
+                    <input onChange={e=>setQuantity(e.target.value)} type='text' id='quantity' autoComplete='off' placeholder='Quantity'/>
+                </div>
 
         
 
@@ -85,6 +85,7 @@ const VaccineRequest = ({submitted,data}) => {
     
     </div>
     </div>
+    </Layout>
     )
 }
 export default VaccineRequest

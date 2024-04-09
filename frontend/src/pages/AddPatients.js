@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Form , Alert } from 'react-bootstrap' //add alert
+import { Button, Form , Alert } from 'react-bootstrap' 
 import Layout from '../components/Layout'
 import '../styles/addPatient.css';
 import Swal from 'sweetalert2'
@@ -18,7 +18,7 @@ const AddPatients = ({ submitted, data }) => {
   const [age, setAge] = useState(0);
   const [address, setAddress] = useState('');
   const [mobile, setMobile] = useState(0);
-  const [errorMessage , setErrorMessage] = useState('');//required
+  const [errorMessage , setErrorMessage] = useState('');
 
   useEffect(() => {
     if (!submitted) {
@@ -42,7 +42,7 @@ const AddPatients = ({ submitted, data }) => {
 
   const addPatient = async () => {
 
-    //required this condition
+    
     if(!name || !gender || !address || !mobile){
       setErrorMessage('Please fill all fields');
     }
@@ -79,13 +79,22 @@ const AddPatients = ({ submitted, data }) => {
       if (result.isConfirmed) {
         Swal.fire({
           title: "Success",
-          text: "Successfully joined to " + ctype + " clinic on " + date + " at " + time,
+          text: "Successfully joined to " + ctype + " clinic on " + date + " at " + venue,
           icon: "success"
         });
         addPatient();
-        window.location.reload();
+        if(addPatient()){
+          setName('');
+          setGender('');
+          setAge(0);
+          setAddress('');
+          setMobile(0);
+        }
+
       }
+      
     });
+    
   }
 
   return (
@@ -140,7 +149,9 @@ const AddPatients = ({ submitted, data }) => {
               type='number'
               size='sm'
               value={mobile}
-              onChange={e => setMobile(e.target.value)}
+              min={0}
+              maxLength={10}
+              onChange={e => setMobile(e.target.value.slice(0,10))}
             />
           </Form.Group>
           <br />

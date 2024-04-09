@@ -3,10 +3,8 @@ import Layout from '../components/Layout'
 import { FaUser } from 'react-icons/fa'
 import { Button, Form ,Alert} from 'react-bootstrap'
 import '../styles/addClinics.css'
-import PatientReport from './PatientReport'
 import Axios from 'axios'
 import Swal from 'sweetalert2'
-import AdminClinic from './AdminClinic'
 import { useNavigate } from 'react-router-dom';
 
 const AddClinic = ({submitted,data}) => {
@@ -73,6 +71,10 @@ const AddClinic = ({submitted,data}) => {
 
     const navtoClinics = async() => {
         navigate('/adminClinics');
+    }
+
+    const navtoGenrep = async() => {
+        navigate('/genPatientReport')
     }
 
   return (
@@ -174,7 +176,7 @@ const AddClinic = ({submitted,data}) => {
             <hr/>
             <br/>
             <Button onClick={navtoClinics}>View clinics</Button>
-            <Button className='btn'>Generate report</Button>
+            <Button className='btn' onClick={navtoGenrep}>Generate report</Button>
         </div>
         
       </div>

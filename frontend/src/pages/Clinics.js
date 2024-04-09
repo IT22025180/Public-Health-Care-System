@@ -1,15 +1,15 @@
 import React from 'react'
 import Layout from '../components/Layout'
 import '../styles/Clinics.css';
-import { Button } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
+//import { Button } from 'react-bootstrap';
+//import { useNavigate } from 'react-router-dom';
 import PatientReport from './PatientReport';
 import '../styles/Clinics.css';
 import imageDgC from '../webImages/dentalC.png';
 import imageDtC from '../webImages/dngC.png';
 
 const Clinics = () => {
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
 
   const cards = [
     {
@@ -48,7 +48,7 @@ const Clinics = () => {
           ))}
         </div>
       </div>
-      <PatientReport />
+      
     </Layout>
   )
 }
