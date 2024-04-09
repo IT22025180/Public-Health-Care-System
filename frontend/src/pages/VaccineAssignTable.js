@@ -42,11 +42,11 @@ const VaccineAssignTable = () => {
             {vaccinestaff && vaccinestaff.length > 0 ? (
               vaccinestaff.map(staff => (
                 <tr key={staff._id}>
-                  <td>{staff.V_type}</td>
-                  <td>{staff.V_staffmember}</td>
-                  <td>{staff.V_date}</td>
-                  <td>{staff.V_location}</td>
-                  <td>{staff.V_description}</td>
+                  <td>{staff.type}</td>
+                  <td>{staff.staffmember}</td>
+                  <td>{staff.date}</td>
+                  <td>{staff.location}</td>
+                  <td>{staff.description}</td>
                   <td><button className="edit-button">Edit</button></td>
                   <td><button className="delete-button">Delete</button></td>
                 </tr>

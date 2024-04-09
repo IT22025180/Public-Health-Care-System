@@ -64,7 +64,8 @@ const Leave = ({submitted,data}) => {
   }
 
   return (
-    <Layout>
+    <Layout >
+      <div className="layout-container5">
       <div className="form1">
         <form  className="emailForm">
           <h2>Leave Request form</h2>
@@ -131,6 +132,7 @@ const Leave = ({submitted,data}) => {
           <button onClick = {addLeave} className='subBut' type="submit">Submit</button>
           </Link>
         </form>
+      </div>
       </div>
     </Layout>
   )

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import Layout from '../components/Layout';
 import '../styles/DengueAssignTable.css';
-import { useNavigate } from 'react-router-dom';
 import Axios from 'axios';
 
 const DengueAssignTable = () => {
   const [denguestaff, setDenguestaff] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     getDengueStaff();
@@ -22,10 +22,27 @@ const DengueAssignTable = () => {
       });
   }
 
+  const filteredStaff = denguestaff.filter(staff =>
+    staff.staffmember.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
   return (
     <Layout>
       <div className="assigned-staff-table">
         <h3>Assigned Staff</h3>
+        <div className="search-bar">
+          <input
+            type="text"
+            className="search-input"
+            value={searchQuery}
+            onChange={handleSearchChange}
+            placeholder="Search Staff Member"
+          />
+        </div>
         <table border={1} cellPadding={10} cellSpacing={0}>
           <thead>
             <tr>
@@ -39,8 +56,8 @@ const DengueAssignTable = () => {
             </tr>
           </thead>
           <tbody>
-            {denguestaff && denguestaff.length > 0 ? (
-              denguestaff.map(staff => (
+            {filteredStaff.length > 0 ? (
+              filteredStaff.map(staff => (
                 <tr key={staff._id}>
                   <td>{staff.type}</td>
                   <td>{staff.staffmember}</td>
@@ -53,7 +70,7 @@ const DengueAssignTable = () => {
               ))
             ) : (
               <tr>
-                <td colSpan="7">No staff assigned</td>
+                <td colSpan="7">No staff found</td>
               </tr>
             )}
           </tbody>
