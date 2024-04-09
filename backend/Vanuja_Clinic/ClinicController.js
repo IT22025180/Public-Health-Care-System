@@ -41,9 +41,13 @@ const updateClinic = async (req,res) => {
 
         const { _id, ctype, date , time , venue} = req.body;
 
+        formattedDate_u = Array.isArray(date) ?  date.join(', ') : date;
+
         const updatedClinic= await Clinics.findOneAndUpdate({_id} ,{
+
+                _id,
                 ctype,        
-                date,
+                date : formattedDate_u,
                 time,
                 venue,     
         }, { new : true});

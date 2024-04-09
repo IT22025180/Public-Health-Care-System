@@ -5,6 +5,7 @@ import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, 
 import { Unstable_Popup as BasePopup } from '@mui/base/Unstable_Popup';
 import { styled } from '@mui/system';
 import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 
 const PopupBody = styled('div')({
   padding: '10px',
@@ -15,6 +16,9 @@ const AdminClinic = () => {
     const [clinics,setClinics] = useState([]);
     const [patients,setPatients] = useState([]);
     const [joinedPatients, setJoinedPatients] = useState([]);
+    const [clinictoUpdate , setClinicToUpdate] = useState(null);
+    const [updateMode , setupdateMode] = useState(false);
+    const navigate = useNavigate();
 
     const getClinics = async() => {
         try{
@@ -23,7 +27,7 @@ const AdminClinic = () => {
             console.log('Data from server: ' , response);
             setClinics(response.data.allClinics);
 
-            console.log('Products : ' , clinics.length);
+            console.log('Clinics : ' , clinics.length);
         }catch(error){
             console.error('Axios error : ' , error);
         }
@@ -66,32 +70,30 @@ const AdminClinic = () => {
             })
             .catch(error => {
                 console.error('Error deleting Clinic:', error);
-      });
-};
+        });
+    };
 
-const confirmDelete = (id) => {
+    const confirmDelete = (id) => {
 
-    Swal.fire({
-        title: "Are you sure?",
-        text: "You won't be able to revert this!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it!"
-      }).then((result) => {
-        if (result.isConfirmed) {
-            deleteClinic(id);
-          Swal.fire({
-            title: "Deleted!",
-            text: "Your file has been deleted.",
-            icon: "success"
-          });
-        }
-      });
-}
-
-
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                deleteClinic(id);
+            Swal.fire({
+                title: "Deleted!",
+                text: "Your file has been deleted.",
+                icon: "success"
+            });
+            }
+        });
+    }
   return (
     <>
         <Layout>
@@ -110,18 +112,18 @@ const confirmDelete = (id) => {
                 </TableHead>
                 <TableBody>
                     {clinics && clinics.length > 0 ? (
-                        clinics.map((cli , index) => (
-                            <TableRow key={cli._id} sx = {{'&:last-child id, &:last-child th' : { border: 1}}}>
+                        clinics.map((clinic , index) => (
+                            <TableRow key={clinic._id} sx = {{'&:last-child id, &:last-child th' : { border: 1}}}>
 
                                 <TableCell>{index + 1}</TableCell>
-                                <TableCell>{cli.date}</TableCell>
-                                <TableCell>{cli.time}</TableCell>
-                                <TableCell>{cli.ctype}</TableCell>
-                                <TableCell>{cli.venue}</TableCell>
+                                <TableCell>{clinic.date}</TableCell>
+                                <TableCell>{clinic.time}</TableCell>
+                                <TableCell>{clinic.ctype}</TableCell>
+                                <TableCell>{clinic.venue}</TableCell>
                                 <TableCell>
-                                    <Button>Update</Button>
-                                    <Button onClick={() =>confirmDelete(cli._id) }>Delete</Button>
-                                    <Button onClick={() => handleClickViewPatients(cli._id)}>View joined patients</Button>
+                                    <Button onClick={() => navigate(`/updateCli/${clinic._id}/${clinic.date}/${clinic.time}/${clinic.ctype}/${clinic.venue}`)}>Update</Button>
+                                    <Button onClick={() =>confirmDelete(clinic._id) }>Delete</Button>
+                                    <Button onClick={() => handleClickViewPatients(clinic._id)}>View joined patients</Button>
                                 </TableCell>
                             </TableRow>
                         ))

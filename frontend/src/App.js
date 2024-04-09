@@ -43,6 +43,7 @@ import RaidForm from './pages/RaidForm';
 import EditLeave from './pages/EditLeave';
 import FCRVTable from './pages/FCRVTable';
 import AdminClinic from './pages/AdminClinic';
+import UpdateClinic from './pages/UpdateClinic';
 
 function App() {
   return (
@@ -106,6 +107,7 @@ function App() {
 
         <Route path='/addclinics' element = {<AddClinic/>}/>
         <Route path='/addpatients/:_id/:date/:time/:venue/:ctype' element = {<AddPatients/>}/>
+        <Route path='/updateCli/:_id/:date/:time/:venue/:ctype' element = {<UpdateClinic/>}/>
         <Route path='/dengueCli' element = {<Dengue/>}/>
         <Route path='/dentalCli' element = {<Dental/>}/>
         <Route path='/adminClinics' element = {<AdminClinic/>}/>
@@ -125,16 +127,8 @@ function App() {
 
 
         <Route path='/DengCampTab' element={<DengCampTab />} />
-        <Route path='/addclinics' element={<AddClinic />} />
-        <Route path='/addpatient' element={<AddPatients />} />
         <Route path='/dengueCli' element={<Dengue />} />
         <Route path='/RF' element={<RaidForm />} />
-
-
-        <Route path='/addclinics' element={<AddClinic />} />
-        <Route path='/addpatients' element={<AddPatients />} />
-        <Route path='/dengueCli' element={<Dengue />} />
-        <Route path='/dentalCli' element={<Dental />} />
 
         <Route path='/Complains' element={<ComplaintForm />} />
         <Route path='/denguecamp' element={<DengueCampaigns />} />
