@@ -82,7 +82,7 @@ const BabyDetails = ({submitted,data}) => {
 
     <div>
     <div className='bdtitle'>
-   
+ 
     <h3 className='he3'>Baby Details</h3>
     <form className='addbaby'>
         <div className='input'>
@@ -102,7 +102,7 @@ const BabyDetails = ({submitted,data}) => {
 
         <div className='input'>
             <label htmlFor='contactnumber'>Contact Number</label>
-            <input onChange={e=>setbcontactnumber(e.target.value)} type='tel' id='contactnumber' autoComplete='off' placeholder='Contact Number'/>
+            <input maxLength={10} onChange={e=>setbcontactnumber(e.target.value.slice(0,10))} type='tel' id='contactnumber' autoComplete='off' placeholder='Contact Number'/>
         </div>
 
         <div className='input'>
