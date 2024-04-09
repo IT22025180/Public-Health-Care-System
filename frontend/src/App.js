@@ -86,10 +86,6 @@ function App() {
         <Route path='/DengueAssignTable' element={<DengueAssignTable/>}/>
         <Route path='/VaccineAssignTable' element={<VaccineAssignTable/>}/>
         <Route path='/RaidsAssign' element={<RaidsAssign/>}/> 
-        <Route path='/Fine-And-court' element = {<FineAndCourt/>}/>
-        <Route path='/Fine-And-court-Submit-Reports' element = {<FCReportForm/>}/>
-        <Route path='/Fine-And-court-Document-Management' element = {<FCDocManage/>}/>
-        <Route path='/Fine-And-court-Analyse' element = {<FCAnalyse/>}/>
         <Route path='/clinics' element = {<Clinics/>}/>
         <Route path='/mainMidwife' element={<MainMidwife/>}/>
         <Route path='/babyDetails' element={<BabyDetails/>}/>
@@ -100,9 +96,7 @@ function App() {
         <Route path='/Thriposhatable' element={<Thriposhatable/>}/>
         <Route path='/VaccineRegTab' element={<VaccineRegTab/>}/>
         <Route path='/DengCampTab' element={<DengCampTab/>}/>
-        <Route path='/F&CDocumentManagementTabe' element={<FCDMTable/>}/>
         <Route path='/RF' element={<RaidForm/>}/>
-        <Route path='/F&CDReportViolationTabe' element={<FCRVTable/>}/>
         
 
         <Route path='/addclinics' element = {<AddClinic/>}/>
