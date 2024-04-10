@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const AssignRaid = require('./AssignRaidsModel'); 
+const raidstaff = require('./AssignRaidsModel');
 
 const addstaffraids = async (req, res) => {
     try {
@@ -7,7 +7,7 @@ const addstaffraids = async (req, res) => {
 
         const r_assignedDate = Array.isArray(date) ? date.join(', ') : date;
 
-        const newassignforraids = new Raidsstaff({
+        const newassignforraids = new raidstaff({
             type,
             staffmember,
             date: r_assignedDate,
@@ -25,7 +25,7 @@ const addstaffraids = async (req, res) => {
 
 const getstaffraids = async (req, res) => {
     try {
-        const allstaffraids = await Raidsstaff.find();
+        const allstaffraids = await raidstaff.find();
         res.json({ allstaffraids });
     } catch (error) {
         console.error('Error getting staff:', error);
@@ -35,9 +35,9 @@ const getstaffraids = async (req, res) => {
 
 const updatestaffraids = async (req, res) => {
     try {
-        const {type, staffmember, date, location, description } = req.body;
+        const { type, staffmember, date, location, description } = req.body;
 
-        const updatestaffdraids = await Raid.findOneAndUpdate({ _id }, {
+        const updatestaffdraids = await raidstaff.findOneAndUpdate({ _id }, {
             type,
             staffmember,
             date,
@@ -60,7 +60,7 @@ const deletestaffraids = async (req, res) => {
     try {
         const { _id } = req.body;
 
-        const deletedstaffraids = await Raidsstaff.findOneAndDelete({ _id });
+        const deletedstaffraids = await raidstaff.findOneAndDelete({ _id });
 
         if (!deletedRaidAssignment) {
             return res.status(404).json({ success: false, message: 'Staff not found' });
