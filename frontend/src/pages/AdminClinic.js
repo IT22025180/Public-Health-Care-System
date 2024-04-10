@@ -131,7 +131,6 @@ const AdminClinic = () => {
                                         <TableCell>Name</TableCell>
                                         <TableCell>Gender</TableCell>
                                         <TableCell>Age</TableCell>
-                                        <TableCell>Email</TableCell>
                                         <TableCell>Mobile</TableCell>
                                     </TableRow>
                                 </TableHead>
@@ -142,7 +141,6 @@ const AdminClinic = () => {
                                             <TableCell>{patient.name}</TableCell>
                                             <TableCell>{patient.sex}</TableCell>
                                             <TableCell>{patient.age}</TableCell>
-                                            <TableCell>{patient.email}</TableCell>
                                             <TableCell>{patient.mobile}</TableCell>
                                         </TableRow>
                                     ))}
