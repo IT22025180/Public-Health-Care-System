@@ -74,6 +74,9 @@ const Staff = () => {
         <div className="apply-leave-box">
           <h3 className='applyleave'>Please fill this form to apply for your leave.</h3>
           <button onClick={ApplyLeave}>Click here</button>
+          <a href="/LeaveTable" className="btn-leave-history">
+                  See Leave History
+                </a>
         </div>
       </div>
     </Layout>

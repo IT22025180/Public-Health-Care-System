@@ -3,6 +3,7 @@ import Layout from '../components/Layout';
 import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import '../styles/Dengueschedules.css';
 import Axios from 'axios';
+import Swal from 'sweetalert2'; // Import SweetAlert
 
 const Dengueschedules = ({ submitted, data }) => {
   const [name, setName] = useState('');
@@ -41,6 +42,15 @@ const Dengueschedules = ({ submitted, data }) => {
         description: description
       });
       console.log('Successfully', response.data);
+
+      // Display success message
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Staff added successfully",
+        showConfirmButton: false,
+        timer: 1500
+      });
     } catch (error) {
       console.error('error', error);
     }
@@ -79,8 +89,8 @@ const Dengueschedules = ({ submitted, data }) => {
               </div>
              
               <Link to="/DengueAssignTable">
-              <button type="button" onClick={addstaffdengue}>Assign Staff</button>
-              <button className="view-programs">View Scheduled Programs</button>
+                <button type="button" onClick={addstaffdengue}>Assign Staff</button>
+                <button className="view-programs">View Scheduled Programs</button>
               </Link>
               
             </form>

@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import Layout from '../components/Layout';
 import jsPDF from 'jspdf';
 import logo1 from '../webImages/logo1.png'; // Import the logo image
+import Swal from 'sweetalert2'; // Import SweetAlert
+import '../styles/Leave.css';
 
 const LeaveTable = () => {
   const navigate = useNavigate();
@@ -12,11 +14,6 @@ const LeaveTable = () => {
   useEffect(() => {
     getLeavedata();
   }, []);
-
-
-    /*const editleave = () => {
-        navigate('/EditLeave')
-      }*/
 
   const getLeavedata = () => {
     Axios.get('http://localhost:4000/api/Leave')
@@ -29,20 +26,44 @@ const LeaveTable = () => {
       });
   };
 
-
   const handleEdit = (id) => {
     navigate(`/EditLeave/${id}`); 
   };
 
   const handleDelete = (id) => {
-    Axios.post('http://localhost:4000/api/deleteLeave', { _id: id })
-      .then(response => {
-        console.log('Leave deleted successfully');
-        setLeavedata(prevData => prevData.filter(leave => leave._id !== id));
-      })
-      .catch(error => {
-        console.error('Error deleting leave:', error);
-      });
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes, delete it!",
+      cancelButtonText: "No, cancel",
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Axios.post('http://localhost:4000/api/deleteLeave', { _id: id })
+          .then(response => {
+            console.log('Leave deleted successfully');
+            setLeavedata(prevData => prevData.filter(leave => leave._id !== id));
+            // Display success message
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your leave application has been deleted.",
+              icon: "success"
+            });
+          })
+          .catch(error => {
+            console.error('Error deleting leave:', error);
+          });
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        // Handle cancel action
+        Swal.fire({
+          title: "Cancelled",
+          text: "Your leave is safe ",
+          icon: "error"
+        });
+      }
+    });
   };
 
   const generatePDF = (leave) => {
@@ -111,17 +132,18 @@ const LeaveTable = () => {
     const leaveEndDate = new Date(leave.leaveend).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 
     const description = `
-      ${positionDescription} ${leave.name}, with Staff ID ${leave.staffid}, will be on leave for ${leaveTypeDescription} 
+    ${positionDescription} ${leave.name}, with Staff ID ${leave.staffid}, will be on leave for ${leaveTypeDescription} 
 
-      from ${leaveStartDate}, to ${leaveEndDate}. During this period, ${positionDescription} ${leave.name},
+    from ${leaveStartDate}, to ${leaveEndDate}. During this period, ${positionDescription} ${leave.name},
 
-      who holds the position of ${positionDescription}, will not be available for duty. 
+    who holds the position of ${positionDescription}, will not be available for duty. 
 
-      This leave has been approved due to health concerns, as indicated by the ${leave.leaveType.toLowerCase()} 
 
-      leave type. We wish ${positionDescription} ${leave.name} a swift recovery and look forward to their 
+    This leave has been approved due to health concerns, as indicated by the ${leave.leaveType.toLowerCase()} 
 
-      return to full health and work responsibilities thereafter.
+    leave type. We wish ${positionDescription} ${leave.name} a swift recovery and look forward to 
+
+    their return to full health and work responsibilities thereafter.
     `;
 
     doc.setFontSize(12);
@@ -153,7 +175,7 @@ const LeaveTable = () => {
               <th>Leave Type</th>
               <th>Edit</th>
               <th>Delete</th>
-              <th>Summary</th> {/* Corrected typo from "Summery" to "Summary" */}
+              <th>Summary</th>
             </tr>
           </thead>
           <tbody>

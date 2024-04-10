@@ -119,3 +119,21 @@ background-color: #0056b3;
   margin: 20px 0; /* Adjust margin as needed */
 }
 
+.btn-leave-history {
+  display:inline-flex;
+  padding: 8px 16px;
+  margin-top: 10px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-left: 700PX;
+}
+
+.btn-leave-history:hover {
+  background-color: #0056b3;
+}

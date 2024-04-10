@@ -1,141 +1,201 @@
-import { useEffect, useState } from "react";
-//import emailjs from '@emailjs/browser'
-import '../styles/Leave.css'
-import Layout from '../components/Layout';
-import { Link } from "react-router-dom";
-import Axios from 'axios';
+import React, { useEffect, useState } from "react";
+import Axios from "axios";
+import { Link } from "react-router-dom"; // Import Link
+import Layout from "../components/Layout";
+import Swal from "sweetalert2"; // Import SweetAlert
+import "../styles/Leave.css";
 
+const Leave = ({ submitted, data }) => {
+  const [name, setName] = useState("");
+  const [staffId, setStaffId] = useState("");
+  const [email, setEmail] = useState("");
+  const [position, setPosition] = useState("");
+  const [leaveType, setLeaveType] = useState("");
+  const [leaveFor, setLeaveFor] = useState("Days");
+  const [leaveStart, setLeaveStart] = useState("");
+  const [leaveEnd, setLeaveEnd] = useState("");
 
-const Leave = ({submitted,data}) => {
-
-  const[name,setname]=useState('');
-  const[staffid,setstaffid]=useState('');
-  const[email,setemail]=useState('');
-  const[position,setposition]=useState('');
-  const[doleave,setdoleave]=useState('');
-  const[leavestrt,setleavestrt]=useState('');
-  const[leaveend,setleaveend]=useState('');
-  const[leaveType,setleaveType]=useState('');
-
-  useEffect(()=>{
-    if(!submitted){
-      setname('');
-      setstaffid('');
-      setemail('');
-      setposition('');
-      setdoleave('');
-      setleavestrt('');
-      setleaveend('');
-      setleaveType('');
+  useEffect(() => {
+    if (!submitted) {
+      setName("");
+      setStaffId("");
+      setEmail("");
+      setPosition("");
+      setLeaveType("");
+      setLeaveFor("Days");
+      setLeaveStart("");
+      setLeaveEnd("");
     }
-  },[submitted]);
+  }, [submitted]);
 
-  useEffect(()=>{
-    if(data?.id && data.id !==0){
-      setname(data.name);
-      setstaffid(data.staffid);
-      setemail(data.email);
-      setposition(data.position);
-      setdoleave(data.doleave);
-      setleavestrt(data.leavestrt);
-      setleaveend(data.leaveend);
-      setleaveType(data.leaveType);
-
+  useEffect(() => {
+    if (data?.id && data.id !== 0) {
+      setName(data.name);
+      setStaffId(data.staffid);
+      setEmail(data.email);
+      setPosition(data.position);
+      setLeaveType(data.leaveType);
+      setLeaveFor(data.doleave);
+      setLeaveStart(data.leavestrt);
+      setLeaveEnd(data.leaveend);
     }
-  },[data]);
+  }, [data]);
 
-  const addLeave = async()=>{
-    try{
-      const response = await Axios.post('http://localhost:4000/api/addLeave',{
-        name : name,
-        staffid :staffid,
-        email : email,
-        position : position,
-        doleave : doleave,
-        leavestrt : leavestrt,
-        leaveend : leaveend,
-        leaveType : leaveType,
+  const addLeave = async () => {
+    try {
+      const response = await Axios.post("http://localhost:4000/api/addLeave", {
+        name: name,
+        staffid: staffId,
+        email: email,
+        position: position,
+        doleave: leaveFor,
+        leavestrt: leaveStart,
+        leaveend: leaveEnd,
+        leaveType: leaveType,
       });
 
-      console.log('Successfully',response.data);
-    }catch(error){
-      console.error('error',error);
+      console.log("Successfully", response.data);
+
+      // Display success message
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Leave added Successfully",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    } catch (error) {
+      console.error("error", error);
     }
-  }
+  };
 
   return (
-    <Layout >
+    <Layout>
       <div className="layout-container5">
-      <div className="form1">
-        <form  className="emailForm">
-          <h2>Leave Request form</h2>
-          <div>
-            <label>Name:</label>
-            <input onChange={e=>setname(e.target.value)} type="text" name="sName"  />
-          </div>
-          <div>
-            <label>Staff ID:</label>
-            <input  onChange={e=>setstaffid(e.target.value)} type="text" name="staffid"   />
-          </div>
-          <div>
-            <label>Email:</label>
-            <input  onChange={e=>setemail(e.target.value)} type="email" name="email" />
-          </div>
-          <div>
-            <label>Position:</label>
-            <input  onChange={e=>setposition(e.target.value)} type="text" name="Position"  />
-          </div>
-          <div>
-            <label>Details of leave:</label>
+        <div className="leave">
+          <form className="emailForm">
+            <h2>Leave Request Form</h2>
             <div>
-              <input value='Days'
-                     checked={doleave === 'Days'}
-                     onChange={e=>setdoleave(e.target.value)} type="radio" id="Position"  />
-              Days
+              <label>Name:</label>
+              <input
+                onChange={(e) => setName(e.target.value)}
+                type="text"
+                name="name"
+                value={name}
+              />
             </div>
             <div>
-              <input value='Hours'
-                     checked={doleave === 'Hours'}
-                     onChange={e=>setdoleave(e.target.value)}type="radio" id="position"  />
-              Hours
-            </div>
-          </div>
-          <div>
-            <label>Leave Start:</label>
-            <input  onChange={e=>setleavestrt(e.target.value.toString())} type="Date" name="vdate"  />
-          </div>
-          <div>
-            <label>Leave End:</label>
-            <input  onChange={e=>setleaveend(e.target.value.toString())} type="Date" name="vdate"  />
-          </div>
-          <label>Leave type:</label>
-            <div>
-              <input value='Sick'
-                     checked={leaveType === 'Sick'}
-                     onChange={e=>setleaveType(e.target.value)} type="radio" id="leavetype" name="vtype"  />
-              Sick
+              <label>Staff ID:</label>
+              <input
+                onChange={(e) => setStaffId(e.target.value)}
+                type="text"
+                name="staffId"
+                value={staffId}
+              />
             </div>
             <div>
-              <input value='Vacation'
-                     checked={leaveType === 'Vacation'}
-                     onChange={e=>setleaveType(e.target.value)} type="radio" id="leavetype" name="vtype"  />
-              Vacation
+              <label>Email:</label>
+              <input
+                onChange={(e) => setEmail(e.target.value)}
+                type="email"
+                name="email"
+                value={email}
+              />
             </div>
             <div>
-              <input value='Quititing'
-                     checked={leaveType === 'Quititing'}
-                     onChange={e=>setleaveType(e.target.value)} type="radio" id="leavetype" name="vtype"  />
-              Quititing
+              <label>Position:</label>
+              <input
+                onChange={(e) => setPosition(e.target.value)}
+                type="text"
+                name="position"
+                value={position}
+              />
             </div>
-          
-          <Link to='/LeaveTable'>
-          <button onClick = {addLeave} className='subBut' type="submit">Submit</button>
-          </Link>
-        </form>
-      </div>
+            <div>
+              <label>Details of leave:</label>
+              <div>
+                <input
+                  value="Days"
+                  checked={leaveFor === "Days"}
+                  onChange={() => setLeaveFor("Days")}
+                  type="radio"
+                  id="days"
+                />
+                <label htmlFor="days">Days</label>
+              </div>
+              <div>
+                <input
+                  value="Hours"
+                  checked={leaveFor === "Hours"}
+                  onChange={() => setLeaveFor("Hours")}
+                  type="radio"
+                  id="hours"
+                />
+                <label htmlFor="hours">Hours</label>
+              </div>
+            </div>
+            <div>
+              <label>Leave Start:</label>
+              <input
+                onChange={(e) => setLeaveStart(e.target.value)}
+                type="date"
+                name="leaveStart"
+                value={leaveStart}
+              />
+            </div>
+            <div>
+              <label>Leave End:</label>
+              <input
+                onChange={(e) => setLeaveEnd(e.target.value)}
+                type="date"
+                name="leaveEnd"
+                value={leaveEnd}
+              />
+            </div>
+            <div>
+              <label>Leave type:</label>
+              <div>
+                <input
+                  value="Sick"
+                  checked={leaveType === "Sick"}
+                  onChange={() => setLeaveType("Sick")}
+                  type="radio"
+                  id="sick"
+                />
+                <label htmlFor="sick">Sick</label>
+              </div>
+              <div>
+                <input
+                  value="Vacation"
+                  checked={leaveType === "Vacation"}
+                  onChange={() => setLeaveType("Vacation")}
+                  type="radio"
+                  id="vacation"
+                />
+                <label htmlFor="vacation">Vacation</label>
+              </div>
+              <div>
+                <input
+                  value="Quitting"
+                  checked={leaveType === "Quitting"}
+                  onChange={() => setLeaveType("Quitting")}
+                  type="radio"
+                  id="quitting"
+                />
+                <label htmlFor="quitting">Quitting</label>
+              </div>
+            </div>
+            {/* Use Link to navigate */}
+            <Link to="/LeaveTable">
+              <button onClick={addLeave} className="subBut" type="button">
+                Submit
+              </button>
+            </Link>
+          </form>
+        </div>
       </div>
     </Layout>
-  )
-}
+  );
+};
 
 export default Leave;
