@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import '../styles/Dengcamptab.css';
 import Axios from 'axios';
+import jsPDF from 'jspdf';
 
 const DengCampTab = () => {
     const [campdata,setcampdata]=useState([]);
@@ -38,11 +39,29 @@ const filteredcampdata = campdata.filter(camp=> {
     return camp.date?.toLowerCase().includes(searchQuery.toLowerCase());
 
 });
+
+const generateReport = () => {
+    if (filteredcampdata.length === 0) {
+        console.log("No camp data to generate report.");
+        return;
+    }
+
+    const doc = new jsPDF();
+    let y = 10;
+
+    filteredcampdata.forEach((camp, index) => {
+        const campText = `Venue: ${camp.venue}\nDate: ${camp.date}\nStarting Time: ${camp.time}\nConducted By: ${camp.drName}\n\n`;
+        doc.text(campText, 10, y);
+        y += 30;
+    });
+
+    doc.save("camp_report.pdf");
+};
+
   return (
     <div className='Dcamptable'>
          <form className= "campsearch_bar">
          <input  placeholder="Search name" type='text' value={searchQuery} onChange={e => setSearchQuery(e.target.value)} />
-
          </form>
         <table border ={1} cellPadding={10} cellSpacing={0}>
             <thead>
@@ -69,7 +88,9 @@ const filteredcampdata = campdata.filter(camp=> {
                     <td className='deleteButtons'>
                         <button onClick={()=> campDelete(camp._id)}>Delete</button>
                     </td>
-   
+                    <td className='reportButtons'>
+                    <button onClick={generateReport}>Generate Report</button>
+                    </td>
                 </tr>))
             ):(
                 <tr>

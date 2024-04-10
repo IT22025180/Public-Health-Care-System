@@ -47,6 +47,7 @@ import PatientReport from './pages/PatientReport';
 import DoctorLogin from './Auth/DoctorLogin';
 import Lgportal from './Auth/Lgportal';
 import ModelPopup from './pages/ModelPopup';
+import DengueHomePage from './pages/DengueHomePage';
 
 function App() {
   return (
