@@ -6,16 +6,18 @@ import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import { FaTimes } from 'react-icons/fa';
 
+
 const AdminClinic = () => {
     const [clinics, setClinics] = useState([]);
-    //const [selectedClinicId, setSelectedClinicId] = useState(null);
+    const [selectedClinicId, setSelectedClinicId] = useState(null);
     const [joinedPatients, setJoinedPatients] = useState([]);
     const navigate = useNavigate();
 
     //popup components line 16 to line 24 & line 123 to line 153
     const [open, openPatients] = useState(false);
 
-    const functionPopup = () => {
+    const functionPopup = (clinicID) => {
+        setSelectedClinicId(clinicID);
         openPatients(true);
     }
 
@@ -40,7 +42,7 @@ const AdminClinic = () => {
         try {
             const response = await Axios.get(`http://localhost:4000/api/Patients`);
             setJoinedPatients(response.data.allPatient);
-            //setSelectedClinicId(id);
+
         } catch (error) {
             console.error('Axios error:', error);
         }
@@ -81,6 +83,8 @@ const AdminClinic = () => {
         });
     };
 
+    const selectedPatients = joinedPatients.filter(patient => patient.clinicID === selectedClinicId);
+
     return (
         <Layout>
             <div>
@@ -109,7 +113,7 @@ const AdminClinic = () => {
                                         <TableCell>
                                             <Button onClick={() => navigate(`/updateCli/${clinic._id}/${clinic.date}/${clinic.time}/${clinic.ctype}/${clinic.venue}`)}>Update</Button>
                                             <Button onClick={() => confirmDelete(clinic._id)}>Delete</Button>
-                                            <Button onClick={functionPopup} >View joined patients</Button>
+                                            <Button onClick={() => functionPopup(clinic._id)} >View joined patients</Button>
                                         </TableCell>
                                     </TableRow>))
                             ) : (
@@ -120,8 +124,8 @@ const AdminClinic = () => {
                         </TableBody>
                     </Table>
                 </TableContainer>
-                <Dialog open={open} fullWidth>
-                    <DialogTitle>Patients for that clinic <Button onClick={closepopup}><FaTimes /></Button></DialogTitle>
+                <Dialog open={open} fullWidth >
+                    <DialogTitle>Patients for this clinic <Button onClick={closepopup}><FaTimes /></Button></DialogTitle>
                     <DialogContent>
                         <TableContainer component={Paper}>
                             <Table>
@@ -135,55 +139,35 @@ const AdminClinic = () => {
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                    {joinedPatients.map((patient, index) => (
-                                        <TableRow key={patient._id}>
-                                            <TableCell>{index + 1}</TableCell>
-                                            <TableCell>{patient.name}</TableCell>
-                                            <TableCell>{patient.sex}</TableCell>
-                                            <TableCell>{patient.age}</TableCell>
-                                            <TableCell>{patient.mobile}</TableCell>
-                                        </TableRow>
-                                    ))}
+                                    {selectedPatients &&
+                                        selectedPatients.length > 0 ?
+                                        (selectedPatients.map((patient, index) => (
+                                            <TableRow key={patient._id}>
+                                                <TableCell>{index + 1}</TableCell>
+                                                <TableCell>{patient.name}</TableCell>
+                                                <TableCell>{patient.sex}</TableCell>
+                                                <TableCell>{patient.age}</TableCell>
+                                                <TableCell>{patient.mobile}</TableCell>
+                                            </TableRow>
+                                        )))
+                                        : (
+                                            <TableRow>
+                                                <TableCell colSpan={5}>
+                                                    No patients found for this clinic
+                                                </TableCell>
+                                            </TableRow>
+                                        )}
                                 </TableBody>
                             </Table>
                         </TableContainer>
                     </DialogContent>
                 </Dialog>
             </div>
-        </Layout>
+        </Layout >
     );
 };
 
 export default AdminClinic;
 
 
-/**<TableContainer component={Paper}>
-                                                    <Table>
-                                                        <TableHead>
-                                                            <TableRow>
-                                                                <TableCell>#</TableCell>
-                                                                <TableCell>Name</TableCell>
-                                                                <TableCell>Gender</TableCell>
-                                                                <TableCell>Age</TableCell>
-                                                                <TableCell>Email</TableCell>
-                                                                <TableCell>Mobile</TableCell>
-                                                            </TableRow>
-                                                        </TableHead>
-                                                        <TableBody>
-                                                            {joinedPatients.map((patient, index) => (
-                                                                <TableRow key={patient._id}>
-                                                                    <TableCell>{index + 1}</TableCell>
-                                                                    <TableCell>{patient.name}</TableCell>
-                                                                    <TableCell>{patient.sex}</TableCell>
-                                                                    <TableCell>{patient.age}</TableCell>
-                                                                    <TableCell>{patient.email}</TableCell>
-                                                                    <TableCell>{patient.mobile}</TableCell>
-                                                                </TableRow>
-                                                            ))}
-                                                        </TableBody>
-                                                    </Table>
-                                                </TableContainer>
-                                                
-                                                
-                                                
-                                                {}*/
+/*onClick={() => navigate(`/updateCli/${clinic._id}/${clinic.date}/${clinic.time}/${clinic.ctype}/${clinic.venue}`)}*/
