@@ -20,6 +20,7 @@ const routerP = require('./Vanuja_AddPatient/AddPRoute');
 const routerDS = require('./Yethmi/AssignDengueRoute');
 const routerVS = require('./Yethmi/AssignVaccineRoute');
 const routerL = require('./Login/LoginRoute');
+const routerRA = require('./Yethmi/AssignRaidsRoute');
 
 dotenv.config();
 
@@ -76,3 +77,4 @@ app.use('/api' , routerP);
 app.use('/api' , routerDS);
 app.use('/api',routerVS);
 app.use('/api' , routerL);
+app.use('api', routerRA)

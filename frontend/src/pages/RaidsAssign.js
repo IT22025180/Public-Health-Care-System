@@ -1,61 +1,83 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Layout from '../components/Layout';
-import '../styles/RaidsAssignTable.css'
+import '../styles/RaidsAssignTable.css'; // Update the CSS file path accordingly
+import Axios from 'axios';
 
-const DengueAssignTable = () => {
-    const assignedStaff = [
-        {
-          id: 1,
-          programType: 'Dengue Prevention Program',
-          staffMember: 'Yethmi',
-          date: '2024-04-10',
-          location: 'Colombo',
-          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-        },
-        {
-          id: 2,
-          programType: 'Dengue Awareness Campaign',
-          staffMember: 'Minrada',
-          date: '2024-04-15',
-          location: 'Kandy',
-          description: 'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-        },
-      ];
+const RaidsAssignTable = () => {
+  const [assignedRaids, setAssignedRaids] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
 
-    return (
-        <Layout>
-            <div className="assigned-staff-table">
-          <h3>Assigned Staff</h3>
-          <table>
-            <thead>
-              <tr>
-                <th>Program Type</th>
-                <th>Staff Member</th>
-                <th>Date</th>
-                <th>Location</th>
-                <th>Description</th>
-                <th>Edit</th>
-                <th>Delete</th>
-              </tr>
-            </thead>
-            <tbody>
-              {assignedStaff.map((staff) => (
-                <tr key={staff.id}>
-                  <td>{staff.programType}</td>
-                  <td>{staff.staffMember}</td>
-                  <td>{staff.date}</td>
-                  <td>{staff.location}</td>
-                  <td>{staff.description}</td>
+  useEffect(() => {
+    getAssignedRaids();
+  }, []);
+
+  const getAssignedRaids = () => {
+    Axios.get('/api/getRaids') // Adjust API endpoint
+      .then(response => {
+        console.log('data from server', response.data);
+        setAssignedRaids(response.data.allRaids);
+      })
+      .catch(error => {
+        console.error("Axios error", error);
+      });
+  }
+
+  const filteredRaids = assignedRaids.filter(raid =>
+    raid.staffmember.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+  return (
+    <Layout>
+      <div className="assigned-staff-table">
+        <h3>Assigned Raids</h3>
+        <div className="search-bar">
+          <input
+            type="text"
+            className="search-input"
+            value={searchQuery}
+            onChange={handleSearchChange}
+            placeholder="Search Staff Member"
+          />
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Raid Type</th>
+              <th>Staff Member</th>
+              <th>Date</th>
+              <th>Location</th>
+              <th>Description</th>
+              <th>Edit</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            {filteredRaids.length > 0 ? (
+              filteredRaids.map(raid => (
+                <tr key={raid._id}>
+                  <td>{raid.type}</td>
+                  <td>{raid.staffmember}</td>
+                  <td>{raid.date}</td>
+                  <td>{raid.location}</td>
+                  <td>{raid.description}</td>
                   <td><button className="edit-button">Edit</button></td>
                   <td><button className="delete-button">Delete</button></td>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        </Layout>
-        
-    );
+              ))
+            ) : (
+              <tr>
+                <td colSpan="7">No raids found</td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
+    </Layout>
+  );
 };
 
-export default DengueAssignTable;
+export default RaidsAssignTable;
