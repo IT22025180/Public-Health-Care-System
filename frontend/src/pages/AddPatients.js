@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Form , Alert } from 'react-bootstrap' 
+import { Button, Form, Alert } from 'react-bootstrap'
 import Layout from '../components/Layout'
 import '../styles/addPatient.css';
 import Swal from 'sweetalert2'
@@ -7,18 +7,18 @@ import Axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 
 const AddPatients = ({ submitted, data }) => {
-  
+
 
   const navigate = useNavigate();
 
-  const {_id , date , time , venue , ctype} = useParams();
+  const { _id, date, time, venue, ctype } = useParams();
 
   const [name, setName] = useState('');
   const [gender, setGender] = useState('');
   const [age, setAge] = useState(0);
   const [address, setAddress] = useState('');
   const [mobile, setMobile] = useState(0);
-  const [errorMessage , setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
     if (!submitted) {
@@ -42,8 +42,8 @@ const AddPatients = ({ submitted, data }) => {
 
   const addPatient = async () => {
 
-    
-    if(!name || !gender || !address || !mobile){
+
+    if (!name || !gender || !address || !mobile) {
       setErrorMessage('Please fill all fields');
     }
 
@@ -55,11 +55,11 @@ const AddPatients = ({ submitted, data }) => {
         age,
         address,
         mobile,
-        clinicID : _id
+        clinicID: _id
       });
 
       console.log('Patient added to queue successfully', response.data);
-      
+
     } catch (error) {
       console.error('Error:', error);
     }
@@ -83,7 +83,7 @@ const AddPatients = ({ submitted, data }) => {
           icon: "success"
         });
         addPatient();
-        if(addPatient()){
+        if (addPatient()) {
           setName('');
           setGender('');
           setAge(0);
@@ -92,15 +92,15 @@ const AddPatients = ({ submitted, data }) => {
         }
 
       }
-      
+
     });
-    
+
   }
 
   return (
     <Layout>
       <div className='addform'>
-      {errorMessage && <Alert variant='danger'>{errorMessage}</Alert>} 
+        {errorMessage && <Alert variant='danger'>{errorMessage}</Alert>}
         <h2>Admission form</h2>
         <Form>
           <Form.Group className='padd'>
@@ -151,7 +151,7 @@ const AddPatients = ({ submitted, data }) => {
               value={mobile}
               min={0}
               maxLength={10}
-              onChange={e => setMobile(e.target.value.slice(0,10))}
+              onChange={e => setMobile(e.target.value.slice(0, 10))}
             />
           </Form.Group>
           <br />
