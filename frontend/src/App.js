@@ -44,6 +44,8 @@ import FCRVTable from './pages/FCRVTable';
 import AdminClinic from './pages/AdminClinic';
 import UpdateClinic from './pages/UpdateClinic';
 import PatientReport from './pages/PatientReport';
+import DoctorLogin from './Auth/DoctorLogin';
+import Lgportal from './Auth/Lgportal';
 
 function App() {
   return (
@@ -138,6 +140,8 @@ function App() {
         <Route path='/Fine-And-court-Analyse' element={<FCAnalyse />} />
 
 
+        <Route path='/dclogin' element={<DoctorLogin />} />
+        <Route path='/login' element={<Lgportal />} />
       </Routes>
     </Router>
   );
