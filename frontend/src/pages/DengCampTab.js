@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react'
-import '../styles/Dengcamptab.css'
+import React, { useEffect, useState } from 'react';
+import '../styles/Dengcamptab.css';
 import Axios from 'axios';
 
 const DengCampTab = () => {
     const [campdata,setcampdata]=useState([]);
+
+    const [searchQuery, setSearchQuery] = useState('');
 
     useEffect(()=>{
         getcampdata();
@@ -28,11 +30,20 @@ const DengCampTab = () => {
             })
             .catch(error => {
                 console.error('Error deleting campdata:', error);
-            });
-    };
+      });
+};
 
+const filteredcampdata = campdata.filter(camp=> {
+
+    return camp.date?.toLowerCase().includes(searchQuery.toLowerCase());
+
+});
   return (
     <div className='Dcamptable'>
+         <form className= "campsearch_bar">
+         <input  placeholder="Search name" type='text' value={searchQuery} onChange={e => setSearchQuery(e.target.value)} />
+
+         </form>
         <table border ={1} cellPadding={10} cellSpacing={0}>
             <thead>
                 <tr>
@@ -45,8 +56,8 @@ const DengCampTab = () => {
                 </tr>
             </thead>
             <tbody>
-             {campdata && campdata.length > 0 ? (
-                campdata.map((camp)=>(
+             {filteredcampdata && filteredcampdata.length > 0 ? (
+                filteredcampdata.map((camp)=>(
                 <tr key={camp._id}>
                     <td>{camp.venue}</td>
                     <td>{camp.date}</td>
