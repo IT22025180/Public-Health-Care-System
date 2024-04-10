@@ -29,7 +29,7 @@ import AddPatients from './pages/AddPatients';
 import DengueCampaigns from './pages/DengueCampaignSchedule';
 import VaccineRegTab from './pages/VaccineRegTab';
 import VaccineAppTab from './pages/VaccineAppTab';
-import VaccineRequestTab from './pages/VaccineRequestTab';          /////////
+import VaccineRequestTab from './pages/VaccineRequestTab';          
 import DengCampTab from './pages/DengCampTab';
 import Dengueschedules from './pages/Dengueschedules';
 import Vaccineschedules from './pages/Vaccineschedules';
@@ -39,6 +39,7 @@ import StaffLogin from './pages/StaffLogin';
 import FCDMTable from './pages/FCDMTable';
 import ComplaintForm from './pages/Complains';
 import RaidForm from './pages/RaidForm';
+
 import EditLeave from './pages/EditLeave';
 import FCRVTable from './pages/FCRVTable';
 import AdminClinic from './pages/AdminClinic';
@@ -48,6 +49,11 @@ import DoctorLogin from './Auth/DoctorLogin';
 import Lgportal from './Auth/Lgportal';
 import ModelPopup from './pages/ModelPopup';
 import DengueHomePage from './pages/DengueHomePage';
+
+import Raids from './pages/Raids';
+import RaidSubForm from './pages/RaidSubForm';
+
+
 
 function App() {
   return (
@@ -100,7 +106,13 @@ function App() {
         <Route path='/Thriposhatable' element={<Thriposhatable/>}/>
         <Route path='/VaccineRegTab' element={<VaccineRegTab/>}/>
         <Route path='/DengCampTab' element={<DengCampTab/>}/>
-        <Route path='/RF' element={<RaidForm/>}/>
+        <Route path='/F&CDocumentManagementTabe' element={<FCDMTable/>}/>
+        <Route path='/addclinics' element = {<AddClinic/>}/>
+        <Route path='/addpatient' element = {<AddPatients/>}/>
+        <Route path='/dengueCli' element = {<Dengue/>}/>
+        <Route path='/raidform' element={<RaidForm/>}/>
+        <Route path='/raidhome' element={<Raids/>}/>
+        <Route path='/raidsubform' element={< RaidSubForm/>}/>
         
 
         <Route path='/addclinics' element = {<AddClinic/>}/>
