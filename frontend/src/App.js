@@ -10,8 +10,6 @@ import DengueAssignTable from './pages/DengueAssignTable';
 
 import VaccineAssignTable from './pages/VaccineAssignTable';
 import RaidsAssign from './pages/RaidsAssignTable';
-import VaccineAssignTable from './pages/VaccineAssignTable';
-import RaidsAssign from './pages/RaidsAssign';
 import FineAndCourt from './pages/FineAndCourt';
 import FCReportForm from './pages/FCReportForm';
 import FCDocManage from './pages/FCDocManage';
@@ -54,6 +52,7 @@ import ModelPopup from './pages/ModelPopup';
 
 import Raids from './pages/Raids';
 import RaidSubForm from './pages/RaidSubForm';
+import DengueHomePage from './pages/DengueHomePage';
 
 
 
@@ -155,7 +154,7 @@ function App() {
         <Route path='/F&CDocumentManagementTabe' element={<FCDMTable />} />
         <Route path='/Fine-And-court-Analyse' element={<FCAnalyse />} />
 
-        <Route path='DengueHomePage' element={<DengueHomePage />} />
+        <Route path='/DengueHomePage' element={<DengueHomePage />} />
 
 
         <Route path='/dclogin' element={<DoctorLogin />} />
