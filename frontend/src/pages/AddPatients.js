@@ -4,12 +4,12 @@ import Layout from '../components/Layout'
 import '../styles/addPatient.css';
 import Swal from 'sweetalert2'
 import Axios from 'axios';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 const AddPatients = ({ submitted, data }) => {
 
 
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
 
   const { _id, date, time, venue, ctype } = useParams();
 

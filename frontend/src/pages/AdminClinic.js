@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import Layout from '../components/Layout';
 import Axios from 'axios';
-import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Dialog, DialogActions, DialogTitle, DialogContent, DialogContentText } from '@mui/material';
+import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Dialog, DialogTitle, DialogContent } from '@mui/material';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
-import { FaCut, FaTimes } from 'react-icons/fa';
+import { FaTimes } from 'react-icons/fa';
 
 const AdminClinic = () => {
     const [clinics, setClinics] = useState([]);
