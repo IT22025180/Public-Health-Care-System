@@ -1,15 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import Layout from '../components/Layout';
 import Axios from 'axios';
-import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
+import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Dialog, DialogActions, DialogTitle, DialogContent, DialogContentText } from '@mui/material';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
+import { FaCut, FaTimes } from 'react-icons/fa';
 
 const AdminClinic = () => {
     const [clinics, setClinics] = useState([]);
-    const [selectedClinicId, setSelectedClinicId] = useState(null);
+    //const [selectedClinicId, setSelectedClinicId] = useState(null);
     const [joinedPatients, setJoinedPatients] = useState([]);
     const navigate = useNavigate();
+
+    //popup components line 16 to line 24 & line 123 to line 153
+    const [open, openPatients] = useState(false);
+
+    const functionPopup = () => {
+        openPatients(true);
+    }
+
+    const closepopup = () => {
+        openPatients(false);
+    }
 
     const getClinics = async () => {
         try {
@@ -24,15 +36,19 @@ const AdminClinic = () => {
         getClinics();
     }, []);
 
-    const handleClickViewPatients = async (id) => {
+    const getPatients = async () => {
         try {
-            const response = await Axios.get(`http://localhost:4000/api/Clinics/${id}/patients`);
-            setJoinedPatients(response.data.joinedPatients);
-            setSelectedClinicId(id);
+            const response = await Axios.get(`http://localhost:4000/api/Patients`);
+            setJoinedPatients(response.data.allPatient);
+            //setSelectedClinicId(id);
         } catch (error) {
             console.error('Axios error:', error);
         }
     };
+
+    useEffect(() => {
+        getPatients();
+    }, []);
 
     const deleteClinic = async (id) => {
         try {
@@ -81,9 +97,10 @@ const AdminClinic = () => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {clinics.map((clinic, index) => (
-                                <React.Fragment key={clinic._id}>
-                                    <TableRow>
+                            {clinics && clinics.length > 0 ? (
+                                clinics.map((clinic, index) => (
+
+                                    <TableRow key={clinic._id}>
                                         <TableCell>{index + 1}</TableCell>
                                         <TableCell>{clinic.date}</TableCell>
                                         <TableCell>{clinic.time}</TableCell>
@@ -92,13 +109,57 @@ const AdminClinic = () => {
                                         <TableCell>
                                             <Button onClick={() => navigate(`/updateCli/${clinic._id}/${clinic.date}/${clinic.time}/${clinic.ctype}/${clinic.venue}`)}>Update</Button>
                                             <Button onClick={() => confirmDelete(clinic._id)}>Delete</Button>
-                                            <Button onClick={() => handleClickViewPatients(clinic._id)}>View joined patients</Button>
+                                            <Button onClick={functionPopup} >View joined patients</Button>
                                         </TableCell>
+                                    </TableRow>))
+                            ) : (
+                                <TableRow >
+                                    <TableCell colSpan={5}> No added clinics yet</TableCell>
+                                </TableRow>
+                            )}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+                <Dialog open={open} fullWidth>
+                    <DialogTitle>Patients for that clinic <Button onClick={closepopup}><FaTimes /></Button></DialogTitle>
+                    <DialogContent>
+                        <TableContainer component={Paper}>
+                            <Table>
+                                <TableHead>
+                                    <TableRow>
+                                        <TableCell>#</TableCell>
+                                        <TableCell>Name</TableCell>
+                                        <TableCell>Gender</TableCell>
+                                        <TableCell>Age</TableCell>
+                                        <TableCell>Email</TableCell>
+                                        <TableCell>Mobile</TableCell>
                                     </TableRow>
-                                    {selectedClinicId === clinic._id && (
-                                        <TableRow>
-                                            <TableCell colSpan={6}>
-                                                <TableContainer component={Paper}>
+                                </TableHead>
+                                <TableBody>
+                                    {joinedPatients.map((patient, index) => (
+                                        <TableRow key={patient._id}>
+                                            <TableCell>{index + 1}</TableCell>
+                                            <TableCell>{patient.name}</TableCell>
+                                            <TableCell>{patient.sex}</TableCell>
+                                            <TableCell>{patient.age}</TableCell>
+                                            <TableCell>{patient.email}</TableCell>
+                                            <TableCell>{patient.mobile}</TableCell>
+                                        </TableRow>
+                                    ))}
+                                </TableBody>
+                            </Table>
+                        </TableContainer>
+                    </DialogContent>
+                </Dialog>
+            </div>
+        </Layout>
+    );
+};
+
+export default AdminClinic;
+
+
+/**<TableContainer component={Paper}>
                                                     <Table>
                                                         <TableHead>
                                                             <TableRow>
@@ -124,17 +185,7 @@ const AdminClinic = () => {
                                                         </TableBody>
                                                     </Table>
                                                 </TableContainer>
-                                            </TableCell>
-                                        </TableRow>
-                                    )}
-                                </React.Fragment>
-                            ))}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-            </div>
-        </Layout>
-    );
-};
-
-export default AdminClinic;
+                                                
+                                                
+                                                
+                                                {}*/

@@ -17,6 +17,8 @@ const AddClinic = ({submitted,data}) => {
     const[venue , setVenue] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
 
+    const user = localStorage.getItem("token");
+
     useEffect(() => {
         if(!submitted){
             setCtype('');
@@ -87,7 +89,7 @@ const AddClinic = ({submitted,data}) => {
         </div>
         <div className='frm'>
             {errorMessage && <Alert variant='danger'>{errorMessage}</Alert>}
-            <h2>Add a Clinic appointment</h2>
+            <h2>Add a Clinic appointment {user.username}</h2>
             <br/>
             <div className='rdgrp'>
                 <div className='rdbtn'>

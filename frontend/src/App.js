@@ -46,6 +46,7 @@ import UpdateClinic from './pages/UpdateClinic';
 import PatientReport from './pages/PatientReport';
 import DoctorLogin from './Auth/DoctorLogin';
 import Lgportal from './Auth/Lgportal';
+import ModelPopup from './pages/ModelPopup';
 
 function App() {
   return (
@@ -142,6 +143,9 @@ function App() {
 
         <Route path='/dclogin' element={<DoctorLogin />} />
         <Route path='/login' element={<Lgportal />} />
+
+        <Route path='/popup' element={<ModelPopup/>} />
+
       </Routes>
     </Router>
   );
