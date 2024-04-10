@@ -6,7 +6,7 @@ import Swal from 'sweetalert2'
 import Axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { Dialog, DialogTitle, DialogContent } from '@mui/material';
-
+import jspdf from 'jspdf';
 
 const AddPatients = ({ submitted, data }) => {
 
@@ -36,6 +36,37 @@ const AddPatients = ({ submitted, data }) => {
 
   const closepopup = () => {
     openConfirm(false);
+  }
+
+  //generatePDF
+  const confirmWithGetPDF = () => {
+
+    if (!name || !gender || !address || !mobile) {
+      setErrorMessage('No details to generate pdf');
+      return;
+    } else {
+      const doc = new jspdf();
+      let y = 10;
+
+      const genPDF = `Patient details\n\n 
+                      Name : ${name}\n
+                      Gender : ${gender}\n
+                      Age : ${age}\n
+                      Mobile : ${mobile}\n
+                      Address : ${address}\n\n\n
+                      Clinic details \n\n
+                      Type : ${ctype}\n
+                      Date : ${date}\n
+                      Time : ${time}\n
+                      Venue : ${venue}\n\n
+                      Please be on time\nThank you
+                      `;
+      doc.text(genPDF, 10, y);
+      y += 50;
+
+      doc.save("Patient_report.pdf");
+    }
+    addPatient();
   }
 
 
@@ -165,7 +196,7 @@ const AddPatients = ({ submitted, data }) => {
             <p>Age : {age}</p>
             <p>Mobile : {mobile}</p>
             <p>Address : {address}</p>
-            <br /><br />
+            <br />
             <h3>Clinic details</h3>
             <p>Type : {ctype}</p>
             <p>Date : {date}</p>
@@ -173,6 +204,7 @@ const AddPatients = ({ submitted, data }) => {
             <p>Venue : {venue}</p>
 
             <Button onClick={addPatient}>Confirm appointment</Button>
+            <Button onClick={confirmWithGetPDF}>Confirm with get pdf</Button>
             <Button onClick={closepopup}>Decline</Button>
           </Form>
         </DialogContent>
