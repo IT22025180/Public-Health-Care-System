@@ -9,7 +9,7 @@ import Leave from './pages/Leave';
 import DengueAssignTable from './pages/DengueAssignTable';
 
 import  VaccineAssignTable  from './pages/VaccineAssignTable';
-import  RaidsAssign from './pages/RaidsAssign';
+import  RaidsAssign from './pages/RaidsAssignTable';
 import FineAndCourt from './pages/FineAndCourt';
 import FCReportForm from './pages/FCReportForm';
 import FCDocManage from './pages/FCDocManage';
@@ -152,6 +152,8 @@ function App() {
         <Route path='/F&CDReportViolationTabe' element={<FCRVTable />} />
         <Route path='/F&CDocumentManagementTabe' element={<FCDMTable />} />
         <Route path='/Fine-And-court-Analyse' element={<FCAnalyse />} />
+
+        <Route path='DengueHomePage' element ={<DengueHomePage/>}/>
 
 
         <Route path='/dclogin' element={<DoctorLogin />} />

@@ -11,6 +11,22 @@ const RaidSchedules = ({ submitted, data }) => {
   const [location, setLocation] = useState('');
   const [description, setDescription] = useState('');
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await Axios.post('http://localhost:4000/api/addstaffraids', {
+        type: name,
+        staffmember: staffmember,
+        date: date,
+        location: location,
+        description: description
+      });
+      console.log('Successfully', response.data);
+    } catch (error) {
+      console.error('error', error);
+    }
+  };
+
   useEffect(() => {
     if (!submitted) {
       setName('');
@@ -31,28 +47,13 @@ const RaidSchedules = ({ submitted, data }) => {
     }
   }, [data]);
 
-  const addstaffraids = async () => {
-    try {
-      const response = await Axios.post('http://localhost:4000/api/addstaffraids', {
-        type: name,
-        staffmember: staffmember,
-        date: date,
-        location: location,
-        description: description
-      });
-      console.log('Successfully', response.data);
-    } catch (error) {
-      console.error('error', error);
-    }
-  }
-
   return (
     <Layout>
       <div className="layout-container3">
         <div className="assign-staff-container">
           <h3>Schedule Staff for Raids</h3>
           <div className='form-box'>
-            <form>
+            <form onSubmit={handleSubmit}>
               <div>
                 <label>Raid Type:</label>
                 <select onChange={e => setName(e.target.value)} value={name}>
@@ -77,9 +78,8 @@ const RaidSchedules = ({ submitted, data }) => {
                 <label>Description:</label>
                 <textarea onChange={e => setDescription(e.target.value)} value={description} />
               </div>
-              
+              <button type="submit">Schedule Raid</button>
               <Link to="/raidsAssign">
-                <button type="submit">Schedule Raid</button>
                 <button className="view-programs">View Scheduled Raids</button>
               </Link>
             </form>

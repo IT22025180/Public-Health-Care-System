@@ -9,6 +9,12 @@ import image1 from '../webImages/den.png'
 import image2 from '../webImages/va2.png'
 import image3 from '../webImages/raids.png'
 
+import first from '../webImages/st1.jpg'
+import second from '../webImages/st1.jpg'
+import third from '../webImages/st1.jpg'
+import fourth from '../webImages/st1.jpg'
+
+
 const Staff = () => {
   const navigate = useNavigate();
 
@@ -71,12 +77,18 @@ const Staff = () => {
         </div>
         <hr className="horizontal-line" />
 
+        <div className="leave-notices">
+          title:"first slider image",
+          
+          
+        </div>
+
         <div className="apply-leave-box">
           <h3 className='applyleave'>Please fill this form to apply for your leave.</h3>
           <button onClick={ApplyLeave}>Click here</button>
           <a href="/LeaveTable" className="btn-leave-history">
                   See Leave History
-                </a>
+          </a>
         </div>
       </div>
     </Layout>

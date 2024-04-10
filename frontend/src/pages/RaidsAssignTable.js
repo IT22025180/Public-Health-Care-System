@@ -12,10 +12,10 @@ const RaidsAssignTable = () => {
   }, []);
 
   const getAssignedRaids = () => {
-    Axios.get('/api/getRaids') // Adjust API endpoint
+    Axios.get('http://localhost:4000/api/getstaffraids') // Adjust API endpoint
       .then(response => {
         console.log('data from server', response.data);
-        setAssignedRaids(response.data.allRaids);
+        setAssignedRaids(response.data.allstaffraids);
       })
       .catch(error => {
         console.error("Axios error", error);
