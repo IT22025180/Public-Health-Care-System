@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Layout from '../components/Layout';
-import '../styles/RaidsAssignTable.css'; // Update the CSS file path accordingly
+import '../styles/RaidsAssignTable.css'; 
 import Axios from 'axios';
 
 const RaidsAssignTable = () => {
@@ -12,7 +12,7 @@ const RaidsAssignTable = () => {
   }, []);
 
   const getAssignedRaids = () => {
-    Axios.get('http://localhost:4000/api/getstaffraids') // Adjust API endpoint
+    Axios.get('http://localhost:4000/api/getstaffraids') 
       .then(response => {
         console.log('data from server', response.data);
         setAssignedRaids(response.data.allstaffraids);
