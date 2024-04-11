@@ -24,6 +24,9 @@ const ComplaintForm = () => {
 
 
   const addComplain = async (e) => {
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
@@ -60,18 +63,18 @@ const ComplaintForm = () => {
       // Clear the form after successful submission
       setFormData({
         fname: '',
-    lname: '',
-    mobile: '',
-    email: '',
-    NIC: '',
-    date: '',
-    yaddress: '',
-    images: [],
-    ctype: '',
-    /*otherDocument: [],*/
-    cdesc: '',
-    area: '',
-    location : ''
+        lname: '',
+        mobile: '',
+        email: '',
+        NIC: '',
+        date: '',
+        yaddress: '',
+        images: [],
+        ctype: '',
+        /*otherDocument: [],*/
+        cdesc: '',
+        area: '',
+        location : ''
       });
 
       console.log('Data stored successfully', response.data);
