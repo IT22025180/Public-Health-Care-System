@@ -16,20 +16,17 @@ const Footer = () => {
                 <div className="row_f">
                     <div className="footer-col">
                         <h4>Contact Information</h4>
-
                         <ul>
                             <FaMapMarkerAlt />
                             <li><a href='https://maps.app.goo.gl/E3hwTditMfC7xo2v9'>Suwasiripaya, No. 385,
                                 Rev. Baddegama Wimalawansa Thero
                                 Mawatha,
                                 Colombo 10, Sri Lanka.</a></li>
-
                             <FaPhone />
                             <li><a href="tel: 0112694033">112 694033</a></li>
                             <li><a href="tel: 0112675011">112 675011</a></li>
                             <li><a href="tel: 0112675449">112 675449</a></li>
                             <li><a href="tel: 0112693493">112 693493</a></li>
-
                             <FaEnvelope />
                             <li>abcd@gov.lk</li>
                         </ul>

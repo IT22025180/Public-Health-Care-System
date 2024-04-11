@@ -52,7 +52,7 @@ const Clinics = () => {
       </div>
 
       <AddClinic />
-      <br />
+
     </Layout>
   )
 }

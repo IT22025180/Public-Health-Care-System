@@ -82,7 +82,6 @@ const AddClinic = ({ submitted, data }) => {
 
     return (
         <div className='contflex'>
-
             <hr className='hline' />
             <div className='clcontainer'>
                 <div className='cl1'>
@@ -182,7 +181,6 @@ const AddClinic = ({ submitted, data }) => {
                     <Button onClick={navtoClinics}>View clinics</Button>
                     <Button className='btn' onClick={navtoGenrep}>Generate report</Button>
                 </div>
-
             </div>
         </div>
     )

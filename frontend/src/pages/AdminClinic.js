@@ -4,7 +4,7 @@ import Axios from 'axios';
 import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Dialog, DialogTitle, DialogContent } from '@mui/material';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
-import { FaTimes } from 'react-icons/fa';
+import { FaEdit, FaTimes, FaTrash } from 'react-icons/fa';
 
 
 const AdminClinic = () => {
@@ -111,8 +111,8 @@ const AdminClinic = () => {
                                         <TableCell>{clinic.ctype}</TableCell>
                                         <TableCell>{clinic.venue}</TableCell>
                                         <TableCell>
-                                            <Button onClick={() => navigate(`/updateCli/${clinic._id}/${clinic.date}/${clinic.time}/${clinic.ctype}/${clinic.venue}`)}>Update</Button>
-                                            <Button onClick={() => confirmDelete(clinic._id)}>Delete</Button>
+                                            <Button onClick={() => navigate(`/updateCli/${clinic._id}/${clinic.date}/${clinic.time}/${clinic.ctype}/${clinic.venue}`)}><FaEdit /></Button>
+                                            <Button variant='danger' color='red' onClick={() => confirmDelete(clinic._id)}><FaTrash /></Button>
                                             <Button onClick={() => functionPopup(clinic._id)} >View joined patients</Button>
                                         </TableCell>
                                     </TableRow>))
