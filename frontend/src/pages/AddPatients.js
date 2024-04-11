@@ -31,7 +31,6 @@ const AddPatients = ({ submitted, data }) => {
     } else {
       openConfirm(true);
     }
-
   }
 
   const closepopup = () => {
@@ -48,7 +47,7 @@ const AddPatients = ({ submitted, data }) => {
       const doc = new jspdf();
       let y = 10;
 
-      const genPDF = `Patient details\n\n 
+      const genPDF = `Public Health Information System\n\nPatient details\n\n 
                       Name : ${name}\n
                       Gender : ${gender}\n
                       Age : ${age}\n
@@ -59,14 +58,18 @@ const AddPatients = ({ submitted, data }) => {
                       Date : ${date}\n
                       Time : ${time}\n
                       Venue : ${venue}\n\n
-                      Please be on time\nThank you
+                      Please be on time\tThank you
+                      \n
+                      Public Health Information Technical Team
                       `;
       doc.text(genPDF, 10, y);
       y += 50;
 
-      doc.save("Patient_report.pdf");
+      doc.save(`${name}_${ctype}_appointment_report.pdf`);
+
     }
     addPatient();
+
   }
 
 

@@ -1,54 +1,77 @@
-.clcontainer{
-    
+.clcontainer {
+
     height: auto;
     margin-top: 50px;
     margin-left: 30%;
     margin-right: 30%;
+
+    width: 40%;
     background-color: #ECECEC;
     border-radius: 30px;
     padding: 25px 25px 25px 25px;
     border: 1px solid black;
-    
+
 }
 
-.cl1{
+.cl1 {
     display: flex;
-    justify-content:flex-end;
+    justify-content: flex-end;
+    flex-direction: column;
 }
 
-.rdgrp{
+.rdgrp {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
 }
 
-.rdbtn{
+.rdbtn {
     display: flex;
     flex-direction: row;
     justify-content: center;
 }
 
-.rdbtn label{
+.rdbtn label {
     padding-left: 5px;
     font-size: large;
     font-weight: 500;
 }
 
-.slcbtn{
+.slcbtn {
 
     display: flex;
     flex-direction: row;
-    justify-content: center; 
+    justify-content: center;
 }
 
-.slcbtn p{
+.slcbtn p {
     padding-right: 10px;
     font-size: large;
     font-weight: 500;
 }
 
-.btn{
-    
+.btn {
+
     margin-top: 1%;
 }
 
+/*img slideshow*/
+
+
+.img-containerC img {
+    justify-content: center;
+    align-items: center;
+    /*width: 20%;
+    height: 20%;*/
+}
+
+.contflex {
+    display: flex;
+
+    height: auto;
+    width: 100%;
+}
+
+.hline {
+    background-color: black;
+}

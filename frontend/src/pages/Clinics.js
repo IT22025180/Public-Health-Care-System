@@ -3,10 +3,10 @@ import Layout from '../components/Layout'
 import '../styles/Clinics.css';
 //import { Button } from 'react-bootstrap';
 //import { useNavigate } from 'react-router-dom';
-import PatientReport from './PatientReport';
 import '../styles/Clinics.css';
 import imageDgC from '../webImages/dentalC.png';
 import imageDtC from '../webImages/dngC.png';
+import AddClinic from './AddClinic';
 
 const Clinics = () => {
   //const navigate = useNavigate();
@@ -32,7 +32,9 @@ const Clinics = () => {
 
   return (
     <Layout>
+      <br />
       <div className="home-page">
+        <h1>Select Clinic Type</h1><br /><br />
         <div className="card-container">
           {cards.map((card) => (
             <div key={card.id} className="Ccard">
@@ -48,7 +50,9 @@ const Clinics = () => {
           ))}
         </div>
       </div>
-      
+
+      <AddClinic />
+      <br />
     </Layout>
   )
 }
