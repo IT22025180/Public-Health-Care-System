@@ -97,6 +97,41 @@ function App() {
         <Route path='/DengueAssignTable' element={<DengueAssignTable />} />
         <Route path='/VaccineAssignTable' element={<VaccineAssignTable />} />
         <Route path='/RaidsAssign' element={<RaidsAssign />} />
+        <Route path='/DengueAssignTable' element={<DengueAssignTable/>}/>
+        <Route path='/VaccineAssignTable' element={<VaccineAssignTable/>}/>
+        <Route path='/RaidsAssign' element={<RaidsAssign/>}/> 
+        <Route path='/clinics' element = {<Clinics/>}/>
+        <Route path='/mainMidwife' element={<MainMidwife/>}/>
+        <Route path='/babyDetails' element={<BabyDetails/>}/>
+        <Route path='/babyVaccination' element={<BabyVaccination/>}/>
+        <Route path='/thriposha' element={<Thriposha/>}/>
+        <Route path='/Babytable' element={<Babytable/>}/>
+        <Route path='/Bvaccinetable' element={<Bvaccinetable/>}/>
+        <Route path='/Thriposhatable' element={<Thriposhatable/>}/>
+        <Route path='/VaccineRegTab' element={<VaccineRegTab/>}/>
+        <Route path='/DengCampTab' element={<DengCampTab/>}/>
+        <Route path='/F&CDocumentManagementTabe' element={<FCDMTable/>}/>
+        <Route path='/addclinics' element = {<AddClinic/>}/>
+        <Route path='/addpatient' element = {<AddPatients/>}/>
+        <Route path='/dengueCli' element = {<Dengue/>}/>
+        <Route path='/raids' element={<Raids/>}/>
+        <Route path='/raidform' element={<RaidForm/>}/>
+        <Route path='/raidsubform' element={< RaidSubForm/>}/>
+        
+
+        <Route path='/addclinics' element = {<AddClinic/>}/>
+        <Route path='/addpatients/:_id/:date/:time/:venue/:ctype' element = {<AddPatients/>}/>
+        <Route path='/updateCli/:_id/:date/:time/:venue/:ctype' element = {<UpdateClinic/>}/>
+        <Route path='/dengueCli' element = {<Dengue/>}/>
+        <Route path='/dentalCli' element = {<Dental/>}/>
+        <Route path='/adminClinics' element = {<AdminClinic/>}/>
+        <Route path='/genPatientReport' element = {<PatientReport/>}/>
+        
+        <Route path='/Complains' element = {<ComplaintForm/>}/>
+        <Route path='/denguecamp' element = {<DengueCampaigns/>}/>
+        
+
+        
         <Route path='/clinics' element={<Clinics />} />
         <Route path='/mainMidwife' element={<MainMidwife />} />
         <Route path='/babyDetails' element={<BabyDetails />} />
