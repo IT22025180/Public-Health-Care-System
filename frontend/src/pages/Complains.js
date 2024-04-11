@@ -1,7 +1,7 @@
 import Layout from '../components/Layout';
 import '../styles/Complains.css';
 import React, { useState } from 'react';
-import { Form, Button, Container, Row, Col } from 'react-bootstrap';
+import { Form, Button, Container, Row, Col, Alert } from 'react-bootstrap';
 import Axios from 'axios';
 import Swal from 'sweetalert2';
 
@@ -26,6 +26,11 @@ const ComplaintForm = () => {
 
 
   const addComplain = async (e) => {
+
+    if (!formData.fname || !formData.lname || !formData.mobile || !formData.email || !formData.NIC || !formData.yaddress || !formData.images || !FormData.ctype || !formData.cdesc || !formData.date || !formData.area || !formData.location) {
+      setErrorMessage('Please fill in all required fields');
+      return;
+  }
 
 
     const handleSubmit = async (e) => {
@@ -104,6 +109,7 @@ const ComplaintForm = () => {
   return (
     <Layout>
       <Container>
+      {errorMessage && <Alert variant='danger'>{errorMessage}</Alert>}
         <h1>Public Health Complaint Form</h1>
         <Form>
           <Row>
