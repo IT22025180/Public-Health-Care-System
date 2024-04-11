@@ -1,35 +1,70 @@
-import React from 'react'
+import React from "react";
 import Layout from '../components/Layout'
 import '../styles/Raids.css'
-import { ProSidebarProvider } from "react-pro-sidebar";
-import { Sidebar,Menu,MenuItem } from "react-pro-sidebar";
+import { useNavigate } from "react-router-dom";
 
-const Raids=() =>{
-    return(
-        <Layout>
-       <h2>For law</h2>
-       <h2>enforcement to</h2>
-       <h2>handle raids</h2>
-       <h2>effectively,the</h2>
-       <h2>Raids Management</h2>
-       <h2>System (RMS) is</h2>
-       <h2>user-friendly.</h2>
 
-       <div style={{ display: "flex", height: "100vh" }}>
-      <Sidebar className="app">
-        <Menu>
-          <MenuItem className="menu1">
-            <h2>QUICKPAY</h2>
-          </MenuItem>
-          <MenuItem>Raid Schedule </MenuItem>
-          <MenuItem>Raid Submission</MenuItem>
-          
-        </Menu>
-      </Sidebar>
-    </div>
+
+/*import image1 from '../webImages/vac1.jpg'*/
+/*import image2 from '../webImages/vac2.jpg'*/
+
+
+const Raids = () => {
     
+    
+    const navigate = useNavigate();
+    
+    const cards = [
+      {
+        id: 1,
+        title: 'Raid Form',
+        buttonText: 'Add',
+        buttonLink: '/RaidForm',
+        className: 'dengue-card',
+        /*image: image1*/
+      },
+  
+      {
+        id: 2,
+        title: 'Raid Submission',
+        buttonText: 'Add',
+        buttonLink: '/RaidSubForm',
+        className: 'vaccine-card',
+        /*image:image2*/
+        
+        
+        
+      },
+  
+    
+    ];
 
-        </Layout>
+
+    return(
+      
+        <Layout>
+                <div className="home-page">
+        <h3>Raids Management</h3>
+        <div className="card-container">
+          {cards.map((card) => (
+            <div key={card.id} className="card">
+              <img src={card.image} alt={card.title} className="card-image" />
+              <div className="card-body">
+                <h2 className="card-title">{card.title}</h2>
+                <p className="card-text">{card.description}</p>
+                <a href={card.buttonLink} className="btnview">
+                  {card.buttonText}
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+
+    </div>
+        </Layout>  
+
+
+
     )
 }
 

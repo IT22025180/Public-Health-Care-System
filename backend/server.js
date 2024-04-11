@@ -17,6 +17,10 @@ const routerClnc = require('./Vanuja_Clinic/ClinicRoute');
 const routerVReport = require('./Maleesha_RViolation/RVRoute');
 const routerDocM = require('./Maleesha_DocM/DocMRoute');
 const routerP = require('./Vanuja_AddPatient/AddPRoute');
+const routerDS = require('./Yethmi/AssignDengueRoute');
+const routerVS = require('./Yethmi_va/AssignVaccineRoute');
+const routerL = require('./Login/LoginRoute');
+const routerRA = require('./Yethmi_rad/AssignRaidsRoute');
 
 dotenv.config();
 
@@ -25,12 +29,12 @@ const app = express();
 
 const uri = 'mongodb+srv://vanuja2024:7289@phisystem.r1glzmh.mongodb.net/';
 
-const connect = async() => {
-    try{
+const connect = async () => {
+    try {
         await mongoose.connect(uri);
         console.log('Connected to mongodb');
-    }catch(error){
-        console.log('Mongodb error: ' , error);
+    } catch (error) {
+        console.log('Mongodb error: ', error);
     }
 };
 
@@ -38,7 +42,7 @@ connect();
 
 app.use(cors());
 
-app.get('/',(req,res) => {
+app.get('/', (req, res) => {
     res.send({
         message: 'Welcome to PHI Backend'
     });
@@ -55,18 +59,40 @@ app.listen(PORT, () => {
 });
 
 
-app.use('/api' , routerDC);
-app.use('/api' , routerCmp);
-app.use('/api' , routerRF);
-app.use('/api' , routerRS);
-app.use('/api' , routerB);
-app.use('/api' , routerBV);
-app.use('/api' , routerTD);
-app.use('/api' , routerST);
-app.use('/api' , routerVac);
-app.use('/api' , routerVacRq);
-app.use('/api' , routerVacApp);
-app.use('/api' , routerClnc);
-app.use('/api' , routerVReport);
-app.use('/api' , routerDocM);
-app.use('/api' , routerP);
+app.use('/api', routerDC);
+app.use('/api', routerCmp);
+app.use('/api', routerRF);
+app.use('/api', routerRS);
+app.use('/api', routerB);
+app.use('/api', routerBV);
+app.use('/api', routerTD);
+app.use('/api', routerST);
+app.use('/api', routerVac);
+app.use('/api', routerVacRq);
+app.use('/api', routerVacApp);
+app.use('/api', routerClnc);
+app.use('/api', routerVReport);
+app.use('/api', routerDocM);
+app.use('/api', routerP);
+app.use('/api', routerDS);
+app.use('/api', routerL);
+
+app.use('/api', routerDC);
+app.use('/api', routerCmp);
+app.use('/api', routerRF);
+app.use('/api', routerRS);
+app.use('/api', routerB);
+app.use('/api', routerBV);
+app.use('/api', routerTD);
+app.use('/api', routerST);
+app.use('/api', routerVac);
+app.use('/api', routerVacRq);
+app.use('/api', routerVacApp);
+app.use('/api', routerClnc);
+app.use('/api', routerVReport);
+app.use('/api', routerDocM);
+app.use('/api', routerP);
+app.use('/api', routerDS);
+app.use('/api', routerVS);
+app.use('/api', routerL);
+app.use('/api', routerRA)

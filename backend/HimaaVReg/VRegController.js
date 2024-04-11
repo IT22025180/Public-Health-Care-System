@@ -7,7 +7,7 @@ const addVac = async(req,res) => {
         
             const{ vname, manf_date, expi_Date, quantity, notes} = req.body;
 
-            const manDate=Array.isArray(manf_date)?manf_date.join(', '):manf_date;
+            const manDate=Array.isArray(manf_date)?manf_date.join(', '):manf_date;       //if there's a date
             const expireDate=Array.isArray(expi_Date)?expi_Date.join(', '):expi_Date;
 
             const newVaccine =  new Vaccine({

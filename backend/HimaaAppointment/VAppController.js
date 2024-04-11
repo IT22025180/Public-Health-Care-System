@@ -6,10 +6,13 @@ const addVacApp = async(req,res) => {
     try{
         
             const{ v_name, quantity , date, location} = req.body;
+
+            const Date=Array.isArray(date)?date.join(', '):date; 
+
             const newVaccineApp =  new VacAppointment({
                 v_name,        
                 quantity,
-                date,
+                date:Date,    //date
                 location    
             });
 

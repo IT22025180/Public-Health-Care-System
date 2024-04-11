@@ -3,7 +3,7 @@
     background-color: rgb(225, 217, 241); /* Apply color to the whole table area */
     box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.065);
     border-radius: 5px;
-    margin: 50px ;
+    margin: 50px auto;
     padding: 50px;
 
 }

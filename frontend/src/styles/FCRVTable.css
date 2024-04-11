@@ -1,0 +1,62 @@
+.FCRVTable {
+  background-color:rgb(225,217,241);
+  box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.065);
+  border-radius: 5px;
+  margin: 10px auto;
+}
+
+.FCRVTable table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.FCRVTable th, .FCRVTable td {
+  padding: 8px;
+  text-align: center;
+  font-size: 14px;
+  border: 1px solid #000;
+}
+
+.FCRVTable th {
+  background-color: #f2f2f2;
+}
+
+.FCRVTable tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.rvedtBtn {
+  padding: 5px 10px;
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.rvdeleteBtn {
+  padding: 5px 10px;
+  background-color: #e74c3c;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.rvdeleteBtn:hover {
+  background-color: #c0392b;
+}
+
+.rvedtBtn:hover { 
+  background-color: #45a049;
+}
+
+.searchvr {
+  width: 100%;
+  text-align: right;
+}
+
+.searchvr input {
+  width: 300px;
+  display: inline-block;
+}

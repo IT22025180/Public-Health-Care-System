@@ -1,28 +1,63 @@
-.form1 {
+.leave {
   position: relative;
   width: 500px;
-  background-color: #ECECEC;
   padding: 20px;
   border-radius: 10px;
-  width: 500px;
   border: 1px solid #000000;
-  margin-top: 60px;
-  margin-bottom: 20px;
   margin: 60px auto 20px;
+  background-color: rgba(255, 255, 255, 0.7); 
+
 }
 
-.subBut {
+.leave h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.leave label {
   display: block;
-  margin: auto;
-  padding: 5px;
-  margin-top: 15px;
+  margin-bottom: 10px;
+}
+
+.leave input[type="text"],
+.leave input[type="email"],
+.leave input[type="date"] {
+  width: calc(100% - 20px);
+  padding: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.leave input[type="radio"] {
+  margin-right: 5px;
+}
+
+.leave input[type="radio"] + label {
+  display: inline-block;
+  margin-right: 15px;
+}
+
+.leave button {
+  display: block;
+  width: 100%;
+  padding: 10px;
   background-color: #007bff;
-  color: #ECECEC;
+  color: #fff;
   border: none;
   border-radius: 5px;
+  cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
-.subBut:hover {
-  background-color: #0056b3;
+.leave button:hover {
+  background-color: #0056b3;
+}
+
+.layout-container5{
+  background-image: url('../webImages/d1.jpg'); 
+    background-size: cover;
+    background-position: center;
+    margin-top: -60x;
+    margin-bottom: -45px;
 }

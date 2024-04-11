@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import Header from '../components/Header'; 
 import '../styles/babyvaccination.css'
-import { Link, useHistory } from 'react-router-dom'; 
+import { Link } from 'react-router-dom'; 
 import Layout from '../components/Layout';
 import Axios from 'axios';
 

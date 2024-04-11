@@ -4,38 +4,23 @@ const multer = require('multer');
 const path = require('path');
 const { error } = require('console');
 
-const storage = multer.diskStorage({
-    destination: function(req,file,cb){
-        const absolutePath = path.resolve(__dirname, '../../frontend/src/CImages/');
-        cb(null, absolutePath);
-    },
-    filename: function(req,file,cb){
-        const uniqueSuffix = Date.now();
-        cb(null,uniqueSuffix + file.originalname);
-    }
-});
-
-const upload = multer({ storage : storage});
-
 const addComplain = async(req,res) => {
     try{
         
-        upload.single('images')(req,res, async (error) => {
-            if(error){
-                console.error('Error uploading image: ' , error);
-                return res.status(500).json({ success : false, message: 'Error uploading image'});
-            }
-            console.log('req.file:',req.file);
-            const imageFileName = req.file.filename;
-            const{fname, lname , mobile, email, NIC, yaddress, ctype, cdesc, area, location} = req.body;
+            const{fname, lname , mobile, email, NIC, date, yaddress, ctype, cdesc, area} = req.body;
 
-            /*const offset = 5.5; // +5.30 is 5 hours and 30 minutes ahead of UTC
-            const utcMilliseconds = new Date().getTime();
-            const localOffset = new Date().getTimezoneOffset();
-            const localMilliseconds = utcMilliseconds - (localOffset * 60000);
-            const targetMilliseconds = localMilliseconds + (offset * 3600000);
-            const createdAt = new Date(targetMilliseconds);*/
+            formattedDate = Array.isArray(date) ?  date.join(', ') : date;
 
+
+        
+            console.log(req.files);
+                const imagesData = req.files.map(file => ({
+                    data: file.buffer.toString('base64'),
+                    contentType: file.mimetype,
+                }  
+            ));
+            
+            console.log(imagesData);
             const newComplain = new Complain({
 
                 fname,
@@ -43,19 +28,24 @@ const addComplain = async(req,res) => {
                 mobile,
                 email,
                 NIC,
+                date: formattedDate,
                 yaddress,
                 ctype,
                 cdesc,
                 area,
-                location,
-                images : imageFileName,
+                images : imagesData,
                 
             });
 
             await newComplain.save();
-            res.json({ success : true , message : 'Complain added successfully'});
-        });
+            if (!req.files || req.files.length === 0) {
+                return res.status(201).json({ success:true, message: 'No files were uploaded.' });
+              }
+              else {
+                res.json({ success: true, message: 'Complain submitted successfully' });
+              }
         }
+        
     catch(error){
         console.error('Error adding Dengue Complain: ' , error);
         res.status(500).json({ success : false , message : 'Internal server error'});
@@ -76,7 +66,7 @@ const updateComplain = async (req,res) => {
 
     try{
 
-        const { _id, fname, lname , mobile, email, NIC, yaddress, ctype, cdesc, area, location} = req.body;
+        const { _id, fname, lname , mobile, email, NIC, date, yaddress, ctype, cdesc, area, location} = req.body;
 
         const updatedComplain = await Complain.findOneAndUpdate({_id} ,{
                 fname,
@@ -84,6 +74,7 @@ const updateComplain = async (req,res) => {
                 mobile,
                 email,
                 NIC,
+                date,
                 yaddress,
                 ctype,
                 cdesc,

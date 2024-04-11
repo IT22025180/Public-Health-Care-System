@@ -1,69 +1,173 @@
-import React, { useEffect, useState } from 'react'
-import Layout from '../components/Layout'
-import Axios  from 'axios';
-import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import Layout from '../components/Layout';
+import Axios from 'axios';
+import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Dialog, DialogTitle, DialogContent } from '@mui/material';
+import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
+import { FaEdit, FaTimes, FaTrash } from 'react-icons/fa';
+
 
 const AdminClinic = () => {
-    const [clinics,setClinics] = useState([]);
+    const [clinics, setClinics] = useState([]);
+    const [selectedClinicId, setSelectedClinicId] = useState(null);
+    const [joinedPatients, setJoinedPatients] = useState([]);
+    const navigate = useNavigate();
 
-    const getClinics = async() => {
-        try{
-            const response = await Axios.get('http://localhost:4000/api/Clinics')
+    //popup components line 16 to line 24 & line 123 to line 153
+    const [open, openPatients] = useState(false);
 
-            console.log('Data from server: ' , response);
+    const functionPopup = (clinicID) => {
+        setSelectedClinicId(clinicID);
+        openPatients(true);
+    }
+
+    const closepopup = () => {
+        openPatients(false);
+    }
+
+    const getClinics = async () => {
+        try {
+            const response = await Axios.get('http://localhost:4000/api/Clinics');
             setClinics(response.data.allClinics);
-
-            console.log('Products : ' , clinics.length);
-        }catch(error){
-            console.error('Axios error : ' , error);
+        } catch (error) {
+            console.error('Axios error:', error);
         }
-    } 
+    };
 
     useEffect(() => {
         getClinics();
-    },[]);
-  return (
-    <>
+    }, []);
+
+    const getPatients = async () => {
+        try {
+            const response = await Axios.get(`http://localhost:4000/api/Patients`);
+            setJoinedPatients(response.data.allPatient);
+
+        } catch (error) {
+            console.error('Axios error:', error);
+        }
+    };
+
+    useEffect(() => {
+        getPatients();
+    }, []);
+
+    const deleteClinic = async (id) => {
+        try {
+            await Axios.post('http://localhost:4000/api/deleteClinic', { _id: id });
+            setClinics((prevClinics) => prevClinics.filter((clinic) => clinic._id !== id));
+            console.log('Clinic deleted successfully');
+        } catch (error) {
+            console.error('Error deleting Clinic:', error);
+        }
+    };
+
+    const confirmDelete = (id) => {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                deleteClinic(id);
+                Swal.fire({
+                    title: 'Deleted!',
+                    text: 'Your file has been deleted.',
+                    icon: 'success'
+                });
+            }
+        });
+    };
+
+    const selectedPatients = joinedPatients.filter(patient => patient.clinicID === selectedClinicId);
+
+    return (
         <Layout>
-        <div>
-        <TableContainer component={Paper}>
-            <Table>
-                <TableHead>
-                    <TableRow>
-                        <TableCell>Date</TableCell>
-                        <TableCell>Time</TableCell>
-                        <TableCell>Type</TableCell>
-                        <TableCell>Venue</TableCell>
-                        <TableCell>Actions</TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {clinics && clinics.length > 0 ? (
-                        clinics.map((cli) => (
-                            <TableRow key={cli._id} sx = {{'&:last-child id, &:last-child th' : { border: 1}}}>
-
-                                <TableCell>{cli.date}</TableCell>
-                                <TableCell>{cli.time}</TableCell>
-                                <TableCell>{cli.ctype}</TableCell>
-                                <TableCell>{cli.venue}</TableCell>
-                                <TableCell>
-                                    <Button >Update</Button>
-                                    <Button >Delete</Button>
-                                </TableCell>
+            <div>
+                <TableContainer component={Paper}>
+                    <Table>
+                        <TableHead>
+                            <TableRow>
+                                <TableCell>#</TableCell>
+                                <TableCell>Date</TableCell>
+                                <TableCell>Time</TableCell>
+                                <TableCell>Type</TableCell>
+                                <TableCell>Venue</TableCell>
+                                <TableCell>Actions</TableCell>
                             </TableRow>
-                        ))
-                    ) : (
-                        <TableRow>
-                            <TableCell colSpan={7}>You have no clinics  yet!!</TableCell>
-                        </TableRow>
-                    ) }
-                </TableBody>
-            </Table>
-        </TableContainer>
-        </div>
-        </Layout>
-    </>
-  )
-}
+                        </TableHead>
+                        <TableBody>
+                            {clinics && clinics.length > 0 ? (
+                                clinics.map((clinic, index) => (
 
-export default AdminClinic
+                                    <TableRow key={clinic._id}>
+                                        <TableCell>{index + 1}</TableCell>
+                                        <TableCell>{clinic.date}</TableCell>
+                                        <TableCell>{clinic.time}</TableCell>
+                                        <TableCell>{clinic.ctype}</TableCell>
+                                        <TableCell>{clinic.venue}</TableCell>
+                                        <TableCell>
+                                            <Button onClick={() => navigate(`/updateCli/${clinic._id}/${clinic.date}/${clinic.time}/${clinic.ctype}/${clinic.venue}`)}><FaEdit /></Button>
+                                            <Button variant='danger' color='red' onClick={() => confirmDelete(clinic._id)}><FaTrash /></Button>
+                                            <Button onClick={() => functionPopup(clinic._id)} >View joined patients</Button>
+                                        </TableCell>
+                                    </TableRow>))
+                            ) : (
+                                <TableRow >
+                                    <TableCell colSpan={5}> No added clinics yet</TableCell>
+                                </TableRow>
+                            )}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+                <Dialog open={open} fullWidth >
+                    <DialogTitle>Patients for this clinic <Button onClick={closepopup}><FaTimes /></Button></DialogTitle>
+                    <DialogContent>
+                        <TableContainer component={Paper}>
+                            <Table>
+                                <TableHead>
+                                    <TableRow>
+                                        <TableCell>#</TableCell>
+                                        <TableCell>Name</TableCell>
+                                        <TableCell>Gender</TableCell>
+                                        <TableCell>Age</TableCell>
+                                        <TableCell>Mobile</TableCell>
+                                    </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                    {selectedPatients &&
+                                        selectedPatients.length > 0 ?
+                                        (selectedPatients.map((patient, index) => (
+                                            <TableRow key={patient._id}>
+                                                <TableCell>{index + 1}</TableCell>
+                                                <TableCell>{patient.name}</TableCell>
+                                                <TableCell>{patient.sex}</TableCell>
+                                                <TableCell>{patient.age}</TableCell>
+                                                <TableCell>{patient.mobile}</TableCell>
+                                            </TableRow>
+                                        )))
+                                        : (
+                                            <TableRow>
+                                                <TableCell colSpan={5}>
+                                                    No patients found for this clinic
+                                                </TableCell>
+                                            </TableRow>
+                                        )}
+                                </TableBody>
+                            </Table>
+                        </TableContainer>
+                    </DialogContent>
+                </Dialog>
+            </div>
+        </Layout >
+    );
+};
+
+export default AdminClinic;
+
+
+/*onClick={() => navigate(`/updateCli/${clinic._id}/${clinic.date}/${clinic.time}/${clinic.ctype}/${clinic.venue}`)}*/

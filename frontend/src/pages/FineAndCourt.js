@@ -1,6 +1,7 @@
 import React from 'react';
 import '../styles/FineAndCourt.css';
 import Layout from '../components/Layout';
+import { Link } from 'react-router-dom';
 
 import img1 from '../webImages/Reportimg.jpg';
 import img2 from '../webImages/AnalyseImg.png';
@@ -52,6 +53,10 @@ const FineAndCourt = () => {
                   </div>
                 ))}
               </div>
+            </div>
+            <div className='tabBtn'>
+              <Link to='/F&CDReportViolationTabe'><button>Report Table</button></Link>
+              <Link to='/F&CDocumentManagementTabe'><button>Documents Table</button></Link>
             </div>
       </Layout>
   );
