@@ -14,6 +14,7 @@ const FCDocManage = ({ submitted, data }) => {
   const [dengueViolation, setDengueViolation] = useState(false);
   const [documents, setDocuments] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [violationType, setViolationType] = useState('');
 
   useEffect(() => {
     if (!submitted) {
@@ -42,9 +43,14 @@ const FCDocManage = ({ submitted, data }) => {
   const validateSchema = Yup.object().shape({
     reportid: Yup.string().required('Report ID is required').matches(/^[A-Za-z0-9]+$/, 'Report ID must contain only letters and numbers'),
     raidOfficer: Yup.string().required('Report ID is Required').matches(/^[A-Za-z\s]+$/, 'Name must contain only letters'),
-    date: Yup.date().required('Date is required'),
+    date: Yup.string().required('Date is required'),
     violatorName: Yup.string().required('Report ID is Required').matches(/^[A-Za-z\s]+$/, 'Name must contain only letters'),
-    documents: Yup.mixed().required('Documents required'),
+    documents: Yup.mixed()
+    .test('fileCount', 'At least one document is required', (value) => {
+      return value && value.length > 0;
+    }),
+    violationType: Yup.string().required('Violation Type is required').oneOf(['foodViolation', 'dengueViolation'], 'Invalid Violation Type')
+
   });
 
   const addDocm = async () => {
@@ -54,6 +60,7 @@ const FCDocManage = ({ submitted, data }) => {
         raidOfficer,
         date,
         violatorName,
+        violationType,
         documents,
       }, { abortEarly: false });
 
@@ -80,6 +87,8 @@ const FCDocManage = ({ submitted, data }) => {
           errors[err.path] = err.message;
         });
         setErrorMessage(errors);
+      } else {
+        console.error('Error', error);
       }
     }
   };
@@ -111,11 +120,12 @@ const FCDocManage = ({ submitted, data }) => {
           </div>
           <div>
             <label>Violation Type:</label>
-            <input type="radio" id="foodViolation" name="type" value='foodViolation' checked={foodViolation} onChange={() => { setFoodViolation(true); setDengueViolation(false); }} />
+            <input type="radio" id="foodViolation" name="type" value='foodViolation' checked={violationType === 'foodViolation'} onChange={() => setViolationType('foodViolation')} />
             Food Violation
             <span style={{ marginRight: '40px' }}></span>
-            <input type="radio" id="dengueViolation" name="type" value='dengueViolation' checked={dengueViolation} onChange={() => { setDengueViolation(true); setFoodViolation(false); }} />
+            <input type="radio" id="dengueViolation" name="type" value='dengueViolation' checked={violationType === 'dengueViolation'} onChange={() => setViolationType('dengueViolation')} />
             Dengue Violation
+            {errorMessage.violationType && <div className="errorMessage">{errorMessage.violationType}</div>}
           </div>
           <div>
             <label>Upload Documents</label>

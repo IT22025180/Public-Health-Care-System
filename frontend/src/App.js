@@ -55,6 +55,7 @@ import RaidSubForm from './pages/RaidSubForm';
 import DengueHomePage from './pages/DengueHomePage';
 
 
+import FCDMEdit from './pages/FCDMEdit';
 
 function App() {
   return (
@@ -188,6 +189,7 @@ function App() {
         <Route path='/F&CDReportViolationTabe' element={<FCRVTable />} />
         <Route path='/F&CDocumentManagementTabe' element={<FCDMTable />} />
         <Route path='/Fine-And-court-Analyse' element={<FCAnalyse />} />
+        <Route path='/FCDMEdit/:_id/:r_id/:ro_name/:date/:v_name/:v_type' element={<FCDMEdit />} />
 
         <Route path='/DengueHomePage' element={<DengueHomePage />} />
 

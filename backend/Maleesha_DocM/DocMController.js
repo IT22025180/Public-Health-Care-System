@@ -41,6 +41,7 @@ const updateDocM = async (req,res) => {
         const { _id,r_id, ro_name , date, v_name, v_type, documents} = req.body;
 
         const updatedDocM = await DocM.findOneAndUpdate({_id} ,{
+            _id,
             r_id,        
             ro_name,
             date,

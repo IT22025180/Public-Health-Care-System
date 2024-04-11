@@ -1,15 +1,16 @@
-import { useEffect, useState } from "react";
-import '../styles/FCDMTable.css'
+import React, { useState, useEffect } from "react";
 import Axios from "axios";
+import '../styles/FCDMTable.css';
 import Swal from "sweetalert2";
-import jsPDF from 'jspdf'
-import 'jspdf-autotable'
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
 import Layout from '../components/Layout';
+import { Link } from 'react-router-dom';
 
 const FCDMTable = () => {
-
   const [DMdata, setDMdata] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
+  const [editData, setEditData] = useState(null);
 
   useEffect(() => {
     getDOCMdata();
@@ -20,12 +21,12 @@ const FCDMTable = () => {
     Axios.get('http://localhost:4000/api/Documents')
       .then(response => {
         console.log('Data from Server', response.data);
-        setDMdata(response.data.allDocM)
+        setDMdata(response.data.allDocM);
       })
       .catch(error => {
-        console.error('Axios Error : ', error)
-      })
-  }
+        console.error('Axios Error:', error);
+      });
+  };
 
   // Delete
   const deleteDocument = (id) => {
@@ -49,13 +50,13 @@ const FCDMTable = () => {
             });
           })
           .catch(error => {
-            console.error('Error Delete Document', error)
+            console.error('Error deleting document:', error);
           });
       }
     });
-  }
+  };
 
-  //Search
+  // Search
   const filterData = DMdata.filter(dmdata => {
     return dmdata.ro_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       dmdata.r_id.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -66,7 +67,7 @@ const FCDMTable = () => {
 
   // Report Generate
   const GenReport = () => {
-    const doc = jsPDF();
+    const doc = new jsPDF();
     const title = "Fine And Court Document Management Report";
     const titleMargin = 20;
     const tableMargin = 20;
@@ -77,19 +78,24 @@ const FCDMTable = () => {
 
     doc.autoTable({
       head: [['Report ID', 'Raid Officer', 'Date', 'Violator Name', 'Violation Type', 'Documents',]],
-      body: DMdata.map((val, i) => [val.r_id, val.ro_name, val.date, val.v_name, val.v_type, val.documents]),
+      body: DMdata.map((val) => [val.r_id, val.ro_name, val.date, val.v_name, val.v_type, val.documents]),
       startY: titleMargin + tableMargin
-    })
+    });
 
-    doc.save('Fine and Court Document Management Report.pdf')
-  }
+    doc.save('Fine and Court Document Management Report.pdf');
+  };
+
+  // Update - Submit edited data
+  const updateDocument = (ddata) => {
+    setEditData(ddata); // Set the editData state with the data being edited
+  };
 
   return (
     <Layout>
       <>
         <h2>Document Management Table</h2>
         <div className="search">
-          <input type="text" value={searchQuery} onChange={e => setSearchQuery(e.target.value)} placeholder="Search"/>
+          <input type="text" value={searchQuery} onChange={e => setSearchQuery(e.target.value)} placeholder="Search" />
         </div>
         <div className="FCDMTable">
           <table border={1} cellPadding={10} cellSpacing={0}>
@@ -116,10 +122,12 @@ const FCDMTable = () => {
                     <td>{ddata.v_type}</td>
                     <td>{ddata.documents}</td>
                     <td>
-                      <button className="edtBtn">Edit</button>
+                      <Link to={`/FCDMEdit/${ddata._id}/${ddata.r_id}/${ddata.ro_name}/${ddata.date}/${ddata.v_name}/${ddata.v_type}`}>
+                        <button className="edtBtn">Edit</button>
+                      </Link>
                     </td>
                     <td>
-                      <button className="deleteBtn" onClick={() => deleteDocument(ddata._id)}>Delete</button>
+                      <button className='deleteBtn' onClick={() => deleteDocument(ddata._id)}>Delete</button>
                     </td>
                   </tr>
                 ))

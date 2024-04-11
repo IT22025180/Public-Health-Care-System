@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 import * as Yup from 'yup';
 
 const FCReportForm = ({ submitted, data }) => {
-  
+
   const [ROname, setROname] = useState('');
   const [Roemail, setRoemail] = useState('');
   const [ROcontact, setROcontact] = useState('');
@@ -20,7 +20,7 @@ const FCReportForm = ({ submitted, data }) => {
   const [vContact, setvContact] = useState('');
   const [vId, setvId] = useState('');
   const [evidenceFile, setEvidenceFile] = useState(null);
-    const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   const [violationType, setViolationType] = useState('');
 
   useEffect(() => {
@@ -62,7 +62,7 @@ const FCReportForm = ({ submitted, data }) => {
     ROname: Yup.string().required('Report ID is Required').matches(/^[A-Za-z\s]+$/, 'Name must contain only letters'),
     Roemail: Yup.string().matches(/^[a-zA-Z0-9._%+-]+@gmail\.com$/, 'Invalid Gmail address').required('Email is Required'),
     ROcontact: Yup.string().matches(/^0\d{9}$/, 'Invalid Contact Number').required('Contact number is Required'),
-    date: Yup.date().required('Date is Required'),
+    date: Yup.string().required('Date is Required'),
     location: Yup.string().required('Location is Required').matches(/^[A-Za-z\s,.0-9]+$/, 'Location must contain only letters'),
     description: Yup.string().required('Description is Required').matches(/^[A-Za-z\s,.0-9]+$/, 'Description must contain only letters'),
     vName: Yup.string().required('Name is Required').matches(/^[A-Za-z\s]+$/, 'Name must contain only letters'),
@@ -87,7 +87,7 @@ const FCReportForm = ({ submitted, data }) => {
           vContact,
           vId,
           evidenceFile,
-          violationType
+          violationType,  
         },
         { abortEarly: false }
       );
@@ -214,7 +214,7 @@ const FCReportForm = ({ submitted, data }) => {
 
           <h4>Upload Evidence</h4>
           <div>
-          <input type="file" onChange={(e) => setEvidenceFile(e.target.files[0])} />
+            <input type="file" onChange={(e) => setEvidenceFile(e.target.files[0])} />
           </div>
           <button className="button" type="button" onClick={addFCReport}>
             Submit Report
@@ -225,4 +225,4 @@ const FCReportForm = ({ submitted, data }) => {
   );
 };
 
-export default FCReportForm;
+export default FCReportForm;
