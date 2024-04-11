@@ -5,7 +5,7 @@ const imageSchema = new mongoose.Schema({
     data: String,
     contentType: String,
     image: Buffer,
-  });
+});
 
 const AddComplain = new mongoose.Schema({
 
@@ -22,9 +22,9 @@ const AddComplain = new mongoose.Schema({
     area: String,
     //location: String
 },
-{
-    collection : "Complains"
-});
+    {
+        collection: "Complains"
+    });
 
-const Complains = mongoose.model('Complains',AddComplain);
+const Complains = mongoose.model('Complains', AddComplain);
 module.exports = Complains;
