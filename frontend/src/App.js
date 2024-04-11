@@ -192,6 +192,7 @@ function App() {
         <Route path='/FCDMEdit/:_id/:r_id/:ro_name/:date/:v_name/:v_type' element={<FCDMEdit />} />
 
         <Route path='/DengueHomePage' element={<DengueHomePage />} />
+        <Route path='/DengueHomePage' element={<DengueHomePage/>}/>
 
 
         <Route path='/dclogin' element={<DoctorLogin />} />
