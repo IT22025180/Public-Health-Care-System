@@ -87,7 +87,7 @@ const ComplaintForm = () => {
         console.log('Data stored successfully', response.data);
         Swal.fire({
           title: "Success !",
-          text: "Clinic added successfully",
+          text: "Complain added successfully",
           icon: "success"
         })
       } catch (error) {
