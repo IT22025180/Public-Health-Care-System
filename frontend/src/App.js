@@ -53,6 +53,7 @@ import ModelPopup from './pages/ModelPopup';
 import Raids from './pages/Raids';
 import RaidSubForm from './pages/RaidSubForm';
 import DengueHomePage from './pages/DengueHomePage';
+import Denguemap from './pages/Denguemap';
 
 
 import FCDMEdit from './pages/FCDMEdit';
@@ -193,6 +194,7 @@ function App() {
 
         <Route path='/DengueHomePage' element={<DengueHomePage />} />
         <Route path='/DengueHomePage' element={<DengueHomePage/>}/>
+        <Route path='/Denguemap' element={<Denguemap/>}/>
 
 
         <Route path='/dclogin' element={<DoctorLogin />} />
