@@ -63,3 +63,8 @@
     background-color: #218838;
   }
   
+  .form-error {
+    color: red;
+    margin-top: 5px;
+  }
+  

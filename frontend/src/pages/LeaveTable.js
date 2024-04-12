@@ -3,8 +3,8 @@ import Axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Layout from '../components/Layout';
 import jsPDF from 'jspdf';
-import logo1 from '../webImages/logo1.png'; // Import the logo image
-import Swal from 'sweetalert2'; // Import SweetAlert
+import logo1 from '../webImages/logo1.png'; 
+import Swal from 'sweetalert2'; 
 import '../styles/Leave.css';
 
 const LeaveTable = () => {

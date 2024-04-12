@@ -63,13 +63,13 @@ const deletestaffdengue = async (req, res) => {
     try {
         const { _id } = req.body;
 
-        const deletedstaffdengue= await denguestaff.findOneAndDelete({ _id });
+        const deletedStaff = await Denguestaff.findOneAndDelete({ _id }); // Corrected variable name
 
-        if (!deletedLeave) {
+        if (!deletedStaff) {
             return res.status(404).json({ success: false, message: 'Staff not found' });
         }
 
-        res.json({ success: true, message: 'staff deleted successfully', data: deletedstaffdengue });
+        res.json({ success: true, message: 'Staff deleted successfully', data: deletedStaff });
     } catch (error) {
         console.error('Error deleting staff:', error);
         res.status(500).json({ success: false, message: 'Internal server error' });

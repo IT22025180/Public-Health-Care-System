@@ -62,7 +62,7 @@ const deletestaffraids = async (req, res) => {
 
         const deletedstaffraids = await raidstaff.findOneAndDelete({ _id });
 
-        if (!deletedRaidAssignment) {
+        if (!deletedstaffraids) { // Corrected variable name
             return res.status(404).json({ success: false, message: 'Staff not found' });
         }
 
@@ -76,4 +76,4 @@ const deletestaffraids = async (req, res) => {
 exports.addstaffraids = addstaffraids;
 exports.getstaffraids = getstaffraids;
 exports.updatestaffdraids = updatestaffraids;
-exports.deleteRaidAssignment = deletestaffraids;
+exports.deletestaffraids = deletestaffraids;

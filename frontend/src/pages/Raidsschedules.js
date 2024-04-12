@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Axios from 'axios'; 
 import '../styles/RaidSchedules.css';
 
+
 const RaidSchedules = ({ submitted, data }) => {
   const [name, setName] = useState('');
   const [staffmember, setStaffmember] = useState('');
@@ -11,8 +12,7 @@ const RaidSchedules = ({ submitted, data }) => {
   const [location, setLocation] = useState('');
   const [description, setDescription] = useState('');
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const addstaffraids = async () => {
     try {
       const response = await Axios.post('http://localhost:4000/api/addstaffraids', {
         type: name,
@@ -53,7 +53,7 @@ const RaidSchedules = ({ submitted, data }) => {
         <div className="assign-staff-container">
           <h3>Schedule Staff for Raids</h3>
           <div className='form-box'>
-            <form onSubmit={handleSubmit}>
+            <form >
               <div>
                 <label>Raid Type:</label>
                 <select onChange={e => setName(e.target.value)} value={name}>
@@ -78,9 +78,9 @@ const RaidSchedules = ({ submitted, data }) => {
                 <label>Description:</label>
                 <textarea onChange={e => setDescription(e.target.value)} value={description} />
               </div>
-              <button type="submit">Schedule Raid</button>
               <Link to="/raidsAssign">
-                <button className="view-programs">View Scheduled Raids</button>
+                <button type="button" onClick={addstaffraids}>Assign Staff</button>
+                <button className="view-programs">View Scheduled Programs</button>
               </Link>
             </form>
           </div>
