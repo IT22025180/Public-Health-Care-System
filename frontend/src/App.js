@@ -93,6 +93,7 @@ function App() {
           <Route path='/raidform' element={<RaidForm />} />
           <Route path='/raidsubform' element={<RaidSubForm />} />
           <Route path='/updateCli/:_id/:date/:time/:venue/:ctype' element={<UpdateClinic />} />
+          <Route path='/addpatients/:_id/:date/:time/:venue/:ctype' element={<AddPatients />} />
           <Route path='/dengueCli' element={<Dengue />} />
           <Route path='/dentalCli' element={<Dental />} />
           <Route path='/adminClinics' element={<AdminClinic />} />

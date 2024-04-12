@@ -149,6 +149,7 @@ const AddPatients = ({ submitted, data }) => {
                 type='number'
                 size='sm'
                 value={age}
+                min={0}
                 onChange={e => setAge(e.target.value)}
               />
             </Form.Group>
