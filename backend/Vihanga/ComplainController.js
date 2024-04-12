@@ -11,6 +11,8 @@ const addComplain = async (req, res) => {
 
         formattedDate = Array.isArray(date) ? date.join(', ') : date;
 
+
+
         console.log(req.files);
         const imagesData = req.files.map(file => ({
             data: file.buffer.toString('base64'),
