@@ -2,6 +2,7 @@ import React from 'react'
 import Layout from '../components/Layout';
 import { Button, Container } from 'react-bootstrap';
 import '../styles/home.css';
+import { useNavigate } from 'react-router-dom';
 import img from '../webImages/doctor.jpg';
 import vimg from '../webImages/vacccine.jpg';
 import dimg from '../webImages/dengueM.jpg';
@@ -20,6 +21,8 @@ const Home = () => {
     const slideShowContainer = document.getElementById('slideshow-container');
     slideShowContainer.scrollIntoView({ behavior: 'smooth' });
   };
+
+  const navigate = useNavigate();
 
 
   return (
@@ -59,7 +62,7 @@ const Home = () => {
               <br />
               <h2>Our Clinic schedules</h2>
               <p className='fs-5 text-center'>Public health Information system organizing a dengue & dental clinic services on giving dates click the button below to view and join the appointments</p>
-              <Button>Click here </Button>
+              <Button onClick={() => navigate(`/clinics`)}>Click here </Button>
             </div>
             <br />
             <img src={img} alt='clinics' width={300} height={300} />
@@ -74,7 +77,7 @@ const Home = () => {
               <br />
               <h2>Need a vaccination ? </h2>
               <p className='fs-5 text-center'>Public health Information system organizing a vaccination schedules for a children to adults click here to view details</p>
-              <Button>Jump to vaccine page </Button>
+              <Button onClick={() => navigate(`/vaccines`)}>Click here </Button>
             </div>
             <br />
           </div>
@@ -86,8 +89,8 @@ const Home = () => {
               <br />
               <br />
               <h2>Dengue programs</h2>
-              <p className='fs-5 text-center'>Dengue is a threat for human beings. Click the button to give a complain or join for a campaigns</p>
-              <Button>Click here</Button>
+              <p className='fs-5 text-center'>Dengue is a threat for human beings. Click the button to give a complain or join for a campaign</p>
+              <Button onClick={() => navigate(`/dengueCamp`)}>Click here</Button>
             </div>
             <br />
             <img src={dimg} alt='dengue' width={300} height={300} />
@@ -102,7 +105,7 @@ const Home = () => {
               <br />
               <h2>Give a complain</h2>
               <p className='fs-5 text-center'>Is there any problem in your area to affect our health ? Click below button to add complains of unhealthy foods or dengue affected places</p>
-              <Button>Complains </Button>
+              <Button onClick={() => navigate(`/Complains`)}>Complains </Button>
             </div>
             <br />
 
@@ -116,7 +119,7 @@ const Home = () => {
               <br />
               <h2>View our raids</h2>
               <p className='fs-5 text-center'>Click here to view some raids by our officers according to your complains</p>
-              <Button>Click here </Button>
+              <Button onClick={() => navigate(`/RF`)}>Click here </Button>
             </div>
             <br />
             <img src={rimg} width={300} height={300} alt='raids' />
