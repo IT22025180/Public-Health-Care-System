@@ -7,6 +7,7 @@ import Axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { Dialog, DialogTitle, DialogContent } from '@mui/material';
 import jspdf from 'jspdf';
+import { motion } from 'framer-motion';
 
 const AddPatients = () => {
 
@@ -113,66 +114,73 @@ const AddPatients = () => {
   return (
     <>
       <Layout>
-        <div className='addform'>
-          {errorMessage && <Alert variant='danger'>{errorMessage}</Alert>}
-          <h2>Admission form</h2>
-          <Form>
-            <Form.Group className='padd'>
-              <p>Your Name</p>
-              <Form.Control
-                type='text'
-                size='sm'
-                value={name}
-                onChange={e => setName(e.target.value)}
-              />
-            </Form.Group>
-            <br />
-            <Form.Group className='padd'>
-              <p>Age</p>
-              <Form.Control
-                type='number'
-                size='sm'
-                value={age}
-                min={0}
-                onChange={e => setAge(e.target.value)}
-              />
-            </Form.Group>
-            <br />
-            <Form.Group className='padd'>
-              <p>Gender</p>
-              <Form.Control as='select' size='sm' value={gender} onChange={e => setGender(e.target.value)}>
-                <option>Select Gender</option>
-                <option>Male</option>
-                <option>Female</option>
-                <option>Other</option>
-              </Form.Control>
-            </Form.Group>
-            <br />
-            <Form.Group className='padd'>
-              <p>Address :</p>
-              <Form.Control
-                type='text'
-                size='sm'
-                value={address}
-                onChange={e => setAddress(e.target.value)}
-              />
-            </Form.Group>
-            <br />
-            <Form.Group className='padd'>
-              <p>Mobile :</p>
-              <Form.Control
-                type='number'
-                size='sm'
-                value={mobile}
-                min={0}
-                maxLength={10}
-                onChange={e => setMobile(e.target.value.slice(0, 10))}
-              />
-            </Form.Group>
-            <br />
-            <Button onClick={functionPopup}>Submit</Button>
-          </Form>
-        </div>
+        <motion.div className="progress-bar"
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -50 }}
+          transition={{ duration: 0.5 }}
+        >
+          <div className='addform'>
+            {errorMessage && <Alert variant='danger'>{errorMessage}</Alert>}
+            <h2>Admission form</h2>
+            <Form>
+              <Form.Group className='padd'>
+                <p>Your Name</p>
+                <Form.Control
+                  type='text'
+                  size='sm'
+                  value={name}
+                  onChange={e => setName(e.target.value)}
+                />
+              </Form.Group>
+              <br />
+              <Form.Group className='padd'>
+                <p>Age</p>
+                <Form.Control
+                  type='number'
+                  size='sm'
+                  value={age}
+                  min={0}
+                  onChange={e => setAge(e.target.value)}
+                />
+              </Form.Group>
+              <br />
+              <Form.Group className='padd'>
+                <p>Gender</p>
+                <Form.Control as='select' size='sm' value={gender} onChange={e => setGender(e.target.value)}>
+                  <option>Select Gender</option>
+                  <option>Male</option>
+                  <option>Female</option>
+                  <option>Other</option>
+                </Form.Control>
+              </Form.Group>
+              <br />
+              <Form.Group className='padd'>
+                <p>Address :</p>
+                <Form.Control
+                  type='text'
+                  size='sm'
+                  value={address}
+                  onChange={e => setAddress(e.target.value)}
+                />
+              </Form.Group>
+              <br />
+              <Form.Group className='padd'>
+                <p>Mobile :</p>
+                <Form.Control
+                  type='number'
+                  size='sm'
+                  value={mobile}
+                  min={0}
+                  maxLength={10}
+                  onChange={e => setMobile(e.target.value.slice(0, 10))}
+                />
+              </Form.Group>
+              <br />
+              <Button onClick={functionPopup}>Submit</Button>
+            </Form>
+          </div>
+        </motion.div>
       </Layout>
       <Dialog open={open}>
         <DialogTitle>Appointment Confirmation</DialogTitle>
