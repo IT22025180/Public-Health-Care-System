@@ -13,6 +13,8 @@ import Svac from '../webImages/Slidevaccine.jpg';
 import Ssta from '../webImages/Slidestaff.jpg';
 import Sdeng from '../webImages/Slidedengue.jpg';
 import Sraid from '../webImages/Slideraids.jpg';
+import { motion } from 'framer-motion';
+
 
 const Home = () => {
 
@@ -28,103 +30,112 @@ const Home = () => {
   return (
     <div>
       <Layout>
-        <div className='contain'>
+        <motion.div className=''
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <div className='contain'>
 
-          <div className='slider-frame'>
-            <div className='slider-img'>
-              <div className='img-container'>
-                <img src={Scli} alt='clinic' width={1500} height={500} />
+            <div className='slider-frame'>
+              <div className='slider-img'>
+                <div className='img-container'>
+                  <img src={Scli} alt='clinic' width={1500} height={500} />
+                </div>
+                <div className='img-container'>
+                  <img src={Svac} alt='vaccine' width={1500} height={500} />
+                </div>
+                <div className='img-container'>
+                  <img src={Ssta} alt='Stafff' width={1500} height={500} />
+                </div>
+                <div className='img-container'>
+                  <img src={Sdeng} alt='dengue' width={1500} height={500} />
+                </div>
+                <div className='img-container'>
+                  <img src={Sraid} alt='raid' width={1500} height={500} />
+                </div>
               </div>
-              <div className='img-container'>
-                <img src={Svac} alt='vaccine' width={1500} height={500} />
+              <div className='overlay-item'>
+                <h1 className='overlay-text'>Welcome to Public Health Information System</h1>
+                <Button className='btn-home' onClick={scrollToSlideShow}>More Info</Button>
               </div>
-              <div className='img-container'>
-                <img src={Ssta} alt='Stafff' width={1500} height={500} />
-              </div>
-              <div className='img-container'>
-                <img src={Sdeng} alt='dengue' width={1500} height={500} />
-              </div>
-              <div className='img-container'>
-                <img src={Sraid} alt='raid' width={1500} height={500} />
-              </div>
-            </div>
-            <div className='overlay-item'>
-              <h1 className='overlay-text'>Welcome to Public Health Information System</h1>
-              <Button className='btn-home' onClick={scrollToSlideShow}>More Info</Button>
             </div>
           </div>
-        </div>
 
-        <Container id='slideshow-container' className='Lcontainer'>
-          <div className='leftflex'>
-            <div className='clinicsub'>
-              <br />
-              <br />
-              <h2>Our Clinic schedules</h2>
-              <p className='fs-5 text-center'>Public health Information system organizing a dengue & dental clinic services on giving dates click the button below to view and join the appointments</p>
-              <Button onClick={() => navigate(`/clinics`)}>Click here </Button>
-            </div>
-            <br />
-            <img src={img} alt='clinics' width={300} height={300} />
-          </div>
-        </Container>
-        <br />
-        <Container className='Rcontainer'>
-          <div className='rightflex'>
-            <img src={vimg} alt='vaccine' width={300} height={300} />
-            <div className='clinicsub'>
-              <br />
-              <br />
-              <h2>Need a vaccination ? </h2>
-              <p className='fs-5 text-center'>Public health Information system organizing a vaccination schedules for a children to adults click here to view details</p>
-              <Button onClick={() => navigate(`/vaccines`)}>Click here </Button>
-            </div>
-            <br />
-          </div>
-        </Container>
-        <br />
-        <Container className='Lcontainer'>
-          <div className='leftflex'>
-            <div className='clinicsub'>
-              <br />
-              <br />
-              <h2>Dengue programs</h2>
-              <p className='fs-5 text-center'>Dengue is a threat for human beings. Click the button to give a complain or join for a campaign</p>
-              <Button onClick={() => navigate(`/dengueCamp`)}>Click here</Button>
-            </div>
-            <br />
-            <img src={dimg} alt='dengue' width={300} height={300} />
-          </div>
-        </Container>
-        <br />
-        <Container className='Rcontainer'>
-          <div className='rightflex'>
-            <img src={cimg} alt='complains' width={300} height={300} />
-            <div className='clinicsub'>
-              <br />
-              <br />
-              <h2>Give a complain</h2>
-              <p className='fs-5 text-center'>Is there any problem in your area to affect our health ? Click below button to add complains of unhealthy foods or dengue affected places</p>
-              <Button onClick={() => navigate(`/Complains`)}>Complains </Button>
-            </div>
-            <br />
 
-          </div>
-        </Container>
-        <br />
-        <Container className='Lcontainer'>
-          <div className='leftflex'>
-            <div className='clinicsub'>
+          <Container id='slideshow-container' className='Lcontainer'>
+            <div className='leftflex'>
+              <div className='clinicsub'>
+                <br />
+                <br />
+                <h2>Our Clinic schedules</h2>
+                <p className='fs-5 text-center'>Public health Information system organizing a dengue & dental clinic services on giving dates click the button below to view and join the appointments</p>
+                <Button onClick={() => navigate(`/clinics`)}>Click here </Button>
+              </div>
               <br />
-              <br />
-              <h2>View our raids</h2>
-              <p className='fs-5 text-center'>Click here to view some raids by our officers according to your complains</p>
-              <Button onClick={() => navigate(`/RF`)}>Click here </Button>
+              <img src={img} alt='clinics' width={300} height={300} />
             </div>
-            <br />
-            <img src={rimg} width={300} height={300} alt='raids' />
-          </div>
-        </Container>
+          </Container>
+
+          <br />
+          <Container className='Rcontainer'>
+            <div className='rightflex'>
+              <img src={vimg} alt='vaccine' width={300} height={300} />
+              <div className='clinicsub'>
+                <br />
+                <br />
+                <h2>Need a vaccination ? </h2>
+                <p className='fs-5 text-center'>Public health Information system organizing a vaccination schedules for a children to adults click here to view details</p>
+                <Button onClick={() => navigate(`/vaccines`)}>Click here </Button>
+              </div>
+              <br />
+            </div>
+          </Container>
+          <br />
+          <Container className='Lcontainer'>
+            <div className='leftflex'>
+              <div className='clinicsub'>
+                <br />
+                <br />
+                <h2>Dengue programs</h2>
+                <p className='fs-5 text-center'>Dengue is a threat for human beings. Click the button to give a complain or join for a campaign</p>
+                <Button onClick={() => navigate(`/dengueCamp`)}>Click here</Button>
+              </div>
+              <br />
+              <img src={dimg} alt='dengue' width={300} height={300} />
+            </div>
+          </Container>
+          <br />
+          <Container className='Rcontainer'>
+            <div className='rightflex'>
+              <img src={cimg} alt='complains' width={300} height={300} />
+              <div className='clinicsub'>
+                <br />
+                <br />
+                <h2>Give a complain</h2>
+                <p className='fs-5 text-center'>Is there any problem in your area to affect our health ? Click below button to add complains of unhealthy foods or dengue affected places</p>
+                <Button onClick={() => navigate(`/Complains`)}>Complains </Button>
+              </div>
+              <br />
+
+            </div>
+          </Container>
+          <br />
+          <Container className='Lcontainer'>
+            <div className='leftflex'>
+              <div className='clinicsub'>
+                <br />
+                <br />
+                <h2>View our raids</h2>
+                <p className='fs-5 text-center'>Click here to view some raids by our officers according to your complains</p>
+                <Button onClick={() => navigate(`/RF`)}>Click here </Button>
+              </div>
+              <br />
+              <img src={rimg} width={300} height={300} alt='raids' />
+            </div>
+          </Container>
+        </motion.div>
       </Layout>
     </div>
   )
