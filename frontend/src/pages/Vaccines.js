@@ -20,7 +20,7 @@ const Vaccines = () => {
         title: 'Vaccine Registration',
         buttonText: 'Add',
         buttonLink: '/VaccineReg',
-        className: 'dengue-card',
+        className: 'reg-card',
         image: image1
       },
   
@@ -29,7 +29,7 @@ const Vaccines = () => {
         title: 'Vaccine Appointments',
         buttonText: 'Add',
         buttonLink: '/VaccineApp',
-        className: 'vaccine-card',
+        className: 'app-card',
         image:image2
         
         
@@ -41,7 +41,7 @@ const Vaccines = () => {
         title: 'Vaccine Requests',
         buttonText: 'Request',
         buttonLink: '/VaccineRequest',
-        className: 'raids-card',
+        className: 'req-card',
         image: image3
         
       },
@@ -51,22 +51,25 @@ const Vaccines = () => {
     return(
       
         <Layout>
-                <div className="home-page">
-        <h3>Vaccination Management</h3>
-        <div className="card-container">
+                <div className="vaccine-page">
+        <h2>Vaccination Management</h2>
+        <div className="Card-container">
           {cards.map((card) => (
-            <div key={card.id} className="card">
-              <img src={card.image} alt={card.title} className="card-image" />
-              <div className="card-body">
-                <h2 className="card-title">{card.title}</h2>
-                <p className="card-text">{card.description}</p>
-                <a href={card.buttonLink} className="btnview">
+            <div key={card.id} className="Card">
+              <img src={card.image} alt={card.title} className="Card-image" />
+              <div className="Card-body">
+                <h2 className="Card-title">{card.title}</h2>
+                <p className="Card-text">{card.description}</p>
+                <a href={card.buttonLink} className="Btnview">
                   {card.buttonText}
                 </a>
               </div>
             </div>
           ))}
         </div>
+          
+          
+
 
     </div>
         </Layout>  
