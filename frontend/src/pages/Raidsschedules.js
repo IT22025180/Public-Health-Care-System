@@ -3,7 +3,7 @@ import Layout from '../components/Layout';
 import { Link } from 'react-router-dom';
 import Axios from 'axios'; 
 import '../styles/RaidSchedules.css';
-
+import Swal from 'sweetalert2';
 
 const RaidSchedules = ({ submitted, data }) => {
   const [name, setName] = useState('');
@@ -22,6 +22,14 @@ const RaidSchedules = ({ submitted, data }) => {
         description: description
       });
       console.log('Successfully', response.data);
+      // Display success message
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Staff assigned Successfully",
+        showConfirmButton: false,
+        timer: 1500
+      });
     } catch (error) {
       console.error('error', error);
     }
