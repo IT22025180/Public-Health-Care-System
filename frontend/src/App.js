@@ -37,6 +37,7 @@ import LeaveTable from './pages/LeaveTable';
 import StaffLogin from './pages/StaffLogin';
 import FCDMTable from './pages/FCDMTable';
 import ComplaintForm from './pages/Complains';
+import Complainstable from './pages/Complainstable';
 import RaidForm from './pages/RaidForm';
 import EditLeave from './pages/EditLeave';
 import FCRVTable from './pages/FCRVTable';
@@ -97,6 +98,7 @@ function App() {
           <Route path='/adminClinics' element={<AdminClinic />} />
           <Route path='/genPatientReport' element={<PatientReport />} />
           <Route path='/Complains' element={<ComplaintForm />} />
+          <Route path='/Complainstable' element={<Complainstable />} />
           <Route path='/denguecamp' element={<DengueCampaigns />} />
           <Route path='/Fine-And-court' element={<FineAndCourt />} />
           <Route path='/Fine-And-court-Submit-Reports' element={<FCReportForm />} />
