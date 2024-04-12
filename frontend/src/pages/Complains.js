@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { Form, Button, Container, Row, Col, Alert } from 'react-bootstrap';
 import Axios from 'axios'
 import Swal from 'sweetalert2'
+import Complainstable from './Complainstable';
 
 const ComplaintForm = () => {
   const [formData, setFormData] = useState({
@@ -201,6 +202,7 @@ const ComplaintForm = () => {
           </Button>
         </Form>
       </Container>
+
     </Layout>
   );
 };

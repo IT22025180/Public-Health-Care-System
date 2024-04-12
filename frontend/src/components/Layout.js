@@ -2,15 +2,15 @@ import React from 'react'
 import Header from './Header'
 import Footer from './Footer'
 
-const Layout = ({children}) => {
+const Layout = ({ children }) => {
   return (
     <div>
-      <Header/>
-      <main style={{minHeight:"80vh"}} >
+      <Header />
+      <main style={{ minHeight: "60vh" }} >
         {children}
       </main>
-      <br/>
-      <Footer/>
+      <br />
+      <Footer />
     </div>
   )
 }

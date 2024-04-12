@@ -59,7 +59,6 @@ const Clinics = () => {
         </div>
       </motion.div>
       <AddClinic />
-
     </Layout>
   )
 }

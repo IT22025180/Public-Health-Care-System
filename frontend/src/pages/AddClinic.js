@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import teeth from '../webImages/teeth.jpg'
 import dengue from '../webImages/dengueM.jpg'
 
-const AddClinic = ({ submitted, data }) => {
+const AddClinic = () => {
 
     const navigate = useNavigate();
 
@@ -21,23 +21,7 @@ const AddClinic = ({ submitted, data }) => {
 
     const user = localStorage.getItem("token");
 
-    useEffect(() => {
-        if (!submitted) {
-            setCtype('');
-            setDate('');
-            setTime('');
-            setVenue('');
-        }
-    }, [submitted]);
 
-    useEffect(() => {
-        if (data?.id && data.id !== 0) {
-            setCtype(data.ctype);
-            setDate(data.date);
-            setTime(data.time);
-            setVenue(data.venue);
-        }
-    }, [data]);
 
     const addClnics = async () => {
 

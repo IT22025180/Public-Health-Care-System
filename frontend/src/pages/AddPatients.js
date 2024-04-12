@@ -8,7 +8,7 @@ import { useParams } from 'react-router-dom';
 import { Dialog, DialogTitle, DialogContent } from '@mui/material';
 import jspdf from 'jspdf';
 
-const AddPatients = ({ submitted, data }) => {
+const AddPatients = () => {
 
 
   //const navigate = useNavigate();
@@ -28,6 +28,9 @@ const AddPatients = ({ submitted, data }) => {
 
     if (!name || !gender || !address || !mobile) {
       setErrorMessage('Please fill all fields');
+    } else if (age < 0) {
+      setErrorMessage('Please add suitable age');
+      return;
     } else {
       openConfirm(true);
     }
@@ -36,6 +39,7 @@ const AddPatients = ({ submitted, data }) => {
   const closepopup = () => {
     openConfirm(false);
   }
+
 
   //generatePDF
   const confirmWithGetPDF = () => {
@@ -71,35 +75,7 @@ const AddPatients = ({ submitted, data }) => {
     addPatient();
 
   }
-
-
-  useEffect(() => {
-    if (!submitted) {
-      setName('');
-      setGender('');
-      setAge(0);
-      setAddress('');
-      setMobile(0);
-    }
-  }, [submitted]);
-
-  useEffect(() => {
-    if (data?.id && data.id !== 0) {
-      setName(data.name);
-      setGender(data.gender);
-      setAge(data.age);
-      setAddress(data.address);
-      setMobile(data.mobile);
-    }
-  }, [data]);
-
   const addPatient = async () => {
-
-
-    if (!name || !gender || !address || !mobile) {
-      setErrorMessage('Please fill all fields');
-    }
-
     openConfirm(false);
     try {
       const response = await Axios.post('http://localhost:4000/api/addPatients', {
@@ -113,6 +89,12 @@ const AddPatients = ({ submitted, data }) => {
 
       console.log('Patient added to queue successfully', response.data);
 
+      setName('');
+      setGender('');
+      setAge(0);
+      setAddress('');
+      setMobile(0);
+
       Swal.fire({
         title: "Success!",
         text: "You have been appointed to queue!",
@@ -125,6 +107,8 @@ const AddPatients = ({ submitted, data }) => {
       console.error('Error:', error);
     }
   }
+
+
 
   return (
     <>
