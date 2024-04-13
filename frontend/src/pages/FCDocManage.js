@@ -45,11 +45,8 @@ const FCDocManage = ({ submitted, data }) => {
     raidOfficer: Yup.string().required('Report ID is Required').matches(/^[A-Za-z\s]+$/, 'Name must contain only letters'),
     date: Yup.string().required('Date is required'),
     violatorName: Yup.string().required('Report ID is Required').matches(/^[A-Za-z\s]+$/, 'Name must contain only letters'),
-    documents: Yup.mixed()
-    .test('fileCount', 'At least one document is required', (value) => {
-      return value && value.length > 0;
-    }),
-    violationType: Yup.string().required('Violation Type is required').oneOf(['foodViolation', 'dengueViolation'], 'Invalid Violation Type')
+    documents: Yup.mixed().test('fileCount', 'At least one document is required', (value) => { return value && value.length > 0; }),
+    violationType: Yup.string().required('Violation Type is required').oneOf(['foodViolation', 'dengueViolation'], 'Violation Type is required')
 
   });
 

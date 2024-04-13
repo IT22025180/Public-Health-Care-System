@@ -69,7 +69,12 @@ const FCReportForm = ({ submitted, data }) => {
     vEmail: Yup.string().matches(/^[a-zA-Z0-9._%+-]+@gmail\.com$/, 'Invalid Gmail address').required('Email is Required'),
     vContact: Yup.string().matches(/^0\d{9}$/, 'Invalid Contact Number').required('Contact Number is Required'),
     vId: Yup.string().required('NIC is required').matches(/^\d{11}(V|v|\d)$/, 'Invalid NIC Number'),
-    violationType: Yup.string().required('Violation Type is required').oneOf(['foodViolation', 'dengueViolation'], 'Invalid Violation Type')
+    violationType: Yup.string().required('Violation Type is required').oneOf(['foodViolation', 'dengueViolation'], 'Invalid Violation Type'),
+    evidenceFile: Yup.mixed()
+      .test('fileCount', 'At least one document is required', (value) => {
+        return value !== undefined && value !== null;
+      })
+      .required('Evidence is required'),
   })
 
   const addFCReport = async () => {
@@ -97,7 +102,7 @@ const FCReportForm = ({ submitted, data }) => {
       formData.append('ro_mobile', ROcontact);
       formData.append('date', date);
       formData.append('v_location', location);
-      formData.append('v_type', foodViolation ? 'foodViolation' : 'dengueViolation');
+      formData.append('v_type', foodViolation ? 'Food Violation' : 'Dengue Violation');
       formData.append('v_description', description);
       formData.append('v_name', vName);
       formData.append('v_email', vEmail);
@@ -105,7 +110,7 @@ const FCReportForm = ({ submitted, data }) => {
       formData.append('v_nic', vId);
       formData.append('evidence', evidenceFile);
 
-      const response = await Axios.post('http://localhost:4000/api/addVioR', formData, {
+      await Axios.post('http://localhost:4000/api/addVioR', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -115,7 +120,7 @@ const FCReportForm = ({ submitted, data }) => {
         title: 'Success!',
         text: 'Report Submitted Successfully.',
       }).then(() => {
-        window.location.href = '/F&CDReportViolationTabe';
+        window.location.href = '/F&CReportViolationTabe';
       });
     } catch (error) {
       if (error instanceof Yup.ValidationError) {
@@ -151,7 +156,7 @@ const FCReportForm = ({ submitted, data }) => {
             </div>
             <div>
               <label>Contact Number:</label>
-              <input type="Number" name="contactNumber" value={ROcontact} onChange={(e) => setROcontact(e.target.value)} />
+              <input type="text" name="contactNumber" value={ROcontact} onChange={(e) => setROcontact(e.target.value)} />
               {errorMessage.ROcontact && <div className="errorMessage">{errorMessage.ROcontact}</div>}
             </div>
             <div>
@@ -201,12 +206,12 @@ const FCReportForm = ({ submitted, data }) => {
             </div>
             <div>
               <label>Contact Number:</label>
-              <input type="Number" name="contactNumber" value={vContact} onChange={(e) => setvContact(e.target.value)} />
+              <input type="text" name="contactNumber" value={vContact} onChange={(e) => setvContact(e.target.value)} />
               {errorMessage.vContact && <div className="errorMessage">{errorMessage.vContact}</div>}
             </div>
             <div>
-              <label>ID Number:</label>
-              <input type="Number" name="idNumber" value={vId} onChange={(e) => setvId(e.target.value)} />
+              <label>NIC Number:</label>
+              <input type="text" name="idNumber" value={vId} onChange={(e) => setvId(e.target.value)} />
               {errorMessage.vId && <div className="errorMessage">{errorMessage.vId}</div>}
             </div>
           </div>
@@ -215,6 +220,7 @@ const FCReportForm = ({ submitted, data }) => {
           <h4>Upload Evidence</h4>
           <div>
             <input type="file" onChange={(e) => setEvidenceFile(e.target.files[0])} />
+            {errorMessage.evidenceFile && <div className="errorMessage">{errorMessage.evidenceFile}</div>}
           </div>
           <button className="button" type="button" onClick={addFCReport}>
             Submit Report

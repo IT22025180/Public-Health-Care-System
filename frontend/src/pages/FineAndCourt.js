@@ -36,16 +36,16 @@ const FineAndCourt = () => {
   ];
 
   return (
-      <Layout>
+      <Layout>  
             <div className="home-page">
               <h1>Fine and Court</h1>
-              <div className="card-container">
+              <div className="fccard-container">
                 {cards.map((card) => (
-                  <div key={card.id} className="card">
-                    <img src={card.image} alt={card.title} className="card-image" />
-                    <div className="card-body">
-                      <h2 className="card-title">{card.title}</h2>
-                      <p className="card-text">{card.description}</p>
+                  <div key={card.id} className="fccard">
+                    <img src={card.image} alt={card.title} className="fccard-image" />
+                    <div className="fccard-body">
+                      <h2 className="fccard-title">{card.title}</h2>
+                      <p className="fccard-text">{card.description}</p>
                       <a href={card.buttonLink} className="btn btn-primary">
                         {card.buttonText}
                       </a>
@@ -55,7 +55,7 @@ const FineAndCourt = () => {
               </div>
             </div>
             <div className='tabBtn'>
-              <Link to='/F&CDReportViolationTabe'><button>Report Table</button></Link>
+              <Link to='/F&CReportViolationTabe'><button>Report Table</button></Link>
               <Link to='/F&CDocumentManagementTabe'><button>Documents Table</button></Link>
             </div>
       </Layout>

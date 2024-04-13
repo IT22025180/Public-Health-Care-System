@@ -122,7 +122,7 @@ const FCDMTable = () => {
                     <td>{ddata.v_type}</td>
                     <td>{ddata.documents}</td>
                     <td>
-                      <Link to={`/FCDMEdit/${ddata._id}/${ddata.r_id}/${ddata.ro_name}/${ddata.date}/${ddata.v_name}/${ddata.v_type}`}>
+                      <Link to={`/FCDMEdit/${encodeURIComponent(ddata._id)}/${encodeURIComponent(ddata.r_id)}/${encodeURIComponent(ddata.ro_name)}/${encodeURIComponent(ddata.date)}/${encodeURIComponent(ddata.v_name)}/${encodeURIComponent(ddata.v_type)}`}>
                         <button className="edtBtn">Edit</button>
                       </Link>
                     </td>

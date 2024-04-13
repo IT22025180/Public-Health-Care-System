@@ -5,6 +5,7 @@ import Axios from "axios";
 import Swal from "sweetalert2";
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
+import { Link } from "react-router-dom";
 
 const FCRVTable = () => {
 
@@ -140,7 +141,9 @@ const FCRVTable = () => {
                   <td>{RVdata.v_nic}</td>
                   <td>{RVdata.evidence}</td>
                   <td>
-                    <button className="rvedtBtn">Edit</button>
+                    <Link to={`/FCRVEdit/${RVdata._id}/${RVdata.ro_name}/${RVdata.ro_email}/${RVdata.ro_mobile}/${RVdata.date}/${RVdata.v_location}/${RVdata.v_type}/${RVdata.v_description}/${RVdata.v_name}/${RVdata.v_nic}/${RVdata.v_mobile}/${RVdata.v_email}`}>
+                      <button className="rvedtBtn">Edit</button>
+                    </Link>
                   </td>
                   <td>
                     <button className="rvdeleteBtn" onClick={() => deletereport(RVdata._id)}>Delete</button>
@@ -158,7 +161,7 @@ const FCRVTable = () => {
       <div className='genButton'>
         <button onClick={GenReport}>Generate Report</button>
       </div>
-    </Layout>
+    </Layout >
   );
 };
 

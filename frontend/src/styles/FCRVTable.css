@@ -60,3 +60,16 @@
   width: 300px;
   display: inline-block;
 }
+
+.analyse {
+  border: 0;
+  outline: none;
+  background-color: #3498db;
+  padding: 8px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.analyse:hover{
+  background-color: #2980b9;
+}

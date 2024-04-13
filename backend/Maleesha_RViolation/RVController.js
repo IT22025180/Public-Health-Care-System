@@ -84,6 +84,7 @@ const updateVioReport = async (req, res) => {
         const { _id, ro_name, ro_email, ro_mobile, date, v_location, v_type, v_description, v_name, v_nic, v_mobile, v_email } = req.body;
 
         const updatedVioReport = await VioReport.findOneAndUpdate({ _id }, {
+            _id,
             ro_name,
             ro_email,
             ro_mobile,
