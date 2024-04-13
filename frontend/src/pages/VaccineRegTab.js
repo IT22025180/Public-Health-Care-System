@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import '../styles/VaccineRegTab.css'
 import Axios from 'axios';
+import Swal from 'sweetalert2';
+
 
 const VaccineRegTab = () => {
     //state variables
     const[vaccinedata,setvaccinedata]=useState([]);
     const[searchQuery, setSearchQuery] = useState('');//search
 
-    
 
 
 
@@ -28,14 +29,34 @@ const VaccineRegTab = () => {
     //delete
 
     const deletevaccinedata = (id) => {
-        Axios.post('http://localhost:4000/api/deleteVac',{_id: id})
-        .then(response =>{
-            console.log('Vaccine Data deleted successfully');
-            setvaccinedata(prevData => prevData.filter(vaccine => vaccine._id !== id));
-        })
-        .catch(error =>{
-            console.error('Error deleting vaccinedata:',error);
-        })
+        // Display SweetAlert confirmation dialog
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // If confirmed, proceed with deletion
+                Axios.post('http://localhost:4000/api/deleteVac', { _id: id })
+                    .then(response => {
+                        console.log('Vaccine Data deleted successfully');
+                        setvaccinedata(prevData => prevData.filter(vaccine => vaccine._id !== id));
+                        // Display success message
+                        Swal.fire({
+                            title: "Deleted!",
+                            text: "Your file has been deleted.",
+                            icon: "success"
+                        });
+                    })
+                    .catch(error => {
+                        console.error('Error deleting vaccine data:', error);
+                    });
+            }
+        });
     }
 
 
@@ -71,6 +92,7 @@ const VaccineRegTab = () => {
                     <th>Notes</th>
                     <th>Update</th>
                     <th>Delete</th>
+                    
                 </tr>
             </thead>
             <tbody>
@@ -91,6 +113,7 @@ const VaccineRegTab = () => {
                         <td onClick={() => deletevaccinedata(vaccine._id)} className='deleteButtons'>
                             <button >Delete</button>
                         </td>
+
     
                     </tr>
 
