@@ -177,7 +177,7 @@ const LeaveTable = () => {
           </thead>
           <tbody>
             {leavedata && leavedata.length > 0 ? (
-              leavedata.map((leave) => (
+              leavedata.map((leave) => ( 
                 <tr key={leave._id}>
                   <td>{leave.name}</td>
                   <td>{leave.staffid}</td>

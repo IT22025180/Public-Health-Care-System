@@ -1,4 +1,4 @@
-.title1{
+.titleVac{
    
     width: 38%;
     background-color:rgb(206, 213, 224);
@@ -17,7 +17,6 @@
 .addvaccine{
     margin-top: 50px;   
 }
-
 
 .addvaccine .input{
     width:100%;

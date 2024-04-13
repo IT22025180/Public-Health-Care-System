@@ -96,8 +96,8 @@ const VaccineReg = ({submitted,data}) => {
     return (
         <div>
             <Header />
-            <div className='title1'>
-                <h2 className="he2">Vaccine Registration</h2>
+            <div className='titleVac'>
+                <h2 className="head2">Vaccine Registration</h2>
                 {errorMessage && <div className="error-message">{errorMessage}</div>}             
                 <form className='addvaccine'>
                     <div className='input'>
