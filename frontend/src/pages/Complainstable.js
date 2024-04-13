@@ -70,8 +70,37 @@ const Complainstable = () => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
+                        {complainsdata && complainsdata.length > 0 ? (
+                            complainsdata.map((Complains) => (
+                                <TableRow key={Complains._id}>
+                                    <TableCell>{Complains.fname}</TableCell>
+                                    <TableCell>{Complains.lname} </TableCell>
+                                    <TableCell>{Complains.email}</TableCell>
+                                    <TableCell>{Complains.NIC}</TableCell>
+                                    <TableCell>{Complains.Address}</TableCell>
+                                    <TableCell>{Complains.images}</TableCell>
+                                    <TableCell>{Complains.ctype}</TableCell>
+                                    <TableCell>{Complains.cdesc}</TableCell>
+                                    <TableCell>{Complains.area}</TableCell>
+                                    <TableCell>{Complains.location}</TableCell>
+                                    <TableCell>{Complains.images.map((image) => (
+                                        <div >
+                                            <img src={`complainsdata:${image.contentType};base64,${image.data}`} alt={`Image`} width={50} height={50} />
+                                        </div>
+                                    ))}</TableCell>
 
 
+                                    <TableCell >
+                                        <Button >Edit</Button>
+                                        <Button /*onClick={() => ComplainsDdelete(Complains._id)}*/ >Delete</Button>
+                                    </TableCell>
+                                </TableRow>
+                            ))
+                        ) : (
+                            <TableRow>
+                                <TableCell>You have not Complains data</TableCell>
+                            </TableRow>
+                        )}
                     </TableBody>
                 </Table>
             </TableContainer>
