@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import '../styles/bvaccinetable.css'
 import  Axios  from 'axios'
+import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
+
 const Bvaccinetable = () => {
 
     const[bvaccinedata,setbvaccinedata]=useState([]);
+    const navigate = useNavigate();
 
     useEffect(()=>{
         getbvaccinedata();
@@ -32,6 +36,26 @@ const Bvaccinetable = () => {
       });
 };
 
+const confirmDelete = (id) => {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            bvaccineDelete(id);
+            Swal.fire({
+                title: 'Deleted!',
+                text: 'Your file has been deleted.',
+                icon: 'success'
+            });
+        }
+    });
+};
   return (
     <div className='Bvaccinetable'>
         <table border ={1} cellPadding={10} cellSpacing={0}>
@@ -53,11 +77,13 @@ const Bvaccinetable = () => {
                     <td>{bvaccine.quantity}</td>
                     
                     <td className='actionButtons'>
-                        <button>Edit</button>
+                    {bvaccine._id && bvaccine.type && bvaccine.esti_Date && bvaccine.quantity  && (
+                        <button onClick={() => navigate(`/Editbabyvaccination/${bvaccine._id}/${bvaccine.type}/${bvaccine.esti_Date}/${bvaccine.quantity}`)}>Edit</button>
+                    )}
                     </td>
                     <td className='deleteButtons'>
                         
-                        <button onClick={() => bvaccineDelete(bvaccine._id)} >Delete</button>
+                        <button onClick={() => confirmDelete(bvaccine._id)} >Delete</button>
 
                     </td>
                 </tr>

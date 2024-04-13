@@ -3,12 +3,12 @@ import '../styles/babyvaccination.css'
 import { Link } from 'react-router-dom'; 
 import Layout from '../components/Layout';
 import Axios from 'axios';
+import {Alert} from 'react-bootstrap';
 
 const BabyVaccination = (submitted,data) => {
     const[vtype,setvtype]=useState('');
     const[vesti_Date,setvdate]=useState('');
     const[vquantity,setvquantity]=useState(0);
-
     useEffect(()=>{
         if(!submitted){
             setvtype('');
@@ -25,7 +25,10 @@ const BabyVaccination = (submitted,data) => {
         }
     },[data]);
 
+    
+
     const addbvaccine = async()=>{
+
         try{
             const response = await Axios.post('http://localhost:4000/api/addBabyVac',{
                 type:vtype,
@@ -64,7 +67,7 @@ const BabyVaccination = (submitted,data) => {
         <button className='bvsubmit' type='submit'>Cancel</button>
 
         <Link to="/Bvaccinetable">
-            <button onClick={addbvaccine} className='bvsave'type='submit'>Save</button>
+            <button onClick={addbvaccine} className='bvsave'type='button'>Save</button>
         </Link>
 
     </form>

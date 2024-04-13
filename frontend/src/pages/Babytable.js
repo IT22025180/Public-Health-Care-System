@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import '../styles/babytable.css'
 import  Axios  from 'axios';
+import { Link, useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
+
 const Babytable = () => {
 
     const [babydata,setbabydata]=useState([]);
     //search
     const [searchQuery, setSearchQuery] = useState('');
+    const navigate = useNavigate();
 
     useEffect(()=>{
         getbabydata();
@@ -32,6 +36,27 @@ const Babytable = () => {
             .catch(error => {
                 console.error('Error deleting babydata:', error);
       });
+};
+
+const confirmDelete = (id) => {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            babyDdelete(id);
+            Swal.fire({
+                title: 'Deleted!',
+                text: 'Your file has been deleted.',
+                icon: 'success'
+            });
+        }
+    });
 };
    
 //search
@@ -69,13 +94,16 @@ const filteredBabyData = babydata.filter(baby => {
                     <td>{baby.co_no}</td>
                     <td>{baby.notes}</td>
 
-                  
+                   
                     <td className='actionButtons'>
-                        <button >Edit</button>
+                    {baby._id && baby.bname && baby.age && baby.weight  && baby.co_no  && baby.notes  && (
+                        <button onClick={() => navigate(`/Editbabydetails/${baby._id}/${baby.bname}/${baby.age}/${baby.weight}/${baby.co_no}/${baby.notes}`)}>Edit</button>
+                    )}
                     </td>
+                 
                     
                     <td  className='deleteButtons'>
-                        <button onClick={()=> babyDdelete(baby._id)}>Delete</button>
+                        <button onClick={()=> confirmDelete(baby._id)}>Delete</button>
                     </td>
                 </tr>
                     ))

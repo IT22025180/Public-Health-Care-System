@@ -2,10 +2,14 @@ import React, { useEffect, useState } from 'react'
 import '../styles/thriposhatable.css'
 import Axios from 'axios';
 import jsPDF from 'jspdf';
+import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
+
 
 const Thriposhatable = () => {
 
     const[thriposhadata,setthriposhadata]=useState([]);
+    const navigate = useNavigate();
 
     useEffect(()=>{
         getthriposhadata();
@@ -32,6 +36,27 @@ const Thriposhatable = () => {
             .catch(error => {
                 console.error('Error deleting thriposha:', error);
       });
+};
+
+const confirmDelete = (id) => {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            thriposhaDelete(id);
+            Swal.fire({
+                title: 'Deleted!',
+                text: 'Your file has been deleted.',
+                icon: 'success'
+            });
+        }
+    });
 };
 //generate report
     const generatePDF = () => {
@@ -70,10 +95,12 @@ const Thriposhatable = () => {
                     <td>{thriposha.quantity}</td>
 
                     <td className='actionButtons'>
-                        <button>Edit</button>
+                    {thriposha._id && thriposha.type && thriposha.esti_Date && thriposha.quantity  && (
+                        <button onClick={() => navigate(`/Edittriposha/${thriposha._id}/${thriposha.type}/${thriposha.esti_Date}/${thriposha.quantity}`)}>Edit</button>
+                    )}
                     </td>
                     <td className='deleteButtons'>
-                        <button onClick={() => thriposhaDelete(thriposha._id)} >Delete</button>
+                        <button onClick={() => confirmDelete(thriposha._id)} >Delete</button>
                     </td>
                 </tr>
                     ))

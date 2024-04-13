@@ -6,6 +6,7 @@ import { Link, useHistory } from 'react-router-dom';
 import Layout from '../components/Layout';
 import Axios  from 'axios';
 import {Alert} from 'react-bootstrap';
+import {useNavigate} from 'react-router-dom';
 
 const BabyDetails = ({submitted,data}) => {
     const [bname,setbname]=useState('');
@@ -13,7 +14,7 @@ const BabyDetails = ({submitted,data}) => {
     const[weight,setbweight]=useState('');
     const[contactnumber,setbcontactnumber]=useState('');
     const[specialnotes,setbspecialnotes]=useState('');
-
+    const navigate = useNavigate();
 
     useEffect(()=>{
         if(!submitted){
@@ -39,6 +40,7 @@ const BabyDetails = ({submitted,data}) => {
     
     const addbaby =async()=>{
 
+
         
         try{
         const response =await Axios.post('http://localhost:4000/api/addBaby',{
@@ -55,26 +57,6 @@ const BabyDetails = ({submitted,data}) => {
     }
 
     }
-
-    //update
-    const updateBaby = async () => {
-        try {
-            if (data) {
-                // If data is provided, it means we are updating an existing baby
-                await Axios.post(`http://localhost:4000/api/updateBaby/${data.id}`, {
-                    bname,
-                    age,
-                    weight,
-                    co_no: contactnumber,
-                    notes: specialnotes,
-                    
-                });
-                console.log('Successfully updated baby');
-            } 
-        } catch (error) {
-            console.error('Error:', error);
-        }
-    };
 
 
   return (
@@ -113,13 +95,9 @@ const BabyDetails = ({submitted,data}) => {
         
             <button className='bdsubmit' type='submit'>Cancel</button>
 
-            
-        
 
         <Link to="/Babytable">
-        <button onClick={data ? updateBaby : addbaby} className='bdsave' type='submit'>
-        {data ? 'Update' : 'Save'}
-        </button>
+        <button  onClick={addbaby} className='bdsave' type='submit'>Save</button>
         </Link>
 
 
