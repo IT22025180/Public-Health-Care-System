@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import '../styles/Dengueschedules.css';
 import Axios from 'axios';
 import Swal from 'sweetalert2'; // Import SweetAlert
+import Alert from 'react-bootstrap/Alert'; // Import Bootstrap Alert component
 
 const Dengueschedules = ({ submitted, data }) => {
   const [name, setName] = useState('');
@@ -11,6 +12,7 @@ const Dengueschedules = ({ submitted, data }) => {
   const [date, setDate] = useState('');
   const [location, setLocation] = useState('');
   const [description, setDescription] = useState('');
+  const [validationError, setValidationError] = useState(false); // State for validation error
 
   useEffect(() => {
     if (!submitted) {
@@ -33,6 +35,11 @@ const Dengueschedules = ({ submitted, data }) => {
   }, [data]);
 
   const addstaffdengue = async () => {
+    if (!name || !staffmember || !date || !location || !description) {
+      setValidationError(true); // Set validation error to true
+      return; // Exit the function if any field is empty
+    }
+    setValidationError(false); // Reset validation error
     try {
       const response = await Axios.post('http://localhost:4000/api/addstaffdengue', {
         type: name,
@@ -87,12 +94,20 @@ const Dengueschedules = ({ submitted, data }) => {
                 <label>Description:</label>
                 <textarea onChange={e => setDescription(e.target.value)} value={description} />
               </div>
-             
-              <Link to="/DengueAssignTable">
-                <button type="button" onClick={addstaffdengue}>Assign Staff</button>
-                <button className="view-programs">View Scheduled Programs</button>
-              </Link>
-              
+              {validationError && (
+                <Alert variant="danger">All fields are required</Alert>
+              )}
+              {(!name || !staffmember || !date || !location || !description) ? (
+                <div>
+                  <button type="button" onClick={addstaffdengue}>Assign Staff</button>
+                  <button className="view-programs">View Scheduled Programs</button>
+                </div>
+              ) : (
+                <Link to="/DengueAssignTable">
+                  <button type="button" onClick={addstaffdengue}>Assign Staff</button>
+                  <button className="view-programs">View Scheduled Programs</button>
+                </Link>
+              )}
             </form>
           </div>
         </div>

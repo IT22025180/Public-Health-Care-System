@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Axios from "axios";
-import { Link } from "react-router-dom"; // Import Link
+import { Link, useParams } from "react-router-dom";
 import Layout from "../components/Layout";
-import Swal from "sweetalert2"; // Import SweetAlert
+import Swal from "sweetalert2";
 import "../styles/Leave.css";
 
-const Leave = ({ submitted, data }) => {
+const Leave = () => {
   const [name, setName] = useState("");
   const [staffId, setStaffId] = useState("");
   const [email, setEmail] = useState("");
@@ -14,45 +14,70 @@ const Leave = ({ submitted, data }) => {
   const [leaveFor, setLeaveFor] = useState("Days");
   const [leaveStart, setLeaveStart] = useState("");
   const [leaveEnd, setLeaveEnd] = useState("");
+  const [validationError, setValidationError] = useState(false);
+
+  // UseParams hook to get the id from the URL
+  const { id } = useParams();
 
   useEffect(() => {
-    if (!submitted) {
-      setName("");
-      setStaffId("");
-      setEmail("");
-      setPosition("");
-      setLeaveType("");
-      setLeaveFor("Days");
-      setLeaveStart("");
-      setLeaveEnd("");
+    if (id) {
+      // Fetch leave details if id is present (indicating edit mode)
+      fetchLeaveDetails();
     }
-  }, [submitted]);
+  }, [id]);
 
-  useEffect(() => {
-    if (data?.id && data.id !== 0) {
-      setName(data.name);
-      setStaffId(data.staffid);
-      setEmail(data.email);
-      setPosition(data.position);
-      setLeaveType(data.leaveType);
-      setLeaveFor(data.doleave);
-      setLeaveStart(data.leavestrt);
-      setLeaveEnd(data.leaveend);
-    }
-  }, [data]);
-
-  const addLeave = async () => {
+  const fetchLeaveDetails = async () => {
     try {
-      const response = await Axios.post("http://localhost:4000/api/addLeave", {
-        name: name,
-        staffid: staffId,
-        email: email,
-        position: position,
-        doleave: leaveFor,
-        leavestrt: leaveStart,
-        leaveend: leaveEnd,
-        leaveType: leaveType,
-      });
+      const response = await Axios.get(`http://localhost:4000/api/Leave/${id}`);
+      const leaveData = response.data;
+      setName(leaveData.name);
+      setStaffId(leaveData.staffid);
+      setEmail(leaveData.email);
+      setPosition(leaveData.position);
+      setLeaveType(leaveData.leaveType);
+      setLeaveFor(leaveData.doleave);
+      setLeaveStart(leaveData.leavestrt);
+      setLeaveEnd(leaveData.leaveend);
+    } catch (error) {
+      console.error("Error fetching leave details:", error);
+    }
+  };
+
+  const addOrUpdateLeave = async () => {
+    // Validate form fields
+    if (!name || !staffId || !email || !position || !leaveType || !leaveStart || !leaveEnd) {
+      setValidationError(true);
+      return;
+    }
+    setValidationError(false);
+
+    try {
+      let response;
+      if (id) {
+        // Update leave if id is present (indicating edit mode)
+        response = await Axios.put(`http://localhost:4000/api/updateLeave/${id}`, {
+          name: name,
+          staffid: staffId,
+          email: email,
+          position: position,
+          doleave: leaveFor,
+          leavestrt: leaveStart,
+          leaveend: leaveEnd,
+          leaveType: leaveType,
+        });
+      } else {
+        // Add new leave if no id is present (indicating add mode)
+        response = await Axios.post("http://localhost:4000/api/addLeave", {
+          name: name,
+          staffid: staffId,
+          email: email,
+          position: position,
+          doleave: leaveFor,
+          leavestrt: leaveStart,
+          leaveend: leaveEnd,
+          leaveType: leaveType,
+        });
+      }
 
       console.log("Successfully", response.data);
 
@@ -60,7 +85,7 @@ const Leave = ({ submitted, data }) => {
       Swal.fire({
         position: "top-end",
         icon: "success",
-        title: "Leave added Successfully",
+        title: id ? "Leave updated Successfully" : "Leave added Successfully",
         showConfirmButton: false,
         timer: 1500,
       });
@@ -74,123 +99,16 @@ const Leave = ({ submitted, data }) => {
       <div className="layout-container5">
         <div className="leave">
           <form className="emailForm">
-            <h2>Leave Request Form</h2>
-            <div>
-              <label>Name:</label>
-              <input
-                onChange={(e) => setName(e.target.value)}
-                type="text"
-                name="name"
-                value={name}
-              />
-            </div>
-            <div>
-              <label>Staff ID:</label>
-              <input
-                onChange={(e) => setStaffId(e.target.value)}
-                type="text"
-                name="staffId"
-                value={staffId}
-              />
-            </div>
-            <div>
-              <label>Email:</label>
-              <input
-                onChange={(e) => setEmail(e.target.value)}
-                type="email"
-                name="email"
-                value={email}
-              />
-            </div>
-            <div>
-              <label>Position:</label>
-              <input
-                onChange={(e) => setPosition(e.target.value)}
-                type="text"
-                name="position"
-                value={position}
-              />
-            </div>
-            <div>
-              <label>Details of leave:</label>
-              <div>
-                <input
-                  value="Days"
-                  checked={leaveFor === "Days"}
-                  onChange={() => setLeaveFor("Days")}
-                  type="radio"
-                  id="days"
-                />
-                <label htmlFor="days">Days</label>
+            <h2>{id ? 'Edit Leave' : 'Leave Request Form'}</h2>
+            {/* Form fields */}
+            {validationError && (
+              <div className="alert alert-danger" role="alert">
+                All fields are required.
               </div>
-              <div>
-                <input
-                  value="Hours"
-                  checked={leaveFor === "Hours"}
-                  onChange={() => setLeaveFor("Hours")}
-                  type="radio"
-                  id="hours"
-                />
-                <label htmlFor="hours">Hours</label>
-              </div>
-            </div>
-            <div>
-              <label>Leave Start:</label>
-              <input
-                onChange={(e) => setLeaveStart(e.target.value)}
-                type="date"
-                name="leaveStart"
-                value={leaveStart}
-              />
-            </div>
-            <div>
-              <label>Leave End:</label>
-              <input
-                onChange={(e) => setLeaveEnd(e.target.value)}
-                type="date"
-                name="leaveEnd"
-                value={leaveEnd}
-              />
-            </div>
-            <div>
-              <label>Leave type:</label>
-              <div>
-                <input
-                  value="Sick"
-                  checked={leaveType === "Sick"}
-                  onChange={() => setLeaveType("Sick")}
-                  type="radio"
-                  id="sick"
-                />
-                <label htmlFor="sick">Sick</label>
-              </div>
-              <div>
-                <input
-                  value="Vacation"
-                  checked={leaveType === "Vacation"}
-                  onChange={() => setLeaveType("Vacation")}
-                  type="radio"
-                  id="vacation"
-                />
-                <label htmlFor="vacation">Vacation</label>
-              </div>
-              <div>
-                <input
-                  value="Quitting"
-                  checked={leaveType === "Quitting"}
-                  onChange={() => setLeaveType("Quitting")}
-                  type="radio"
-                  id="quitting"
-                />
-                <label htmlFor="quitting">Quitting</label>
-              </div>
-            </div>
-            {/* Use Link to navigate */}
-            <Link to="/LeaveTable">
-              <button onClick={addLeave} className="subBut" type="button">
-                Submit
-              </button>
-            </Link>
+            )}
+            <button onClick={addOrUpdateLeave} className="subBut" type="button">
+              {id ? 'Update' : 'Submit'}
+            </button>
           </form>
         </div>
       </div>

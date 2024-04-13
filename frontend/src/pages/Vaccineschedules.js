@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import '../styles/Vaccineschedules.css';
 import Axios from 'axios';
 import Swal from 'sweetalert2';
+import Alert from 'react-bootstrap/Alert'; // Import Bootstrap Alert component
 
 const Vaccineschedules = ({ submitted, data }) => {
     const [name, setName] = useState('');
@@ -11,6 +12,7 @@ const Vaccineschedules = ({ submitted, data }) => {
     const [date, setDate] = useState('');
     const [location, setLocation] = useState('');
     const [description, setDescription] = useState('');
+    const [validationError, setValidationError] = useState(false);
 
     useEffect(() => {
         if (!submitted) {
@@ -33,6 +35,12 @@ const Vaccineschedules = ({ submitted, data }) => {
     }, [data]);
 
     const addstaffvaccine = async () => {
+        if (!name || !staffmember || !date || !location || !description) {
+            setValidationError(true);
+            return;
+        }
+        setValidationError(false);
+
         try {
             const response = await Axios.post('http://localhost:4000/api/addstaffvaccine', {
                 type: name,
@@ -42,7 +50,6 @@ const Vaccineschedules = ({ submitted, data }) => {
                 description
             });
             console.log('Successfully', response.data);
-            // Display success message using SweetAlert
             Swal.fire({
                 position: "top-end",
                 icon: "success",
@@ -86,10 +93,20 @@ const Vaccineschedules = ({ submitted, data }) => {
                                 <label>Description:</label>
                                 <textarea onChange={e => setDescription(e.target.value)} value={description} />
                             </div>
-                            <Link to="/VaccineAssignTable">
-                                <button type="button" onClick={addstaffvaccine}>Assign Staff</button>
-                                <button className="view-programs">View Scheduled Programs</button>
-                            </Link>
+                            {validationError && (
+                                <Alert variant="danger">All fields are required</Alert>
+                            )}
+                            {(!name || !staffmember || !date || !location || !description) ? (
+                                <div>
+                                    <button type="button" onClick={addstaffvaccine}>Assign Staff</button>
+                                    <button className="view-programs">View Scheduled Programs</button>
+                                </div>
+                            ) : (
+                                <Link to="/VaccineAssignTable">
+                                    <button type="button" onClick={addstaffvaccine}>Assign Staff</button>
+                                    <button className="view-programs">View Scheduled Programs</button>
+                                </Link>
+                            )}
                         </form>
                     </div>
                 </div>

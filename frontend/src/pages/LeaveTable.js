@@ -26,10 +26,7 @@ const LeaveTable = () => {
       });
   };
 
-  const handleEdit = (id) => {
-    navigate(`/EditLeave/${id}`); 
-  };
-
+  
   const handleDelete = (id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -191,7 +188,7 @@ const LeaveTable = () => {
                   <td>{leave.leaveend}</td>
                   <td>{leave.leaveType}</td>
                   <td className='actionButtons'>
-                    <button className="editButton" onClick={() => handleEdit(leave._id)}>Edit</button>
+                    <button className="editButton">Edit</button>
                   </td>
                   <td className='actionButtons'> 
                     <button className="deleteButton" onClick={() => handleDelete(leave._id)}>Delete</button>
