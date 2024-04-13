@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate ,Link} from 'react-router-dom';
 import Layout from '../components/Layout';
 import jsPDF from 'jspdf';
 import logo1 from '../webImages/logo1.png'; 
@@ -187,9 +187,12 @@ const LeaveTable = () => {
                   <td>{leave.leavestrt}</td>
                   <td>{leave.leaveend}</td>
                   <td>{leave.leaveType}</td>
+                  <Link to={`/EditLeave/${leave._id}/${leave.name}/${leave.staffid}/${leave.email}/${leave.doleave}/${leave.leavestrt}/${leave.leaveend}/${leave.leaveType}`}>
+
                   <td className='actionButtons'>
                     <button className="editButton">Edit</button>
                   </td>
+                  </Link>
                   <td className='actionButtons'> 
                     <button className="deleteButton" onClick={() => handleDelete(leave._id)}>Delete</button>
                   </td>

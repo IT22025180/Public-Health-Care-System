@@ -156,6 +156,61 @@ function App() {
         <Route path='/F&CDReportViolationTabe' element={<FCRVTable />} />
         <Route path='/F&CDocumentManagementTabe' element={<FCDMTable />} />
         <Route path='/Fine-And-court-Analyse' element={<FCAnalyse />} />
+          <Route path='/' element={<Home />} />
+          <Route path='/vaccines' element={<Vaccines />} />
+          <Route path='/vaccinereg' element={<VaccineReg />} />
+          <Route path='/VaccineApp' element={<VaccineApp />} />
+          <Route path='/VaccineRequest' element={<VaccineRequest />} />
+          <Route path='/VaccineRegTab' element={<VaccineRegTab />} />
+          <Route path='/vaccineapptab' element={<VaccineAppTab />} />
+          <Route path='/VaccineRequestTab' element={<VaccineRequestTab />} />
+          <Route path='/staff' element={<Staff />} />
+          <Route path='/Leave' element={<Leave />} />
+          <Route path='/Dengueschedules' element={<Dengueschedules />} />
+          <Route path='/Vaccineschedules' element={<Vaccineschedules />} />
+          <Route path='/Raidsschedules' element={<Raidsschedules />} />
+          <Route path='/LeaveTable' element={<LeaveTable />} />
+          <Route path='/StaffLogin' element={<StaffLogin />} />
+          <Route path="/EditLeave/:id" element={<EditLeave />} />
+          <Route path='/DengueAssignTable' element={<DengueAssignTable />} />
+          <Route path='/VaccineAssignTable' element={<VaccineAssignTable />} />
+          <Route path='/RaidsAssign' element={<RaidsAssign />} />
+          <Route path='/clinics' element={<Clinics />} />
+          <Route path='/mainMidwife' element={<MainMidwife />} />
+          <Route path='/babyDetails' element={<BabyDetails />} />
+          <Route path='/babyVaccination' element={<BabyVaccination />} />
+          <Route path='/thriposha' element={<Thriposha />} />
+          <Route path='/Babytable' element={<Babytable />} />
+          <Route path='/Bvaccinetable' element={<Bvaccinetable />} />
+          <Route path='/Thriposhatable' element={<Thriposhatable />} />
+          <Route path='/addclinics' element={<AddClinic />} />
+          <Route path='/addpatient' element={<AddPatients />} />
+          <Route path='/dengueCli' element={<Dengue />} />
+          <Route path='/raids' element={<Raids />} />
+          <Route path='/raidform' element={<RaidForm />} />
+          <Route path='/raidsubform' element={<RaidSubForm />} />
+          <Route path='/updateCli/:_id/:date/:time/:venue/:ctype' element={<UpdateClinic />} />
+          <Route path='/addpatients/:_id/:date/:time/:venue/:ctype' element={<AddPatients />} />
+          <Route path='/dengueCli' element={<Dengue />} />
+          <Route path='/dentalCli' element={<Dental />} />
+          <Route path='/adminClinics' element={<AdminClinic />} />
+          <Route path='/genPatientReport' element={<PatientReport />} />
+          <Route path='/Complains' element={<ComplaintForm />} />
+          <Route path='/Complainstable' element={<Complainstable />} />
+          <Route path='/denguecamp' element={<DengueCampaigns />} />
+          <Route path='/Fine-And-court' element={<FineAndCourt />} />
+          <Route path='/Fine-And-court-Submit-Reports' element={<FCReportForm />} />
+          <Route path='/Fine-And-court-Document-Management' element={<FCDocManage />} />
+          <Route path='/F&CDReportViolationTabe' element={<FCRVTable />} />
+          <Route path='/F&CDocumentManagementTabe' element={<FCDMTable />} />
+          <Route path='/Fine-And-court-Analyse' element={<FCAnalyse />} />
+          <Route path='/FCDMEdit/:_id/:r_id/:ro_name/:date/:v_name/:v_type' element={<FCDMEdit />} />
+          <Route path='/EditLeave/:_id/:name/:staffid/:date/:email/:email/:doleave/:leavestrt/:leaveend/:leaveType' element={<EditLeave />} />
+          <Route path='/DengueHomePage' element={<DengueHomePage />} />
+          <Route path='/Denguemap' element={<Denguemap />} />
+          <Route path='/dclogin' element={<DoctorLogin />} />
+          <Route path='/login' element={<Lgportal />} />
+          <Route path='/popup' element={<ModelPopup />} />
         </Routes>
       </Router>
     </AnimatePresence>
