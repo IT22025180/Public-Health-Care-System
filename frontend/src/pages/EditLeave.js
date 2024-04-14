@@ -13,7 +13,7 @@ const EditLeave = () => {
   const [leavesfor, setLeavesFor] = useState('');
   const [leaveStartDate, setLeaveStartDate] = useState('');
   const [leaveEndDate, setLeaveEndDate] = useState('');
-  const [leaveTypeValue, setLeaveTypeValue] = useState('');
+  const [leaveTypeValue, setLeaveTypeValue] = useState(leaveType);
   const navigate = useNavigate();
 
   useEffect(() => {
