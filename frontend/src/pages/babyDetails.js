@@ -5,8 +5,9 @@ import Header from '../components/Header';
 import { Link, useHistory } from 'react-router-dom';
 import Layout from '../components/Layout';
 import Axios  from 'axios';
-import {Alert} from 'react-bootstrap';
-import {useNavigate} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom'
+import {Alert} from 'react-bootstrap'
+import Swal from 'sweetalert2'
 
 const BabyDetails = ({submitted,data}) => {
     const [bname,setbname]=useState('');
@@ -14,7 +15,8 @@ const BabyDetails = ({submitted,data}) => {
     const[weight,setbweight]=useState('');
     const[contactnumber,setbcontactnumber]=useState('');
     const[specialnotes,setbspecialnotes]=useState('');
-    const navigate = useNavigate();
+    const navigate=useNavigate();
+    const[errorMessage,setErrorMessage]=useState('');
 
     useEffect(()=>{
         if(!submitted){
@@ -38,9 +40,13 @@ const BabyDetails = ({submitted,data}) => {
     },[data]);
 
     
-    const addbaby =async()=>{
+    const addbaby =async(e)=>{
 
-
+        e.preventDefault();
+        if(!bname || !age || !weight || !contactnumber || !specialnotes){
+            setErrorMessage('Please fill in all required fields');
+            return;
+        }
         
         try{
         const response =await Axios.post('http://localhost:4000/api/addBaby',{
@@ -51,7 +57,25 @@ const BabyDetails = ({submitted,data}) => {
             notes:specialnotes,
         });
 
+        console.log('Baby data adding is successful',response.data);
+        Swal.fire({
+         title:"Success!",
+         text:"Baby data was added successfully",
+         icon:"success",
+         showConfirmButton:false,
+         timer:2000
+        });
+
+        setbname('');
+        setbage('');
+        setbweight('');
+        setbcontactnumber('');
+        setbspecialnotes('');
+        navigate('/Babytable');
+         console.log('Successfully',response.data);
+         console.log('Successfully',response.data);
         console.log('Successfully',response.data);
+
     }catch(error){
         console.error('error',error);
     }
@@ -64,7 +88,8 @@ const BabyDetails = ({submitted,data}) => {
 
     <div>
     <div className='bdtitle'>
- 
+    {errorMessage && <Alert variant='danger'>{errorMessage}</Alert>}
+
     <h3 className='he3'>Baby Details</h3>
     <form className='addbaby'>
         <div className='input'>
@@ -93,11 +118,11 @@ const BabyDetails = ({submitted,data}) => {
         </div>
 
         
-            <button className='bdsubmit' type='submit'>Cancel</button>
+            <button className='bddsubmit' type='submit'>Cancel</button>
 
 
         <Link to="/Babytable">
-        <button  onClick={addbaby} className='bdsave' type='submit'>Save</button>
+        <button  onClick={addbaby} className='bddsave' type='submit'>Save</button>
         </Link>
 
 
