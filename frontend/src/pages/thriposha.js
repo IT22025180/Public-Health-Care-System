@@ -88,7 +88,6 @@ const Thriposha = ({submitted,data}) => {
         </div>
 
 
-        <button className='tbsubmit' type='submit'>Cancel</button>
 
         <Link to="/Thriposhatable">
             <button onClick={addthriposha} className='tbsave'type='button'>Save</button>

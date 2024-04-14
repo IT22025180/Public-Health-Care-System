@@ -118,9 +118,7 @@ const BabyDetails = ({submitted,data}) => {
         </div>
 
         
-            <button className='bddsubmit' type='submit'>Cancel</button>
-
-
+        
         <Link to="/Babytable">
         <button  onClick={addbaby} className='bddsave' type='submit'>Save</button>
         </Link>

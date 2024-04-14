@@ -92,7 +92,6 @@ const Editbabyvaccination = () => {
         </div>
 
 
-        <button className='bvsubmit' type='submit'>Cancel</button>
 
         
             <button onClick={confirmUpdatee} className='bvsave'type='button'>Update</button>

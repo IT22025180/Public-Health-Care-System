@@ -92,7 +92,7 @@ const BabyVaccination = (submitted,data) => {
         </div>
 
 
-        <button className='bvsubmit' type='submit'>Cancel</button>
+        
 
         <Link to="/Bvaccinetable">
             <button onClick={addbvaccine} className='bvsave'type='button'>Save</button>

@@ -178,7 +178,7 @@ function App() {
         <Route path='/Babytable' element={<Babytable />} />
         <Route path='/Bvaccinetable' element={<Bvaccinetable />} />
         <Route path='/Thriposhatable' element={<Thriposhatable />} />
-        <Route path='/Editbabydetails/:_id/:bnama/:age/:weight/:co_no/:notes' element={<Editbabydetails/>}/>
+        <Route path='/Editbabydetails/:_id/:bname/:age/:weight/:co_no/:notes' element={<Editbabydetails/>}/>
         <Route path='/Editbabyvaccination/:_id/:type/:esti_Date/:quantity' element={<Editbabyvaccination/>}/>
         <Route path='/Edittriposha/:_id/:type/:esti_Date/:quantity' element={<Edittriposha/>}/>
 
