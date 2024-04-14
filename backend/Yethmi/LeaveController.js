@@ -50,6 +50,7 @@ const updateLeave = async (req, res) => {
         const formatleaveend = formatDate(leaveend);
 
         const updatedLeave = await Leave.findOneAndUpdate({ _id }, {
+            _id,
             name,
             email,
             staffid,

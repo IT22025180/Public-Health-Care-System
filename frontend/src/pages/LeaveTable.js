@@ -189,7 +189,7 @@ const LeaveTable = () => {
                   <td>{leave.leaveType}</td>
                  
                   <td className='actionButtons'>
-                  <Link to={`/EditLeave/${leave._id}/${leave.name}/${leave.staffid}/${leave.email}/${leave.doleave}/${leave.leavestrt}/${leave.leaveend}/${leave.leaveType}`}>
+                  <Link to={`/EditLeave/${leave._id}/${leave.name}/${leave.staffid}/${leave.email}/${leave.position}/${leave.doleave}/${leave.leavestrt}/${leave.leaveend}/${leave.leaveType}`}>
 
                     <button className="editButton">Edit</button>
                     </Link>

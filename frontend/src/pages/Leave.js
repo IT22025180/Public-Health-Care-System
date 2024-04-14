@@ -5,6 +5,7 @@ import Layout from "../components/Layout";
 import Swal from "sweetalert2"; // Import SweetAlert
 import Alert from "react-bootstrap/Alert"; // Import Bootstrap Alert component
 import "../styles/Leave.css";
+import { useNavigate } from "react-router-dom";
 
 const Leave = ({ submitted, data }) => {
   const [name, setName] = useState("");
@@ -35,6 +36,8 @@ const Leave = ({ submitted, data }) => {
       setLeaveEnd(data.leaveend);
     }
   }, [data]);
+
+  const navigate = useNavigate();
 
   const clearForm = () => {
     setName("");
@@ -74,6 +77,8 @@ const Leave = ({ submitted, data }) => {
         title: "Leave added Successfully",
         showConfirmButton: false,
         timer: 1500,
+      }).then(() => {
+        navigate('/LeaveTable');
       });
     } catch (error) {
       console.error("error", error);
@@ -199,6 +204,7 @@ const Leave = ({ submitted, data }) => {
             {validationError && (
               <Alert variant="danger">All fields are required</Alert>
             )}
+            
             <button onClick={addLeave} className="subBut" type="button">
               Submit
             </button>
