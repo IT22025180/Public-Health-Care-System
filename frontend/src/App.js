@@ -59,6 +59,7 @@ import Edittriposha from './pages/Edittriposha';
 
 import FCRFEdit from './pages/FCRFEdit';
 
+import RaidSubTable from './pages/RaidSubTable';
 
 
 
@@ -125,8 +126,18 @@ function App() {
         <Route path='/VaccineRegTab' element={<VaccineRegTab/>}/>
         <Route path='/DengCampTab' element={<DengCampTab/>}/>
         <Route path='/F&CDocumentManagementTabe' element={<FCDMTable/>}/>
+
         <Route path='/RF' element={<RaidForm/>}/>
         <Route path='/F&CDReportViolationTabe' element={<FCRVTable/>}/>
+
+        <Route path='/addclinics' element = {<AddClinic/>}/>
+        <Route path='/addpatient' element = {<AddPatients/>}/>
+        <Route path='/dengueCli' element = {<Dengue/>}/>
+        <Route path='/raids' element={<Raids/>}/>
+        <Route path='/raidform' element={<RaidForm/>}/>
+        <Route path='/raidsubform' element={< RaidSubForm/>}/>
+        <Route path='/raidsubtable' element={< RaidSubTable/>}/>
+
         
 
         <Route path='/addclinics' element = {<AddClinic/>}/>
