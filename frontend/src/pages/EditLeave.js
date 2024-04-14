@@ -7,18 +7,28 @@ import * as Yup from 'yup';
 
 const EditLeave = () => {
   const { name, staffid, email, position, doleave, leavestrt, leaveend, leaveType } = useParams();
-
-  const [employeeName, setEmployeeName] = useState(name);
-  const [staffId, setStaffId] = useState(staffid);
-  const [employeeEmail, setEmployeeEmail] = useState(email);
-  const [employeePosition, setEmployeePosition] = useState(position);
-  const [leaveDate, setLeaveDate] = useState(doleave);
-  const [leaveStartDate, setLeaveStartDate] = useState(leavestrt);
-  const [leaveEndDate, setLeaveEndDate] = useState(leaveend);
-  const [leaveTypeValue, setLeaveTypeValue] = useState(leaveType);
+  const [employeeName, setEmployeeName] = useState('');
+  const [staffId, setStaffId] = useState('');
+  const [employeeEmail, setEmployeeEmail] = useState('');
+  const [employeePosition, setEmployeePosition] = useState('');
+  const [leaveDate, setLeaveDate] = useState('');
+  const [leaveStartDate, setLeaveStartDate] = useState('');
+  const [leaveEndDate, setLeaveEndDate] = useState('');
+  const [leaveTypeValue, setLeaveTypeValue] = useState('');
   const [errorMessage, setErrorMessage] = useState({});
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setEmployeeName(name);
+    setStaffId(staffid);
+    setEmployeeEmail(email);
+    setEmployeePosition(position);
+    setLeaveDate(doleave);
+    setLeaveStartDate(leavestrt);
+    setLeaveEndDate(leaveend);
+    setLeaveTypeValue(leaveType);
+  }, [name, staffid, email, position, doleave, leavestrt, leaveend, leaveType]);
 
   const validateSchema = Yup.object().shape({
     employeeName: Yup.string().required('Employee Name is required').matches(/^[A-Za-z\s]+$/, 'Employee Name must contain only letters'),
@@ -31,58 +41,25 @@ const EditLeave = () => {
     leaveTypeValue: Yup.string().required('Leave Type is required').oneOf(['sick', 'vacation', 'quitting'], 'Please select a valid leave type'),
   });
 
-  useEffect(() => {
-    const validateForm = async () => {
-      try {
-        await validateSchema.validate({
-          employeeName,
-          staffId,
-          employeeEmail,
-          employeePosition,
-          leaveDate,
-          leaveStartDate,
-          leaveEndDate,
-          leaveTypeValue,
-          errorMessage
-        }, { abortEarly: false });
-
-        // Clear error messages if validation passes
-        setErrorMessage({});
-      } catch (error) {
-        // Set error messages if validation fails
-        const errors = {};
-        error.inner.forEach(err => {
-          errors[err.path] = err.message;
-        });
-        setErrorMessage(errors);
-      }
-    };
-
-    // Validate form fields on component mount
-    validateForm();
-  }, []);
-
-  const updateLeave = async (_id, name, staffid, email, position, doleave, leavestrt, leaveend, leaveType) => {
+  const updateLeaves = async (name, staffid, email, doleave, leavestrt, leaveend, leaveType) => {
     try {
       const response = await Axios.post('http://localhost:4000/api/updateLeave', {
-        _id,
         name,
         staffid,
         email,
-        position,
+        position: employeePosition,
         doleave,
         leavestrt,
         leaveend,
         leaveType
       });
-      console.log("Leave updated successfully", response.data);
+      console.log("Form Update successfully", response.data);
       return response;
-    } catch(error) {
-      console.error('Error updating leave:', error);
+    } catch (error) {
+      console.error('Error', error);
       throw error;
     }
   }
-  
 
   const updateL = async () => {
     try {
@@ -92,21 +69,23 @@ const EditLeave = () => {
         staffId,
         employeeEmail,
         employeePosition,
+        leaveDate,
         leaveStartDate,
         leaveEndDate,
         leaveTypeValue,
-        errorMessage
       }, { abortEarly: false });
-  
-      await updateLeave(staffid, employeeName, staffId, employeeEmail, employeePosition, leaveDate, leaveStartDate, leaveEndDate, leaveTypeValue);
+
+      const leaveTypeText = leaveTypeValue === 'sick' ? 'Sick Leave' : leaveTypeValue === 'vacation' ? 'Vacation Leave' : leaveTypeValue === 'quitting' ? 'Quitting Leave' : '';
+
+      await updateLeaves(name, staffid, email, doleave, leavestrt, leaveend, leaveTypeText);
       Swal.fire({
         icon: 'success',
         title: 'Success!',
-        text: 'Leave updated successfully.',
+        text: 'Document added successfully.',
       }).then(() => {
-        navigate('/LeaveTable'); // Navigate back to the LeaveTable component after successful update
+        navigate('/LeaveTable');
       });
-    } catch(error) {
+    } catch (error) {
       const errors = {};
       error.inner.forEach(err => {
         errors[err.path] = err.message;
@@ -115,7 +94,6 @@ const EditLeave = () => {
       console.log("Error", error);
     }
   }
-  
 
   return (
     <Layout>
@@ -130,8 +108,8 @@ const EditLeave = () => {
                 type="text"
                 name="name"
                 value={employeeName}
-                
               />
+              {errorMessage.employeeName && <div className='errorMessage'>{errorMessage.employeeName}</div>}
             </div>
             <div>
               <label>Staff ID:</label>
@@ -141,6 +119,7 @@ const EditLeave = () => {
                 name="staffId"
                 value={staffId}
               />
+              {errorMessage.staffId && <div className='errorMessage'>{errorMessage.staffId}</div>}
             </div>
             <div>
               <label>Email:</label>
@@ -150,6 +129,7 @@ const EditLeave = () => {
                 name="email"
                 value={employeeEmail}
               />
+              {errorMessage.employeeEmail && <div className='errorMessage'>{errorMessage.employeeEmail}</div>}
             </div>
             <div>
               <label>Position:</label>
@@ -159,6 +139,7 @@ const EditLeave = () => {
                 name="position"
                 value={employeePosition}
               />
+              {errorMessage.employeePosition && <div className='errorMessage'>{errorMessage.employeePosition}</div>}
             </div>
             <div>
               <label>Leave Start Date:</label>
@@ -168,6 +149,7 @@ const EditLeave = () => {
                 name="leaveStartDate"
                 value={leaveStartDate}
               />
+              {errorMessage.leaveStartDate && <div className='errorMessage'>{errorMessage.leaveStartDate}</div>}
             </div>
             <div>
               <label>Leave End Date:</label>
@@ -177,6 +159,7 @@ const EditLeave = () => {
                 name="leaveEndDate"
                 value={leaveEndDate}
               />
+              {errorMessage.leaveEndDate && <div className='errorMessage'>{errorMessage.leaveEndDate}</div>}
             </div>
             <div>
               <label>Leave Type:</label>
@@ -188,14 +171,8 @@ const EditLeave = () => {
                 <option value="vacation">Vacation</option>
                 <option value="quitting">Quitting</option>
               </select>
+              {errorMessage.leaveTypeValue && <div className='errorMessage'>{errorMessage.leaveTypeValue}</div>}
             </div>
-            {Object.keys(errorMessage).length > 0 && (
-              <div className="error">
-                {Object.values(errorMessage).map((error, index) => (
-                  <p key={index}>{error}</p>
-                ))}
-              </div>
-            )}
             <button onClick={updateL} className="subBut" type="button">
               Submit
             </button>

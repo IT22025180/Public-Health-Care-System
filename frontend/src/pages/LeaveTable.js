@@ -187,12 +187,14 @@ const LeaveTable = () => {
                   <td>{leave.leavestrt}</td>
                   <td>{leave.leaveend}</td>
                   <td>{leave.leaveType}</td>
+                 
+                  <td className='actionButtons'>
                   <Link to={`/EditLeave/${leave._id}/${leave.name}/${leave.staffid}/${leave.email}/${leave.doleave}/${leave.leavestrt}/${leave.leaveend}/${leave.leaveType}`}>
 
-                  <td className='actionButtons'>
                     <button className="editButton">Edit</button>
+                    </Link>
                   </td>
-                  </Link>
+                 
                   <td className='actionButtons'> 
                     <button className="deleteButton" onClick={() => handleDelete(leave._id)}>Delete</button>
                   </td>
