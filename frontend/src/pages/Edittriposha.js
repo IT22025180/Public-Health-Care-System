@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Layout from '../components/Layout';
 import '../styles/thriposha.css'
 import { useNavigate ,useParams } from 'react-router-dom';
-import { Axios } from 'axios';
+import Axios from 'axios';
 import Swal from 'sweetalert2';
 import {Alert} from 'react-bootstrap';
 
