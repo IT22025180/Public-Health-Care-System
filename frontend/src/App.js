@@ -56,6 +56,7 @@ import { AnimatePresence } from 'framer-motion';
 import Editbabydetails from './pages/Editbabydetails';
 import Editbabyvaccination from './pages/Editbabyvaccination';
 import Edittriposha from './pages/Edittriposha';
+import FCRFEdit from './pages/FCRFEdit';
 
 function App() {
   return (
