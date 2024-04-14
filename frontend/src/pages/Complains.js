@@ -15,7 +15,7 @@ const ComplaintForm = () => {
     NIC: '',
     yaddress: '',
     images: [],
-    ctype: '',
+    ctype: null,
     /*otherDocument: [],*/
     cdesc: '',
     date: '',
@@ -29,10 +29,10 @@ const ComplaintForm = () => {
   const addComplain = async (e) => {
 
 
-    if (!formData.fname || !formData.lname || !formData.mobile || !formData.email || !formData.NIC || !formData.yaddress || !formData.images || !formData.ctype || !formData.cdesc || !formData.date || !formData.area) {
+   /* if (!formData.fname || !formData.lname || !formData.mobile || !formData.email || !formData.NIC || !formData.yaddress || !formData.ctype || !formData.cdesc || !formData.date || !formData.area) {
       setErrorMessage('Please fill in all required fields');
       return;
-    }
+    }*/
 
 
     e.preventDefault();
@@ -98,6 +98,7 @@ const ComplaintForm = () => {
 
   const handleImageChange = (e) => {
     const files = Array.from(e.target.files).slice(0, 4);
+    console.log(files);
     setFormData((prevData) => ({
       ...prevData,
       images: files,
@@ -173,8 +174,9 @@ const ComplaintForm = () => {
               <Form.Group >
                 <Form.Label>Complain Type:</Form.Label>
                 <Form.Control as="select" name="complainType" value={formData.ctype} onChange={(e) => setFormData({ ...formData, ctype: e.target.value })} required>
-                  <option value="dengue">Dengue</option>
-                  <option value="food">Food</option>
+                <option value="" selected disabled>Select type</option>
+                  <option value="Food">Food</option>
+                  <option value="Dengue">Dengue</option>
                 </Form.Control>
               </Form.Group>
             </Col>

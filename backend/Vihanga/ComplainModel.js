@@ -13,7 +13,7 @@ const AddComplain = new mongoose.Schema({
     lname: String,
     mobile: Number,
     email: String,
-    NIC: Number,
+    NIC: String,
     yaddress: String,
     ctype: String,
     cdesc: String,
