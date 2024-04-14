@@ -95,4 +95,4 @@ app.use('/api', routerP);
 app.use('/api', routerDS);
 app.use('/api', routerVS);
 app.use('/api', routerL);
-app.use('/api', routerRA)
+app.use('/api', routerRA);
