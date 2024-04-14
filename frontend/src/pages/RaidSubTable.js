@@ -12,7 +12,7 @@ const RaidSubTable = () => {
     },[]);
 
     const getsubmissiondata =()=>{
-        Axios.get('http://localhost:4000/api/raidSub')
+        Axios.get('http://localhost:4000/api/RaidSubForm')
         .then(response=>{
             console.log('data from sever',response.data);
             setsubmissiondata(response.data.allRSub);

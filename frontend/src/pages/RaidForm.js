@@ -90,7 +90,7 @@ const RaidForm= ({submitted,data}) => {
             <button className='bdsubmit' type='submit'>Cancel</button>
 
             
-        <Link to="/Raid Schedule Table">
+        <Link to="/RaidFormTable">
             <button onClick={addRF} className='bdsave'type='submit'>Save</button>
         </Link>
 

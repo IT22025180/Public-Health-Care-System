@@ -62,6 +62,7 @@ import FCRFEdit from './pages/FCRFEdit';
 import RaidSubTable from './pages/RaidSubTable';
 import FCReportStatus from './pages/FCReportStatus';
 import FCAnalMain from './pages/FCAnalyseMain';
+import RaidFormTable from './pages/RaidFormTable';
 
 
 
@@ -137,6 +138,7 @@ function App() {
         <Route path='/dengueCli' element = {<Dengue/>}/>
         <Route path='/raids' element={<Raids/>}/>
         <Route path='/raidform' element={<RaidForm/>}/>
+        <Route path='/raidformtable' element={< RaidFormTable/>}/>
         <Route path='/raidsubform' element={< RaidSubForm/>}/>
         <Route path='/raidsubtable' element={< RaidSubTable/>}/>
 
