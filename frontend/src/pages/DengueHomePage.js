@@ -37,32 +37,32 @@ const DengueHomePage = () => {
                                 <img src={denimg1} className="card-img-top" alt="image1" />
                                 <div className="card-body">
                                     <h5 className="card-title">Dengue Awareness Day</h5>
-                                    <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    <a href="#" className="btn btn-primary">Go somewhere</a>
+                                    <p className="card-text">Join us as we unite to combat dengue fever. On this special day, we aim to raise awareness about dengue prevention, symptoms, and treatment.</p>
+                                    <a href="/DengCampTab" className="btn btn-primary">More details</a>
                                 </div>
                             </div>
                             <div className="card d-none d-md-block">
                                 <img src={denimg2} className="card-img-top" alt="image2" />
                                 <div className="card-body">
                                     <h5 className="card-title">Take a Stand Against Dengue</h5>
-                                    <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    <a href="#" className="btn btn-primary">Go somewhere</a>
+                                    <p className="card-text">"Take a Stand Against Dengue" is a community-driven initiative aimed at combating the spread of dengue fever together for a healthier future.</p>
+                                    <a href="/DengCampTab" className="btn btn-primary">More details</a>
                                 </div>
                             </div>
                             <div className="card d-none d-md-block">
                                 <img src={denimg3} className="card-img-top" alt="image3" />
                                 <div className="card-body">
                                     <h5 className="card-title">Dengue Danger Detectives</h5>
-                                    <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    <a href="#" className="btn btn-primary">Go somewhere</a>
+                                    <p className="card-text">"Dengue Danger Detectives" educates children about the dangers of dengue fever and encourages them to take proactive steps to prevent its spread.</p>
+                                    <a href="/DengCampTab" className="btn btn-primary">More details</a>
                                 </div>
                             </div>
                             <div className="card d-none d-md-block">
                                 <img src={denimg4} className="card-img-top" alt="image4" />
                                 <div className="card-body">
                                     <h5 className="card-title">Dengue Awareness Drive in Villages</h5>
-                                    <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    <a href="#" className="btn btn-primary">Go somewhere</a>
+                                    <p className="card-text">Join us in our Dengue Awareness Drive in Villages program, aimed at safeguarding our community against the threat of dengue fever. </p>
+                                    <a href="/DengCampTab" className="btn btn-primary">More details</a>
                                 </div>
                             </div>
                         </div>
@@ -79,8 +79,8 @@ const DengueHomePage = () => {
             </div>
             <div className="addcamphome">
                 <img src={denimg6} className="addcaimg" alt="image6"/>
-                <button onClick={handleClick} className="addcbutton">Add Campaigns</button>
-                <button onClick={handleClick} className="viewmap">View Map</button>
+                <a href="/DengueCampaignSchedule" className="addcbutton">Add Campaigns</a>
+                <a href="/Denguemap" className="viewmap">Add Campaigns</a>
             </div>
         </Layout>
     );
