@@ -5,15 +5,16 @@ import Swal from 'sweetalert2';
 import { useNavigate, useParams } from 'react-router-dom';
 
 const EditLeave = () => {
-  const {_id, name, staffid, email, position, doleave, leavestrt, leaveend, leaveType } = useParams();
+  const { _id, name, staffid, email, position, doleave, leavestrt, leaveend, leaveType } = useParams();
   const [employeeName, setEmployeeName] = useState('');
   const [staffId, setStaffId] = useState('');
   const [employeeEmail, setEmployeeEmail] = useState('');
   const [employeePosition, setEmployeePosition] = useState('');
-  const [leavesfor, setLeavesFor] = useState('');
+  const [leavesfor, setLeavesFor] = useState(doleave); // Initialize with doleave
   const [leaveStartDate, setLeaveStartDate] = useState('');
   const [leaveEndDate, setLeaveEndDate] = useState('');
   const [leaveTypeValue, setLeaveTypeValue] = useState(leaveType);
+  const [errors, setErrors] = useState({});
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -24,12 +25,62 @@ const EditLeave = () => {
     setLeaveStartDate(leavestrt);
     setLeaveEndDate(leaveend);
     setLeaveTypeValue(leaveType);
-    setLeavesFor(doleave)
+    setLeavesFor(doleave);
+  }, [name, staffid, email, position, doleave, leavestrt, leaveend, leaveType]);
 
-  }, [name, staffid, email, position,doleave, leavestrt, leaveend, leaveType]);
-  
+  const validateForm = () => {
+    let errors = {};
+    let isValid = true;
+
+    if (!employeeName.trim()) {
+      errors.employeeName = 'Name is required';
+      isValid = false;
+    }
+
+    if (!staffId.trim()) {
+      errors.staffId = 'Staff ID is required';
+      isValid = false;
+    }
+
+    if (!employeeEmail.trim()) {
+      errors.employeeEmail = 'Email is required';
+      isValid = false;
+    }
+
+    if (!employeePosition.trim()) {
+      errors.employeePosition = 'Position is required';
+      isValid = false;
+    }
+
+    if (!leavesfor) {
+      errors.leavesfor = 'Details of leave is required';
+      isValid = false;
+    }
+
+    if (!leaveStartDate) {
+      errors.leaveStartDate = 'Leave start date is required';
+      isValid = false;
+    }
+
+    if (!leaveEndDate) {
+      errors.leaveEndDate = 'Leave end date is required';
+      isValid = false;
+    }
+
+    if (!leaveTypeValue) {
+      errors.leaveTypeValue = 'Leave type is required';
+      isValid = false;
+    }
+
+    setErrors(errors);
+    return isValid;
+  };
 
   const updateLeaves = async () => {
+    if (!validateForm()) {
+      return;
+    }
+
     try {
       const response = await Axios.post('http://localhost:4000/api/updateLeave', {
         _id: _id,
@@ -37,23 +88,14 @@ const EditLeave = () => {
         staffid: staffId,
         email: employeeEmail,
         position: employeePosition,
-        doleave: doleave,
+        doleave: leavesfor,
         leavestrt: leaveStartDate,
         leaveend: leaveEndDate,
-        leaveType: leaveType,
+        leaveType: leaveTypeValue,
       });
-  
+
       console.log('Form Update successfully', response.data);
-      // Update state variables with response data
-      setEmployeeName(response.data.data.name);
-      setStaffId(response.data.data.staffid);
-      setEmployeeEmail(response.data.data.email);
-      setEmployeePosition(response.data.data.position);
-      setLeavesFor(response.data.data.doleave);
-      setLeaveStartDate(response.data.data.leavestrt);
-      setLeaveEndDate(response.data.data.leaveend);
-      setLeaveTypeValue(response.data.data.leaveType);
-  
+
       Swal.fire({
         icon: 'success',
         title: 'Success!',
@@ -71,8 +113,6 @@ const EditLeave = () => {
       }
     }
   };
-  
-  
 
   return (
     <Layout>
@@ -88,6 +128,7 @@ const EditLeave = () => {
                 name="name"
                 value={employeeName}
               />
+              {errors.employeeName && <p className="error">{errors.employeeName}</p>}
             </div>
             <div>
               <label>Staff ID:</label>
@@ -97,6 +138,7 @@ const EditLeave = () => {
                 name="staffId"
                 value={staffId}
               />
+              {errors.staffId && <p className="error">{errors.staffId}</p>}
             </div>
             <div>
               <label>Email:</label>
@@ -106,6 +148,7 @@ const EditLeave = () => {
                 name="email"
                 value={employeeEmail}
               />
+              {errors.employeeEmail && <p className="error">{errors.employeeEmail}</p>}
             </div>
             <div>
               <label>Position:</label>
@@ -115,29 +158,29 @@ const EditLeave = () => {
                 name="position"
                 value={employeePosition}
               />
+              {errors.employeePosition && <p className="error">{errors.employeePosition}</p>}
             </div>
             <div>
               <label>Details of leave:</label>
               <div>
                 <input
                   value="Days"
-                  checked={leavesfor === "Days"}
-                  onChange={() => setLeavesFor("Days")}
+                  checked={leavesfor === 'Days'}
+                  onChange={() => setLeavesFor('Days')}
                   type="radio"
                   id="days"
                 />
                 <label htmlFor="days">Days</label>
-              </div>
-              <div>
                 <input
                   value="Hours"
-                  checked={leavesfor === "Hours"}
-                  onChange={() => setLeavesFor("Hours")}
+                  checked={leavesfor === 'Hours'}
+                  onChange={() => setLeavesFor('Hours')}
                   type="radio"
                   id="hours"
                 />
                 <label htmlFor="hours">Hours</label>
               </div>
+              {errors.leavesfor && <p className="error">{errors.leavesfor}</p>}
             </div>
             <div>
               <label>Leave Start Date:</label>
@@ -147,6 +190,7 @@ const EditLeave = () => {
                 name="leaveStartDate"
                 value={leaveStartDate}
               />
+              {errors.leaveStartDate && <p className="error">{errors.leaveStartDate}</p>}
             </div>
             <div>
               <label>Leave End Date:</label>
@@ -156,39 +200,37 @@ const EditLeave = () => {
                 name="leaveEndDate"
                 value={leaveEndDate}
               />
+              {errors.leaveEndDate && <p className="error">{errors.leaveEndDate}</p>}
             </div>
             <div>
               <label>Leave Type:</label>
               <div>
-              <input
-                 value="Sick"
-                 checked={leaveTypeValue === "Sick"}
-                 onChange={() => setLeaveTypeValue("Sick")} // Update leaveTypeValue correctly
-                 type="radio"
-                 id="sick"
-               />
-               <label htmlFor="sick">Sick</label>
-              </div>
-              <div>
+                <input
+                  value="Sick"
+                  checked={leaveTypeValue === 'Sick'}
+                  onChange={() => setLeaveTypeValue('Sick')}
+                  type="radio"
+                  id="sick"
+                />
+                <label htmlFor="sick">Sick</label>
                 <input
                   value="Vacation"
-                  checked={leaveTypeValue === "Vacation"}
-                  onChange={() => setLeaveTypeValue("Vacation")}
+                  checked={leaveTypeValue === 'Vacation'}
+                  onChange={() => setLeaveTypeValue('Vacation')}
                   type="radio"
                   id="vacation"
                 />
                 <label htmlFor="vacation">Vacation</label>
-              </div>
-              <div>
                 <input
                   value="Quitting"
-                  checked={leaveTypeValue === "Quitting"}
-                  onChange={() => setLeaveTypeValue("Quitting")}
+                  checked={leaveTypeValue === 'Quitting'}
+                  onChange={() => setLeaveTypeValue('Quitting')}
                   type="radio"
                   id="quitting"
                 />
                 <label htmlFor="quitting">Quitting</label>
               </div>
+              {errors.leaveTypeValue && <p className="error">{errors.leaveTypeValue}</p>}
             </div>
             <button onClick={updateLeaves} className="subBut" type="button">
               Update

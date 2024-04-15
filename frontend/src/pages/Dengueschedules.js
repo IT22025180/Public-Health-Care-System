@@ -3,116 +3,113 @@ import Layout from '../components/Layout';
 import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import '../styles/Dengueschedules.css';
 import Axios from 'axios';
+import { Dialog, DialogTitle, DialogContent } from '@mui/material';
 import Swal from 'sweetalert2'; // Import SweetAlert
 import Alert from 'react-bootstrap/Alert'; // Import Bootstrap Alert component
 
 const Dengueschedules = ({ submitted, data }) => {
-  const [name, setName] = useState('');
-  const [staffmember, setStaffmember] = useState('');
-  const [date, setDate] = useState('');
-  const [location, setLocation] = useState('');
-  const [description, setDescription] = useState('');
-  const [validationError, setValidationError] = useState(false); // State for validation error
+     const [campdata,setcampdata]=useState([]);
+     const [open, openConfirm] = useState(false);
+     const [staffmember,setstaffmember]=useState('');
+    const [searchQuery, setSearchQuery] = useState('');
 
-  useEffect(() => {
-    if (!submitted) {
-      setName('');
-      setStaffmember('');
-      setDate('');
-      setLocation('');
-      setDescription('');
-    }
-  }, [submitted]);
+    useEffect(()=>{
+        getcampdata();
+    },[]);
 
-  useEffect(() => {
-    if (data?.id && data.id !== 0) {
-      setName(data.name);
-      setStaffmember(data.staffmember);
-      setDate(data.date);
-      setLocation(data.location);
-      setDescription(data.description);
-    }
-  }, [data]);
-
-  const addstaffdengue = async () => {
-    if (!name || !staffmember || !date || !location || !description) {
-      setValidationError(true); // Set validation error to true
-      return; // Exit the function if any field is empty
-    }
-    setValidationError(false); // Reset validation error
-    try {
-      const response = await Axios.post('http://localhost:4000/api/addstaffdengue', {
-        type: name,
-        staffmember: staffmember,
-        date: date,
-        location: location,
-        description: description
-      });
-      console.log('Successfully', response.data);
-
-      // Display success message
-      Swal.fire({
-        position: "top-end",
-        icon: "success",
-        title: "Staff added successfully",
-        showConfirmButton: false,
-        timer: 1500
-      });
-    } catch (error) {
-      console.error('error', error);
-    }
+    const functionPopup = () => {
+        
+      openConfirm(true);
   }
 
+    const closepopup = () => {
+      openConfirm(false);
+  }
+
+    const getcampdata =()=>{
+        Axios.get('http://localhost:4000/api/camp')
+        .then(response => {
+            console.log('data from server',response.data);
+            setcampdata(response.data.allCampaign);
+        })
+        .catch(error=>{
+            console.error("Axios error: ",error);
+        })
+    } ;
+    const filteredcampdata = campdata.filter(camp=> {
+
+      return camp.date?.toLowerCase().includes(searchQuery.toLowerCase());
+  
+  });
+  
+  const addstaffdengue = async()=>{
+try{
+  const response = await Axios.post("http://localhost:4000/api/addstaffdengue",{
+    
+      venue:campdata.venue,      
+      date:campdata.date,
+      staffmember:staffmember, 
+      time:campdata.time,  
+}
+  )
+  console.log("Successfully", response.data);
+
+}catch (error) {
+  console.error("error", error);
+}  }
+
+
   return (
+    <>
     <Layout>
-      <div className="layout-container1">
-        <div className="assign-staff-container">
-          <h3>Assign Staff for Dengue Prevention Programs and Awareness Campaigns</h3>
-          <div className='form-box'>
-            <form>
-              <div>
-                <label>Program Type:</label>
-                <select onChange={e => setName(e.target.value)} value={name}>
-                  <option value="">Select Program Type</option>
-                  <option value="prevention">Dengue Prevention Program</option>
-                  <option value="awareness">Dengue Awareness Campaign</option>
-                </select>
-              </div>
-              <div>
-                <label>Staff Member:</label>
-                <input onChange={e => setStaffmember(e.target.value)} type="text" value={staffmember} />
-              </div>
-              <div>
-                <label>Date:</label>
-                <input onChange={e => setDate(e.target.value.toString())} type="date" value={date} />
-              </div>
-              <div>
-                <label>Location:</label>
-                <input onChange={e => setLocation(e.target.value)} type="text" value={location} />
-              </div>
-              <div>
-                <label>Description:</label>
-                <textarea onChange={e => setDescription(e.target.value)} value={description} />
-              </div>
-              {validationError && (
-                <Alert variant="danger">All fields are required</Alert>
-              )}
-              {(!name || !staffmember || !date || !location || !description) ? (
-                <div>
-                  <button type="button" onClick={addstaffdengue}>Assign Staff</button>
-                  <button className="view-programs">View Scheduled Programs</button>
-                </div>
-              ) : (
-                <Link to="/DengueAssignTable">
-                  <button type="button" onClick={addstaffdengue}>Assign Staff</button>
-                  <button className="view-programs">View Scheduled Programs</button>
-                </Link>
-              )}
-            </form>
-          </div>
+      <div className='Dcamptable'>
+         <form className= "campsearch_bar">
+         <input  placeholder="Search name" type='text' value={searchQuery} onChange={e => setSearchQuery(e.target.value)} />
+         </form>
+        <table border ={1} cellPadding={10} cellSpacing={0}>
+            <thead>
+                <tr>
+                    <th>Venue</th>
+                    <th>Date</th>
+                    <th>Starting time</th>
+                    <th>Conducted by</th>
+                    <th>Assign Staff</th>
+                </tr>
+            </thead>
+            <tbody>
+             {filteredcampdata && filteredcampdata.length > 0 ? (
+                filteredcampdata.map((camp)=>(
+                <tr key={camp._id}>
+                    <td>{camp.venue}</td>
+                    <td>{camp.date}</td>
+                    <td>{camp.time}</td>
+                    <td>{camp.drName}</td>
+                   
+          
+                    <td className='reportButtons'>
+                    <button onClick={functionPopup}>Assign Staff</button>
+                    </td>
+                </tr>))
+            ):(
+                <tr>
+                    <td>You have not camp data</td>
+                </tr>
+             )}   
+               
+            </tbody>
+        </table>
         </div>
-      </div>
     </Layout>
+    <Dialog open = {open}>
+     <DialogTitle>Assign staff</DialogTitle>
+     <DialogContent>
+      <p>{campdata.venue}</p>
+      <p>{campdata.date}</p>
+      <p>{campdata.time}</p>
+      <input type='text'onChange={(e) => setstaffmember(e.target.value)}></input>
+      <button onClick={addstaffdengue} >submit</button>
+     </DialogContent>
+    </Dialog> </>
   );
 };
 
