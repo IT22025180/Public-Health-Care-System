@@ -49,6 +49,32 @@ const RaidSubTable = () => {
         setSubmissionData(filteredData);
     };
 
+    const generatePDF = () => {
+        const doc = new jsPDF();
+        let yPos = 20;
+
+        doc.text("Raid Submission Report", 20, 10);
+
+        submissiondata.forEach((submission, index) => {
+            yPos = yPos + 10;
+            doc.text(`Location: ${submission.location}`, 20, yPos);
+            yPos = yPos + 10;
+            doc.text(`Details: ${submission.details}`, 20, yPos);
+            yPos = yPos + 10;
+            doc.text(`Special Notes: ${submission.specialNotes}`, 20, yPos);
+            yPos = yPos + 10;
+
+            if (index !== submissiondata.length - 1 && yPos > 250) {
+                doc.addPage();
+                yPos = 20;
+            }
+        });
+
+        doc.save("RaidSubmissionReport.pdf");
+        // Reset the submission data back to original after generating PDF
+        getsubmissiondata();
+    };
+
     return (
         <Layout>
             <div className='RaidSubmissionTable'>
@@ -63,6 +89,7 @@ const RaidSubTable = () => {
                             <th>Special Notes</th>
                             <th>Edit</th>
                             <th>Delete</th>
+                            <th>Generate PDF</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -82,6 +109,9 @@ const RaidSubTable = () => {
                                     <td className='deleteButtons'>
                                         <button onClick={() => submissionDelete(submission._id)}>Delete</button>
                                     </td>
+                                    <td> 
+                        <button className="pdfButton" onClick={() =>generatePDF(RaidSubTable)}>generatePDF</button>
+                        </td>
                                 </tr>
                             ))
                         ) : (

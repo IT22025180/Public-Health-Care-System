@@ -1,12 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, } from 'react'
 import '../styles/RaidFormTable.css';
 import Layout from '../components/Layout';
 import Axios from 'axios';
 import { Link } from 'react-router-dom';
 
+import jsPDF from 'jspdf';
+
 const RaidFormTable = () => {
     const [formtabledata, setFormTableData] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
+    
+
     useEffect(() => {
         getFormTableData();
     }, []);
@@ -44,12 +48,16 @@ const RaidFormTable = () => {
         formtable.sNote.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
+    
+
     return (
         <Layout>|
             <h2>Raid Form Table</h2>
+           
             <div className="search">
           <input type="text" value={searchQuery} onChange={e => setSearchQuery(e.target.value)} placeholder="Search" />
         </div>
+       
             <div className='FormtableTab'>
                 <table border={1} cellPadding={10} cellSpacing={0}>
                     <thead>
