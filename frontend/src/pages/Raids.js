@@ -20,7 +20,7 @@ const Raids = () => {
         title: 'Raid Form',
         buttonText: 'Add',
         buttonLink: '/RaidForm',
-        className: 'dengue-card',
+        className: 'Form-card',
         /*image: image1*/
       },
   
@@ -29,7 +29,7 @@ const Raids = () => {
         title: 'Raid Submission',
         buttonText: 'Add',
         buttonLink: '/RaidSubForm',
-        className: 'vaccine-card',
+        className: 'Submission-card',
         /*image:image2*/
         
         
