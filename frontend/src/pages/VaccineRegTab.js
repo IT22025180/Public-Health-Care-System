@@ -26,7 +26,7 @@ const VaccineRegTab = () => {
       })
   }
 
-
+//delete
   const deletevaccinedata = (id) => {
     // Display SweetAlert confirmation dialog
     Swal.fire({
@@ -69,36 +69,7 @@ const VaccineRegTab = () => {
     logo.src = logo1; // Use the imported logo image
     doc.addImage(logo, 'PNG', 6, 7, 20, 20); // Adjust the position and dimensions as needed
 
-    const deletevaccinedata = (id) => {
-        // Display SweetAlert confirmation dialog
-        Swal.fire({
-            title: "Are you sure?",
-            text: "You won't be able to revert this!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                // If confirmed, proceed with deletion
-                Axios.post('http://localhost:4000/api/deleteVac', { _id: id })
-                    .then(response => {
-                        console.log('Vaccine Data deleted successfully');
-                        setvaccinedata(prevData => prevData.filter(vaccine => vaccine._id !== id));
-                        // Display success message
-                        Swal.fire({
-                            title: "Deleted!",
-                            text: "Your file has been deleted.",
-                            icon: "success"
-                        });
-                    })
-                    .catch(error => {
-                        console.error('Error deleting vaccine data:', error);
-                    });
-            }
-        });
-    }
+   
     // Add Public Health Information System as the letterhead
     doc.setFontSize(12);
     doc.text('Public Health Information System', 70, 15); // Adjust the position as needed

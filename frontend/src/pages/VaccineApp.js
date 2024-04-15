@@ -4,12 +4,14 @@ import Header from '../components/Header';
 import '../styles/VaccineApp.css'
 import Axios from 'axios';
 import { useNavigate } from "react-router-dom";
+import Swal from 'sweetalert2';
 
 const VaccineApp = ({submitted,data}) => {
     const[v_name,setv_name]=useState('');
     const[quantity,setq_uantity]=useState('');
     const[date,setDate]=useState('');
     const[location,setlocation]=useState('');
+    const [errorMessage, setErrorMessage] = useState('');
 
     const navigate = useNavigate();
 
@@ -38,7 +40,41 @@ const VaccineApp = ({submitted,data}) => {
         navigate('/VaccineAppTab');
     }
 
-    const addvacapp = async()=>{
+    const addvacapp = async(event)=>{
+        event.preventDefault(); // Prevent default form submission//prevent the error message disapearing error
+
+        // Check if any field is empty
+        if (!v_name || !quantity || !date || !location) {
+            setErrorMessage("Please fill in all fields.");
+            return;
+        }
+
+        // Check if quantity is a number
+        if (isNaN(quantity)) {
+            setErrorMessage("Please enter a valid quantity.");
+            return;
+        }
+
+        // Show SweetAlert confirmation message
+        Swal.fire({
+            title: "Do you want to save the data?",
+            showCancelButton: true,
+            confirmButtonText: "Save",
+            
+        }).then((result) => {
+            
+            if (result.isConfirmed) {
+                // User clicked "Save"
+                // Perform API call or any other action here
+                saveData(); // Assuming saveData is a function to perform the API call
+            } else if (result.isDenied) {
+                // User clicked "Don't save", do nothing
+            }
+        });
+    };    
+
+
+    const saveData = async () => {
         try{
             const response = await Axios.post('http://localhost:4000/api/addVacApp',{
                 v_name : v_name,
@@ -50,10 +86,14 @@ const VaccineApp = ({submitted,data}) => {
 
             console.log('Successfully',response.data);
             
+            // Show success message
+            Swal.fire("Saved!", "", "success");
         }catch(error){
             console.error('error',error);
+            // Show error message
+            Swal.fire("Error", "Failed to save data", "error");
         }
-    }
+    };
 
     return(
         <div>
@@ -62,6 +102,7 @@ const VaccineApp = ({submitted,data}) => {
     <div className='title1'>
 
     <h2 className="head2" >Vaccination Appointments</h2>
+    {errorMessage && <div className="error-message">{errorMessage}</div>}
     <form className='addvaccineapp'>
         <div className='input'>
             <label htmlFor='v_name'>Vaccine Name :</label>
@@ -93,7 +134,7 @@ const VaccineApp = ({submitted,data}) => {
         
             <button onClick={navtoTable} className='bappview' type='submit'>View Appointments</button>
             
-            <button onClick={addvacapp} className='bappsave'type='submit'>Save</button>
+            <button onClick={(e) => addvacapp(e)} className='bappsave' type='submit'>Save</button>
              
 
             

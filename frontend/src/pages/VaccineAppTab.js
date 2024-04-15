@@ -1,11 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import '../styles/VaccineAppTab.css'
 import Axios from 'axios';
+import Swal from 'sweetalert2';
+import Layout from '../components/Layout';
 
 const VaccineAppTab = () => {
     //state variables
     const[vaccineappdata,setvaccineappdata]=useState([]);
     
+ 
+    
+
+
+
     useEffect(()=>{
         getvaccineappdata();
     },[]);
@@ -25,17 +32,36 @@ const VaccineAppTab = () => {
     //delete
 
     const deletevaccineappdata = (id) => {
+         // Display SweetAlert confirmation dialog
+    Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // If confirmed, proceed with deletion
         Axios.post('http://localhost:4000/api/deleteVacApp',{_id: id})
         .then(response =>{
             console.log('Vaccine Data deleted successfully');
             setvaccineappdata(prevData => prevData.filter(vaccineapp => vaccineapp._id !== id));
-        })
+            // Display success message
+            Swal.fire({
+                title: "Deleted!",
+                text: "Your file has been deleted.",
+                icon: "success"
+        });
+    })
+    
         .catch(error =>{
             console.error('Error deleting vaccineappdata:',error);
-        })
+        });
     }
-
-
+    });
+}
 
     //update
 
