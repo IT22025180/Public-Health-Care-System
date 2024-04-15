@@ -12,7 +12,7 @@ const Complainstable = () => {
     const getComplainsdata = () => {
         Axios.get('http://localhost:4000/api/Complain')
             .then(response => {
-                
+
                 console.log('data from sever', response.data);
                 setComplainsdata(response.data);
             })
@@ -78,17 +78,22 @@ const Complainstable = () => {
                                     <TableCell>{Complains.lname} </TableCell>
                                     <TableCell>{Complains.email}</TableCell>
                                     <TableCell>{Complains.NIC}</TableCell>
-                                    <TableCell>{Complains.Address}</TableCell>
-                                    <TableCell>{Complains.images}</TableCell>
+                                    <TableCell>{Complains.yaddress}</TableCell>
                                     <TableCell>{Complains.ctype}</TableCell>
                                     <TableCell>{Complains.cdesc}</TableCell>
                                     <TableCell>{Complains.area}</TableCell>
                                     <TableCell>{Complains.location}</TableCell>
-                                    <TableCell>{Complains.images.map((image,index) => (
-                                        <div key={index} >
-                                            <img src={`data:${image.contentType};base64,${image.data}`} alt={`Image`} width={50} height={50} />
-                                        </div>
-                                    ))}</TableCell>
+                                    <TableCell>
+                                        {Array.isArray(Complains.images) ? (
+                                            Complains.images.map((image, index) => (
+                                                <div key={index} style={{ width: "200px", height: "200px" }}>
+                                                    <img src={`data:${image.contentType};base64,${image.data}`} alt={`Image`} width={50} height={50} />
+                                                </div>
+                                            ))
+                                        ) : (
+                                            <div>No images available</div>
+                                        )}
+                                    </TableCell>
 
 
                                     <TableCell >

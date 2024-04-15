@@ -64,19 +64,26 @@ const Home = () => {
           </div>
 
 
-          <Container id='slideshow-container' className='Lcontainer'>
-            <div className='leftflex'>
-              <div className='clinicsub'>
+          <motion.div
+            className=""
+            initial="offscreen"
+            animate="onscreen"
+            transition={{ type: "spring", bounce: 0.4, duration: 0.8 }}
+          >
+            <Container id='slideshow-container' className='Lcontainer'>
+              <div className='leftflex'>
+                <div className='clinicsub'>
+                  <br />
+                  <br />
+                  <h2>Our Clinic schedules</h2>
+                  <p className='fs-5 text-center'>Public health Information system organizing a dengue & dental clinic services on giving dates click the button below to view and join the appointments</p>
+                  <Button onClick={() => navigate(`/clinics`)}>Click here </Button>
+                </div>
                 <br />
-                <br />
-                <h2>Our Clinic schedules</h2>
-                <p className='fs-5 text-center'>Public health Information system organizing a dengue & dental clinic services on giving dates click the button below to view and join the appointments</p>
-                <Button onClick={() => navigate(`/clinics`)}>Click here </Button>
+                <img src={img} alt='clinics' width={300} height={300} />
               </div>
-              <br />
-              <img src={img} alt='clinics' width={300} height={300} />
-            </div>
-          </Container>
+            </Container>
+          </motion.div>
 
           <br />
           <Container className='Rcontainer'>
