@@ -26,7 +26,7 @@ const RaidSubForm = ({ submitted, data }) => {
         if (data?.id && data.id !== 0) {
             setslocation(data.location);
             setsdetails(data.details);
-            setsspecialnotes(data.specialnotes);
+            setsspecialnotes(data.sNote);
 
         }
     }, [data]);
@@ -37,7 +37,7 @@ const RaidSubForm = ({ submitted, data }) => {
             const response = await Axios.post('http://localhost:4000/api/addRS', {
                 location: location,
                 details: Details,
-                specialnotes: specialnotes,
+                sNote: specialnotes,
 
             });
 
@@ -68,11 +68,9 @@ const RaidSubForm = ({ submitted, data }) => {
                         </div>
 
                         <div className='input'>
-                            <label htmlFor='specialnotes'>Specialnotes</label>
-                            <input onChange={e => setsspecialnotes(e.target.value)} type='text' id='specialnotes' autoComplete='off' placeholder='Specialnotes' />
-                        </div>
-
-
+            <label htmlFor='specialnotes'>Special Notes</label>
+            <input onChange={e=>setsspecialnotes(e.target.value)} type='text' id='specialnotes' autoComplete='off' placeholder='Special Notes'/>
+        </div>
 
                         <button className='bdsubmit' type='submit'>Cancel</button>
 

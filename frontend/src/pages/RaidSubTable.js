@@ -3,6 +3,7 @@ import '../styles/RaidSubTable.css';
 import Layout from '../components/Layout';
 import Axios from 'axios';
 import jsPDF from 'jspdf';
+import { Link } from 'react-router-dom';
 
 const RaidSubTable = () => {
     const [submissiondata, setSubmissionData] = useState([]);
@@ -56,9 +57,13 @@ const RaidSubTable = () => {
                                 <tr key={submission._id}>
                                     <td>{submission.location}</td>
                                     <td>{submission.details}</td>
-                                    <td>{submission.specialNotes}</td>
+                                    <td>{submission.sNote}</td>
                                     <td className='actionButtons'>
+                
+                                        <Link to ={`/RaidSubFormEdit/${submission._id}/${submission.location}/${submission.details}/${submission.sNote}`}>
                                         <button>Edit</button>
+                                        </Link>
+
                                     </td>
                                     <td className='deleteButtons'>
                                         <button onClick={() => submissionDelete(submission._id)}>Delete</button>

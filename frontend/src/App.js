@@ -69,6 +69,7 @@ import FCAnalMain from './pages/FCAnalyseMain';
 import RaidFormTable from './pages/RaidFormTable';
 import RaidFormEdit from './pages/RaidFormEdit';
 import RaidsHome from './pages/RaidsHome';
+import RaidSubFormEdit from './pages/RaidSubFormEdit';
 
 
 
@@ -136,8 +137,20 @@ function App() {
           <Route path='/DengCampTab' element={<DengCampTab />} />
           <Route path='/F&CDocumentManagementTabe' element={<FCDMTable />} />
 
+
           <Route path='/RF' element={<RaidForm />} />
           <Route path='/F&CDReportViolationTabe' element={<FCRVTable />} />
+
+        <Route path='/addclinics' element = {<AddClinic/>}/>
+        <Route path='/addpatient' element = {<AddPatients/>}/>
+        <Route path='/dengueCli' element = {<Dengue/>}/>
+        <Route path='/raids' element={<Raids/>}/>
+        <Route path='/raidform' element={<RaidForm/>}/>
+        <Route path='/raidformtable' element={< RaidFormTable/>}/>
+        <Route path='/raidsubform' element={< RaidSubForm/>}/>
+        <Route path='/raidsubtable' element={< RaidSubTable/>}/>
+        
+
 
           <Route path='/addclinics' element={<AddClinic />} />
           <Route path='/addpatient' element={<AddPatients />} />
@@ -284,6 +297,7 @@ function App() {
           <Route path='/FineAndCourtReportStatus' element={<FCReportStatus />} />
           <Route path='/FineAndCourtAnalyze' element={<FCAnalMain />} />
           <Route path='/RaidFormEdit/:_id/:location/:date/:time/:officer/:sNote' element={<RaidFormEdit />} />
+          <Route path='/RaidSubFormEdit/:_id/:location/:details/:sNote' element={<RaidSubFormEdit />} />
           <Route path='/RaidsHome' element={<RaidsHome />} />
         </Routes>
       </Router>
