@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import '../styles/RaidFormTable.css';
 import Layout from '../components/Layout';
 import Axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const RaidFormTable = () => {
     const [formtabledata, setFormTableData] = useState([]);
@@ -58,7 +59,9 @@ const RaidFormTable = () => {
                                     <td>{formtable.officer}</td>
                                     <td>{formtable.sNote}</td>
                                     <td className='actionButtons'>
+                                        <Link to ={`/RaidFormEdit/${formtable._id}/${formtable.location}/${formtable.date}/${formtable.time}/${formtable.officer}/${formtable.sNote}`}>
                                         <button>Edit</button>
+                                        </Link>
                                     </td>
                                     <td onClick={() => deleteFormTableData(formtable._id)} className='deleteButtons'>
                                         <button>Delete</button>

@@ -63,6 +63,7 @@ import RaidSubTable from './pages/RaidSubTable';
 import FCReportStatus from './pages/FCReportStatus';
 import FCAnalMain from './pages/FCAnalyseMain';
 import RaidFormTable from './pages/RaidFormTable';
+import RaidFormEdit from './pages/RaidFormEdit';
 
 
 
@@ -272,6 +273,7 @@ function App() {
           <Route path='/popup' element={<ModelPopup />} />
           <Route path='/FineAndCourtReportStatus' element={<FCReportStatus />} />
           <Route path='/FineAndCourtAnalyze' element={<FCAnalMain />} />
+          <Route path='/RaidFormEdit/:_id/:location/:date/:time/:officer/:sNote' element={<RaidFormEdit />} />
         </Routes>
       </Router>
     </AnimatePresence>

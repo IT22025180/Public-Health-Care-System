@@ -41,6 +41,7 @@ const updateRForm = async (req,res) => {
         const { _id, location, date, time, officer, sNote} = req.body;
 
         const updatedRF = await RF.findOneAndUpdate({_id} ,{
+            _id,
             location,
             date,
             time,
