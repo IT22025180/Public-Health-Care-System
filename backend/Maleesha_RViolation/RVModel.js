@@ -13,7 +13,8 @@ const AddReportVio = new mongoose.Schema({
     v_mobile : String,    
     evidance : String,
     v_nic : String,
-    Evidance : String
+    Evidance : String,
+    decision: { type: String, default: 'pending' },
 },
 {
     collection : "ViolationReport"

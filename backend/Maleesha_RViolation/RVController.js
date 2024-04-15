@@ -41,7 +41,8 @@ const addVioReport = async (req, res) => {
                 v_name,
                 v_nic,
                 v_mobile,
-                v_email
+                v_email,
+                decision,
             } = req.body;
 
             const newVioReport = new VioReport({
@@ -56,6 +57,7 @@ const addVioReport = async (req, res) => {
                 v_email,
                 v_mobile,
                 v_nic,
+                decision,
                 evidence: imageFileName,
             });
 

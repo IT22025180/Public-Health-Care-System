@@ -19,7 +19,7 @@ const FCReportForm = ({ submitted, data }) => {
   const [vEmail, setvEmail] = useState('');
   const [vContact, setvContact] = useState('');
   const [vId, setvId] = useState('');
-  const [evidenceFile, setEvidenceFile] = useState(null);
+  const [evidence, setEvidence] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
   const [violationType, setViolationType] = useState('');
 
@@ -37,7 +37,7 @@ const FCReportForm = ({ submitted, data }) => {
       setvEmail('');
       setvContact('');
       setvId('');
-      setEvidenceFile(null);
+      setEvidence(null);
     }
   }, [submitted]);
 
@@ -70,7 +70,7 @@ const FCReportForm = ({ submitted, data }) => {
     vContact: Yup.string().matches(/^0\d{9}$/, 'Invalid Contact Number').required('Contact Number is Required'),
     vId: Yup.string().required('NIC is required').matches(/^\d{11}(V|v|\d)$/, 'Invalid NIC Number'),
     violationType: Yup.string().required('Violation Type is required').oneOf(['foodViolation', 'dengueViolation'], 'Invalid Violation Type'),
-    evidenceFile: Yup.mixed()
+    evidence: Yup.mixed()
       .test('fileCount', 'At least one document is required', (value) => {
         return value !== undefined && value !== null;
       })
@@ -91,7 +91,7 @@ const FCReportForm = ({ submitted, data }) => {
           vEmail,
           vContact,
           vId,
-          evidenceFile,
+          evidence,
           violationType,  
         },
         { abortEarly: false }
@@ -108,7 +108,7 @@ const FCReportForm = ({ submitted, data }) => {
       formData.append('v_email', vEmail);
       formData.append('v_mobile', vContact);
       formData.append('v_nic', vId);
-      formData.append('evidence', evidenceFile);
+      formData.append('evidence', evidence);
 
       await Axios.post('http://localhost:4000/api/addVioR', formData, {
         headers: {
@@ -219,8 +219,8 @@ const FCReportForm = ({ submitted, data }) => {
 
           <h4>Upload Evidence</h4>
           <div>
-            <input type="file" onChange={(e) => setEvidenceFile(e.target.files[0])} />
-            {errorMessage.evidenceFile && <div className="errorMessage">{errorMessage.evidenceFile}</div>}
+            <input type="file" name="photo" onChange={(e) => setEvidence(e.target.files[0])} />
+            {errorMessage.evidence && <div className="errorMessage">{errorMessage.evidence}</div>}
           </div>
           <button className="button" type="button" onClick={addFCReport}>
             Submit Report

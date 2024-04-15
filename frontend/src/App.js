@@ -60,6 +60,8 @@ import Edittriposha from './pages/Edittriposha';
 import FCRFEdit from './pages/FCRFEdit';
 
 import RaidSubTable from './pages/RaidSubTable';
+import FCReportStatus from './pages/FCReportStatus';
+import FCAnalMain from './pages/FCAnalyseMain';
 
 
 
@@ -266,6 +268,8 @@ function App() {
           <Route path='/dclogin' element={<DoctorLogin />} />
           <Route path='/login' element={<Lgportal />} />
           <Route path='/popup' element={<ModelPopup />} />
+          <Route path='/FineAndCourtReportStatus' element={<FCReportStatus />} />
+          <Route path='/FineAndCourtAnalyze' element={<FCAnalMain />} />
         </Routes>
       </Router>
     </AnimatePresence>
