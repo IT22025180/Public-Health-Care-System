@@ -29,7 +29,7 @@ const RaidForm= ({submitted,data}) => {
             setfdate(data.date);
             setftime(data.time);
             setfofficer(data.officer);
-            setfspecialnotes(data.specialnotes);
+            setfspecialnotes(data.sNote);
         }
     },[data]);
 
@@ -41,7 +41,7 @@ const RaidForm= ({submitted,data}) => {
             date : date,
             time:time,
             officer:officer,
-            specialnotes:specialnotes,
+            sNote:specialnotes,
         });
 
         console.log('Successfully',response.data);
