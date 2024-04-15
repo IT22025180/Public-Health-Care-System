@@ -4,13 +4,15 @@ import Axios from 'axios';
 import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Dialog, DialogTitle, DialogContent } from '@mui/material';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
-import { FaEdit, FaTimes, FaTrash } from 'react-icons/fa';
+import { FaEdit, FaTimes, FaTrash, FaUser } from 'react-icons/fa';
+import { Alert, Form } from 'react-bootstrap';
 
 
 const AdminClinic = () => {
     const [clinics, setClinics] = useState([]);
     const [selectedClinicId, setSelectedClinicId] = useState(null);
     const [joinedPatients, setJoinedPatients] = useState([]);
+    const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate();
 
     //popup components line 16 to line 24 & line 123 to line 153
@@ -83,7 +85,52 @@ const AdminClinic = () => {
         });
     };
 
+    //search
     const selectedPatients = joinedPatients.filter(patient => patient.clinicID === selectedClinicId);
+
+    //popup update
+
+
+    const [popupup, setpopupup] = useState(false);
+    const [updatedClinic, setUpdatedClinic] = useState([]);
+    const [ctype, setCtype] = useState(updatedClinic.ctype);
+    const [date, setDate] = useState(updatedClinic.date);
+    const [time, setTime] = useState(updatedClinic.time);
+    const [venue, setVenue] = useState(updatedClinic.venue);
+
+
+    const popupUpdate = (clinic) => {
+
+        setUpdatedClinic(clinic);
+        setpopupup(true);
+    }
+
+    const closeUpdate = () => {
+        setpopupup(false);
+    }
+
+    const updateClnic = async () => {
+
+        try {
+
+            const response = await Axios.post('http://localhost:4000/api/updateClinic', {
+                _id: updatedClinic._id,
+                date: date,
+                time: time,
+                venue: venue,
+                ctype: ctype
+            });
+
+            setpopupup(false)
+            console.log("Clinic update is successful", response.data);
+        } catch (error) {
+            console.error('error', error);
+        }
+    }
+
+
+
+
 
     return (
         <Layout>
