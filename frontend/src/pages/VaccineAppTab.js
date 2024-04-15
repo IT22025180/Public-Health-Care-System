@@ -3,13 +3,14 @@ import '../styles/VaccineAppTab.css'
 import Axios from 'axios';
 import Swal from 'sweetalert2';
 import Layout from '../components/Layout';
+import {  useNavigate } from 'react-router-dom';
 
 const VaccineAppTab = () => {
     //state variables
     const[vaccineappdata,setvaccineappdata]=useState([]);
     
  
-    
+    const navigate = useNavigate();
 
 
 
@@ -63,7 +64,7 @@ const VaccineAppTab = () => {
     });
 }
 
-    //update
+   
 
 
 
@@ -71,6 +72,7 @@ const VaccineAppTab = () => {
   
 
   return (
+    <Layout>
     <div className='VaccineAppTab'>
 
     
@@ -98,7 +100,11 @@ const VaccineAppTab = () => {
                             
                         
                         <td className='actionButtons'>
-                            <button  >Edit</button>
+                            {vaccineapp._id && vaccineapp.v_name && vaccineapp.quantity && vaccineapp.date && vaccineapp.location &&(
+                                <button onClick={() => navigate(`/EditVApp/${vaccineapp._id}/${vaccineapp.v_name}/${vaccineapp.quantity}/${vaccineapp.date}/${vaccineapp.location}`)}>Edit</button>
+
+                            )}
+                            
                         </td>
 
                         <td onClick={() => deletevaccineappdata(vaccineapp._id)} className='deleteButtons'>
@@ -118,6 +124,7 @@ const VaccineAppTab = () => {
             </tbody>
         </table>
         </div>
+        </Layout>
   )
 }
 

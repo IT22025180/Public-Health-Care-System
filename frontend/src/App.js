@@ -57,6 +57,10 @@ import Editbabydetails from './pages/Editbabydetails';
 import Editbabyvaccination from './pages/Editbabyvaccination';
 import Edittriposha from './pages/Edittriposha';
 
+import EditVReg from './pages/EditVReg'; 
+import EditVApp from './pages/EditVApp'; 
+
+
 import FCRFEdit from './pages/FCRFEdit';
 
 import RaidSubTable from './pages/RaidSubTable';
@@ -225,6 +229,11 @@ function App() {
           <Route path='/VaccineRegTab' element={<VaccineRegTab />} />
           <Route path='/vaccineapptab' element={<VaccineAppTab />} />
           <Route path='/VaccineRequestTab' element={<VaccineRequestTab />} />
+          <Route path='/EditVReg/:_id/:vname/:manf_date/:expi_Date/:quantity/:notes' element={<EditVReg/>}/>
+          <Route path='/EditVApp/:_id/:v_name/:quantity/:date/:location' element={<EditVApp />} />
+  
+
+
           <Route path='/staff' element={<Staff />} />
           <Route path='/Leave' element={<Leave />} />
           <Route path='/Dengueschedules' element={<Dengueschedules />} />

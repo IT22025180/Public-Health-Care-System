@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Axios from 'axios';
 import Swal from 'sweetalert2';
-
+import {  useNavigate } from 'react-router-dom';
 import Layout from '../components/Layout';
 import jsPDF from 'jspdf';
 import logo1 from '../webImages/logo1.png'; 
@@ -11,9 +11,15 @@ const VaccineRegTab = () => {
   const [vaccinedata, setvaccinedata] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
 
+  const navigate = useNavigate();
+  
+
   useEffect(() => {
     getvaccinedata();
   }, []);
+
+
+
 
   const getvaccinedata = () => {
     Axios.get('http://localhost:4000/api/Vacccines')
@@ -119,9 +125,7 @@ const VaccineRegTab = () => {
     return vaccine.vname.toLowerCase().includes(searchQuery.toLowerCase());
   });
 
-  const handleEdit = (id) => {
-    // Implement edit functionality
-  }
+
 
   return (
     <Layout>
@@ -153,7 +157,10 @@ const VaccineRegTab = () => {
                   <td>{vaccine.quantity}</td>
                   <td>{vaccine.notes}</td>
                   <td className='actionButtons'>
-                    <button onClick={() => handleEdit(vaccine._id)}>Edit</button>
+                    {vaccine._id && vaccine.vname && vaccine.manf_date && vaccine.expi_Date && vaccine.quantity && vaccine.notes &&(
+                      <button onClick={() => navigate(`/EditVReg/${vaccine._id}/${vaccine.vname}/${vaccine.manf_date}/${vaccine.expi_Date}/${vaccine.quantity}/${vaccine.notes}`)}>Edit</button>
+                    )}
+                    
                   </td>
                   <td onClick={() => deletevaccinedata(vaccine._id)} className='deleteButtons'>
                     <button>Delete</button>

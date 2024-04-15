@@ -42,6 +42,7 @@ const updateVacApp = async (req,res) => {
         const { _id, v_name, quantity , date , location} = req.body;
 
         const updatedVacApp = await VacAppointment.findOneAndUpdate({_id} ,{
+                _id,
                 v_name,                      
                 quantity,
                 date,
