@@ -18,7 +18,7 @@ const RaidSubFormEdit = () => {
         _id,
         location: location_u,
         details: details_u,
-        specialnotes: specialnotes_u,
+        specialNotes: specialnotes_u,
       });
 
       console.log('Raid Submission updated successfully:', response.data);

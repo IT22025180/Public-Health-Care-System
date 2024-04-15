@@ -57,10 +57,10 @@ const RaidSubTable = () => {
                                 <tr key={submission._id}>
                                     <td>{submission.location}</td>
                                     <td>{submission.details}</td>
-                                    <td>{submission.sNote}</td>
+                                    <td>{submission.specialNotes}</td>
                                     <td className='actionButtons'>
                 
-                                        <Link to ={`/RaidSubFormEdit/${submission._id}/${submission.location}/${submission.details}/${submission.sNote}`}>
+                                        <Link to ={`/RaidSubFormEdit/${submission._id}/${submission.location}/${submission.details}/${submission.specialNotes}`}>
                                         <button>Edit</button>
                                         </Link>
 

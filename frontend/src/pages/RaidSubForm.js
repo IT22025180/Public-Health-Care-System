@@ -26,7 +26,7 @@ const RaidSubForm = ({ submitted, data }) => {
         if (data?.id && data.id !== 0) {
             setslocation(data.location);
             setsdetails(data.details);
-            setsspecialnotes(data.sNote);
+            setsspecialnotes(data.specialNotes);
 
         }
     }, [data]);
@@ -37,7 +37,7 @@ const RaidSubForm = ({ submitted, data }) => {
             const response = await Axios.post('http://localhost:4000/api/addRS', {
                 location: location,
                 details: Details,
-                sNote: specialnotes,
+                specialNotes: specialnotes,
 
             });
 
