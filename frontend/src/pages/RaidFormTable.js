@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 const RaidFormTable = () => {
     const [formtabledata, setFormTableData] = useState([]);
-
+    const [searchQuery, setSearchQuery] = useState('');
     useEffect(() => {
         getFormTableData();
     }, []);
@@ -33,9 +33,23 @@ const RaidFormTable = () => {
             });
     };
 
+    const handleSearchChange = (event) => {
+        setSearchQuery(event.target.value);
+    };
+    const filteredData = formtabledata.filter(formtable =>
+        formtable.location.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        formtable.date.includes(searchQuery) ||
+        formtable.time.includes(searchQuery) ||
+        formtable.officer.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        formtable.sNote.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
     return (
         <Layout>|
             <h2>Raid Form Table</h2>
+            <div className="search">
+          <input type="text" value={searchQuery} onChange={e => setSearchQuery(e.target.value)} placeholder="Search" />
+        </div>
             <div className='FormtableTab'>
                 <table border={1} cellPadding={10} cellSpacing={0}>
                     <thead>

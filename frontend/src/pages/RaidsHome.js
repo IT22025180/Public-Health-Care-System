@@ -25,7 +25,7 @@ const RaidsHome = () => {
   return (
       <Layout>  
             <div className="Rhome-page">
-              <h1>Raids</h1>
+              <h1>Raids Management</h1>
               <div className="Rcard-container">
                 {cards.map((card) => (
                   <div key={card.id} className="Rcard">

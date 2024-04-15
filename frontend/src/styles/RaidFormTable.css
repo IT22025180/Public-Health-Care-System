@@ -30,3 +30,13 @@
 .FormtableTab .deleteButtons {
     text-align: center;
 }
+.search {
+    width: 100%;
+    text-align: right;
+  }
+  
+  .search input {
+    width: 300px;
+    display: inline-block;
+    margin-right: 20px;
+  }

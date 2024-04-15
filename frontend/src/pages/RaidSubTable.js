@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 
 const RaidSubTable = () => {
     const [submissiondata, setSubmissionData] = useState([]);
+    const [searchQuery, setSearchQuery] = useState('');
 
     useEffect(()=>{
         getsubmissiondata();
@@ -37,10 +38,23 @@ const RaidSubTable = () => {
                 console.error('Axios error:', error);
             });
     };
+    const handleSearch = () => {
+        // Perform search based on searchQuery
+        // Here, you can filter the submissiondata based on searchQuery
+        // For example, if you want to search for location:
+        const filteredData = submissiondata.filter(submission =>
+            submission.location.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+        // Update submissiondata with filtered data
+        setSubmissionData(filteredData);
+    };
 
     return (
         <Layout>
             <div className='RaidSubmissionTable'>
+            <div className="search">
+          <input type="text" value={searchQuery} onChange={e => setSearchQuery(e.target.value)} placeholder="Search" />
+        </div>
                 <table border={1} cellPadding={10} cellSpacing={0}>
                     <thead>
                         <tr>
