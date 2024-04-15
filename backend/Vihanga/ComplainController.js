@@ -21,8 +21,8 @@ const addComplain = async (req, res) => {
         ));
 
         console.log(imagesData);
-        const newComplain = new Complain({
 
+        const newComplain = new Complain({
             fname,
             lname,
             mobile,

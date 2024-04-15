@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import '../styles/FCReportSubmit.css'
+import React, { useState } from 'react';
 import Layout from '../components/Layout';
 import Axios from 'axios';
 import Swal from "sweetalert2";
@@ -19,44 +18,9 @@ const FCReportForm = ({ submitted, data }) => {
   const [vEmail, setvEmail] = useState('');
   const [vContact, setvContact] = useState('');
   const [vId, setvId] = useState('');
-  const [evidence, setEvidence] = useState(null);
+  const [evidence, setEvidence] = useState([]);
   const [errorMessage, setErrorMessage] = useState('');
   const [violationType, setViolationType] = useState('');
-
-  useEffect(() => {
-    if (!submitted) {
-      setROname('');
-      setRoemail('');
-      setROcontact('');
-      setdate('');
-      setlocation('');
-      setFoodViolation(false);
-      setDengueViolation(false);
-      setdescription('');
-      setvName('');
-      setvEmail('');
-      setvContact('');
-      setvId('');
-      setEvidence(null);
-    }
-  }, [submitted]);
-
-  useEffect(() => {
-    if (data?.id && data.id !== 0) {
-      setROname(data.ROname);
-      setRoemail(data.Roemail);
-      setROcontact(data.ROcontact);
-      setdate(data.date);
-      setlocation(data.location);
-      setFoodViolation(data.foodViolation);
-      setDengueViolation(data.dengueViolation);
-      setdescription(data.description);
-      setvName(data.vName);
-      setvEmail(data.vEmail);
-      setvContact(data.vContact);
-      setvId(data.vId);
-    }
-  }, [data]);
 
   const validateSchema = Yup.object().shape({
     ROname: Yup.string().required('Report ID is Required').matches(/^[A-Za-z\s]+$/, 'Name must contain only letters'),
@@ -70,12 +34,7 @@ const FCReportForm = ({ submitted, data }) => {
     vContact: Yup.string().matches(/^0\d{9}$/, 'Invalid Contact Number').required('Contact Number is Required'),
     vId: Yup.string().required('NIC is required').matches(/^\d{11}(V|v|\d)$/, 'Invalid NIC Number'),
     violationType: Yup.string().required('Violation Type is required').oneOf(['foodViolation', 'dengueViolation'], 'Invalid Violation Type'),
-    evidence: Yup.mixed()
-      .test('fileCount', 'At least one document is required', (value) => {
-        return value !== undefined && value !== null;
-      })
-      .required('Evidence is required'),
-  })
+  });
 
   const addFCReport = async () => {
     try {
@@ -91,11 +50,11 @@ const FCReportForm = ({ submitted, data }) => {
           vEmail,
           vContact,
           vId,
-          evidence,
           violationType,  
         },
         { abortEarly: false }
       );
+
       const formData = new FormData();
       formData.append('ro_name', ROname);
       formData.append('ro_email', Roemail);
@@ -108,13 +67,20 @@ const FCReportForm = ({ submitted, data }) => {
       formData.append('v_email', vEmail);
       formData.append('v_mobile', vContact);
       formData.append('v_nic', vId);
-      formData.append('evidence', evidence);
+
+      if (formData.images && formData.images.length > 0) {
+        for (let i = 0; i < formData.images.length; i++) {
+          formData.append("images", formData.images[i]);
+        }
+      }
+      console.log(formData.get("images"));
 
       await Axios.post('http://localhost:4000/api/addVioR', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
+
       Swal.fire({
         icon: 'success',
         title: 'Success!',
@@ -135,10 +101,15 @@ const FCReportForm = ({ submitted, data }) => {
     }
   };
 
+  const handleImageChange = (e) => {
+    const files = Array.from(e.target.files).slice(0, 4);
+    console.log(files);
+    setEvidence(files);
+  };
+
   return (
     <Layout>
       <div className="form-container">
-
         <form className='form'>
           <h2>Report Violation</h2>
           <h4>Raid Officer Information</h4>
@@ -166,7 +137,6 @@ const FCReportForm = ({ submitted, data }) => {
             </div>
           </div>
 
-
           <h4>Violation Details</h4>
           <div className='Vdetails'>
             <div>
@@ -183,14 +153,12 @@ const FCReportForm = ({ submitted, data }) => {
               Dengue Violation
               {errorMessage.violationType && <div className="errorMessage">{errorMessage.violationType}</div>}
             </div>
-
             <div>
               <label>Violation Description:</label>
               <textarea name="description" value={description} onChange={(e) => setdescription(e.target.value)} />
               {errorMessage.description && <div className="errorMessage">{errorMessage.description}</div>}
             </div>
           </div>
-
 
           <h4>Violator Information</h4>
           <div className='Vinfo'>
@@ -216,11 +184,9 @@ const FCReportForm = ({ submitted, data }) => {
             </div>
           </div>
 
-
           <h4>Upload Evidence</h4>
           <div>
-            <input type="file" name="photo" onChange={(e) => setEvidence(e.target.files[0])} />
-            {errorMessage.evidence && <div className="errorMessage">{errorMessage.evidence}</div>}
+            <input type="file" name="photo" onChange={handleImageChange} />
           </div>
           <button className="button" type="button" onClick={addFCReport}>
             Submit Report
