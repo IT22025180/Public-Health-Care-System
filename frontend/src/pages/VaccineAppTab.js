@@ -6,11 +6,6 @@ const VaccineAppTab = () => {
     //state variables
     const[vaccineappdata,setvaccineappdata]=useState([]);
     
-
-    
-
-
-
     useEffect(()=>{
         getvaccineappdata();
     },[]);

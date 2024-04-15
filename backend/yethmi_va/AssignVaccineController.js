@@ -2,15 +2,15 @@ const Vaccinestaff = require('./AssignVaccineModel');
 
 const addstaffvaccine = async (req, res) => {
     try {
-        const { type, staffmember, date, location, description } = req.body;
+        const { v_name, quantity, date, location, staffmember } = req.body;
         const d_assigndate = Array.isArray(date) ? date.join(', ') : date;
 
         const newassignforvaccine = new Vaccinestaff({
-            type,
-            staffmember,
-            date: d_assigndate,
+            v_name,        
+            quantity,
+            date:Date,    //date
             location,
-            description,
+            staffmember
         });
 
         await newassignforvaccine.save();

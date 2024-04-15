@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 
 const addstaffvaccineSchema = new mongoose.Schema({
-    type: String,
-    staffmember: String,
-    date: String,
-    location: String,
-    description: String,
+            v_name:String,        
+            quantity:String,
+            date:String,   
+            location:String,
+            staffmember:String
 }, {
     collection: "Vaccinestaff"
 });

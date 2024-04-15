@@ -3,15 +3,18 @@ const Denguestaff = require('./AssignDengueModel');
 
 const addstaffdengue = async(req,res) => {
     try{
-    const{venue,date,staffmember,time}=req.body;
+    const{type,staffmember,date,location,description}=req.body;
 
     const d_assigndate = Array.isArray(date)?date.join(', '):date;
     
+
+
             const newassignfordengue =  new Denguestaff({
-                venue,      
+                type,  
+                staffmember,    
                 date:d_assigndate,
-                staffmember, 
-                time,     
+                location,
+                description,       
             });
 
             await newassignfordengue.save();

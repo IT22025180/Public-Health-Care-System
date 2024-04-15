@@ -117,6 +117,7 @@ const Dengueschedules = ({ submitted, data }) => {
             </tbody>
           </table>
         </div>
+
       </Layout>
       <Dialog open={open}>
         <DialogTitle>Assign staff</DialogTitle>
@@ -129,6 +130,9 @@ const Dengueschedules = ({ submitted, data }) => {
           <button onClick={closepopup}>close</button>
         </DialogContent>
       </Dialog> </>
+
+    
+
   );
 };
 
