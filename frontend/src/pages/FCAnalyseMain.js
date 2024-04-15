@@ -7,13 +7,19 @@ import 'jspdf-autotable';
 const FCAnalMain = () => {
   const [RVdata, setRVdata] = useState([]);
   const [selectedReport, setSelectedReport] = useState(null);
+  const [decision, setDecision] = useState("");
 
   useEffect(() => {
     getReportData();
   }, []);
 
   const getReportData = () => {
-    Axios.get('http://localhost:4000/api/VioReports')
+    
+    Axios.get('http://localhost:4000/api/VioReports', {
+      params: {
+        decision: "pending"
+      }
+    })
       .then(response => {
         console.log('Data from Server', response.data);
         setRVdata(response.data.allVioReports);
@@ -22,10 +28,30 @@ const FCAnalMain = () => {
         console.error('Axios Error : ', error);
       });
   };
+  
 
   const handleAnalyse = (report) => {
     setSelectedReport(report);
   };
+
+  const handleDecisionSubmit = () => {
+    if (selectedReport) {
+      const updatedReport = { ...selectedReport, decision };
+      Axios.post(`http://localhost:4000/api/updateVioR`, updatedReport)
+        .then(response => {
+          console.log('Decision updated successfully:', response.data);
+          const updatedRVdata = RVdata.map(report =>
+            report._id === selectedReport._id ? { ...report, decision } : report
+          );
+          setRVdata(updatedRVdata);
+        })
+        .catch(error => {
+          console.error('Error updating decision:', error);
+        });
+    }
+  };
+  
+  
 
   return (
     <Layout>
@@ -42,7 +68,7 @@ const FCAnalMain = () => {
               <th>Violator Name</th>
               <th>Violator Email</th>
               <th>Violator Contact Number</th>
-              <th>Violator ID</th>
+              <th>Violator NIC Number</th>
               <th>Evidences</th>
               <th>Decision</th>
               <th>Action</th>
@@ -77,22 +103,25 @@ const FCAnalMain = () => {
         </table>
       </div>
       {selectedReport && (
-        <div className="analyseData">
-          Raid Officer Name : {selectedReport.ro_name} <br />
-          Date : {selectedReport.date} <br />
-          Violation Location : {selectedReport.v_location} <br />
-          Violation Type : {selectedReport.v_type} <br />
-          Violation Description : {selectedReport.v_description} <br />
-          Violator Name : {selectedReport.v_name} <br />
-          Violator Email : {selectedReport.v_email} <br />
-          Violator Contact Number : {selectedReport.v_mobile} <br />
-          Violator ID : {selectedReport.v_nic} <br />
-          Evidences : {selectedReport.evidence} <br />
-          Decision :
-          <span style={{ marginLeft: '20px' }}></span>
-          <input type="radio" id="fineViolation" name="decision" value="Fine Only" /> Fine Only
-          <span style={{ marginLeft: '20px' }}></span>
-          <input type="radio" id="courtAction" name="decision" value="Court Action" /> Court Action
+        <div className="analyseDataBox">
+          <div className="analyseData">
+            <strong>Raid Officer Name :</strong> {selectedReport.ro_name} <br />
+            <strong>Date :</strong> {selectedReport.date} <br />
+            <strong>Violation Location :</strong> {selectedReport.v_location} <br />
+            <strong>Violation Type :</strong> {selectedReport.v_type} <br />
+            <strong>Violation Description :</strong> {selectedReport.v_description} <br />
+            <strong>Violator Name :</strong> {selectedReport.v_name} <br />
+            <strong>Violator Email :</strong> {selectedReport.v_email} <br />
+            <strong>Violator Contact Number :</strong> {selectedReport.v_mobile} <br />
+            <strong>Violator NIC Number :</strong> {selectedReport.v_nic} <br />
+            <strong>Evidences :</strong> {selectedReport.evidence} <br />
+            <strong>Decision :</strong>
+            <input type="radio" id="fineViolation" name="decision" value="Fine Only" onChange={() => setDecision("Fine Only")} /> Fine Only
+            <input type="radio" id="courtAction" name="decision" value="Court Action" onChange={() => setDecision("Court Action")} /> Court Action
+            <div className="subBtn">
+              <button onClick={handleDecisionSubmit}>Submit</button>
+            </div>
+          </div>
         </div>
       )}
     </Layout>

@@ -83,7 +83,7 @@ const getVioReport = async (req, res) => {
 
 const updateVioReport = async (req, res) => {
     try {
-        const { _id, ro_name, ro_email, ro_mobile, date, v_location, v_type, v_description, v_name, v_nic, v_mobile, v_email } = req.body;
+        const { _id, ro_name, ro_email, ro_mobile, date, v_location, v_type, v_description, v_name, v_nic, v_mobile, v_email, decision } = req.body;
 
         const updatedVioReport = await VioReport.findOneAndUpdate({ _id }, {
             _id,
@@ -98,6 +98,7 @@ const updateVioReport = async (req, res) => {
             v_email,
             v_mobile,
             v_nic,
+            decision,
         }, { new: true });
 
         if (!updatedVioReport) {

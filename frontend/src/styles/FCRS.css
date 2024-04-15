@@ -37,3 +37,29 @@
   display: inline-block;
   margin-right: 20px;
 }
+
+/*analyse Data main*/
+
+.analyseDataBox {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 20px auto;
+  width: 600px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+}
+
+.analyseData {
+  margin-top: 10px;
+  width: 90%;
+}
+
+.analyseData input[type="radio"] {
+  margin-right: 10px;
+}
+
+.subBtn {
+  text-align: center;
+}
