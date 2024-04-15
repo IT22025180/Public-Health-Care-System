@@ -7,8 +7,6 @@ const addstaffdengue = async(req,res) => {
 
     const d_assigndate = Array.isArray(date)?date.join(', '):date;
     
-
-
             const newassignfordengue =  new Denguestaff({
                 type,  
                 staffmember,    

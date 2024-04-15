@@ -8,7 +8,7 @@ const addstaffvaccine = async (req, res) => {
         const newassignforvaccine = new Vaccinestaff({
             v_name,        
             quantity,
-            date:Date,    //date
+            date:d_assigndate,    
             location,
             staffmember
         });

@@ -11,6 +11,7 @@ import { Dialog, DialogTitle, DialogContent } from '@mui/material';
 const Vaccineschedules = ({ submitted, data }) => {
     // State variables
     const [vaccineappdata, setvaccineappdata] = useState([]);
+    const [stvacdata, setstvacdata] = useState([]);
     const [open, setOpen] = useState(false); // Renamed openConfirm to setOpen
     const [staffmember, setstaffmember] = useState('');
 
@@ -18,8 +19,10 @@ const Vaccineschedules = ({ submitted, data }) => {
         getvaccineappdata();
     }, []);
 
-    const functionPopup = () => {
-        setOpen(true); // Renamed openConfirm to setOpen
+    const functionPopup = (vaccineapp) => {
+        setOpen(true); 
+        setstvacdata(vaccineapp);
+    
     }
 
     const closepopup = () => {
@@ -40,13 +43,24 @@ const Vaccineschedules = ({ submitted, data }) => {
     const addstaffvaccine = async () => {
         try {
             const response = await Axios.post("http://localhost:4000/api/addstaffvaccine", {
-                v_name: vaccineappdata.v_name,
-                quantity: vaccineappdata.quantity,
-                date: vaccineappdata.date, // Date
-                location: vaccineappdata.location,
+                v_name: stvacdata.v_name,
+                quantity: stvacdata.quantity,
+                date: stvacdata.date, // Date
+                location: stvacdata.location,
                 staffmember: staffmember
             });
             console.log("Successfully", response.data);
+            setOpen(false);
+            setstaffmember('');
+
+            Swal.fire({
+                title: "Success!",
+                text: "Staff added successfully!",
+                icon: "success",
+                showConfirmButton: false,
+                timer: 1500
+              });
+
         } catch (error) {
             console.error("error", error);
         }
@@ -75,7 +89,7 @@ const Vaccineschedules = ({ submitted, data }) => {
                                         <td>{vaccineapp.date}</td>
                                         <td>{vaccineapp.location}</td>
                                         <td className='actionButtons'>
-                                            <button onClick={functionPopup}>Assign Staff</button>
+                                            <button onClick={() => functionPopup(vaccineapp)}>Assign Staff</button>
                                         </td>
                                     </tr>
                                 ))
@@ -91,10 +105,10 @@ const Vaccineschedules = ({ submitted, data }) => {
             <Dialog open={open} onClose={closepopup}> {/* Added onClose prop to Dialog component */}
                 <DialogTitle>Assign staff</DialogTitle>
                 <DialogContent>
-                    <p>{vaccineappdata.v_name}</p>
-                    <p>{vaccineappdata.quantity}</p>
-                    <p>{vaccineappdata.data}</p>
-                    <p>{vaccineappdata.location}</p>
+                    <p>{stvacdata.v_name}</p>
+                    <p>{stvacdata.quantity}</p>
+                    <p>{stvacdata.date}</p>
+                    <p>{stvacdata.location}</p>
                     <input type='text' onChange={(e) => setstaffmember(e.target.value)} />
                     <button onClick={addstaffvaccine}>Submit</button>
                     <button onClick={closepopup}>Close</button>
