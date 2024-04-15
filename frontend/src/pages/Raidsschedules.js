@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import Axios from 'axios'; 
 import '../styles/RaidSchedules.css';
 import Swal from 'sweetalert2';
-import Alert from 'react-bootstrap/Alert'; // Import Bootstrap Alert component
 
 const RaidSchedules = ({ submitted, data }) => {
   const [name, setName] = useState('');
@@ -12,22 +11,15 @@ const RaidSchedules = ({ submitted, data }) => {
   const [date, setDate] = useState('');
   const [location, setLocation] = useState('');
   const [description, setDescription] = useState('');
-  const [validationError, setValidationError] = useState(false);
 
   const addstaffraids = async () => {
-    if (!name || !staffmember || !date || !location || !description) {
-      setValidationError(true);
-      return;
-    }
-    setValidationError(false);
-
     try {
       const response = await Axios.post('http://localhost:4000/api/addstaffraids', {
         type: name,
-        staffmember,
-        date,
-        location,
-        description
+        staffmember: staffmember,
+        date: date,
+        location: location,
+        description: description
       });
       console.log('Successfully', response.data);
       // Display success message
@@ -42,6 +34,8 @@ const RaidSchedules = ({ submitted, data }) => {
       console.error('error', error);
     }
   };
+
+  
 
   useEffect(() => {
     if (!submitted) {
@@ -94,20 +88,10 @@ const RaidSchedules = ({ submitted, data }) => {
                 <label>Description:</label>
                 <textarea onChange={e => setDescription(e.target.value)} value={description} />
               </div>
-              {validationError && (
-                <Alert variant="danger">All fields are required</Alert>
-              )}
-              {(!name || !staffmember || !date || !location || !description) ? (
-                <div>
-                  <button type="button" onClick={addstaffraids}>Assign Staff</button>
-                  <button className="view-programs">View Scheduled Programs</button>
-                </div>
-              ) : (
-                <Link to="/raidsAssign">
-                  <button type="button" onClick={addstaffraids}>Assign Staff</button>
-                  <button className="view-programs">View Scheduled Programs</button>
-                </Link>
-              )}
+              <Link to="/raidsAssign">
+                <button type="button" onClick={addstaffraids}>Assign Staff</button>
+                <button className="view-programs">View Scheduled Programs</button>
+              </Link>
             </form>
           </div>
         </div>

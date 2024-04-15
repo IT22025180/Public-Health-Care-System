@@ -73,6 +73,7 @@ import RaidSubFormEdit from './pages/RaidSubFormEdit';
 
 
 
+
 function App() {
   return (
     <AnimatePresence>
@@ -99,6 +100,7 @@ function App() {
           <Route path="/EditLeave/:id" element={<EditLeave />} />
           <Route path='/DengueAssignTable' element={<DengueAssignTable />} />
           <Route path='/VaccineAssignTable' element={<VaccineAssignTable />} />
+
 
           <Route path='/' element={<Home />} />
           <Route path='/vaccines' element={<Vaccines />} />
@@ -140,6 +142,12 @@ function App() {
 
           <Route path='/RF' element={<RaidForm />} />
           <Route path='/F&CDReportViolationTabe' element={<FCRVTable />} />
+
+        <Route path='/RF' element={<RaidForm/>}/>
+        <Route path='/F&CDReportViolationTabe' element={<FCRVTable/>}/>
+        <Route path='/DengueAssignTable' element={<DengueAssignTable/>}/>
+
+
 
         <Route path='/addclinics' element = {<AddClinic/>}/>
         <Route path='/addpatient' element = {<AddPatients/>}/>
