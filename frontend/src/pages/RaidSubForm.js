@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import '../styles/RaidSubForm.css'
-import Header from '../components/Header'; 
 import { Link, useHistory } from 'react-router-dom';
 import Layout from '../components/Layout';
 import Axios  from 'axios';
@@ -32,20 +31,18 @@ const RaidSubForm = ({submitted,data}) => {
     },[data]);
 
     
-    const addRS =async()=>{
-        try{
-        const response =await Axios.post('http://localhost:4000/api/addRS',{
-            location : location,
-            details : Details,
-            specialnotes:specialnotes,
-           
-        });
-
-        console.log('Successfully',response.data);
-    }catch(error){
-        console.error('error',error);
-    }
-
+    const addRS = async () => {
+        try {
+            const response = await Axios.post('http://localhost:4000/api/addRS', {
+                location: location,
+                details: Details,
+                specialNotes: specialnotes,
+            });
+    
+            console.log('Successfully added Raid Submission:', response.data);
+        } catch (error) {
+            console.error('Error adding Raid Submission:', error);
+        }
     }
 
 

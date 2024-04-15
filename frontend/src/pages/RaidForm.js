@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import '../styles/RaidForm.css'
-import Header from '../components/Header'; 
 import { Link, useHistory } from 'react-router-dom';
 import Layout from '../components/Layout';
 import Axios  from 'axios';
