@@ -55,7 +55,7 @@ const addComplain = async (req, res) => {
 const getComplain = async (req, res) => {
     try {
         const allComplain = await Complain.find();
-        res.json({ allComplain });
+        res.status(200).json( allComplain );
     } catch (error) {
         console.error('Error getting Complain:', error);
         res.status(500).json({ success: false, message: 'Internal server error' });

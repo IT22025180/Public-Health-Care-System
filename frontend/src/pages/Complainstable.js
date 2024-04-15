@@ -12,8 +12,9 @@ const Complainstable = () => {
     const getComplainsdata = () => {
         Axios.get('http://localhost:4000/api/Complain')
             .then(response => {
+                
                 console.log('data from sever', response.data);
-                setComplainsdata(response.data.allComplain);
+                setComplainsdata(response.data);
             })
             .catch(error => {
                 console.error("Axios error:", error);
@@ -83,9 +84,9 @@ const Complainstable = () => {
                                     <TableCell>{Complains.cdesc}</TableCell>
                                     <TableCell>{Complains.area}</TableCell>
                                     <TableCell>{Complains.location}</TableCell>
-                                    <TableCell>{Complains.images.map((image) => (
-                                        <div >
-                                            <img src={`complainsdata:${image.contentType};base64,${image.data}`} alt={`Image`} width={50} height={50} />
+                                    <TableCell>{Complains.images.map((image,index) => (
+                                        <div key={index} >
+                                            <img src={`data:${image.contentType};base64,${image.data}`} alt={`Image`} width={50} height={50} />
                                         </div>
                                     ))}</TableCell>
 
