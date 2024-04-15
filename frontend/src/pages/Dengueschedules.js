@@ -108,6 +108,7 @@ try{
       <p>{campdata.time}</p>
       <input type='text'onChange={(e) => setstaffmember(e.target.value)}></input>
       <button onClick={addstaffdengue} >submit</button>
+      <button onClick={closepopup}>close</button>
      </DialogContent>
     </Dialog> </>
   );
