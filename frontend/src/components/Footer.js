@@ -40,7 +40,7 @@ const Footer = () => {
                             <li><a href="/clinics">Clinic</a></li>
                             <li><a href="/Complains">Complains</a></li>
                             <li><a href="/denguecamp">Dengue</a></li>
-                            <li><a href="/RF">Raids</a></li>
+                            <li><a href="/RaidsHome">Raids</a></li>
                             <li><a href="/mainMidwife">Midwife</a></li>
                             <li><a href="/Fine-And-court">Fine & Court</a></li>
                         </ul>
