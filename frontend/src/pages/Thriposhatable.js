@@ -4,6 +4,7 @@ import Axios from 'axios';
 import jsPDF from 'jspdf';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import logo1 from '../webImages/logo1.png';
 
 
 const Thriposhatable = () => {
@@ -65,7 +66,32 @@ const confirmDelete = (id) => {
             return;
         }
         const doc = new jsPDF();
-        let y = 10;
+
+        const logo = new Image();
+    logo.src = logo1; // Use the imported logo image
+    doc.addImage(logo, 'PNG', 6, 7, 20, 20); // Adjust the position and dimensions as needed
+
+    // Add Public Health Information System as the letterhead
+    doc.setFontSize(12);
+    doc.text('Public Health Information System', 70, 15); // Adjust the position as needed
+    doc.text('Suwasiripaya, No. 385, Rev. Baddegama Wimalawansa Thero Mawatha,', 70, 20);
+    doc.text('Colombo 10, Sri Lanka.', 70, 25);
+    doc.text('Tel: 112 694033, 112 675011, 112 675449, 112 693493', 70, 30);
+
+    // Add page border
+    doc.setDrawColor(0);
+    doc.setLineWidth(0.5);
+    doc.rect(0, 0, doc.internal.pageSize.width, doc.internal.pageSize.height, 'S');
+
+    // Add horizontal line
+    doc.setLineWidth(0.5);
+    doc.line(5, 45, 205, 45);
+
+    // Leave summary topic
+    doc.setFontSize(18);
+    doc.setTextColor(0, 0, 0); // Set text color to black
+    doc.text('Thriposha Destribution Summary', 60, 60); // Adjust the position as needed
+        let y = 75;
         thriposhadata.forEach((thriposha, index) => {
             const thriposhaText = `Thriposha Type: ${thriposha.type}\nEstimated Date: ${thriposha.esti_Date}\nQuantity: ${thriposha.quantity}\n\n`;
             doc.text(thriposhaText, 10, y);
