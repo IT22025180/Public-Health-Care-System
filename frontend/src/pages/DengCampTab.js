@@ -92,7 +92,7 @@ const generateReport = () => {
   return (
     <div className='Dcamptable'>
          <form className= "campsearch_bar">
-         <input  placeholder="Search name" type='text' value={searchQuery} onChange={e => setSearchQuery(e.target.value)} />
+         <input  placeholder="Search by date" type='text' value={searchQuery} onChange={e => setSearchQuery(e.target.value)} />
          </form>
         <table border ={1} cellPadding={10} cellSpacing={0}>
             <thead>
@@ -103,6 +103,7 @@ const generateReport = () => {
                     <th>Conducted by</th>
                     <th>Edit</th>
                     <th>Delete</th>
+                    <th>Generate PDF</th>
                 </tr>
             </thead>
             <tbody>

@@ -64,3 +64,12 @@
     cursor: pointer;
     
 }
+.reportButtons button{
+    border: 0;
+    outline: none;
+    background-color: rgb(15, 22, 221);
+    padding: 8px 10px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
