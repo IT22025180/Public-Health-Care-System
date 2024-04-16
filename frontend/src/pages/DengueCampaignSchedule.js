@@ -81,7 +81,10 @@ const DengueCampaigns = ({ submitted, data }) => {
 
                     
                         <button onClick={addcamp} type='submit' value="Submit">Save</button>
-                        <button type='submit' value="Cancel">Cancel</button>
+
+                        <Link to="/DengCampTab">
+                        <button type='submit' value="Cancel">View table</button>
+                        </Link>
     
                     </div>
                 </form>
