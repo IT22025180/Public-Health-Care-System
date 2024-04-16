@@ -111,8 +111,8 @@ const AddPatients = () => {
                       \n
                       Public Health Information Technical Team
                       `;
-    doc.text(genPDF, 10, y);
-    y += 50;
+    doc.text(genPDF, 10, 50);
+
 
     doc.save(`${name}_${ctype}_appointment_report.pdf`);
 
