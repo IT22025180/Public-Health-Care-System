@@ -56,7 +56,7 @@ const FCDocManage = ({ submitted, data }) => {
   
       await Axios.post('http://localhost:4000/api/addDocM', formData, {
         headers: {
-          'Content-Type': 'multipart/form-data' // Set content type to multipart/form-data
+          'Content-Type': 'multipart/form-data'
         }
       });
   
