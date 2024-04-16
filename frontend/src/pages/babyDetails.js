@@ -82,7 +82,6 @@ const BabyDetails = ({submitted,data}) => {
 
     }
 
-
   return (
     <Layout>
 
