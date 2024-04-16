@@ -58,7 +58,8 @@ const Editcampdetails = () => {
 }
 
 
-      const confirmUpdate = () => {
+      const confirmUpdate = (event) => {
+        event.preventDefault();
 
         if(!venue_u || !date_u || !time_u || !drName_u){
             setErrorMessage('Please fill in all required fields');
