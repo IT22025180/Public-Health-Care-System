@@ -11,14 +11,14 @@ const RaidsHome = () => {
       id: 1,
       title: 'Raid Form',
       image: img1,
-      buttonText: 'Submit',
+      buttonText: 'View',
       buttonLink: '/RF'
     }, 
     {
       id: 2,
       title: 'Raid Submit Form',
       image: img2,
-      buttonText: 'Submit',
+      buttonText: 'View',
       buttonLink: '/raidsubform'
     }
   ];
