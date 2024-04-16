@@ -64,13 +64,14 @@ import EditVApp from './pages/EditVApp';
 import FCRFEdit from './pages/FCRFEdit';
 
 import RaidSubTable from './pages/RaidSubTable';
-import FCReportStatus from './pages/FCReportStatus';
 import FCAnalMain from './pages/FCAnalyseMain';
 import RaidFormTable from './pages/RaidFormTable';
 import RaidFormEdit from './pages/RaidFormEdit';
 import RaidsHome from './pages/RaidsHome';
 
 import RaidSubFormEdit from './pages/RaidSubFormEdit';
+import FCRS from './pages/FCRS';
+import FCNotify from './pages/FCNotify';
 
 
 import Editcampdetails from './pages/Editcampdetails';
@@ -307,11 +308,12 @@ function App() {
           <Route path='/dclogin' element={<DoctorLogin />} />
           <Route path='/login' element={<Lgportal />} />
           <Route path='/popup' element={<ModelPopup />} />
-          <Route path='/FineAndCourtReportStatus' element={<FCReportStatus />} />
           <Route path='/FineAndCourtAnalyze' element={<FCAnalMain />} />
           <Route path='/RaidFormEdit/:_id/:location/:date/:time/:officer/:sNote' element={<RaidFormEdit />} />
           <Route path='/RaidSubFormEdit/:_id/:location/:details/:sNote' element={<RaidSubFormEdit />} />
           <Route path='/RaidsHome' element={<RaidsHome />} />
+          <Route path='/FCRS' element={<FCRS />} />
+          <Route path='/FCNotify' element={<FCNotify />} />
         </Routes>
       </Router>
     </AnimatePresence>
