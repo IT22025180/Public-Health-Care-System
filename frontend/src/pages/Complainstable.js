@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import '../styles/Complains.css'
 import Axios from 'axios';
 import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
+import { FaEdit, FaTrash } from 'react-icons/fa';
 
 const Complainstable = () => {
 
@@ -99,8 +100,8 @@ const Complainstable = () => {
 
 
                                     <TableCell >
-                                        <Button onClick={() => editEComplain(Complains._id)}>Edit</Button>
-                                        <Button onClick={() => ComplainsDdelete(Complains._id)}>Delete</Button>
+                                        <Button onClick={() => editEComplain(Complains._id)}><FaEdit /></Button>
+                                        <Button onClick={() => ComplainsDdelete(Complains._id)}>Delete <FaTrash /></Button>
                                     </TableCell>
                                 </TableRow>
                             ))
