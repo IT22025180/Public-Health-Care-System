@@ -28,23 +28,125 @@ const LeaveTable = () => {
   };
 
   const handleDelete = (id) => {
-    // Delete functionality remains the same
-    // ...
+    Axios.post('http://localhost:4000/api/deleteLeave', { _id: id })
+      .then(response => {
+        console.log('Leave deleted successfully');
+        setLeavedata(prevData => prevData.filter(leave => leave._id !== id));
+        // Display success message
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your leave application has been deleted.",
+          icon: "success"
+        });
+      })
+      .catch(error => {
+        console.error('Error deleting leave:', error);
+      });
   };
 
   const generatePDF = (leave) => {
-    // PDF generation functionality remains the same
-    // ...
+    const doc = new jsPDF();
+
+    // Add Sri Lankan national logo
+    const logo = new Image();
+    logo.src = logo1; // Use the imported logo image
+    doc.addImage(logo, 'PNG', 6, 7, 20, 20); // Adjust the position and dimensions as needed
+
+    // Add Public Health Information System as the letterhead
+    doc.setFontSize(12);
+    doc.text('Public Health Information System', 70, 15); // Adjust the position as needed
+    doc.text('Suwasiripaya, No. 385, Rev. Baddegama Wimalawansa Thero Mawatha,', 70, 20);
+    doc.text('Colombo 10, Sri Lanka.', 70, 25);
+    doc.text('Tel: 112 694033, 112 675011, 112 675449, 112 693493', 70, 30);
+
+    // Add page border
+    doc.setDrawColor(0);
+    doc.setLineWidth(0.5);
+    doc.rect(0, 0, doc.internal.pageSize.width, doc.internal.pageSize.height, 'S');
+
+    // Add horizontal line
+    doc.setLineWidth(0.5);
+    doc.line(5, 45, 205, 45);
+
+    // Leave summary topic
+    doc.setFontSize(18);
+    doc.setTextColor(0, 0, 0); // Set text color to black
+    doc.text('Leave Summary', 90, 60); // Adjust the position as needed
+
+    // Professional summary description
+    let leaveTypeDescription = '';
+    switch (leave.leaveType) {
+      case 'Sick':
+        leaveTypeDescription = 'medical reasons';
+        break;
+      case 'Vacation':
+        leaveTypeDescription = 'personal reasons';
+        break;
+      case 'Quitting':
+        leaveTypeDescription = 'resignation';
+        break;
+      default:
+        leaveTypeDescription = 'reasons unknown';
+        break;
+    }
+
+    let positionDescription = '';
+    switch (leave.position) {
+      case 'Doctor':
+        positionDescription = 'Doctor';
+        break;
+      case 'Nurse':
+        positionDescription = 'Nurse';
+        break;
+      case 'PHI':
+        positionDescription = 'Public Health Inspector';
+        break;
+      default:
+        positionDescription = 'position unknown';
+        break;
+    }
+
+    const leaveStartDate = new Date(leave.leavestrt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+    const leaveEndDate = new Date(leave.leaveend).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+
+    const description = `
+    ${positionDescription} ${leave.name}, with Staff ID ${leave.staffid}, will be on leave for ${leaveTypeDescription} 
+
+    from ${leaveStartDate}, to ${leaveEndDate}. During this period, ${positionDescription} ${leave.name},
+
+    who holds the position of ${positionDescription}, will not be available for duty. 
+
+
+    This leave has been approved due to health concerns, as indicated by the ${leave.leaveType.toLowerCase()} 
+
+    leave type. We wish ${positionDescription} ${leave.name} a swift recovery and look forward to 
+
+    their return to full health and work responsibilities thereafter.
+    `;
+
+    doc.setFontSize(12);
+    doc.text(description, 15, 75); 
+
+    // Date and signature
+    const currentDate = new Date().toLocaleDateString('en-US');
+    doc.setFontSize(12);
+    doc.text(`Date: ${currentDate}`, 15, 170); 
+    doc.text('Signature:', 15, 180); 
+
+    // Save the PDF with a filename based on leave name
+    doc.save(`Leave_Summary_${leave.name}.pdf`);
   };
 
-  const handleSearch = () => {
+  const handleSearch = (e) => {
+    const value = e.target.value.toLowerCase();
+    setSearchQuery(value);
     // Filter the leave data based on the search query
-    const filteredData = leavedata.filter(leave =>
-      leave.name.toLowerCase().includes(searchQuery.toLowerCase())
-      || leave.staffid.toLowerCase().includes(searchQuery.toLowerCase())
-      || leave.position.toLowerCase().includes(searchQuery.toLowerCase())
-      || leave.leaveType.toLowerCase().includes(searchQuery.toLowerCase())
-    );
+    const filteredData = value
+      ? leavedata.filter(leave =>
+          leave.name.toLowerCase().includes(value) ||
+          leave.staffid.toLowerCase().includes(value)
+        )
+      : leavedata;
     setLeavedata(filteredData);
   };
 
@@ -55,10 +157,9 @@ const LeaveTable = () => {
           <input
             type="text"
             value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Search by name, staff ID, position, leave type..."
+            onChange={handleSearch}
+            placeholder="Search by name or staff ID..."
           />
-          <button className="searchButton" onClick={handleSearch}>Search</button>
         </div>
         <table border={1} cellPadding={10} cellSpacing={0}>
           <thead>
@@ -113,7 +214,6 @@ const LeaveTable = () => {
       </div>
     </Layout>
   );
-
 };
 
 export default LeaveTable;
