@@ -4,15 +4,21 @@ import React, { useEffect, useState, useRef, useCallback } from "react";
 import { Form, Button, Container, Row, Col, Alert } from "react-bootstrap";
 import Axios from "axios";
 import Swal from "sweetalert2";
+import { useNavigate } from 'react-router-dom';
 import Complainstable from "./Complainstable";
 import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
+import * as Yup from 'yup';
+import { motion, useScroll } from 'framer-motion'
 
 const mapStyle = {
   height: "300px",
   width: "100%",
 };
 
+
 const ComplaintForm = () => {
+
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     fname: "",
     lname: "",
@@ -30,15 +36,33 @@ const ComplaintForm = () => {
 
   const [errorMessage, setErrorMessage] = useState("");
 
+  const validateSchema = Yup.object().shape({
+    fname: Yup.string().required('First Name is Required').matches(/^[A-Za-z\s]+$/, 'Name must contain only letters'),
+    lname: Yup.string().required('Last Name is Required').matches(/^[A-Za-z\s]+$/, 'Name must contain only letters'),
+    mobile: Yup.string().matches(/^0\d{9}$/, 'Invalid Contact Number').required('Contact number is Required'),
+    email: Yup.string().matches(/^[a-zA-Z0-9._%+-]+@gmail\.com$/, 'Invalid Gmail address').required('Email is Required'),
+    NIC: Yup.string().required('NIC is required').matches(/^\d{11}(V|v|\d)$/, 'Invalid NIC Number'),
+    yaddress: Yup.string().required('Address is Required').matches(/^[A-Za-z\s]+$/, 'Name must contain only letters'),
+    images: Yup.array().min(1, 'img is required').required('At least one document is required'),
+    cdesc: Yup.string().required('Description is Required').matches(/^[A-Za-z\s,.0-9]+$/, 'Description must contain only letters'),
+    ctype: Yup.string().required('Complain Type is Required'),
+    date: Yup.string().required('Date is Required'),
+    area: Yup.string().required('Location is Required').matches(/^[A-Za-z\s,.0-9]+$/, 'Location must contain only letters'),
+    
+    
+  });
+
   const addComplain = async (e) => {
-    /* if (!formData.fname || !formData.lname || !formData.mobile || !formData.email || !formData.NIC || !formData.yaddress || !formData.ctype || !formData.cdesc || !formData.date || !formData.area) {
-      setErrorMessage('Please fill in all required fields');
-      return;
-    }*/
 
     e.preventDefault();
 
     try {
+
+      await validateSchema.validate(formData,
+        
+        { abortEarly: false }
+      );
+      
       console.log(formData);
       // Prepare the request payload
       const formdata = new FormData();
@@ -96,7 +120,15 @@ const ComplaintForm = () => {
         icon: "success",
       });
     } catch (error) {
-      console.error("Error submitting complain data:", error);
+      if (error instanceof Yup.ValidationError) {
+        const errors = {};
+        error.inner.forEach(err => {
+          errors[err.path] = err.message;
+        });
+        setErrorMessage(errors);
+      } else {
+        console.error('Error', error);
+      }
     }
   };
   const [isLoaded, setisLoaded] = useState(false);
@@ -194,11 +226,22 @@ const ComplaintForm = () => {
 
   }
 
+  const navtoComplains = async () => {
+    navigate('/Complainstable');
+}
+
   return (
     <Layout>
+      <motion.div className=""
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -50 }}
+        transition={{ duration: 0.5 }}
+
+      >
       <Container>
         <h1>Public Health Complaint Form</h1>
-        {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
+       
         <Form>
           <Row>
             <Col>
@@ -211,9 +254,11 @@ const ComplaintForm = () => {
                   onChange={(e) =>
                     setFormData({ ...formData, fname: e.target.value })
                   }
-                  required
+                  
+                  
                 />
               </Form.Group>
+              {errorMessage.fname && <div className="text-danger">{errorMessage.fname}</div>}
             </Col>
             <Col>
               <Form.Group controlId="lastName">
@@ -225,9 +270,10 @@ const ComplaintForm = () => {
                   onChange={(e) =>
                     setFormData({ ...formData, lname: e.target.value })
                   }
-                  required
+                  
                 />
               </Form.Group>
+              {errorMessage.lname && <div className="text-danger">{errorMessage.lname}</div>}
             </Col>
           </Row>
           <Row>
@@ -237,14 +283,15 @@ const ComplaintForm = () => {
                 <Form.Control
                   type="number"
                   name="mobile"
-                  pattern="[0-9]{10}"
+                 // pattern="[0-9]{10}"
                   value={formData.mobile}
                   onChange={(e) =>
                     setFormData({ ...formData, mobile: e.target.value })
                   }
-                  required
+                  
                 />
               </Form.Group>
+              {errorMessage.mobile && <div className="text-danger">{errorMessage.mobile}</div>}
             </Col>
             <Col>
               <Form.Group>
@@ -256,9 +303,10 @@ const ComplaintForm = () => {
                   onChange={(e) =>
                     setFormData({ ...formData, email: e.target.value })
                   }
-                  required
+                  
                 />
               </Form.Group>
+              {errorMessage.email && <div className="text-danger">{errorMessage.email}</div>}
             </Col>
           </Row>
           <Row>
@@ -272,9 +320,10 @@ const ComplaintForm = () => {
                   onChange={(e) =>
                     setFormData({ ...formData, NIC: e.target.value })
                   }
-                  required
+                  
                 />
               </Form.Group>
+              {errorMessage.NIC && <div className="text-danger">{errorMessage.NIC}</div>}
             </Col>
             <Col>
               <Form.Group>
@@ -286,9 +335,10 @@ const ComplaintForm = () => {
                   onChange={(e) =>
                     setFormData({ ...formData, yaddress: e.target.value })
                   }
-                  required
+                  
                 />
               </Form.Group>
+              {errorMessage.yaddress && <div className="text-danger">{errorMessage.yaddress}</div>}
             </Col>
           </Row>
           <Row>
@@ -305,9 +355,10 @@ const ComplaintForm = () => {
                       date: e.target.value.toString(),
                     })
                   }
-                  required
+                  
                 />
               </Form.Group>
+              {errorMessage.date && <div className="text-danger">{errorMessage.date}</div>}
             </Col>
             <Col>
               <Form.Group>
@@ -319,6 +370,7 @@ const ComplaintForm = () => {
                   multiple
                 />
               </Form.Group>
+              {errorMessage.images && <div className="text-danger">{errorMessage.images}</div>}
             </Col>
           </Row>
           <Row>
@@ -332,15 +384,16 @@ const ComplaintForm = () => {
                   onChange={(e) =>
                     setFormData({ ...formData, ctype: e.target.value })
                   }
-                  required
+                  
                 >
                   <option value="" selected disabled>
                     Select type
                   </option>
                   <option value="Food">Food</option>
                   <option value="Dengue">Dengue</option>
-                </Form.Control>
+                </Form.Control>   
               </Form.Group>
+              {errorMessage.ctype && <div className="text-danger">{errorMessage.ctype}</div>}
             </Col>
             <Col></Col>
           </Row>
@@ -359,6 +412,7 @@ const ComplaintForm = () => {
                   required
                 />
               </Form.Group>
+              {errorMessage.cdesc && <div className="text-danger">{errorMessage.cdesc}</div>}
             </Col>
             <Col>
               <Form.Group>
@@ -371,7 +425,7 @@ const ComplaintForm = () => {
                   onChange={(e) =>
                     setFormData({ ...formData, area: e.target.value })
                   }
-                  required
+                  
                   ref={inputRef}
                   onFocus={loadmap}
                 />
@@ -392,13 +446,18 @@ const ComplaintForm = () => {
                   )}
                 </div>
               </Form.Group>
+              {errorMessage.area && <div className="text-danger">{errorMessage.area}</div>}
             </Col>
           </Row>
           <Button variant="primary" type="submit" onClick={addComplain}>
             Submit
           </Button>
+          <Button  onClick={navtoComplains}>
+          Complainstable
+          </Button>
         </Form>
       </Container>
+      </motion.div>
     </Layout>
   );
 };
