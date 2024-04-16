@@ -6,10 +6,13 @@ const addRForm = async(req,res) => {
     try{
         
             const{ location, date, time, officer, sNote} = req.body;
+
+            const Date=Array.isArray(date)?date.join(', '):date;
+
             const newRForm =  new RF({
 
                 location,
-                date,
+                date:Date,
                 time,
                 officer,
                 sNote
