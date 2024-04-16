@@ -98,11 +98,11 @@ const Editcampdetails = () => {
                 </div>
                 <div className="input">
                     <label className='stime' htmlFor="stime">Starting Time</label>
-                    <input onChange={e => settime(e.target.value)} type="stime" id="stime" name="stime" autoComplete='off' placeholder='Starting Time' />
+                    <input value={time_u} onChange={e => settime(e.target.value)} type="stime" id="stime" name="stime" autoComplete='off' placeholder='Starting Time' />
                 </div>
                 <div className="input">
                     <label className='drname' htmlFor="conductedby">Conducted by</label>
-                    <input onChange={e => setdrName(e.target.value)} type="conductedby" id="conductedby" name="conductedby" autoComplete='off' placeholder='Conductedby' />
+                    <input value={drName_u} onChange={e => setdrName(e.target.value)} type="conductedby" id="conductedby" name="conductedby" autoComplete='off' placeholder='Conductedby' />
                 </div>
                 <div className="input">
                     <button onClick={confirmUpdate} type='submit' value="Submit">Update</button>
