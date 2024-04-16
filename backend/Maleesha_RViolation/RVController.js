@@ -7,6 +7,7 @@ const { error } = require('console');
 
 const addVioReport = async (req, res) => {
     try {
+        console.log(req.files); 
 
         const { ro_name, ro_email, ro_mobile, v_location, date, v_type, v_description, v_name, v_nic, v_mobile, v_email, decision } = req.body;
 

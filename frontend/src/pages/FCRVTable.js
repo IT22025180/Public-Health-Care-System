@@ -83,27 +83,26 @@ const FCRVTable = () => {
     const tableMargin = 20;
     const titleWidth = doc.getTextWidth(title);
     const center = (doc.internal.pageSize.width / 2) - (titleWidth / 2);
-  
+
     doc.text(title, center, titleMargin);
-  
+
     doc.autoTable({
       head: [['Raid Officer Name', 'Raid Officer Email', 'Raid Officer Contact Number', 'Date', 'Violation Location', 'Violation Type', 'Violation Description', 'Violator Name', 'Violator Email', 'Violator Contact Number', 'Violator NIC']],
       body: FilterData().map((val, i) => [val.ro_name, val.ro_email, val.ro_mobile, val.date, val.v_location, val.v_type, val.v_description, val.v_name, val.v_email, val.v_mobile, val.v_nic]),
       startY: titleMargin + tableMargin,
       styles: {
         cellWidth: 'auto',
-        fontSize: 8, // Adjust font size
+        fontSize: 8,
       },
       columnStyles: {
-        0: { cellWidth: 30 }, // Adjust column width
+        0: { cellWidth: 30 },
         1: { cellWidth: 30 },
-        // Adjust other column widths as needed
       },
     });
-  
+
     doc.save('Fine_And_Court_Violation_Report.pdf');
   };
-  
+
 
   return (
     <Layout>
@@ -146,16 +145,15 @@ const FCRVTable = () => {
                   <td>{RVdata.v_email}</td>
                   <td>{RVdata.v_mobile}</td>
                   <td>{RVdata.v_nic}</td>
-                  <td>
-                    {Array.isArray(RVdata.evidence) && RVdata.evidence.length > 0 && (
+                  <td className="evidence-cell">
+                    {Array.isArray(RVdata.evidence) && RVdata.evidence.length > 0 ? (
                       RVdata.evidence.map((evidence, index) => (
-                        <div key={index} style={{ width: "200px", height: "200px" }}>
-                          <img src={`data:${evidence.contentType};base64,${evidence.data}`} alt={`Image ${index + 1}`} width={50} height={50} />
-                        </div>
+                        <img key={index} src={`data:${evidence.contentType};base64,${evidence.data}`} alt={`Image ${index + 1}`} />
                       ))
+                    ) : (
+                      <span>No evidence</span>
                     )}
                   </td>
-
                   <td>
                     <Link to={`/FCRVEdit/${RVdata._id}/${RVdata.ro_name}/${RVdata.ro_email}/${RVdata.ro_mobile}/${RVdata.date}/${RVdata.v_location}/${RVdata.v_type}/${RVdata.v_description}/${RVdata.v_name}/${RVdata.v_nic}/${RVdata.v_mobile}/${RVdata.v_email}`}>
                       <button className="rvedtBtn">Edit</button>

@@ -18,9 +18,8 @@ const AddReportVio = new mongoose.Schema({
     v_name : String ,
     v_email : String,
     v_mobile : String,    
-    evidance : [imageSchema],
+    evidence : [imageSchema],
     v_nic : String,
-    Evidance : String,
     decision: { type: String, default: 'Pending' },
 },
 {

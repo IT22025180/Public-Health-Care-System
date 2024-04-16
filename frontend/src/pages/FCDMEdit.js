@@ -123,9 +123,9 @@ const FCDMEdit = () => {
     <Layout>
       <div className="formContainer">
         <form className="DMForm">
-          <h2>UpdateDocument Management</h2>
+          <h2>Update Document Management</h2>
           <div>
-            <label>Report ID</label>
+            <label>Case Number</label>
             <input type="text" name="id" value={reportid_u} onChange={(e) => setID(e.target.value)} />
             {errorMessage.reportid_u && <div className='errorMessage'>{errorMessage.reportid_u}</div>}
           </div>

@@ -68,10 +68,12 @@ const FCReportForm = ({ submitted, data }) => {
       formData.append('v_mobile', vContact);
       formData.append('v_nic', vId);
 
-      if (formData.images && formData.images.length > 0) {
-        for (let i = 0; i < formData.images.length; i++) {
-          formData.append("images", formData.images[i]);
-        }
+      for (let i = 0; i < evidence.length; i++) {
+        formData.append("images", evidence[i]);
+      }
+
+      for (var pair of formData.entries()) {
+        console.log(pair[0] + ', ' + pair[1]);
       }
       console.log(formData.get("images"));
 
@@ -186,7 +188,7 @@ const FCReportForm = ({ submitted, data }) => {
 
           <h4>Upload Evidence</h4>
           <div>
-            <input type="file" name="photo" onChange={handleImageChange} />
+            <input type="file" name="photo" onChange={handleImageChange} multiple  />
           </div>
           <button className="button" type="button" onClick={addFCReport}>
             Submit Report
