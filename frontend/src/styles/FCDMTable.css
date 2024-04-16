@@ -25,6 +25,12 @@
   background-color: #f2f2f2;
 }
 
+.evidence-cellDM {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .edtBtn {
   border: 0;
   outline: none;

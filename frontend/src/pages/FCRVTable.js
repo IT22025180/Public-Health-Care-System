@@ -107,7 +107,7 @@ const FCRVTable = () => {
   return (
     <Layout>
       <h2>Violation Report Table</h2>
-      <div className="searchvr">
+      <div className="search">
         <input type="text" value={searchQuery} onChange={e => setSearchQuery(e.target.value)} placeholder="Search" />
       </div>
       <div className="FCRVTable">
