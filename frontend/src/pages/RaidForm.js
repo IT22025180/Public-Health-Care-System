@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import '../styles/RaidForm.css'
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useHistory, useNavigate } from 'react-router-dom';
 import Layout from '../components/Layout';
 import Axios  from 'axios';
 
@@ -11,30 +11,25 @@ const RaidForm= ({submitted,data}) => {
     const[time,setftime]=useState('');
     const[officer,setfofficer]=useState('');
     const[specialnotes,setfspecialnotes]=useState('');
+    const [errorMessage, setErrorMessage] = useState('');
+const navigate= useNavigate();
 
-    useEffect(()=>{
-        if(!submitted){
-            setflocation('');
-            setfdate('');
-            setftime('');
-            setfofficer('');
-            setfspecialnotes('');
 
-        }
-    },[submitted]);
-
-    useEffect(()=>{
-        if(data?.id && data.id !==0){
-            setflocation(data.location);
-            setfdate(data.date);
-            setftime(data.time);
-            setfofficer(data.officer);
-            setfspecialnotes(data.sNote);
-        }
-    },[data]);
-
+   
+ 
     
+
+        
+       
     const addRF =async()=>{
+                // Check if any field is empty
+                if (!location || !date || !time|| !officer|| !specialnotes) {
+                    setErrorMessage("Please fill in all fields.");
+                    return;
+                }
+        
+
+
         try{
         const response =await Axios.post('http://localhost:4000/api/addRF',{
             location :location,
@@ -43,7 +38,7 @@ const RaidForm= ({submitted,data}) => {
             officer:officer,
             sNote:specialnotes,
         });
-
+navigate('/raidformtable');
         console.log('Successfully',response.data);
     }catch(error){
         console.error('error',error);
@@ -59,6 +54,7 @@ const RaidForm= ({submitted,data}) => {
     <div className='bdtitle'>
 
     <h3 className='he3'>Raid Form</h3>
+    {errorMessage && <div className="error-message">{errorMessage}</div>}
     <form className='addRF'>
         <div className='input'>
             <label htmlFor='location'>Location</label>
@@ -89,9 +85,9 @@ const RaidForm= ({submitted,data}) => {
             <button className='bdsubmit' type='submit'>Cancel</button>
 
             
-        <Link to="/RaidFormTable">
+       
             <button onClick={addRF} className='bdsave'type='submit'>Save</button>
-        </Link>
+        
 
 
     </form>
@@ -102,9 +98,4 @@ const RaidForm= ({submitted,data}) => {
 
   ) 
 }
-     
-
-
-
-
-export default RaidForm
+export default RaidForm   
