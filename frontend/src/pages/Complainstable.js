@@ -37,7 +37,7 @@ const Complainstable = () => {
                 console.error('Error deleting Complaindata:', error);
       });
 };
-//tt
+
 const editComplain = (id) => {
     // Implement your edit logic here
     console.log(`Edit complain with id: ${id}`);
