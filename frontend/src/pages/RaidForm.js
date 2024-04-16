@@ -21,7 +21,7 @@ const RaidForm= ({submitted,data}) => {
         location: Yup.string().required('Location is Required').matches(/^[A-Za-z\s,.0-9]+$/, 'Location must contain only letters'),
         date: Yup.string().required('Date is Required'),
         time:Yup.string().required('Time is Required'),
-        officer: Yup.string().required('Officer is Required').matches(/^[A-Za-z\s]+$/, 'Name must contain only letters'),
+        officer: Yup.string().required('Officer is Required').matches(/^[A-Za-z\s,.0-9]+$/, 'Name must contain only letters'),
         specialnotes: Yup.string().required('Specialnotes is Required').matches(/^[A-Za-z\s,.0-9]+$/, 'Description must contain only letters'),
        
       });
