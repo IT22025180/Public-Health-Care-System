@@ -5,6 +5,7 @@ import '../styles/VaccineApp.css'
 import Axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2';
+import * as Yup from 'yup';
 
 const VaccineApp = ({submitted,data}) => {
     const[v_name,setv_name]=useState('');
@@ -12,6 +13,17 @@ const VaccineApp = ({submitted,data}) => {
     const[date,setDate]=useState('');
     const[location,setlocation]=useState('');
     const [errorMessage, setErrorMessage] = useState('');
+
+    const validateSchema = Yup.object().shape({
+        v_name: Yup.string().required('vaccine name is Required').matches(/^[A-Za-z\s]+$/, 'Name must contain only letters'),
+        quantity:Yup.string().required('Quantity is Required').matches(/^[.0-9]/,'Quantity must be a number'),
+
+        date: Yup.string().required('Date is Required'),
+        
+        location: Yup.string().required('Location is Required').matches(/^[A-Za-z\s,.0-9]+$/, 'location must contain only letters'),
+
+
+      });
 
     const navigate = useNavigate();
 
@@ -43,7 +55,7 @@ const VaccineApp = ({submitted,data}) => {
     const addvacapp = async(event)=>{
         event.preventDefault(); // Prevent default form submission//prevent the error message disapearing error
 
-        // Check if any field is empty
+      /*  // Check if any field is empty
         if (!v_name || !quantity || !date || !location) {
             setErrorMessage("Please fill in all fields.");
             return;
@@ -54,7 +66,7 @@ const VaccineApp = ({submitted,data}) => {
             setErrorMessage("Please enter a valid quantity.");
             return;
         }
-
+*/
         // Show SweetAlert confirmation message
         Swal.fire({
             title: "Do you want to save the data?",
@@ -76,6 +88,19 @@ const VaccineApp = ({submitted,data}) => {
 
     const saveData = async () => {
         try{
+
+            await validateSchema.validate(
+                {
+                    v_name,
+                    quantity,
+                    date,
+                    location,
+                   
+  
+                },
+                { abortEarly: false }
+              );
+            
             const response = await Axios.post('http://localhost:4000/api/addVacApp',{
                 v_name : v_name,
                 quantity : quantity,
@@ -89,9 +114,15 @@ const VaccineApp = ({submitted,data}) => {
             // Show success message
             Swal.fire("Saved!", "", "success");
         }catch(error){
-            console.error('error',error);
-            // Show error message
-            Swal.fire("Error", "Failed to save data", "error");
+            if (error instanceof Yup.ValidationError) {
+                const errors = {};
+                error.inner.forEach(err => {
+                  errors[err.path] = err.message;
+                });
+                setErrorMessage(errors);
+              } else {
+                console.error('Error', error);
+              }
         }
     };
 
@@ -102,22 +133,25 @@ const VaccineApp = ({submitted,data}) => {
     <div className='title1'>
 
     <h2 className="head2" >Vaccination Appointments</h2>
-    {errorMessage && <div className="error-message">{errorMessage}</div>}
+    
     <form className='addvaccineapp'>
         <div className='input'>
             <label htmlFor='v_name'>Vaccine Name :</label>
             <input onChange={e=>setv_name(e.target.value)} type='text' id='v_name' autoComplete='off' placeholder='Vaccine Name'/>
+            {errorMessage.v_name && <div className="text-danger">{errorMessage.v_name}</div>}
         </div>
 
 
         <div className='input'>
             <label htmlFor='quantity'>Quantity :</label>
             <input onChange={e=>setq_uantity(e.target.value)} type='text' id='quantity' autoComplete='off' placeholder='Quantity'/>
+            {errorMessage.quantity && <div className="text-danger">{errorMessage.quantity}</div>}
         </div>
 
         <div className='input'>
             <label htmlFor='date'>Date :</label>
             <input onChange={e=>setDate(e.target.value.toString())} type='date' id='date' autoComplete='off' placeholder='Date'/>
+            {errorMessage.date && date === '' && <div className="text-danger">Invalid Date</div>}
         </div>
 
 
@@ -127,6 +161,7 @@ const VaccineApp = ({submitted,data}) => {
         <div className='input'>
             <label htmlFor='location'>Location :</label>
             <input onChange={e=>setlocation(e.target.value)} type='text' id='location' autoComplete='off' placeholder='location'/>
+            {errorMessage.location && <div className="text-danger">{errorMessage.location}</div>}
         </div>
 
         

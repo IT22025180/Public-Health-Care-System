@@ -53,17 +53,7 @@ const VaccineReg = ({submitted,data}) => {
     }
 
     const addvacc = async () => {
-       /* // Check if any field is empty
-        if (!vname || !manf_date || !expi_Date || !quantity || !notes) {
-            setErrorMessage("Please fill in all fields.");
-            return;
-        }
 
-         // Check if quantity is a number
-        if (isNaN(quantity)) {
-        setErrorMessage("Please enter a valid quantity.");
-        return;
-    }*/
     
         // Show SweetAlert confirmation message
         Swal.fire({
