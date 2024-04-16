@@ -4,6 +4,7 @@ import  Axios  from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
+import Layout from '../components/Layout';
 
 const Babytable = () => {
 
@@ -66,6 +67,7 @@ const filteredBabyData = babydata.filter(baby => {
 });
 
   return (
+    <Layout>
     <div className='babytable'>
         
         <form className= "babysearch_bar">
@@ -120,6 +122,7 @@ const filteredBabyData = babydata.filter(baby => {
         </TableContainer>
 
     </div>
+    </Layout>
   )
 }
 

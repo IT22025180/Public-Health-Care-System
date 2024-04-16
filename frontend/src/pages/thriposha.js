@@ -90,8 +90,10 @@ const Thriposha = ({submitted,data}) => {
 
 
         <Link to="/Thriposhatable">
-            <button onClick={addthriposha} className='tbsave'type='button'>Save</button>
+        <button   className='bvvsubmit' type='submit'>View thriposha data</button>
         </Link>
+
+        <button onClick={addthriposha} className='tbsave'type='button'>Save</button>
 
     </form>
     
