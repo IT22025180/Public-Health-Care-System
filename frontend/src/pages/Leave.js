@@ -176,6 +176,8 @@ const Leave = ({ submitted, data }) => {
                 />
                 <label htmlFor="days">Days</label>
               </div>
+              {errorMessage.leaveFor && <div className="errorMessage">{errorMessage.leaveFor}</div>}
+
               <div>
                 <input
                   value="Hours"
