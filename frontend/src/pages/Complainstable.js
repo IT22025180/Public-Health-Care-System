@@ -101,7 +101,7 @@ const Complainstable = () => {
 
                                     <TableCell >
                                         <Button onClick={() => editEComplain(Complains._id)}><FaEdit /></Button>
-                                        <Button onClick={() => ComplainsDdelete(Complains._id)}>Delete <FaTrash /></Button>
+                                        <Button onClick={() => ComplainsDdelete(Complains._id)}><FaTrash /></Button>
                                     </TableCell>
                                 </TableRow>
                             ))
@@ -119,36 +119,11 @@ const Complainstable = () => {
 
 export default Complainstable
 
-/**
- * {complainsdata && complainsdata.length > 0 ? (
-                            complainsdata.map((Complains) => (
-                                <TableRow key={Complains._id}>
-                                    <TableCell>{Complains.fname}</TableCell>
-                                    <TableCell>{Complains.lname} </TableCell>
-                                    <TableCell>{Complains.email}</TableCell>
-                                    <TableCell>{Complains.NIC}</TableCell>
-                                    <TableCell>{Complains.Address}</TableCell>
-                                    <TableCell>{Complains.images}</TableCell>
-                                    <TableCell>{Complains.ctype}</TableCell>
-                                    <TableCell>{Complains.cdesc}</TableCell>
-                                    <TableCell>{Complains.area}</TableCell>
-                                    <TableCell>{Complains.location}</TableCell>
-                                    <TableCell>{Complains.images.map((image, index) => (
-                                        <div key={index}>
-                                            <img src={`data:${image.contentType};base64,${image.data}`} alt={`Image ${index}`} />
-                                        </div>
-                                    ))}</TableCell>
-
-
-                                    <TableCell >
-                                        <Button >Edit</Button>
-                                        <Button /*onClick={() => ComplainsDdelete(Complains._id)}*/ /*>Delete</Button>
-</TableCell>
-</TableRow>
-))
-) : (
-<TableRow>
-<TableCell>You have no Complains data</TableCell>
-</TableRow>
-)}
+/*
+ layout deka
+ confirmdelete from kaveesha's babytable
+ search
+ form css
+ images css display flex direction row
+ 
 */
