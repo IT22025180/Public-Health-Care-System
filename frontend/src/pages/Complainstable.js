@@ -38,7 +38,7 @@ const Complainstable = () => {
       });
 };
 
-const editComplain = (id) => {
+const editEComplain = (id) => {
     // Implement your edit logic here
     console.log(`Edit complain with id: ${id}`);
 };
@@ -102,7 +102,7 @@ const editComplain = (id) => {
 
 
                                     <TableCell >
-                                    <Button onClick={() => editComplain(Complains._id)}>Edit</Button>
+                                    <Button onClick={() => editEComplain(Complains._id)}>Edit</Button>
                                     <Button onClick={() => ComplainsDdelete(Complains._id)}>Delete</Button>
                                     </TableCell>
                                 </TableRow>
