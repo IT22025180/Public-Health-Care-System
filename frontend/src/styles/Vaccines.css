@@ -67,4 +67,28 @@
     .Btnview:hover {
     background-color: #346498;
     }
-    
+
+
+    .vachome {
+      display: flex;
+      align-items: center;
+  }
+  
+  .vhome {
+      flex: 1;
+      margin-right: 20px;
+  }
+  
+  .vaccmain {
+      width: 30%
+  }
+.view-details-btn{
+  border: 0;
+    outline: none;
+    padding: 8px 10px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: red;
+}
+  
