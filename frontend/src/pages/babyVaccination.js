@@ -95,9 +95,9 @@ const BabyVaccination = (submitted,data) => {
         
 
         <Link to="/Bvaccinetable">
-            <button onClick={addbvaccine} className='bvsave'type='button'>Save</button>
+        <button   className='bvvsubmit' type='submit'>View Baby vaccination</button>
         </Link>
-
+        <button onClick={addbvaccine} className='bvsave'type='button'>Save</button>
         
     </form>
     
