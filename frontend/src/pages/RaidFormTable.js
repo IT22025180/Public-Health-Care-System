@@ -40,13 +40,10 @@ const RaidFormTable = () => {
     const handleSearchChange = (event) => {
         setSearchQuery(event.target.value);
     };
-    const filteredData = formtabledata.filter(formtable =>
-        formtable.location.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        formtable.date.includes(searchQuery) ||
-        formtable.time.includes(searchQuery) ||
-        formtable.officer.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        formtable.sNote.toLowerCase().includes(searchQuery.toLowerCase())
-    );
+   //  search query
+ const filteredformtabledata = formtabledata.filter(Location=> {
+    return Location.location.toLowerCase().includes(searchQuery.toLowerCase());
+  });
 
     
 
@@ -72,8 +69,8 @@ const RaidFormTable = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {formtabledata && formtabledata.length > 0 ? (
-                            formtabledata.map((formtable) => (
+                        {filteredformtabledata && filteredformtabledata.length > 0 ? (
+                            filteredformtabledata.map((formtable) => (
                                 <tr key={formtable._id}>
                                     <td>{formtable.location}</td>
                                     <td>{formtable.date}</td>

@@ -3,11 +3,13 @@ import '../styles/RaidSubTable.css';
 import Layout from '../components/Layout';
 import Axios from 'axios';
 import jsPDF from 'jspdf';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const RaidSubTable = () => {
     const [submissiondata, setSubmissionData] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
+    const navigate = useNavigate();
+
 
     useEffect(()=>{
         getsubmissiondata();
@@ -38,16 +40,7 @@ const RaidSubTable = () => {
                 console.error('Axios error:', error);
             });
     };
-    const handleSearch = () => {
-        // Perform search based on searchQuery
-        // Here, you can filter the submissiondata based on searchQuery
-        // For example, if you want to search for location:
-        const filteredData = submissiondata.filter(submission =>
-            submission.location.toLowerCase().includes(searchQuery.toLowerCase())
-        );
-        // Update submissiondata with filtered data
-        setSubmissionData(filteredData);
-    };
+   
 
     const generatePDF = () => {
         const doc = new jsPDF();
@@ -74,13 +67,17 @@ const RaidSubTable = () => {
         // Reset the submission data back to original after generating PDF
         getsubmissiondata();
     };
+ // Filter submission data based on search query
+ const filteredsubmissiondata = submissiondata.filter(Location=> {
+    return Location.location.toLowerCase().includes(searchQuery.toLowerCase());
+  });
 
     return (
         <Layout>
             <div className='RaidSubmissionTable'>
             <div className="search">
-          <input type="text" value={searchQuery} onChange={e => setSearchQuery(e.target.value)} placeholder="Search" />
-        </div>
+            <input  placeholder="Search name" type='text' value={searchQuery} onChange={e => setSearchQuery(e.target.value)} />
+                </div>
                 <table border={1} cellPadding={10} cellSpacing={0}>
                     <thead>
                         <tr>
@@ -93,8 +90,8 @@ const RaidSubTable = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {submissiondata && submissiondata.length > 0 ? (
-                            submissiondata.map(submission => (
+                        {filteredsubmissiondata && filteredsubmissiondata.length > 0 ? (
+                            filteredsubmissiondata.map(submission => (
                                 <tr key={submission._id}>
                                     <td>{submission.location}</td>
                                     <td>{submission.details}</td>
