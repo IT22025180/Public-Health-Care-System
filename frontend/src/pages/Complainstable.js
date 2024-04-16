@@ -26,7 +26,7 @@ const Complainstable = () => {
     }, []);
 
     //delete
-    
+
     const ComplainsDdelete = (id) => {
         Axios.post('http://localhost:4000/api/deleteComplain', { _id: id })
             .then(response => {
@@ -35,12 +35,12 @@ const Complainstable = () => {
             })
             .catch(error => {
                 console.error('Error deleting Complaindata:', error);
-      });
-};
+            });
+    };
 
-const editEComplain = (id) => {
-    console.log(`Edit complain with id: ${id}`);
-};
+    const editEComplain = (id) => {
+        console.log(`Edit complain with id: ${id}`);
+    };
 
     //search
     /*const filteredComplainsData = Complainsdata.filter(Complains => {
@@ -62,14 +62,12 @@ const editEComplain = (id) => {
                             <TableCell>First name</TableCell>
                             <TableCell>Last Name</TableCell>
                             <TableCell>Mobile</TableCell>
-                            <TableCell>Emal</TableCell>
+                            <TableCell>Email</TableCell>
                             <TableCell>NIC</TableCell>
                             <TableCell>Address</TableCell>
-                            <TableCell>Images</TableCell>
                             <TableCell>Complain Type</TableCell>
                             <TableCell>Description</TableCell>
                             <TableCell>Area</TableCell>
-                            <TableCell>Location</TableCell>
                             <TableCell>Images</TableCell>
                             <TableCell>Actions</TableCell>
                         </TableRow>
@@ -80,13 +78,13 @@ const editEComplain = (id) => {
                                 <TableRow key={Complains._id}>
                                     <TableCell>{Complains.fname}</TableCell>
                                     <TableCell>{Complains.lname} </TableCell>
+                                    <TableCell>{Complains.mobile} </TableCell>
                                     <TableCell>{Complains.email}</TableCell>
                                     <TableCell>{Complains.NIC}</TableCell>
                                     <TableCell>{Complains.yaddress}</TableCell>
                                     <TableCell>{Complains.ctype}</TableCell>
                                     <TableCell>{Complains.cdesc}</TableCell>
                                     <TableCell>{Complains.area}</TableCell>
-                                    <TableCell>{Complains.location}</TableCell>
                                     <TableCell>
                                         {Array.isArray(Complains.images) ? (
                                             Complains.images.map((image, index) => (
@@ -101,8 +99,8 @@ const editEComplain = (id) => {
 
 
                                     <TableCell >
-                                    <Button onClick={() => editEComplain(Complains._id)}>Edit</Button>
-                                    <Button onClick={() => ComplainsDdelete(Complains._id)}>Delete</Button>
+                                        <Button onClick={() => editEComplain(Complains._id)}>Edit</Button>
+                                        <Button onClick={() => ComplainsDdelete(Complains._id)}>Delete</Button>
                                     </TableCell>
                                 </TableRow>
                             ))
