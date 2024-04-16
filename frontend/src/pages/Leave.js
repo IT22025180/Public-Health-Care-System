@@ -47,10 +47,10 @@ const Leave = ({ submitted, data }) => {
     email: Yup.string().matches(/^[a-zA-Z0-9._%+-]+@gmail\.com$/, 'Invalid Gmail address').required('Email is Required'),
     leaveStart: Yup.string().required('Date is Required'),
     leaveEnd: Yup.string().required('Date is Required'),
-    staffId:Yup.string().required('Location is Required').matches(/^[A-Za-z\s,.0-9]+$/, 'Staff ID must contain only letters'),
+    staffId: Yup.string().required('Location is Required').matches(/^[A-Za-z\s,.0-9]+$/, 'Staff ID must contain only letters'),
     position: Yup.string().required('Report ID is Required').matches(/^[A-Za-z\s]+$/, 'Name must contain only letters'),
     leaveFor: Yup.string().required('Leave for is required').oneOf(['Days', 'Hours'], 'Invalid leave '),
-    leaveType: Yup.string().required('Leave type for is required').oneOf(['Sick', 'Vacation','Quititing'], 'Invalid leave '),
+    leaveType: Yup.string().required('Leave type for is required').oneOf(['Sick', 'Vacation', 'Quititing'], 'Invalid leave '),
 
   });
 
@@ -66,7 +66,7 @@ const Leave = ({ submitted, data }) => {
   };
 
   const addLeave = async () => {
-    
+
     try {
       await validateSchema.validate(
         {
@@ -77,7 +77,7 @@ const Leave = ({ submitted, data }) => {
           leaveType,
           leaveFor,
           leaveStart,
-          leaveEnd,  
+          leaveEnd,
         },
         { abortEarly: false }
       );
@@ -173,7 +173,7 @@ const Leave = ({ submitted, data }) => {
                   onChange={() => setLeaveFor("Days")}
                   type="radio"
                   id="days"
-                />              
+                />
                 <label htmlFor="days">Days</label>
               </div>
               <div>
@@ -196,6 +196,7 @@ const Leave = ({ submitted, data }) => {
                 name="leaveStart"
                 value={leaveStart}
               />
+              {errorMessage.leaveStart && <div className="errorMessage">{errorMessage.leaveStart}</div>}
             </div>
             <div>
               <label>Leave End:</label>
@@ -205,6 +206,7 @@ const Leave = ({ submitted, data }) => {
                 name="leaveEnd"
                 value={leaveEnd}
               />
+              {errorMessage.leaveEnd && <div className="errorMessage">{errorMessage.leaveEnd}</div>}
             </div>
             <div>
               <label>Leave type:</label>
@@ -241,8 +243,8 @@ const Leave = ({ submitted, data }) => {
               {errorMessage.leaveType && <div className="errorMessage">{errorMessage.leaveType}</div>}
 
             </div>
-            
-            
+
+
             <button onClick={addLeave} className="subBut" type="button">
               Submit
             </button>
