@@ -74,3 +74,13 @@
   cursor: pointer;
   font-size: 16px;
 }
+.addcamphome-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.addcamphome,
+.addmaphome {
+  flex: 1;
+  margin-right: 10px;
+}

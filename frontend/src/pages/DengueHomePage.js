@@ -78,15 +78,19 @@ const DengueHomePage = () => {
                     <span className="sr-only">Next</span>
                 </a>
             </div>
-            <div className="addcamphome">
+            <div className="addcamphome-container">
+             <div className="addcamphome">
                 <img src={denimg6} className="addcaimg" alt="image6"/>
-                
                 <Link to="/denguecamp">
-                
-                <button  className="addcbutton" type='button'>Add Campaigns</button>
+                <button className="addcbutton" type='button'>Add Campaigns</button>
                 </Link>
-                
-                <a href="/Denguemap" className="viewmap">Add Campaigns</a>
+             </div>
+             <div className="addmaphome">
+                <img src={denimg6} className="addcaimg" alt="image6"/>
+                <Link to="/Denguemap">
+                <button className="viewmap" type='button'>View Map</button>
+                </Link>
+             </div>
             </div>
         </Layout>
     );
