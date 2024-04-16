@@ -6,6 +6,7 @@ import Layout from '../components/Layout';
 import jsPDF from 'jspdf';
 import logo1 from '../webImages/logo1.png'; 
 import '../styles/VaccineRegTab.css'
+import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 
 const VaccineRegTab = () => {
   const [vaccinedata, setvaccinedata] = useState([]);
@@ -134,47 +135,47 @@ const VaccineRegTab = () => {
           <label>Search</label>
           <input type='text' value={searchQuery} onChange={e => setSearchQuery(e.target.value)} />
         </form>
-
-        <table border={1} cellPadding={10} cellSpacing={0}>
-          <thead>
-            <tr>
-              <th>Vaccine Name</th>
-              <th>Manufactured Date</th>
-              <th>Expire Date</th>
-              <th>Quantity</th>
-              <th>Notes</th>
-              <th>Update</th>
-              <th>Delete</th>
-            </tr>
-          </thead>
-          <tbody>
+        <TableContainer component={Paper}>
+        <Table border={1} cellPadding={10} cellSpacing={0}>
+          <TableHead>
+            <TableRow>
+              <TableCell>Vaccine Name</TableCell>
+              <TableCell>Manufactured Date</TableCell>
+              <TableCell>Expire Date</TableCell>
+              <TableCell>Quantity</TableCell>
+              <TableCell>Notes</TableCell>
+              <TableCell>Update</TableCell>
+              <TableCell>Delete</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
             {filteredVaccineData && filteredVaccineData.length > 0 ? (
               filteredVaccineData.map((vaccine) => (
-                <tr key={vaccine._id}>
-                  <td>{vaccine.vname}</td>
-                  <td>{vaccine.manf_date}</td>
-                  <td>{vaccine.expi_Date}</td>
-                  <td>{vaccine.quantity}</td>
-                  <td>{vaccine.notes}</td>
-                  <td className='actionButtons'>
+                <TableRow key={vaccine._id}>
+                  <TableCell>{vaccine.vname}</TableCell>
+                  <TableCell>{vaccine.manf_date}</TableCell>
+                  <TableCell>{vaccine.expi_Date}</TableCell>
+                  <TableCell>{vaccine.quantity}</TableCell>
+                  <TableCell>{vaccine.notes}</TableCell>
+                  <TableCell className='actionButtons'>
                     {vaccine._id && vaccine.vname && vaccine.manf_date && vaccine.expi_Date && vaccine.quantity && vaccine.notes &&(
                       <button onClick={() => navigate(`/EditVReg/${vaccine._id}/${vaccine.vname}/${vaccine.manf_date}/${vaccine.expi_Date}/${vaccine.quantity}/${vaccine.notes}`)}>Edit</button>
                     )}
                     
-                  </td>
-                  <td onClick={() => deletevaccinedata(vaccine._id)} className='deleteButtons'>
+                  </TableCell>
+                  <TableCell onClick={() => deletevaccinedata(vaccine._id)} className='deleteButtons'>
                     <button>Delete</button>
-                  </td>
-                </tr>
+                  </TableCell>
+                </TableRow>
               ))
             ) : (
-              <tr>
-                <td>You have not added any vaccine data</td>
-              </tr>
+              <TableRow>
+                <TableCell>You have not added any vaccine data</TableCell>
+              </TableRow>
             )}
-          </tbody>
-        </table>
-
+          </TableBody>
+        </Table>
+        </TableContainer>
         <button className="generate" onClick={generatePDF}>Generate PDF</button>
       </div>
     </Layout>
