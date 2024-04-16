@@ -88,7 +88,7 @@ const filteredBabyData = babydata.filter(baby => {
                     <TableCell>Delete</TableCell>
                 </TableRow>
             </TableHead>
-            <tbody>
+            <TableBody>
             {filteredBabyData && filteredBabyData.length > 0 ? (
                         filteredBabyData.map((baby) =>(
                 <TableRow key={baby._id}>
@@ -117,7 +117,7 @@ const filteredBabyData = babydata.filter(baby => {
                         </TableRow>  
                 )}
 
-            </tbody>
+            </TableBody>
         </Table>
         </TableContainer>
 

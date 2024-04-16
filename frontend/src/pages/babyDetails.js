@@ -129,14 +129,15 @@ const BabyDetails = ({submitted,data}) => {
 
         </div>
 
-        <Link to="/Babytable">
-        <button   className='bddsubmit' type='submit'>View Babydata</button>
-        </Link>
         
         <button  onClick={addbaby} className='bddsave' type='submit'>Save</button>
+       
         
+        <Link to="/Babytable">
+        <button className='bddsubmit' type='submit'>View Babydata</button>
+        </Link>
 
-
+        
     </form>
     
     </div>

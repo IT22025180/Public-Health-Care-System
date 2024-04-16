@@ -5,6 +5,8 @@ import jsPDF from 'jspdf';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import logo1 from '../webImages/logo1.png';
+import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
+import Layout from '../components/Layout';
 
 
 const Thriposhatable = () => {
@@ -101,45 +103,52 @@ const confirmDelete = (id) => {
     };
 
   return (
+    <Layout>
+
     <div className='thriposhatable'>
-        <table border ={1} cellPadding={10} cellSpacing={0}>
-            <thead>
-                <tr>
-                    <th>Thriposha Type</th>
-                    <th>Estimated Date</th>
-                    <th>Quantity</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
-                </tr>
-            </thead>
-            <tbody>
+        <TableContainer component={Paper}>
+
+        <Table border ={1} cellPadding={10} cellSpacing={0}>
+            <TableHead>
+                <TableRow>
+                    <TableCell>Thriposha Type</TableCell>
+                    <TableCell>Estimated Date</TableCell>
+                    <TableCell>Quantity</TableCell>
+                    <TableCell>Edit</TableCell>
+                    <TableCell>Delete</TableCell>
+                </TableRow>
+            </TableHead>
+            <TableBody>
             {thriposhadata && thriposhadata.length > 0 ?(
                     thriposhadata.map((thriposha)=>(
-                <tr key={thriposha._id}>
-                    <td>{thriposha.type}</td>
-                    <td>{thriposha.esti_Date} </td>
-                    <td>{thriposha.quantity}</td>
+                <TableRow key={thriposha._id}>
+                    <TableCell>{thriposha.type}</TableCell>
+                    <TableCell>{thriposha.esti_Date} </TableCell>
+                    <TableCell>{thriposha.quantity}</TableCell>
 
-                    <td className='actionButtons'>
+                    <TableCell className='actionButtons'>
                     {thriposha._id && thriposha.type && thriposha.esti_Date && thriposha.quantity  && (
-                        <button onClick={() => navigate(`/Edittriposha/${thriposha._id}/${thriposha.type}/${thriposha.esti_Date}/${thriposha.quantity}`)}>Edit</button>
+                        <Button onClick={() => navigate(`/Edittriposha/${thriposha._id}/${thriposha.type}/${thriposha.esti_Date}/${thriposha.quantity}`)}>Edit</Button>
                     )}
-                    </td>
-                    <td className='deleteButtons'>
-                        <button onClick={() => confirmDelete(thriposha._id)} >Delete</button>
-                    </td>
-                </tr>
+                    </TableCell>
+                    <TableCell className='deleteButtons'>
+                        <Button onClick={() => confirmDelete(thriposha._id)} >Delete</Button>
+                    </TableCell>
+                </TableRow>
                     ))
                     ):(
-                        <tr>
-                            <td>You have not baby data</td>
-                        </tr>  
+                        <TableRow>
+                            <TableCell>You have not baby data</TableCell>
+                        </TableRow>  
                 )}
-            </tbody>
-        </table>
+            </TableBody>
+        </Table>
+        </TableContainer>
 
         <button className='generate' onClick={generatePDF}>Generate Report</button>
     </div>
+    </Layout>
+
   )
 }
 
