@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
 import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import { Link } from 'react-router-dom'; // Import Link from react-router-dom
+import Layout from '../components/Layout';
 
 const DengueAssignTable = () => {
   const [denguedata, setDenguedata] = useState([]);
@@ -35,7 +36,8 @@ const DengueAssignTable = () => {
   };
 
   return (
-    <div className='DengueAssignTable'>
+    <Layout>
+      <div className='DengueAssignTable'>
       <h2>Dengue Assignments</h2>
       <TableContainer component={Paper}>
       <Table border={1} cellPadding={10} cellSpacing={0}>
@@ -73,6 +75,7 @@ const DengueAssignTable = () => {
             <button className="denbtn" style={{ backgroundColor: '#ff5722', color: '#fff', padding: '10px 20px', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>Assign Staff</button>
       </Link>
     </div>
+    </Layout>
   );
 };
 
