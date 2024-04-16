@@ -23,7 +23,7 @@ const Editcampdetails = () => {
   const updateCampaign = async(_id,venue,date,time,drName) => {
        try{
 
-        const response = await Axios.post('http://localhost:4000/api/updateCampaign',{
+        const response = await Axios.post('http://localhost:4000/api/updateCamp',{
             _id:_id,
             venue,
             date,
