@@ -111,11 +111,6 @@ const VaccineRegTab = () => {
     doc.setFontSize(12);
     doc.text(summaryDescription, 15, 75);
 
-    // Date and signature
-    const currentDate = new Date().toLocaleDateString('en-US');
-    doc.setFontSize(12);
-    doc.text(`Date: ${currentDate}`, 15, 170); 
-    doc.text('Signature:', 15, 180); 
 
     // Save the PDF with a filename
     doc.save('vaccine_registration_summary.pdf');
