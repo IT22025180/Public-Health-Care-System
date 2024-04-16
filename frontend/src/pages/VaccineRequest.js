@@ -5,14 +5,13 @@ import Axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2';
 import { Dialog, DialogTitle, DialogContent } from '@mui/material';
+import {Link} from 'react-router-dom';
 
 
-const VaccineRequest = ({submitted,data}) => {
+const VaccineRequest =() => {
     const[bvaccinedata,setbvaccinedata]=useState([]);
     const [stvreqpdata, setstvreqpdata] = useState({});
     const [open, setOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
-    const navigate = useNavigate();
     const [notification, setnotification] = useState('');
 
     useEffect(()=>{
@@ -108,7 +107,9 @@ const VaccineRequest = ({submitted,data}) => {
          <p>{stvreqpdata.esti_Date}</p>
          <p>{stvreqpdata.quantity}</p>
          <input type='text' onChange={(e) => setnotification(e.target.value)} />
+         <Link to = "/VaccineRequestTab">
          <button onClick={addVacRq}>Submit</button>
+         </Link>
          <button onClick={closePopup}>Close</button>
      </DialogContent>
  </Dialog></>
