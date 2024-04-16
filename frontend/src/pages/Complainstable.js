@@ -39,7 +39,6 @@ const Complainstable = () => {
 };
 
 const editEComplain = (id) => {
-    // Implement your edit logic here
     console.log(`Edit complain with id: ${id}`);
 };
 
