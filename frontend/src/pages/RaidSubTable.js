@@ -4,7 +4,7 @@ import Layout from '../components/Layout';
 import Axios from 'axios';
 import jsPDF from 'jspdf';
 import { Link, useNavigate } from 'react-router-dom';
-import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
+
 
 const RaidSubTable = () => {
     const [submissiondata, setSubmissionData] = useState([]);
@@ -79,48 +79,48 @@ const RaidSubTable = () => {
             <div className="search">
             <input  placeholder="Search name" type='text' value={searchQuery} onChange={e => setSearchQuery(e.target.value)} />
                 </div>
-                <TableContainer component={Paper}>
-                <Table border={1} cellPadding={10} cellSpacing={0}>
-                    <TableHead>
-                        <TableRow>
-                            <TableCell>Location</TableCell>
-                            <TableCell>Details</TableCell>
-                            <TableCell>Special Notes</TableCell>
-                            <TableCell>Edit</TableCell>
-                            <TableCell>Delete</TableCell>
-                            <TableCell>Generate PDF</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
+                
+                <table border={1} cellPadding={10} cellSpacing={0}>
+                    <thead>
+                        <tr>
+                            <th>Location</th>
+                            <th>Details</th>
+                            <th>Special Notes</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                            <th>Generate PDF</th>
+                        </tr>
+                    </thead>
+                    <tbody>
                         {filteredsubmissiondata && filteredsubmissiondata.length > 0 ? (
                             filteredsubmissiondata.map(submission => (
-                                <TableRow key={submission._id}>
-                                    <TableCell>{submission.location}</TableCell>
-                                    <TableCell>{submission.details}</TableCell>
-                                    <TableCell>{submission.specialNotes}</TableCell>
-                                    <TableBody className='actionButtons'>
+                                <tr key={submission._id}>
+                                    <th>{submission.location}</th>
+                                    <th>{submission.details}</th>
+                                    <th>{submission.specialNotes}</th>
+                                    <tbody className='actionButtons'>
                 
                                         <Link to ={`/RaidSubFormEdit/${submission._id}/${submission.location}/${submission.details}/${submission.specialNotes}`}>
                                         <button>Edit</button>
                                         </Link>
 
-                                    </TableBody>
-                                    <TableCell className='deleteButtons'>
+                                    </tbody>
+                                    <th className='deleteButtons'>
                                         <button onClick={() => submissionDelete(submission._id)}>Delete</button>
-                                    </TableCell>
-                                    <TableBody> 
+                                    </th>
+                                    <tbody> 
                         <button className="pdfButton" onClick={() =>generatePDF(RaidSubTable)}>generatePDF</button>
-                        </TableBody>
-                                </TableRow>
+                        </tbody>
+                                </tr>
                             ))
                         ) : (
-                            <TableRow>
-                                <TableCell colSpan="5"><center>You have no submission data.</center></TableCell>
-                            </TableRow>
+                            <tr>
+                                <th colSpan="5"><center>You have no submission data.</center></th>
+                            </tr>
                         )}
-                    </TableBody>
-                </Table>
-                </TableContainer>
+                    </tbody>
+                </table>
+                
             </div>
         </Layout>
     );
