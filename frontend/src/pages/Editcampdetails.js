@@ -90,11 +90,11 @@ const Editcampdetails = () => {
             <form className='campaigndetails'>
                 <div className="input">
                     <label className='venue' htmlFor="venue">Venue</label>
-                    <input onChange={e => setvenue(e.target.value)} type="text" id="venue" name="venue" autoComplete='off' placeholder='Venue' />
+                    <input value={venue_u} onChange={e => setvenue(e.target.value)} type="text" id="venue" name="venue" autoComplete='off' placeholder='Venue' />
                 </div>
                 <div className="input">
                     <label htmlFor="date">Date</label>
-                    <input onChange={e => setdate(e.target.value.toString())} type="date" id="date" name="date" autoComplete='off' placeholder='Date' />
+                    <input value={date_u} onChange={e => setdate(e.target.value.toString())} type="date" id="date" name="date" autoComplete='off' placeholder='Date' />
                 </div>
                 <div className="input">
                     <label className='stime' htmlFor="stime">Starting Time</label>
