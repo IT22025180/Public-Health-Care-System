@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Layout from "../components/Layout"; 
+import Layout from "../components/Layout";
 import '../styles/VaccineRequest.css'
 import Axios from 'axios';
 import Swal from 'sweetalert2';
@@ -20,42 +20,40 @@ const VaccineRequest = () => {
         setOpen(true);
         setstvreqpdata(babyvacc);
     }
-    
+
     const closePopup = () => {
         setOpen(false);
     }
 
     const getbvaccinedata = () => {
         Axios.get('http://localhost:4000/api/babyvacc')
-        .then(response => {
-            console.log('data from sever', response.data);
-            setbvaccinedata(response.data.allBVac);
-        })
-        .catch(error => {
-            console.error('Axios error:', error);
-        })
+            .then(response => {
+                console.log('data from sever', response.data);
+                setbvaccinedata(response.data.allBVac);
+            })
+            .catch(error => {
+                console.error('Axios error:', error);
+            })
     }
 
-    const handleDelete = (id) => {
-      // Perform deletion from the database
-      Axios.post('http://localhost:4000/api/deleteVacRq',{_id:id})
-        .then(response => {
-          console.log('Deleted successfully');
-          // Update state to reflect the deletion
-          setbvaccinedata(prevData => prevData.filter(bvaccine => bvaccine._id !== id));
-        })
-        .catch(error => {
-          console.error("Axios delete error: ", error);
-        });
+    const handleDelete = async (id) => {
+        // Perform deletion from the database
+        try {
+            await Axios.post('http://localhost:4000/api/deleteVacRq', { _id: id });
+            setbvaccinedata((prevvaqreq) => prevvaqreq.filter((bvaccine) => bvaccine._id !== id));
+            console.log('Vac deleted successfully');
+        } catch (error) {
+            console.error('Error deleting vac:', error);
+        }
     };
-    
+
 
     const addVacRq = async () => {
         try {
             const response = await Axios.post("http://localhost:4000/api/addVacRq", {
                 type: stvreqpdata.type,
-                esti_Date: stvreqpdata.esti_Date ,
-                quantity: stvreqpdata.quantity ,
+                esti_Date: stvreqpdata.esti_Date,
+                quantity: stvreqpdata.quantity,
                 notification: notification,
             });
             console.log("Successfully", response.data);
@@ -75,57 +73,54 @@ const VaccineRequest = () => {
         }
     }
 
-    return(
+    return (
         <>
-        <Layout>
-            <div className='Bvaccinetable'>
-                <table border={1} cellPadding={10} cellSpacing={0}>
-                    <thead>
-                        <tr>
-                            <th>Vaccine Type</th>
-                            <th>Estimated Date</th>
-                            <th>Quantity</th>
-                            <th>Status</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {bvaccinedata && bvaccinedata.length > 0 ? (
-                            bvaccinedata.map((bvaccine) => (
-                                <tr key={bvaccine._id}>
-                                    <td>{bvaccine.type}</td>
-                                    <td>{bvaccine.esti_Date}</td>
-                                    <td>{bvaccine.quantity}</td>
-                                    <td className='actionButtons'>
-                                        <button onClick={() => functionPopup(bvaccine)}>Status</button>
-                                    </td>
-                                    <td className='actionButtons'>
-                                        <button onClick={() => handleDelete(bvaccine._id)}>Delete</button>
-                                    </td>
-                                </tr>
-                            ))
-                        ) : (
+            <Layout>
+                <div className='Bvaccinetable'>
+                    <table border={1} cellPadding={10} cellSpacing={0}>
+                        <thead>
                             <tr>
-                                <td colSpan="5">You have no baby vaccine data</td>
+                                <th>Vaccine Type</th>
+                                <th>Estimated Date</th>
+                                <th>Quantity</th>
+                                <th>Status</th>
+
                             </tr>
-                        )}
-                    </tbody>
-                </table>
-            </div>
-            <Dialog open={open} onClose={closePopup}>
-                <DialogTitle>Status</DialogTitle>
-                <DialogContent>
-                    <p>{stvreqpdata.type}</p>
-                    <p>{stvreqpdata.esti_Date}</p>
-                    <p>{stvreqpdata.quantity}</p>
-                    <input type='text' onChange={(e) => setnotification(e.target.value)} />
-                    <Link to="/VaccineRequestTab">
-                        <button onClick={addVacRq}>Submit</button>
-                    </Link>
-                    <button onClick={closePopup}>Close</button>
-                </DialogContent>
-            </Dialog>
-        </Layout>
+                        </thead>
+                        <tbody>
+                            {bvaccinedata && bvaccinedata.length > 0 ? (
+                                bvaccinedata.map((bvaccine) => (
+                                    <tr key={bvaccine._id}>
+                                        <td>{bvaccine.type}</td>
+                                        <td>{bvaccine.esti_Date}</td>
+                                        <td>{bvaccine.quantity}</td>
+                                        <td className='actionButtons'>
+                                            <button onClick={() => functionPopup(bvaccine)}>Status</button>
+                                        </td>
+                                    </tr>
+                                ))
+                            ) : (
+                                <tr>
+                                    <td colSpan="5">You have no baby vaccine data</td>
+                                </tr>
+                            )}
+                        </tbody>
+                    </table>
+                </div>
+                <Dialog open={open} onClose={closePopup}>
+                    <DialogTitle>Status</DialogTitle>
+                    <DialogContent>
+                        <p>{stvreqpdata.type}</p>
+                        <p>{stvreqpdata.esti_Date}</p>
+                        <p>{stvreqpdata.quantity}</p>
+                        <input type='text' onChange={(e) => setnotification(e.target.value)} />
+                        <Link to="/VaccineRequestTab">
+                            <button onClick={addVacRq}>Submit</button>
+                        </Link>
+                        <button onClick={closePopup}>Close</button>
+                    </DialogContent>
+                </Dialog>
+            </Layout>
         </>
     )
 }
