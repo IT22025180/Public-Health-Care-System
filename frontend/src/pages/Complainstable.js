@@ -26,7 +26,7 @@ const Complainstable = () => {
     }, []);
 
     //delete
-    /*
+    
     const ComplainsDdelete = (id) => {
         Axios.post('http://localhost:4000/api/deleteComplain', { _id: id })
             .then(response => {
@@ -36,7 +36,12 @@ const Complainstable = () => {
             .catch(error => {
                 console.error('Error deleting Complaindata:', error);
       });
-};*/
+};
+
+const editComplain = (id) => {
+    // Implement your edit logic here
+    console.log(`Edit complain with id: ${id}`);
+};
 
     //search
     /*const filteredComplainsData = Complainsdata.filter(Complains => {
@@ -97,14 +102,14 @@ const Complainstable = () => {
 
 
                                     <TableCell >
-                                        <Button >Edit</Button>
-                                        <Button /*onClick={() => ComplainsDdelete(Complains._id)}*/ >Delete</Button>
+                                    <Button onClick={() => editComplain(Complains._id)}>Edit</Button>
+                                    <Button onClick={() => ComplainsDdelete(Complains._id)}>Delete</Button>
                                     </TableCell>
                                 </TableRow>
                             ))
                         ) : (
                             <TableRow>
-                                <TableCell>You have not Complains data</TableCell>
+                                <TableCell>You have no Complains data</TableCell>
                             </TableRow>
                         )}
                     </TableBody>
@@ -145,7 +150,7 @@ export default Complainstable
 ))
 ) : (
 <TableRow>
-<TableCell>You have not Complains data</TableCell>
+<TableCell>You have no Complains data</TableCell>
 </TableRow>
 )}
 */
