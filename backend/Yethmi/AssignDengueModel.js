@@ -1,11 +1,10 @@
 const mongoose = require('mongoose');
 
 const addstaffdengue = new mongoose.Schema({
-    type:String,  
-    staffmember:String,    
+    venue:String,      
     date:String,
-    location:String,
-    description:String, 
+    staffmember:String, 
+    time:String,     
 },
 {
     collection : "Denguestaff"

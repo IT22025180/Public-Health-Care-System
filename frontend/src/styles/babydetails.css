@@ -43,7 +43,7 @@
 
 }
 
-.bdsubmit{
+.bddsubmit{
     border: 0;
     outline: none;
     background-color: purple;
@@ -60,7 +60,7 @@
     margin-right: 50px;
 }
 
-.bdsave{
+.bddsave{
     border: 0;
     outline: none;
     background-color: purple;
@@ -73,5 +73,7 @@
     margin-top: 30px;
     width: 100px;
     height: 30;
+    margin-left: 200px;
+   
 }
 

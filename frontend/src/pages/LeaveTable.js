@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import Axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import Layout from '../components/Layout';
 import jsPDF from 'jspdf';
-import logo1 from '../webImages/logo1.png'; // Import the logo image
-import Swal from 'sweetalert2'; // Import SweetAlert
-import '../styles/Leave.css';
+import logo1 from '../webImages/logo1.png';
+import Swal from 'sweetalert2';
+import '../styles/LeaveTable.css';
 
 const LeaveTable = () => {
   const navigate = useNavigate();
   const [leavedata, setLeavedata] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     getLeavedata();
@@ -26,44 +27,21 @@ const LeaveTable = () => {
       });
   };
 
-  const handleEdit = (id) => {
-    navigate(`/EditLeave/${id}`); 
-  };
-
   const handleDelete = (id) => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonText: "Yes, delete it!",
-      cancelButtonText: "No, cancel",
-      reverseButtons: true
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Axios.post('http://localhost:4000/api/deleteLeave', { _id: id })
-          .then(response => {
-            console.log('Leave deleted successfully');
-            setLeavedata(prevData => prevData.filter(leave => leave._id !== id));
-            // Display success message
-            Swal.fire({
-              title: "Deleted!",
-              text: "Your leave application has been deleted.",
-              icon: "success"
-            });
-          })
-          .catch(error => {
-            console.error('Error deleting leave:', error);
-          });
-      } else if (result.dismiss === Swal.DismissReason.cancel) {
-        // Handle cancel action
+    Axios.post('http://localhost:4000/api/deleteLeave', { _id: id })
+      .then(response => {
+        console.log('Leave deleted successfully');
+        setLeavedata(prevData => prevData.filter(leave => leave._id !== id));
+        // Display success message
         Swal.fire({
-          title: "Cancelled",
-          text: "Your leave is safe ",
-          icon: "error"
+          title: "Deleted!",
+          text: "Your leave application has been deleted.",
+          icon: "success"
         });
-      }
-    });
+      })
+      .catch(error => {
+        console.error('Error deleting leave:', error);
+      });
   };
 
   const generatePDF = (leave) => {
@@ -159,9 +137,30 @@ const LeaveTable = () => {
     doc.save(`Leave_Summary_${leave.name}.pdf`);
   };
 
+  const handleSearch = (e) => {
+    const value = e.target.value.toLowerCase();
+    setSearchQuery(value);
+    // Filter the leave data based on the search query
+    const filteredData = value
+      ? leavedata.filter(leave =>
+          leave.name.toLowerCase().includes(value) ||
+          leave.staffid.toLowerCase().includes(value)
+        )
+      : leavedata;
+    setLeavedata(filteredData);
+  };
+
   return (
     <Layout>
       <div className='LeaveTable'>
+        <div className="search-container">
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={handleSearch}
+            placeholder="Search by name or staff ID..."
+          />
+        </div>
         <table border={1} cellPadding={10} cellSpacing={0}>
           <thead>
             <tr>
@@ -190,13 +189,17 @@ const LeaveTable = () => {
                   <td>{leave.leavestrt}</td>
                   <td>{leave.leaveend}</td>
                   <td>{leave.leaveType}</td>
+
                   <td className='actionButtons'>
-                    <button className="editButton" onClick={() => handleEdit(leave._id)}>Edit</button>
+                    <Link to={`/EditLeave/${leave._id}/${leave.name}/${leave.staffid}/${leave.email}/${leave.position}/${leave.doleave}/${leave.leavestrt}/${leave.leaveend}/${leave.leaveType}`}>
+                      <button className="editButton">Edit</button>
+                    </Link>
                   </td>
-                  <td className='actionButtons'> 
+
+                  <td className='actionButtons'>
                     <button className="deleteButton" onClick={() => handleDelete(leave._id)}>Delete</button>
                   </td>
-                  <td className='actionButtons'> 
+                  <td className='actionButtons'>
                     <button className="pdfButton" onClick={() => generatePDF(leave)}>Generate PDF</button>
                   </td>
                 </tr>

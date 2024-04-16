@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import image1 from '../webImages/babyy1.png'
 import image2 from '../webImages/babyy2.png'
 import image3 from '../webImages/babyy3.png'
+import midimg5 from '../webImages/midd.jpg';
 
 
 const MainMidwife = () => {
@@ -50,7 +51,18 @@ const MainMidwife = () => {
   return (
     <Layout>
     <div className="midwife_home-page">
-    <h3 className='midwife_main_'>Midwife Management</h3>
+    <h3 className='midwife_main_'></h3>
+
+    <div className="midcamphome">
+    <div className="Midamhome">
+                <h1>Midwife Management</h1>
+                <h2>"Empowering Care, Nurturing Lives: Midwife Management for Healthy Beginnings"</h2>
+                <p><center>"Empowering Care, Nurturing Lives: Midwife Management for Healthy Beginnings" encapsulates the essence of a comprehensive midwife management system focused on providing compassionate and empowering care to expectant mothers and their families.<br></br>
+                 empowerment and nurturing. Through efficient and supportive management practices, midwives can empower expectant mothers to actively participate in their care decisions and childbirth experience.</center></p>
+           
+            </div>
+            <img src={midimg5} alt="Description of the image" className="mainmidimg1" />  
+     </div>       
     <div className="midwifecard-container">
     {cards.map((card) => (
     <div key={card.id} className="midwife_card">

@@ -1,31 +1,34 @@
-@media(max-width: 991px){
-    .sidebar{
+@media(max-width: 991px) {
+    .sidebar {
         background-color: rgba(255, 255, 255, 0.15);
         backdrop-filter: blur(10px);
     }
 }
 
-nav{
-    background-image: linear-gradient(to right , #63D8F1,#5BEA9D);
+nav {
+    background-image: linear-gradient(to right, #63D8F1, #5BEA9D);
 }
 
-.active:hover{
+.active:hover {
 
-    border-bottom: 1.0px solid black;
-    
+    border-bottom: 2px solid black;
 }
 
-.dropdown-menu{
-    background-image: linear-gradient(to right , #63D8F1,#5BEA9D);
+.dropdown-menu {
+    background-image: linear-gradient(to right, #63D8F1, #5BEA9D);
 }
 
-.dropdown-menu :hover{
-    border-bottom: 0.5px solid rgba(0, 0, 0, 0.105);
-    border-top: 0.5px solid rgba(0, 0, 0, 0.105);
-    background-image: linear-gradient(to right , #85d8ea,#20e57c);
-    
+.dropdown-menu :hover {
+    border-bottom: 1px solid blue;
+    background-image: linear-gradient(to right, #63D8F1, #5BEA9D);
+
 }
 
-.title{
+.title {
     font-weight: 600;
+}
+
+.nav-link:hover {
+    border-bottom: 2px solid blue;
+
 }

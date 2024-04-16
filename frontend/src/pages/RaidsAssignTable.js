@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Layout from '../components/Layout';
-import '../styles/RaidsAssignTable.css'; // Update the CSS file path accordingly
+import '../styles/RaidsAssignTable.css'; 
 import Axios from 'axios';
+import Swal from 'sweetalert2';
 
 const RaidsAssignTable = () => {
   const [assignedRaids, setAssignedRaids] = useState([]);
@@ -12,7 +13,7 @@ const RaidsAssignTable = () => {
   }, []);
 
   const getAssignedRaids = () => {
-    Axios.get('http://localhost:4000/api/getstaffraids') // Adjust API endpoint
+    Axios.get('http://localhost:4000/api/getstaffraids') 
       .then(response => {
         console.log('data from server', response.data);
         setAssignedRaids(response.data.allstaffraids);
@@ -29,6 +30,8 @@ const RaidsAssignTable = () => {
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
   };
+
+ 
 
   return (
     <Layout>
@@ -65,7 +68,7 @@ const RaidsAssignTable = () => {
                   <td>{raid.location}</td>
                   <td>{raid.description}</td>
                   <td><button className="edit-button">Edit</button></td>
-                  <td><button className="delete-button">Delete</button></td>
+                  <td><button className="delete-button" >Delete</button></td>
                 </tr>
               ))
             ) : (

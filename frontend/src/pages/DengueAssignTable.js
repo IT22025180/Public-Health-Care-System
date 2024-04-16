@@ -1,82 +1,59 @@
-import React, { useEffect, useState } from 'react';
-import Layout from '../components/Layout';
-import '../styles/DengueAssignTable.css';
+import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
+import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 
 const DengueAssignTable = () => {
-  const [denguestaff, setDenguestaff] = useState([]);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [denguedata, setDenguedata] = useState([]);
 
   useEffect(() => {
-    getDengueStaff();
+    getDengueData();
   }, []);
 
-  const getDengueStaff = () => {
+  const getDengueData = () => {
     Axios.get('http://localhost:4000/api/getstaffdengue')
       .then(response => {
         console.log('data from server', response.data);
-        setDenguestaff(response.data.allstaffdengue);
+        setDenguedata(response.data.allstaffdengue);
       })
       .catch(error => {
-        console.error("Axios error", error);
-      });
-  }
-
-  const filteredStaff = denguestaff.filter(staff =>
-    staff.staffmember.toLowerCase().includes(searchQuery.toLowerCase())
-  );
-
-  const handleSearchChange = (e) => {
-    setSearchQuery(e.target.value);
+        console.error("Axios error: ", error);
+      })
   };
 
+  
+
   return (
-    <Layout>
-      <div className="assigned-staff-table">
-        <h3>Assigned Staff</h3>
-        <div className="search-bar">
-          <input
-            type="text"
-            className="search-input"
-            value={searchQuery}
-            onChange={handleSearchChange}
-            placeholder="Search Staff Member"
-          />
-        </div>
-        <table border={1} cellPadding={10} cellSpacing={0}>
-          <thead>
-            <tr>
-              <th>Program Type</th>
-              <th>Staff Member</th>
-              <th>Date</th>
-              <th>Location</th>
-              <th>Description</th>
-              <th>Edit</th>
-              <th>Delete</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredStaff.length > 0 ? (
-              filteredStaff.map(staff => (
-                <tr key={staff._id}>
-                  <td>{staff.type}</td>
-                  <td>{staff.staffmember}</td>
-                  <td>{staff.date}</td>
-                  <td>{staff.location}</td>
-                  <td>{staff.description}</td>
-                  <td><button className="edit-button">Edit</button></td>
-                  <td><button className="delete-button">Delete</button></td>
-                </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan="7">No staff found</td>
-              </tr>
-            )}
-          </tbody>
-        </table>
-      </div>
-    </Layout>
+    <div className='DengueAssignTable'>
+      <h2>Dengue Assignments</h2>
+      <TableContainer component={Paper}>
+      <Table border={1} cellPadding={10} cellSpacing={0}>
+        <TableHead>
+          <TableRow>
+            <TableCell>Venue</TableCell>
+            <TableCell>Date</TableCell>
+            <TableCell>Time</TableCell>
+            <TableCell>Assigned Staff</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {denguedata && denguedata.length > 0 ? (
+            denguedata.map((camp) => (
+              <TableRow key={camp._id}>
+                <TableCell>{camp.venue}</TableCell>
+                <TableCell>{camp.date}</TableCell>
+                <TableCell>{camp.time}</TableCell>
+                <TableCell>{camp.staffmember}</TableCell>
+              </TableRow>
+            ))
+          ) : (
+            <TableRow>
+              <TableCell colSpan="6">No Dengue Assignments found</TableCell>
+            </TableRow>
+          )}
+        </TableBody>
+      </Table>
+      </TableContainer>
+    </div>
   );
 };
 

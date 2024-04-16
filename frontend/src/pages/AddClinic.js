@@ -8,8 +8,9 @@ import Swal from 'sweetalert2'
 import { useNavigate } from 'react-router-dom';
 import teeth from '../webImages/teeth.jpg'
 import dengue from '../webImages/dengueM.jpg'
+import * as Yup from 'yup';
 
-const AddClinic = ({ submitted, data }) => {
+const AddClinic = () => {
 
     const navigate = useNavigate();
 
@@ -19,33 +20,28 @@ const AddClinic = ({ submitted, data }) => {
     const [venue, setVenue] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
 
-    const user = localStorage.getItem("token");
+    
 
-    useEffect(() => {
-        if (!submitted) {
-            setCtype('');
-            setDate('');
-            setTime('');
-            setVenue('');
-        }
-    }, [submitted]);
+    const validateSchema = Yup.object().shape({
+        ctype: Yup.string().required('Clinic type is required').oneOf(['Dengue', 'Dental'], 'Invalid Clinic Type'),
+        date: Yup.string().required('Date is Required'),
+        time: Yup.string().required('Time is required'),
+        venue: Yup.string().required('Venue is required')
+    })
 
-    useEffect(() => {
-        if (data?.id && data.id !== 0) {
-            setCtype(data.ctype);
-            setDate(data.date);
-            setTime(data.time);
-            setVenue(data.venue);
-        }
-    }, [data]);
+
 
     const addClnics = async () => {
-
-        if (!ctype || !date || !time || !venue) {
-            setErrorMessage('Please fill in all required fields');
-            return;
-        }
         try {
+            await validateSchema.validate(
+                {
+                    ctype,
+                    date,
+                    time,
+                    venue,
+                },
+                { abortEarly: false }
+            );
 
             const response = await Axios.post('http://localhost:4000/api/addClinic', {
 
@@ -68,7 +64,15 @@ const AddClinic = ({ submitted, data }) => {
             setTime('');
             setVenue('');
         } catch (error) {
-            console.error('error', error);
+            if (error instanceof Yup.ValidationError) {
+                const errors = {};
+                error.inner.forEach(err => {
+                    errors[err.path] = err.message;
+                });
+                setErrorMessage(errors);
+            } else {
+                console.error('Error', error);
+            }
         }
     }
 
@@ -89,8 +93,7 @@ const AddClinic = ({ submitted, data }) => {
                     <p>Dr. kk</p>
                 </div>
                 <div className='frm'>
-                    {errorMessage && <Alert variant='danger'>{errorMessage}</Alert>}
-                    <h2>Add a Clinic appointment {user.username}</h2>
+                    <h2>Add a Clinic appointment </h2>
                     <br />
                     <div className='rdgrp'>
                         <div className='rdbtn'>
@@ -112,6 +115,7 @@ const AddClinic = ({ submitted, data }) => {
                             </label>
                         </div>
                     </div>
+                    {errorMessage.ctype && <div className="d-flex justify-content-center text-danger">{errorMessage.ctype}</div>}
                     <br />
                     <div className='slcbtn'>
                         <p>Select date :</p>
@@ -123,10 +127,13 @@ const AddClinic = ({ submitted, data }) => {
                                     onChange={e => setDate(e.target.value.toString())} />
                             </Form.Group>
                         </Form>
+
                     </div>
+                    {errorMessage.date && <div className="d-flex justify-content-center text-danger">{errorMessage.date}</div>}
                     <br />
                     <div className='slcbtn'>
                         <p>Select time : </p>
+
                         <Form.Group>
                             <Form.Control as='select' size='sm' onChange={e => setTime(e.target.value)}>
                                 <option >Select time</option>
@@ -158,6 +165,7 @@ const AddClinic = ({ submitted, data }) => {
                             </Form.Control>
                         </Form.Group>
                     </div>
+                    {errorMessage.time && <div className="d-flex justify-content-center text-danger">{errorMessage.time}</div>}
                     <br />
                     <div className='slcbtn'>
                         <p>Venue:</p>
@@ -170,9 +178,8 @@ const AddClinic = ({ submitted, data }) => {
                                 />
                             </Form.Group>
                         </Form>
-
-
                     </div>
+                    {errorMessage.venue && <div className="d-flex justify-content-center text-danger">{errorMessage.venue}</div>}
                     <br />
                     <Button onClick={addClnics}>Submit</Button>
                     <br />

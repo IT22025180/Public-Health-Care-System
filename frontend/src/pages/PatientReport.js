@@ -6,6 +6,7 @@ import jspdf from 'jspdf';
 import Swal from 'sweetalert2'
 import { Dialog, DialogTitle, DialogContent } from '@mui/material';
 import { FaTimes } from 'react-icons/fa';
+import { motion } from 'framer-motion';
 
 const PatientReport = () => {
     const [name, setname] = useState('');
@@ -66,46 +67,53 @@ const PatientReport = () => {
     }
     return (
         <Layout>
-            <div className='ptrep'>
-                <div className='formptnt'>
-                    <h2>Generate report</h2>
-                    {errorMessage && <Alert variant='danger'>{errorMessage}</Alert>}
-                    <p>Patient name</p>
-                    <Form.Group>
-                        <Form.Control
+            <motion.div
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -50 }}
+                transition={{ duration: 0.5 }}
+            >
+                <div className='ptrep'>
+                    <div className='formptnt'>
+                        <h2>Generate report</h2>
+                        {errorMessage && <Alert variant='danger'>{errorMessage}</Alert>}
+                        <p>Patient name</p>
+                        <Form.Group>
+                            <Form.Control
 
-                            value={name}
-                            onChange={e => setname(e.target.value)}
-                            type='text' />
-                    </Form.Group>
+                                value={name}
+                                onChange={e => setname(e.target.value)}
+                                type='text' />
+                        </Form.Group>
+                    </div>
+                    <br />
+                    <div className='formptnt'>
+                        <p>Patient sickness</p>
+                        <Form.Group>
+                            <Form.Control
+                                as='select'
+                                value={stype}
+                                onChange={e => setstype(e.target.value)}>
+                                <option>Dengue</option>
+                                <option>Dental</option>
+                            </Form.Control>
+                        </Form.Group>
+                    </div>
+                    <br />
+                    <div className='formptnt'>
+                        <p>Patient Status</p>
+                        <Form.Group>
+                            <Form.Control
+                                type='text'
+                                value={status}
+                                onChange={e => setStatus(e.target.value)}
+                            />
+                        </Form.Group>
+                    </div>
+                    <br />
+                    <Button onClick={handlePopup}>Generate report</Button>
                 </div>
-                <br />
-                <div className='formptnt'>
-                    <p>Patient sickness</p>
-                    <Form.Group>
-                        <Form.Control
-                            as='select'
-                            value={stype}
-                            onChange={e => setstype(e.target.value)}>
-                            <option>Dengue</option>
-                            <option>Dental</option>
-                        </Form.Control>
-                    </Form.Group>
-                </div>
-                <br />
-                <div className='formptnt'>
-                    <p>Patient Status</p>
-                    <Form.Group>
-                        <Form.Control
-                            type='text'
-                            value={status}
-                            onChange={e => setStatus(e.target.value)}
-                        />
-                    </Form.Group>
-                </div>
-                <br />
-                <Button onClick={handlePopup}>Generate report</Button>
-            </div>
+            </motion.div>
             <Dialog open={open}>
                 <DialogTitle>Confirmation dialog <FaTimes onClick={dialogoff} /></DialogTitle>
                 <DialogContent>
@@ -117,6 +125,7 @@ const PatientReport = () => {
                     <Button onClick={genReport}>Confirm</Button>
                 </DialogContent>
             </Dialog>
+
         </Layout>
     )
 }

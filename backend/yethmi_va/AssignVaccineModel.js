@@ -1,15 +1,14 @@
 const mongoose = require('mongoose');
 
-const addstaffvaccine= new mongoose.Schema({
-    type:String,  
-    staffmember:String,    
-    date:String,
-    location:String,
-    description:String, 
-},
-{
-    collection : "Vaccinestaff"
+const addstaffvaccineSchema = new mongoose.Schema({
+            v_name:String,        
+            quantity:String,
+            date:String,   
+            location:String,
+            staffmember:String
+}, {
+    collection: "Vaccinestaff"
 });
 
-const vaccinestaff = mongoose.model('Vaccinestaff',addstaffvaccine);
-module.exports = vaccinestaff;
+const Vaccinestaff = mongoose.model('Vaccinestaff', addstaffvaccineSchema);
+module.exports = Vaccinestaff;

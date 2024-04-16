@@ -43,7 +43,10 @@ const updateVac = async (req,res) => {
 
         const { _id, vname, manf_date, expi_Date, quantity, notes} = req.body;
 
-        const updatedVac = await Staff.findOneAndUpdate({_id} ,{
+        
+
+        const updatedVac = await Vaccine.findOneAndUpdate({_id} ,{
+                _id,
                 vname,      
                 manf_date,
                 expi_Date,

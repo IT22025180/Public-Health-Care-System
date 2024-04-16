@@ -5,7 +5,7 @@ const Raids_staffcontroller = require('./AssignRaidsController');
 
 routerRA.post('/addstaffraids', Raids_staffcontroller.addstaffraids);
 routerRA.get('/getstaffraids', Raids_staffcontroller.getstaffraids);
-routerRA.put('/updatestaffraids', Raids_staffcontroller.updatestaffdraids);
-routerRA.delete('/deletestaffraids', Raids_staffcontroller.deleteRaidAssignment);
+routerRA.post('/updatestaffraids', Raids_staffcontroller.updatestaffdraids);
+routerRA.post('/deletestaffraids', Raids_staffcontroller.deletestaffraids);
 
 module.exports = routerRA;

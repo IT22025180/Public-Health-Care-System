@@ -1,0 +1,65 @@
+.stTable {
+  background-color:rgb(225,217,241);
+  box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.065);
+  border-radius: 5px;
+  margin: 10px auto;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.stTable table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.stTable th, .stTable td {
+  padding: 8px;
+  text-align: center;
+  font-size: 14px;
+  border: 1px solid #000;
+}
+
+.stTable th {
+  background-color: #f2f2f2;
+}
+
+.stTable tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.searchvr {
+  width: 100%;
+  text-align: right;
+}
+
+.searchvr input {
+  width: 300px;
+  display: inline-block;
+  margin-right: 20px;
+}
+
+/*analyse Data main*/
+
+.analyseDataBox {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 20px auto;
+  width: 600px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+}
+
+.analyseData {
+  margin-top: 10px;
+  width: 90%;
+}
+
+.analyseData input[type="radio"] {
+  margin-right: 10px;
+}
+
+.subBtn {
+  text-align: center;
+}

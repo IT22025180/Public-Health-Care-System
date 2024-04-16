@@ -41,6 +41,7 @@ const updateCampaign = async (req,res) => {
         const { _id, venue , date , time , drName} = req.body;
 
         const updatedCampaign = await Campaigns.findOneAndUpdate({_id} ,{
+        
             venue,
             date,
             time,

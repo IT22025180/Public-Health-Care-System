@@ -2,11 +2,16 @@ import React, { useEffect, useState } from 'react';
 import '../styles/Dengcamptab.css';
 import Axios from 'axios';
 import jsPDF from 'jspdf';
+import Swal from 'sweetalert2';
+import { Link, useNavigate ,useParams } from 'react-router-dom';
+
 
 const DengCampTab = () => {
     const [campdata,setcampdata]=useState([]);
 
     const [searchQuery, setSearchQuery] = useState('');
+
+    const navigate = useNavigate();
 
     useEffect(()=>{
         getcampdata();
@@ -83,8 +88,10 @@ const generateReport = () => {
                     <td>{camp.time}</td>
                     <td>{camp.drName}</td>
                     <td className='actionButtons'>
-                        <button  >Edit</button>
-                    </td>
+                                    <Link to={`/Editcampdetails/${camp._id}/${camp.venue}/${camp.date}/${camp.time}/${camp.drName}`}>
+                                        <button>Edit</button>
+                                    </Link>
+                                </td>
                     <td className='deleteButtons'>
                         <button onClick={()=> campDelete(camp._id)}>Delete</button>
                     </td>
@@ -104,4 +111,4 @@ const generateReport = () => {
   )
 }
 
-export default DengCampTab
+export default DengCampTab;

@@ -29,3 +29,77 @@
       height: 11em;
     }
   }
+  .dencamphome {
+    display: flex;
+    align-items: center;
+}
+
+.dcamhome {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.dcampimg1 {
+    width: 30%
+}
+
+.addcamphome {
+    position: relative;
+    display: inline-block;
+}
+
+.addcbutton {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #e36767;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none;
+}
+
+.addcbutton:hover {
+    background-color: #0056b3;
+}
+.viewmap {
+    background-color: #e36767;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+.addcamphome-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.addcamphome,
+.addmaphome {
+  flex: 1;
+  margin-right: 10px;
+}
+.addmaphome {
+  position: relative;
+}
+
+.button-link {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.addcaimggg{
+  width: 400px;
+  height: 300px;
+}
+.addmapp{
+  width: 400px;
+  height: 300px;
+}

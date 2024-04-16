@@ -19,7 +19,7 @@ const FCDMEdit = () => {
 
   const navigate = useNavigate();
 
-  // Schema for form validation
+  // Schema for form validation 
   const validateSchema = Yup.object().shape({
     reportid_u: Yup.string().required('Report ID is required').matches(/^[A-Za-z0-9]+$/, 'Report ID must contain only letters and numbers'),
     raidOfficer_u: Yup.string().required('Raid Officer is Required').matches(/^[A-Za-z\s]+$/, 'Raid Officer name must contain only letters'),
@@ -53,7 +53,19 @@ const FCDMEdit = () => {
 
     // Validate form fields on component mount
     validateForm();
-  }, []);
+  }, [reportid_u, raidOfficer_u, date_u, violatorName_u, violationType,]);
+
+  useEffect(() => {
+    if (v_type === 'Food Violation') {
+      setFoodViolation(true);
+      setDengueViolation(false);
+      setViolationType('foodViolation');
+    } else if (v_type === 'Dengue Violation') {
+      setDengueViolation(true);
+      setFoodViolation(false);
+      setViolationType('dengueViolation');
+    }
+  }, [v_type]);
 
   // Function to update document data
   const updateDoc = async (_id, r_id, ro_name, date, v_name, v_type) => {
@@ -68,7 +80,7 @@ const FCDMEdit = () => {
       });
       console.log("Form Update successfully", response.data);
       return response;
-    } catch(error) {
+    } catch (error) {
       console.error('Error', error);
       throw error;
     }
@@ -93,11 +105,11 @@ const FCDMEdit = () => {
       Swal.fire({
         icon: 'success',
         title: 'Success!',
-        text: 'Document added successfully.',
+        text: 'Document Data Update Successfully.',
       }).then(() => {
         navigate('/F&CDocumentManagementTabe');
       });
-    } catch(error) {
+    } catch (error) {
       const errors = {};
       error.inner.forEach(err => {
         errors[err.path] = err.message;
@@ -113,7 +125,7 @@ const FCDMEdit = () => {
         <form className="DMForm">
           <h2>Update Document Management</h2>
           <div>
-            <label>Report ID</label>
+            <label>Case Number</label>
             <input type="text" name="id" value={reportid_u} onChange={(e) => setID(e.target.value)} />
             {errorMessage.reportid_u && <div className='errorMessage'>{errorMessage.reportid_u}</div>}
           </div>
@@ -140,7 +152,6 @@ const FCDMEdit = () => {
             <input type="radio" id="dengueViolation" name="type" value='dengueViolation' checked={violationType === 'dengueViolation'} onChange={() => { setDengueViolation(true); setFoodViolation(false); setViolationType('dengueViolation'); }} />
             Dengue Violation
           </div>
-          {errorMessage.violationType && <div className='errorMessage'>{errorMessage.violationType}</div>}
           <button className='DMbut' type='button' onClick={updateD}>Submit</button>
         </form>
       </div>

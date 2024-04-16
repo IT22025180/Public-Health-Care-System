@@ -40,6 +40,7 @@ const updateBaby = async (req,res) => {
         const { _id, bname, age, weight, co_no, notes} = req.body;
 
         const updatedBaby = await Baby.findOneAndUpdate({_id} ,{
+            _id,
             bname,      
             age,
             weight,

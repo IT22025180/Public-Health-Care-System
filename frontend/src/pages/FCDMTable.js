@@ -101,7 +101,7 @@ const FCDMTable = () => {
           <table border={1} cellPadding={10} cellSpacing={0}>
             <thead>
               <tr>
-                <th>Report ID</th>
+                <th>Case Number</th>
                 <th>Raid Officer</th>
                 <th>Date</th>
                 <th>Violator Name</th>
@@ -120,9 +120,21 @@ const FCDMTable = () => {
                     <td>{ddata.date}</td>
                     <td>{ddata.v_name}</td>
                     <td>{ddata.v_type}</td>
-                    <td>{ddata.documents}</td>
+                    <td className="evidence-cell">
+                      {Array.isArray(ddata.documents) && ddata.documents.length > 0 ? (
+                        ddata.documents.map((documents, index) => (
+                          <div key={index}>
+                            <a href={`data:${documents.contentType};base64,${documents.data}`} download={`file_${index}`}>
+                              File {index + 1}
+                            </a>
+                          </div>
+                        ))
+                      ) : (
+                        <span>No evidence</span>
+                      )}
+                    </td>
                     <td>
-                      <Link to={`/FCDMEdit/${ddata._id}/${ddata.r_id}/${ddata.ro_name}/${ddata.date}/${ddata.v_name}/${ddata.v_type}`}>
+                      <Link to={`/FCDMEdit/${encodeURIComponent(ddata._id)}/${encodeURIComponent(ddata.r_id)}/${encodeURIComponent(ddata.ro_name)}/${encodeURIComponent(ddata.date)}/${encodeURIComponent(ddata.v_name)}/${encodeURIComponent(ddata.v_type)}`}>
                         <button className="edtBtn">Edit</button>
                       </Link>
                     </td>

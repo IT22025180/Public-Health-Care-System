@@ -1,97 +1,121 @@
 import React, { useEffect, useState } from 'react';
 import Layout from '../components/Layout';
-import { Link } from 'react-router-dom'; 
+import { Link } from 'react-router-dom';
 import '../styles/Vaccineschedules.css';
 import Axios from 'axios';
+import Swal from 'sweetalert2';
+import Alert from 'react-bootstrap/Alert'; // Import Bootstrap Alert component
+import { Dialog, DialogTitle, DialogContent } from '@mui/material';
+
 
 const Vaccineschedules = ({ submitted, data }) => {
-  const [name, setName] = useState('');
-  const [staffmember, setStaffmember] = useState('');
-  const [date, setDate] = useState('');
-  const [location, setLocation] = useState('');
-  const [description, setDescription] = useState('');
+    // State variables
+    const [vaccineappdata, setvaccineappdata] = useState([]);
+    const [stvacdata, setstvacdata] = useState([]);
+    const [open, setOpen] = useState(false); // Renamed openConfirm to setOpen
+    const [staffmember, setstaffmember] = useState('');
 
-  useEffect(() => {
-    if (!submitted) {
-      setName('');
-      setStaffmember('');
-      setDate('');
-      setLocation('');
-      setDescription('');
+    useEffect(() => {
+        getvaccineappdata();
+    }, []);
+
+    const functionPopup = (vaccineapp) => {
+        setOpen(true); 
+        setstvacdata(vaccineapp);
+    
     }
-  }, [submitted]);
 
-  useEffect(() => {
-    if (data?.id && data.id !== 0) {
-      setName(data.name);
-      setStaffmember(data.staffmember);
-      setDate(data.date);
-      setLocation(data.location);
-      setDescription(data.description);
+    const closepopup = () => {
+        setOpen(false); // Renamed openConfirm to setOpen
     }
-  }, [data]);
 
-  const addstaffvaccine = async () => {
-    try {
-      const response = await Axios.post('http://localhost:4000/api/addstaffvaccine', {
-        V_type: name,
-        V_staffmember: staffmember,
-        V_date: date,
-        V_location: location,
-        V_description: description
-      });
-      console.log('Successfully', response.data);
-    } catch (error) {
-      console.error('error', error);
-    }
-  }
-  return (
-    <Layout>
-      <div className="layout-container2">
-        <div className="assign-staff-container">
-          <h3>Assign Staff for Vaccination Programs</h3> {/* Updated title */}
-          <div className='form-box'>
-            <form>
-            <div>
-               <label>Program Type:</label>
-           <select onChange={e => setName(e.target.value)} value={name}>
-           <option value="">Select Program Type</option>
-           <option value="vaccination">Vaccination Program</option>
-           <option value="vaccination">Awareness Program</option> {/* Updated option */}
-           </select>
-           </div>
+    const getvaccineappdata = () => {
+        Axios.get('http://localhost:4000/api/VacccinesApp')
+            .then(response => {
+                console.log('data from server', response.data);
+                setvaccineappdata(response.data.allVaccineAppointments);
+            })
+            .catch(error => {
+                console.error("Axios error: ", error);
+            })
+    };
 
-              <div>
-                <label>Staff Member:</label>
-                <input onChange={e => setStaffmember(e.target.value)} type="text" value={staffmember} />
-                
-              </div>
-              <div>
-                <label>Date:</label>
-                <input onChange={e => setDate(e.target.value.toString())} type="date" value={date} />
-                
-              </div>
-              <div>
-                <label>Location:</label>
-                <input onChange={e => setLocation(e.target.value)} type="text" value={location} />
-               
-              </div>
-              <div>
-                <label>Description:</label>
-                <textarea onChange={e => setDescription(e.target.value)} value={description} />
-                
-              </div>
-              
-              <Link to="/VaccineAssignTable">
-              <button type="button" onClick={addstaffvaccine}>Assign Staff</button>
-                <button className="view-programs">View Scheduled Programs</button>
-              </Link>
-            </form>
-          </div>
-        </div>
-      </div>
-    </Layout>
-  );
+    const addstaffvaccine = async () => {
+        try {
+            const response = await Axios.post("http://localhost:4000/api/addstaffvaccine", {
+                v_name: stvacdata.v_name,
+                quantity: stvacdata.quantity,
+                date: stvacdata.date, // Date
+                location: stvacdata.location,
+                staffmember: staffmember
+            });
+            console.log("Successfully", response.data);
+            setOpen(false);
+            setstaffmember('');
+
+            Swal.fire({
+                title: "Success!",
+                text: "Staff added successfully!",
+                icon: "success",
+                showConfirmButton: false,
+                timer: 1500
+              });
+
+        } catch (error) {
+            console.error("error", error);
+        }
+    };
+
+    return (
+        <>
+            <Layout>
+                <div className='VaccineAppTab'>
+                    <table border={1} cellPadding={10} cellSpacing={0}>
+                        <thead>
+                            <tr>
+                                <th>Vaccine Name</th>
+                                <th>Quantity</th>
+                                <th>Date</th>
+                                <th>Location</th>
+                                <th>Assign staff</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {vaccineappdata && vaccineappdata.length > 0 ? (
+                                vaccineappdata.map((vaccineapp) => (
+                                    <tr key={vaccineapp._id}>
+                                        <td>{vaccineapp.v_name}</td>
+                                        <td>{vaccineapp.quantity}</td>
+                                        <td>{vaccineapp.date}</td>
+                                        <td>{vaccineapp.location}</td>
+                                        <td className='actionButtons'>
+                                            <button onClick={() => functionPopup(vaccineapp)}>Assign Staff</button>
+                                        </td>
+                                    </tr>
+                                ))
+                            ) : (
+                                <tr>
+                                    <td>You have not added any vaccine Appointments</td>
+                                </tr>
+                            )}
+                        </tbody>
+                    </table>
+                </div>
+            </Layout>
+            <Dialog open={open} onClose={closepopup}> {/* Added onClose prop to Dialog component */}
+                <DialogTitle>Assign staff</DialogTitle>
+                <DialogContent>
+                    <p>{stvacdata.v_name}</p>
+                    <p>{stvacdata.quantity}</p>
+                    <p>{stvacdata.date}</p>
+                    <p>{stvacdata.location}</p>
+                    <input type='text' onChange={(e) => setstaffmember(e.target.value)} />
+                    <button onClick={addstaffvaccine}>Submit</button>
+                    <button onClick={closepopup}>Close</button>
+                </DialogContent>
+            </Dialog>
+        </>
+    );
 };
 
 export default Vaccineschedules;

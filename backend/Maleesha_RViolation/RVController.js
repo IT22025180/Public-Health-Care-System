@@ -2,70 +2,50 @@ const mongoose = require('mongoose');
 const VioReport = require('./RVModel');
 const multer = require('multer');
 const path = require('path');
+const { error } = require('console');
 
-const storage = multer.diskStorage({
-    destination: function(req, file, cb) {
-        const absolutePath = path.resolve(__dirname, '../../frontend/src/EviImages/');
-        cb(null, absolutePath);
-    },
-    filename: function(req, file, cb) {
-        const uniqueSuffix = Date.now();
-        cb(null, uniqueSuffix + file.originalname);
-    }
-});
-
-const upload = multer({ storage: storage });
 
 const addVioReport = async (req, res) => {
     try {
-        upload.single('evidence')(req, res, async (error) => {
-            if (error) {
-                console.error('Error uploading image:', error);
-                return res.status(500).json({ success: false, message: 'Error uploading image', error: error.message });
-            }
-            
-            if (!req.file) {
-                return res.status(400).json({ success: false, message: 'No file uploaded' });
-            }
+        console.log(req.files); 
 
-            console.log('req.file:', req.file);
-            const imageFileName = req.file.filename;
-            const {
-                ro_name,
-                ro_email,
-                ro_mobile,
-                v_location,
-                date,
-                v_type,
-                v_description,
-                v_name,
-                v_nic,
-                v_mobile,
-                v_email
-            } = req.body;
+        const { ro_name, ro_email, ro_mobile, v_location, date, v_type, v_description, v_name, v_nic, v_mobile, v_email, decision } = req.body;
 
-            const newVioReport = new VioReport({
-                ro_name,
-                ro_email,
-                ro_mobile,
-                v_location,
-                date,
-                v_type,
-                v_description,
-                v_name,
-                v_email,
-                v_mobile,
-                v_nic,
-                evidence: imageFileName,
-            });
+        console.log(req.file);
+        const imagesData = req.files.map(file => ({
+            data: file.buffer.toString('base64'),
+            contentType: file.mimetype,
+        }
+        ));
 
-            await newVioReport.save();
-            res.json({ success: true, message: 'Violation report added successfully' });
+        console.log(imagesData);
+
+        const newVioReport = new VioReport({
+            ro_name,
+            ro_email,
+            ro_mobile,
+            v_location,
+            date,
+            v_type,
+            v_description,
+            v_name,
+            v_email,
+            v_mobile,
+            v_nic,
+            decision,
+            evidence: imagesData,
         });
+
+        await newVioReport.save();
+        if (!req.files || req.files.length === 0) {
+            return res.status(201).json({ success: true, message: 'No files were uploaded.' });
+        } else {
+            res.json({ success: true, message: 'Violation report added successfully' });
+        }
     } catch (error) {
-        console.error('Error adding Violation report:', error);
-        res.status(500).json({ success: false, message: 'Internal server error', error: error.message });
-    }
+    console.error('Error adding Violation report:', error);
+    res.status(500).json({ success: false, message: 'Internal server error', error: error.message });
+}
 };
 
 
@@ -81,9 +61,10 @@ const getVioReport = async (req, res) => {
 
 const updateVioReport = async (req, res) => {
     try {
-        const { _id, ro_name, ro_email, ro_mobile, date, v_location, v_type, v_description, v_name, v_nic, v_mobile, v_email } = req.body;
+        const { _id, ro_name, ro_email, ro_mobile, date, v_location, v_type, v_description, v_name, v_nic, v_mobile, v_email, decision } = req.body;
 
         const updatedVioReport = await VioReport.findOneAndUpdate({ _id }, {
+            _id,
             ro_name,
             ro_email,
             ro_mobile,
@@ -95,6 +76,7 @@ const updateVioReport = async (req, res) => {
             v_email,
             v_mobile,
             v_nic,
+            decision,
         }, { new: true });
 
         if (!updatedVioReport) {

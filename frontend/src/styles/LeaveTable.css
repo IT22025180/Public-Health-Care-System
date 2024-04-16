@@ -1,11 +1,10 @@
 .LeaveTable {
     width: 1150px;
-    background-color: rgb(225, 217, 241); /* Apply color to the whole table area */
+    background-color: rgb(225, 217, 241);
     box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.065);
     border-radius: 5px;
     margin: 50px auto;
     padding: 50px;
-
 }
 
 .LeaveTable table {
@@ -14,62 +13,43 @@
     border-collapse: collapse;
 }
 
-.LeaveTable th {
-    border: 1px solid #000;
-    padding: 10px;
-}
-
+.LeaveTable th,
 .LeaveTable td {
     border: 1px solid #000;
     padding: 10px;
 }
 
-.LeaveTable table thead th {
+.LeaveTable th {
     background-color: darkblue;
     color: white;
-    padding: 10px;
 }
 
-.LeaveTable table tbody td {
-    padding: 10px;
-    text-align: center;
-}
-
-.actionButtons .editButton {
-    background-color: green; /* Color for the Edit button */
-}
-
-.actionButtons .deleteButton {
-    background-color: red; /* Color for the Delete button */
-}
-
-.actionButtons button {
+.LeaveTable .actionButtons button {
     border: 0;
     outline: none;
     padding: 8px 10px;
     color: white;
     border-radius: 5px;
     cursor: pointer;
-    margin-right: 5px; /* Add some margin between the buttons */
+    margin-right: 5px;
 }
 
-.deleteButtons button {
-    border: 0;
-    outline: none;
+.LeaveTable .actionButtons .editButton {
+    background-color: rgb(25, 173, 173);
+}
+
+.LeaveTable .actionButtons .deleteButton,
+.LeaveTable .deleteButtons button {
     background-color: red;
-    padding: 8px 10px;
-    color: white;
-    border-radius: 5px;
-    cursor: pointer;
 }
 
-
-.generate {
-    border: 0;
-    outline: none;
+.LeaveTable .generate {
     background-color: rgb(29, 84, 129);
-    padding: 8px 10px;
-    color: white;
-    border-radius: 5px;
-    cursor: pointer;
+}
+.LeaveTable .searchButton {
+    background-color: rgb(199, 199, 230);
+}
+
+.LeaveTable .generateButton {
+    background-color: blue;
 }

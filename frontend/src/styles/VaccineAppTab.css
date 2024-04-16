@@ -44,6 +44,17 @@
     cursor: pointer;
 }
 
+
+.pdfButton {
+    outline: none;
+    background-color: rgb(32, 11, 84);
+    padding: 8px 10px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
 .deleteButtons button{
     border: 0;
     outline: none;
@@ -63,4 +74,9 @@
     border-radius: 5px;
     cursor: pointer;
     
+}
+.AppDescription{
+    text-align: left; /* or 'left' if you prefer */
+    margin-top: 20px; /* Adjust the margin as needed */
+    margin-bottom: 20px; /* Adjust the margin as needed */
 }

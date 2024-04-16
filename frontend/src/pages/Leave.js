@@ -3,7 +3,9 @@ import Axios from "axios";
 import { Link } from "react-router-dom"; // Import Link
 import Layout from "../components/Layout";
 import Swal from "sweetalert2"; // Import SweetAlert
+import Alert from "react-bootstrap/Alert"; // Import Bootstrap Alert component
 import "../styles/Leave.css";
+import { useNavigate } from "react-router-dom";
 
 const Leave = ({ submitted, data }) => {
   const [name, setName] = useState("");
@@ -14,17 +16,11 @@ const Leave = ({ submitted, data }) => {
   const [leaveFor, setLeaveFor] = useState("Days");
   const [leaveStart, setLeaveStart] = useState("");
   const [leaveEnd, setLeaveEnd] = useState("");
+  const [validationError, setValidationError] = useState(false); // State for validation error
 
   useEffect(() => {
     if (!submitted) {
-      setName("");
-      setStaffId("");
-      setEmail("");
-      setPosition("");
-      setLeaveType("");
-      setLeaveFor("Days");
-      setLeaveStart("");
-      setLeaveEnd("");
+      clearForm();
     }
   }, [submitted]);
 
@@ -41,7 +37,25 @@ const Leave = ({ submitted, data }) => {
     }
   }, [data]);
 
+  const navigate = useNavigate();
+
+  const clearForm = () => {
+    setName("");
+    setStaffId("");
+    setEmail("");
+    setPosition("");
+    setLeaveType("");
+    setLeaveFor("Days");
+    setLeaveStart("");
+    setLeaveEnd("");
+  };
+
   const addLeave = async () => {
+    if (!name || !staffId || !email || !position || !leaveType || !leaveStart || !leaveEnd) {
+      setValidationError(true); // Set validation error to true
+      return; // Exit the function if any field is empty
+    }
+    setValidationError(false); // Reset validation error
     try {
       const response = await Axios.post("http://localhost:4000/api/addLeave", {
         name: name,
@@ -63,6 +77,8 @@ const Leave = ({ submitted, data }) => {
         title: "Leave added Successfully",
         showConfirmButton: false,
         timer: 1500,
+      }).then(() => {
+        navigate('/LeaveTable');
       });
     } catch (error) {
       console.error("error", error);
@@ -185,12 +201,13 @@ const Leave = ({ submitted, data }) => {
                 <label htmlFor="quitting">Quitting</label>
               </div>
             </div>
-            {/* Use Link to navigate */}
-            <Link to="/LeaveTable">
-              <button onClick={addLeave} className="subBut" type="button">
-                Submit
-              </button>
-            </Link>
+            {validationError && (
+              <Alert variant="danger">All fields are required</Alert>
+            )}
+            
+            <button onClick={addLeave} className="subBut" type="button">
+              Submit
+            </button>
           </form>
         </div>
       </div>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Layout from '../components/Layout';
 import '../styles/denguecampaignschedule.css'
 import Axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const DengueCampaigns = ({ submitted, data }) => {
     const [venue, setvenue] = useState('');
@@ -63,9 +64,11 @@ const DengueCampaigns = ({ submitted, data }) => {
                         <input onChange={e => setdrName(e.target.value)} type="conductedby" id="conductedby" name="conductedby" autoComplete='off' placeholder='Conductedby' />
                     </div>
                     <div className="input">
+
+                    <Link to="/DengCampTab">
                         <button onClick={addcamp} type='submit' value="Submit">Save</button>
                         <button type='submit' value="Cancel">Cancel</button>
-
+                    </Link>
                     </div>
                 </form>
             </div>

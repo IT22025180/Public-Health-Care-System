@@ -1,0 +1,73 @@
+.Rhome-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 50px 20px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.Rcard-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.Rcard {
+  width: 31%;
+  margin-bottom: 30px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.297);
+}
+
+.Rcard-image {
+  width: 200px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 10px 10px 0 0;
+  display: block;
+  margin:  0 auto;
+  padding-top: 30px;
+}
+
+.Rcard-body {
+  padding: 20px;
+}
+
+.Rcard-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.Rcard-text {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.btn {
+  width: 100%;
+}
+
+.tabBtn {
+  text-align: center;
+} 
+
+.tabBtn button {
+  border: none;
+  outline: none;
+  background-color: #007bff;
+  padding: 12px;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 0 100px;
+  width: 200px;
+  margin-bottom: 50px;
+}
+
+.tabBtn button:hover {
+  background-color: #0056b3;
+}

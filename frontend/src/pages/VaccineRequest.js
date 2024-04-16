@@ -3,89 +3,115 @@ import Layout from "../components/Layout";
 import '../styles/VaccineRequest.css'
 import Axios from 'axios';
 import { useNavigate } from "react-router-dom";
+import Swal from 'sweetalert2';
+import { Dialog, DialogTitle, DialogContent } from '@mui/material';
+
 
 const VaccineRequest = ({submitted,data}) => {
-    const[vName,setvName]=useState('');
-    const[quantity,setQuantity]=useState('');
-   
-
+    const[bvaccinedata,setbvaccinedata]=useState([]);
+    const [stvreqpdata, setstvreqpdata] = useState({});
+    const [open, setOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
     const navigate = useNavigate();
+    const [notification, setnotification] = useState('');
 
     useEffect(()=>{
-        if(!submitted){
-            setvName('');
-            setQuantity('');
-            
-        }
-    },[submitted]);
+        getbvaccinedata();
+    },[]);
 
-    useEffect(()=>{
-        if(data?.id && data.id !==0){
-            setvName(data.vName);
-            setQuantity(data.quantity);
-            
+    const functionPopup = (babyvacc) => {
+        setOpen(true);
+        setstvreqpdata(babyvacc);
+      }
+    
+      const closePopup = () => {
+        setOpen(false);
+      }
 
-        }
-    },[data]);
-
-    const navtoTable = () => {
-        navigate('/VaccineRequestTab');
+    const getbvaccinedata =()=>{
+        Axios.get('http://localhost:4000/api/babyvacc')
+        .then(response=>{
+            console.log('data from sever',response.data);
+            setbvaccinedata(response.data.allBVac);
+        })
+        .catch(error=>{
+            console.error('Axios error:',error);
+        })
     }
 
-    const addvacc = async()=>{
-        try{
-            const response = await Axios.post('http://localhost:4000/api/addVacRq',{
-                vName : vName,
-                quantity : quantity,
-                
-            });
+    const addVacRq = async () => {
+        try {
+          const response = await Axios.post("http://localhost:4000/api/addVacRq", {
+            type : stvreqpdata.type,
+            esti_Date:stvreqpdata.esti_Date ,
+            quantity:stvreqpdata.quantity ,
+            notification:notification,
+          });
+          console.log("Successfully", response.data);
+            setOpen(false);
+            setnotification('');
 
-            console.log('Successfully',response.data);
-            
-        }catch(error){
-            console.error('error',error);
+          Swal.fire({
+            title: "Success!",
+            text: "Status added successfully!",
+            icon: "success",
+            showConfirmButton: false,
+            timer: 1500
+          });
+    
+        } catch (error) {
+          console.error("error", error);
         }
-    }
+      }
+    
 
     return(
+        <>
         <Layout>
-
-        <div>
-            
-            <div className='title1'>
-
-            <h2 className="he2" >Vaccine Requests</h2>
-            <form className='addvaccineRequests'>
-                <div className='input'>
-                    <label htmlFor='vName'>Vaccine Name :</label>
-                    <input onChange={e=>setvName(e.target.value)} type='text' id='vName' autoComplete='off' placeholder='Vaccine Name'/>
-                </div>
-
-
-
-                <div className='input'>
-                    <label htmlFor='quantity'>Quantity :</label>
-                    <input onChange={e=>setQuantity(e.target.value)} type='text' id='quantity' autoComplete='off' placeholder='Quantity'/>
-                </div>
-
-        
-
-        
-            <button onClick={navtoTable} className='bReqView' type='submit'>View vaccines Requests</button>
-            
-            <button onClick={addvacc} className='bReqsave'type='submit'>Save</button>
-             
-
-            
-            
-
-
-
-    </form>
-    
-    </div>
-    </div>
+            <div className='Bvaccinetable'>
+        <table border ={1} cellPadding={10} cellSpacing={0}>
+            <thead>
+                <tr>
+                    <th>Vaccine Type</th>
+                    <th>Estimated Date</th>
+                    <th>Quantity</th>
+                    <th>Status</th>
+                   
+                </tr>
+            </thead>
+            <tbody>
+            {bvaccinedata && bvaccinedata.length > 0 ?(
+                    bvaccinedata.map((bvaccine)=>(
+                <tr key={bvaccine._id}>
+                    <td>{bvaccine.type}</td>
+                    <td>{bvaccine.esti_Date} </td>
+                    <td>{bvaccine.quantity}</td>
+                    
+                    <td className='actionButtons'>
+                        <button onClick={() => functionPopup(bvaccine)}>Status</button>
+                    </td>
+                </tr>
+                    ))
+                    ):(
+                        <tr>
+                            <td>You have not baby vaccine data</td>
+                        </tr>  
+                )}
+            </tbody>
+        </table>
+        </div>
     </Layout>
+     <Dialog open={open} onClose={closePopup}> {/* Added onClose prop to Dialog component */}
+     <DialogTitle>Status</DialogTitle>
+     <DialogContent>
+         <p>{stvreqpdata.type}</p>
+         <p>{stvreqpdata.esti_Date}</p>
+         <p>{stvreqpdata.quantity}</p>
+         <input type='text' onChange={(e) => setnotification(e.target.value)} />
+         <button onClick={addVacRq}>Submit</button>
+         <button onClick={closePopup}>Close</button>
+     </DialogContent>
+ </Dialog></>
     )
 }
 export default VaccineRequest

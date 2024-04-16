@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import image1 from '../webImages/vac1.jpg'
 import image2 from '../webImages/vac2.jpg'
 import image3 from '../webImages/vac3.jpg'
+import vaccmain from '../webImages/vaccmain.png';
 
 const Vaccines = () => {
     
@@ -20,7 +21,7 @@ const Vaccines = () => {
         title: 'Vaccine Registration',
         buttonText: 'Add',
         buttonLink: '/VaccineReg',
-        className: 'dengue-card',
+        className: 'reg-card',
         image: image1
       },
   
@@ -29,7 +30,7 @@ const Vaccines = () => {
         title: 'Vaccine Appointments',
         buttonText: 'Add',
         buttonLink: '/VaccineApp',
-        className: 'vaccine-card',
+        className: 'app-card',
         image:image2
         
         
@@ -41,7 +42,7 @@ const Vaccines = () => {
         title: 'Vaccine Requests',
         buttonText: 'Request',
         buttonLink: '/VaccineRequest',
-        className: 'raids-card',
+        className: 'req-card',
         image: image3
         
       },
@@ -51,22 +52,42 @@ const Vaccines = () => {
     return(
       
         <Layout>
-                <div className="home-page">
-        <h3>Vaccination Management</h3>
-        <div className="card-container">
+                <div className="vaccine-page">
+        <h2>Vaccination Management</h2>
+        <div className="Card-container">
           {cards.map((card) => (
-            <div key={card.id} className="card">
-              <img src={card.image} alt={card.title} className="card-image" />
-              <div className="card-body">
-                <h2 className="card-title">{card.title}</h2>
-                <p className="card-text">{card.description}</p>
-                <a href={card.buttonLink} className="btnview">
+            <div key={card.id} className="Card">
+              <img src={card.image} alt={card.title} className="Card-image" />
+              <div className="Card-body">
+                <h2 className="Card-title">{card.title}</h2>
+                <p className="Card-text">{card.description}</p>
+                <a href={card.buttonLink} className="Btnview">
                   {card.buttonText}
                 </a>
               </div>
             </div>
           ))}
         </div>
+
+        <div className="vachome">
+            <div className="vhome">
+                <h2>Vaccination Details </h2>
+                <h3>Check all the vaccination data and distributions</h3>
+                <p><center>Vaccination distribution and management encompass a complex framework of planning, 
+                  coordination, and execution to ensure the effective delivery of vaccines to target populations.<br></br>
+                   This involves meticulous supply chain management to maintain vaccine integrity,
+                    allocation strategies to prioritize high-risk groups, and the establishment of distribution networks spanning diverse healthcare settings.<br></br>
+                     Additionally, robust monitoring, surveillance, and community engagement efforts are essential to track vaccine uptake,
+                      address concerns, and adapt strategies as needed, ultimately fostering widespread vaccine acceptance and protecting public health.<br></br>
+                      <button onClick={() => navigate('/VaccineRegTab')} className="view-details-btn">View Details</button>
+
+</center></p>
+            </div>
+            <img src={vaccmain} alt="Description of the image" className="vaccmain" />
+        </div>
+          
+          
+
 
     </div>
         </Layout>  

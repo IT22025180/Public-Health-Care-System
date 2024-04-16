@@ -38,6 +38,7 @@ const updateTDis = async (req,res) => {
         const { _id, type, esti_Date, quantity} = req.body;
 
         const updatedTDis = await Triposha.findOneAndUpdate({_id} ,{
+            _id,
                 type,      
                 esti_Date,
                 quantity 

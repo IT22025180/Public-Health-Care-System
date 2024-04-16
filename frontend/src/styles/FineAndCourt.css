@@ -9,21 +9,21 @@ h1 {
   margin-bottom: 50px;
 }
 
-.card-container {
+.fccard-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
 }
 
-.card {
+.fccard {
   width: 31%;
   margin-bottom: 30px;
   border-radius: 10px;
-  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.297);
 }
 
-.card-image {
-  width: 50%;
+.fccard-image {
+  width: 200px;
   height: auto;
   object-fit: cover;
   border-radius: 10px 10px 0 0;
@@ -32,17 +32,17 @@ h1 {
   padding-top: 30px;
 }
 
-.card-body {
+.fccard-body {
   padding: 20px;
 }
 
-.card-title {
+.fccard-title {
   font-size: 24px;
   margin-bottom: 20px;
   text-align: center;
 }
 
-.card-text {
+.fccard-text {
   font-size: 18px;
   margin-bottom: 20px;
 }
