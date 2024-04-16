@@ -50,7 +50,7 @@ const Leave = ({ submitted, data }) => {
     staffId: Yup.string().required('Location is Required').matches(/^[A-Za-z\s,.0-9]+$/, 'Staff ID must contain only letters'),
     position: Yup.string().required('Report ID is Required').matches(/^[A-Za-z\s]+$/, 'Name must contain only letters'),
     leaveFor: Yup.string().required('Leave for is required').oneOf(['Days', 'Hours'], 'Invalid leave '),
-    leaveType: Yup.string().required('Leave type for is required').oneOf(['Sick', 'Vacation', 'Quititing'], 'Invalid leave '),
+    leaveType: Yup.string().required('Leave type for is required').oneOf(['Sick', 'Vacation', 'Quitting'], 'Invalid leave '),
 
   });
 

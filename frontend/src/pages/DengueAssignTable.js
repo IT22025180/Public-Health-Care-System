@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
-import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
-import { Link } from 'react-router-dom'; // Import Link from react-router-dom
+import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from '@mui/material';
+import { Link } from 'react-router-dom';
 import Layout from '../components/Layout';
 
 const DengueAssignTable = () => {
   const [denguedata, setDenguedata] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [filteredData, setFilteredData] = useState([]);
 
   useEffect(() => {
     getDengueData();
@@ -16,6 +18,7 @@ const DengueAssignTable = () => {
       .then(response => {
         console.log('data from server', response.data);
         setDenguedata(response.data.allstaffdengue);
+        setFilteredData(response.data.allstaffdengue); // Initialize filteredData with all data
       })
       .catch(error => {
         console.error("Axios error: ", error);
@@ -23,56 +26,71 @@ const DengueAssignTable = () => {
   };
 
   const handleDelete = (id) => {
-    // Perform deletion from the database
     Axios.post('http://localhost:4000/api/deletestaffdengue',{ _id: id })
       .then(response => {
         console.log('Deleted successfully');
-        // Update state to reflect the deletion
         setDenguedata(prevData => prevData.filter(camp => camp._id !== id));
+        setFilteredData(prevData => prevData.filter(camp => camp._id !== id)); // Update filteredData
       })
       .catch(error => {
         console.error("Axios delete error: ", error);
       });
   };
 
+  const handleSearchChange = (e) => {
+    const value = e.target.value;
+    setSearchQuery(value);
+    const filtered = denguedata.filter(camp =>
+      camp.staffmember.toLowerCase().includes(value.toLowerCase())
+    );
+    setFilteredData(filtered);
+  };
+
   return (
     <Layout>
       <div className='DengueAssignTable'>
       <h2>Dengue Assignments</h2>
+      <TextField
+        label="Search by Name"
+        variant="outlined"
+        value={searchQuery}
+        onChange={handleSearchChange}
+        style={{ marginBottom: '20px' }}
+      />
       <TableContainer component={Paper}>
-      <Table border={1} cellPadding={10} cellSpacing={0}>
-        <TableHead>
-          <TableRow>
-            <TableCell>Venue</TableCell>
-            <TableCell>Date</TableCell>
-            <TableCell>Time</TableCell>
-            <TableCell>Assigned Staff</TableCell>
-            <TableCell>Action</TableCell> {/* Add this column for delete button */}
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {denguedata && denguedata.length > 0 ? (
-            denguedata.map((camp) => (
-              <TableRow key={camp._id}>
-                <TableCell>{camp.venue}</TableCell>
-                <TableCell>{camp.date}</TableCell>
-                <TableCell>{camp.time}</TableCell>
-                <TableCell>{camp.staffmember}</TableCell>
-                <TableCell>
-                  <Button variant="contained" color="secondary" onClick={() => handleDelete(camp._id)}>Delete</Button>
-                </TableCell>
-              </TableRow>
-            ))
-          ) : (
+        <Table border={1} cellPadding={10} cellSpacing={0}>
+          <TableHead>
             <TableRow>
-              <TableCell colSpan="5">No Dengue Assignments found</TableCell>
+              <TableCell>Venue</TableCell>
+              <TableCell>Date</TableCell>
+              <TableCell>Time</TableCell>
+              <TableCell>Assigned Staff</TableCell>
+              <TableCell>Action</TableCell>
             </TableRow>
-          )}
-        </TableBody>
-      </Table>
+          </TableHead>
+          <TableBody>
+            {filteredData && filteredData.length > 0 ? (
+              filteredData.map((camp) => (
+                <TableRow key={camp._id}>
+                  <TableCell>{camp.venue}</TableCell>
+                  <TableCell>{camp.date}</TableCell>
+                  <TableCell>{camp.time}</TableCell>
+                  <TableCell>{camp.staffmember}</TableCell>
+                  <TableCell>
+                    <Button variant="contained" color="secondary" onClick={() => handleDelete(camp._id)}>Delete</Button>
+                  </TableCell>
+                </TableRow>
+              ))
+            ) : (
+              <TableRow>
+                <TableCell colSpan="5">No Dengue Assignments found</TableCell>
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
       </TableContainer>
-      <Link to="/Dengueschedules"> {/* Use Link to navigate */}
-            <button className="denbtn" style={{ backgroundColor: '#ff5722', color: '#fff', padding: '10px 20px', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>Assign Staff</button>
+      <Link to="/Dengueschedules">
+        <button className="denbtn" style={{ backgroundColor: '#ff5722', color: '#fff', padding: '10px 20px', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>Assign Staff</button>
       </Link>
     </div>
     </Layout>
