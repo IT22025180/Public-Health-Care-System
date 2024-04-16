@@ -20,7 +20,7 @@ const AddClinic = () => {
     const [venue, setVenue] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
 
-    const user = localStorage.getItem("token");
+    
 
     const validateSchema = Yup.object().shape({
         ctype: Yup.string().required('Clinic type is required').oneOf(['Dengue', 'Dental'], 'Invalid Clinic Type'),
@@ -93,7 +93,7 @@ const AddClinic = () => {
                     <p>Dr. kk</p>
                 </div>
                 <div className='frm'>
-                    <h2>Add a Clinic appointment {user.username}</h2>
+                    <h2>Add a Clinic appointment </h2>
                     <br />
                     <div className='rdgrp'>
                         <div className='rdbtn'>
