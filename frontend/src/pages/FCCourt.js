@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import '../styles/FCRS.css';
 import Layout from '../components/Layout';
-import Axios from "axios";
 import 'jspdf-autotable';
 import emailjs from '@emailjs/browser';
 import Swal from 'sweetalert2';
