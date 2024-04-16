@@ -15,7 +15,7 @@ const VaccineRequestTab = () => {
     
 
     const getvacreqData = () => {
-        Axios.get('http://localhost:4000/api/getVacRq')
+        Axios.get('http://localhost:4000/api/VacccinesReq')
           .then(response => {
             console.log('data from server', response.data);
             setvacreqData(response.data.allVaccineRq);
@@ -45,9 +45,12 @@ const VaccineRequestTab = () => {
                 {vacreqData && vacreqData.length > 0 ?(                  
                     vacreqData.map((vacreqData)=>(
                         <tr key={vacreqData._id}>
-                            <td>{vacreqData.vName}</td>
+                            <td>{vacreqData.type}</td>
+                            <td>{vacreqData.esti_Date}</td>
                             <td>{vacreqData.quantity}</td>
                             <td>{vacreqData.notification}</td>
+
+
                        
     
                     </tr>

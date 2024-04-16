@@ -1,8 +1,10 @@
 const mongoose = require('mongoose');
 
 const AddReqVac = new mongoose.Schema({
-    vName : String, 
+    type : String, 
     quantity: Number,
+    esti_Date:String,
+    notification:String,
 },
 {
     collection : "VaccineReq"
