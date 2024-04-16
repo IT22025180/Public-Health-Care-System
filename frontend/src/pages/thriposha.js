@@ -94,7 +94,7 @@ const Thriposha = ({submitted,data}) => {
        
 
         <Link to="/Thriposhatable">
-        <button  className='bvvsubmit' type='submit'>View thriposha data</button>
+        <button  className='bvvsubmit' type='submit'>View Thriposha data</button>
         </Link>
 
        
