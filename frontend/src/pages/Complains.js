@@ -147,11 +147,6 @@ const ComplaintForm = () => {
   }, []);
 
   const DEFAULT_ZOOM = 5;
-  // const { isLoaded } = useJsApiLoader({
-  //   id: "google-map-script",
-  //   googleMapsApiKey: "AIzaSyCsjXDyjZfdOrwQeg8OuYqOecH7pMLflto",
-  // });
-
   const [map, setMap] = React.useState(null);
   const [markerPosition, setMarkerPosition] = useState({
     lat: 7.8731,
