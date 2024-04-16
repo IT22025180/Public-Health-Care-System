@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
 import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
+import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 
 const DengueAssignTable = () => {
   const [denguedata, setDenguedata] = useState([]);
@@ -20,7 +21,18 @@ const DengueAssignTable = () => {
       })
   };
 
-  
+  const handleDelete = (id) => {
+    // Perform deletion from the database
+    Axios.post('http://localhost:4000/api/deletestaffdengue',{ _id: id })
+      .then(response => {
+        console.log('Deleted successfully');
+        // Update state to reflect the deletion
+        setDenguedata(prevData => prevData.filter(camp => camp._id !== id));
+      })
+      .catch(error => {
+        console.error("Axios delete error: ", error);
+      });
+  };
 
   return (
     <div className='DengueAssignTable'>
@@ -33,6 +45,7 @@ const DengueAssignTable = () => {
             <TableCell>Date</TableCell>
             <TableCell>Time</TableCell>
             <TableCell>Assigned Staff</TableCell>
+            <TableCell>Action</TableCell> {/* Add this column for delete button */}
           </TableRow>
         </TableHead>
         <TableBody>
@@ -43,16 +56,22 @@ const DengueAssignTable = () => {
                 <TableCell>{camp.date}</TableCell>
                 <TableCell>{camp.time}</TableCell>
                 <TableCell>{camp.staffmember}</TableCell>
+                <TableCell>
+                  <Button variant="contained" color="secondary" onClick={() => handleDelete(camp._id)}>Delete</Button>
+                </TableCell>
               </TableRow>
             ))
           ) : (
             <TableRow>
-              <TableCell colSpan="6">No Dengue Assignments found</TableCell>
+              <TableCell colSpan="5">No Dengue Assignments found</TableCell>
             </TableRow>
           )}
         </TableBody>
       </Table>
       </TableContainer>
+      <Link to="/Dengueschedules"> {/* Use Link to navigate */}
+            <button className="denbtn" style={{ backgroundColor: '#ff5722', color: '#fff', padding: '10px 20px', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>Assign Staff</button>
+      </Link>
     </div>
   );
 };

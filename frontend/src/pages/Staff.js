@@ -17,7 +17,7 @@ const Staff = () => {
       id: 1,
       title: 'Dengue Schedules',
       buttonText: 'View',
-      buttonLink: '/Dengueschedules',
+      buttonLink: '/DengueAssignTable',
       className: 'dengue-card',
       image: image1
     },
