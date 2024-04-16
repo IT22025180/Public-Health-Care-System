@@ -17,10 +17,10 @@ const RaidSchedules = ({ submitted, data }) => {
   }, []);
 
   const getSubmissionData = () => {
-    Axios.get('http://localhost:4000/api/raidSub')
+    Axios.get('http://localhost:4000/api/raidForm')
       .then(response => {
         console.log('Data from server:', response.data);
-        setSubmissionData(response.data.allRS);
+        setSubmissionData(response.data.allRF);
       })
       .catch(error => {
         console.error('Axios error:', error);
@@ -45,6 +45,7 @@ const RaidSchedules = ({ submitted, data }) => {
         officer: stradpdata.officer,
         sNote: stradpdata.sNote
       });
+      console.log('data ', response.data);    
       setOpen(false);
       setStaffmember('');
 

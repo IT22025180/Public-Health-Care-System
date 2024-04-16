@@ -31,42 +31,7 @@ const RaidsAssignTable = () => {
     setSearchQuery(e.target.value);
   };
 
-  const handleDelete = (id) => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonText: "Yes, delete it!",
-      cancelButtonText: "No, cancel",
-      reverseButtons: true
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Axios.post('http://localhost:4000/api/deletestaffraids', { _id: id })
-          .then(response => {
-            console.log('Staff deleted successfully');
-            // Update state after deletion
-            setAssignedRaids(prevRaids => prevRaids.filter(raid => raid._id !== id));
-            // Display success message
-            Swal.fire({
-              title: "Deleted!",
-              text: "The raid has been deleted.",
-              icon: "success"
-            });
-          })
-          .catch(error => {
-            console.error('Error deleting raid:', error);
-          });
-      } else if (result.dismiss === Swal.DismissReason.cancel) {
-        // Handle cancel action
-        Swal.fire({
-          title: "Cancelled",
-          text: "The raid is safe ",
-          icon: "error"
-        });
-      }
-    });
-  };
+ 
 
   return (
     <Layout>
@@ -103,7 +68,7 @@ const RaidsAssignTable = () => {
                   <td>{raid.location}</td>
                   <td>{raid.description}</td>
                   <td><button className="edit-button">Edit</button></td>
-                  <td><button className="delete-button" onClick={() => handleDelete(raid._id)}>Delete</button></td>
+                  <td><button className="delete-button" >Delete</button></td>
                 </tr>
               ))
             ) : (
