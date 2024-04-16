@@ -124,19 +124,19 @@ const ComplaintForm = () => {
 
   const [map, setMap] = React.useState(null);
   const [markerPosition, setMarkerPosition] = useState({
-    lat: 28.0289837,
-    lng: 1.6666663,
+    lat: 7.8731,
+  lng: 80.7718,
   });
 
   const [defaultLocation, setDefaultLocation] = useState({
-    lat: 28.0289837,
-    lng: 1.6666663,
+    lat: 7.8731,
+  lng: 80.7718,
   });
 
   const onLoad = useCallback((map) => {
     const bounds = new window.google.maps.LatLngBounds({
-      lat: 28.0289837,
-      lng: 1.6666663,
+      lat: 7.8731,
+  lng: 80.7718,
     });
     map.fitBounds(bounds);
     setMap(map);
@@ -164,12 +164,17 @@ const ComplaintForm = () => {
         if (!place.geometry || !place.geometry.location) {
           // User entered the name of a Place that was not suggested and
           // pressed the Enter key, or the Place Details request failed.
-            alert("this location not available")
+            alert("this location not available");
+            return;
         }
         if (place.geometry.viewport || place.geometry.location) {
             // do something
             console.log(place.geometry.location)
         }
+        const location = place.geometry.location;
+      setMarkerPosition({ lat: location.lat(), lng: location.lng() });
+      setDefaultLocation({ lat: location.lat(), lng: location.lng() });
+    
       })
     } catch (e) {
       console.log(e);
