@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import '../styles/babydetails.css'
 import Layout from '../components/Layout'
 import { useNavigate, useParams } from 'react-router-dom';
-import { Axios } from 'axios';
+import Axios  from 'axios';
 import Swal from 'sweetalert2';
 import { Alert } from 'react-bootstrap';
 
@@ -49,15 +49,17 @@ const Editbabydetails = () => {
             setBweight('');
             setBco_no('');
             setBnotes('');
-            navigate('/Babytable');
+           // navigate('/Babytable');
         } catch (error) {
             console.log("Error", error);
         }
     }
 
-    const confirmUpdate = () => {
+    const confirmUpdate = (event) => {
+        event.preventDefault(); 
         if (!bname_u || !age_u || !weight_u || !co_no_u || !notes_u) {
             setErrorMessage('Please fill in all required fields');
+            return; 
         }
 
         Swal.fire({
@@ -111,10 +113,8 @@ const Editbabydetails = () => {
                         </div>
 
 
-                        <button className='bdsubmit' type='submit'>Cancel</button>
-
-
-                        <button onClick={confirmUpdate} className='bdsave'>Update</button>
+                        
+                        <button onClick={confirmUpdate} className='bdddupdate'>Update</button>
 
 
 
