@@ -22,11 +22,10 @@ const ComplaintForm = () => {
     yaddress: "",
     images: [],
     ctype: null,
-    /*otherDocument: [],*/
     cdesc: "",
     date: "",
     area: "",
-    location: "",
+    
   });
 
   const [errorMessage, setErrorMessage] = useState("");
@@ -53,7 +52,7 @@ const ComplaintForm = () => {
       formdata.append("ctype", formData.ctype);
       formdata.append("cdesc", formData.cdesc);
       formdata.append("area", formData.area);
-      formdata.append("location", formData.location);
+      
 
       // Append each image file to FormData
       if (formData.images && formData.images.length > 0) {
@@ -85,10 +84,9 @@ const ComplaintForm = () => {
         yaddress: "",
         images: [],
         ctype: "",
-        /*otherDocument: [],*/
         cdesc: "",
         area: "",
-        location: "",
+
       });
 
       console.log("Data stored successfully", response.data);
@@ -160,18 +158,20 @@ const ComplaintForm = () => {
       );
       setisLoaded(true);
       autoCompleteRef.current.addListener('place_changed', () => {
+        let location=""
         const place = autoCompleteRef.current.getPlace()
-        if (!place.geometry || !place.geometry.location) {
-          // User entered the name of a Place that was not suggested and
-          // pressed the Enter key, or the Place Details request failed.
-            alert("this location not available");
-            return;
+        if (place.geometry && place.geometry.location) {
+           location = place.geometry.location;
+          const latitude = location.lat();
+          const longitude = location.lng();
+          console.log('Latitude:', latitude);
+          console.log('Longitude:', longitude);
         }
         if (place.geometry.viewport || place.geometry.location) {
             // do something
-            console.log(place.geometry.location)
+            console.log(place)
         }
-        const location = place.geometry.location;
+        
       setMarkerPosition({ lat: location.lat(), lng: location.lng() });
       setDefaultLocation({ lat: location.lat(), lng: location.lng() });
     
@@ -180,7 +180,7 @@ const ComplaintForm = () => {
       console.log(e);
     }
   };
-
+  
   const handleImageChange = (e) => {
     const files = Array.from(e.target.files).slice(0, 4);
     console.log(files);
