@@ -31,7 +31,7 @@ const Header = () => {
                                 <NavLink to='/vaccines' className='nav-link'>Vaccines</NavLink>
                             </li>
                             <li className='nav-item'>
-                                <NavLink to='/denguecamp' className='nav-link'>Dengue</NavLink>
+                                <NavLink to='/DengueHomePage' className='nav-link'>Dengue</NavLink>
                             </li>
 
                             <li className="nav-item dropdown" onMouseEnter={() => document.getElementById("navbarDropdown").click()}>

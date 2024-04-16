@@ -8,6 +8,7 @@ import denimg3 from '../webImages/dengueimg3.jpeg';
 import denimg4 from '../webImages/dengueimg4.jpeg';
 import denimg5 from '../webImages/dcamp2.jpg';
 import denimg6 from '../webImages/dcamp6.jpg';
+import { Link } from 'react-router-dom';
 
 
 const DengueHomePage = () => {
@@ -79,7 +80,12 @@ const DengueHomePage = () => {
             </div>
             <div className="addcamphome">
                 <img src={denimg6} className="addcaimg" alt="image6"/>
-                <a href="/DengueCampaignSchedule" className="addcbutton">Add Campaigns</a>
+                
+                <Link to="/denguecamp">
+                
+                <button  className="addcbutton" type='button'>Add Campaigns</button>
+                </Link>
+                
                 <a href="/Denguemap" className="viewmap">Add Campaigns</a>
             </div>
         </Layout>
