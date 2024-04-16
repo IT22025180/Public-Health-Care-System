@@ -8,6 +8,7 @@ import { useParams } from 'react-router-dom';
 import { Dialog, DialogTitle, DialogContent } from '@mui/material';
 import jspdf from 'jspdf';
 import { motion } from 'framer-motion';
+import * as Yup from 'yup';
 
 const AddPatients = () => {
 
@@ -25,15 +26,37 @@ const AddPatients = () => {
 
   const [open, openConfirm] = useState(false);
 
-  const functionPopup = () => {
+  const validateSchema = Yup.object().shape({
+    name: Yup.string().required('Name is required'),
+    gender: Yup.string().required('Gender is Required'),
+    age: Yup.number().required('Age is required').min(1, 'Age must be greater than 0'),
+    address: Yup.string().required('Address is required'),
+    mobile: Yup.string().matches(/^0\d{9}$/, 'Invalid Contact Number').required('Contact Number is Required'),
+  })
 
-    if (!name || !gender || !address || !mobile) {
-      setErrorMessage('Please fill all fields');
-    } else if (age < 0) {
-      setErrorMessage('Please add suitable age');
-      return;
-    } else {
+  const functionPopup = async () => {
+
+    try {
+      await validateSchema.validate(
+        {
+          name,
+          gender,
+          age,
+          address,
+          mobile,
+        },
+        { abortEarly: false }
+
+      );
       openConfirm(true);
+    } catch (error) {
+      if (error instanceof Yup.ValidationError) {
+        const errors = {};
+        error.inner.forEach(err => {
+          errors[err.path] = err.message;
+        });
+        setErrorMessage(errors);
+      }
     }
   }
 
@@ -45,14 +68,10 @@ const AddPatients = () => {
   //generatePDF
   const confirmWithGetPDF = () => {
 
-    if (!name || !gender || !address || !mobile) {
-      setErrorMessage('No details to generate pdf');
-      return;
-    } else {
-      const doc = new jspdf();
-      let y = 10;
+    const doc = new jspdf();
+    let y = 10;
 
-      const genPDF = `Public Health Information System\n\nPatient details\n\n 
+    const genPDF = `Public Health Information System\n\nPatient details\n\n 
                       Name : ${name}\n
                       Gender : ${gender}\n
                       Age : ${age}\n
@@ -67,12 +86,12 @@ const AddPatients = () => {
                       \n
                       Public Health Information Technical Team
                       `;
-      doc.text(genPDF, 10, y);
-      y += 50;
+    doc.text(genPDF, 10, y);
+    y += 50;
 
-      doc.save(`${name}_${ctype}_appointment_report.pdf`);
+    doc.save(`${name}_${ctype}_appointment_report.pdf`);
 
-    }
+
     addPatient();
 
   }
@@ -121,7 +140,6 @@ const AddPatients = () => {
           transition={{ duration: 0.5 }}
         >
           <div className='addform'>
-            {errorMessage && <Alert variant='danger'>{errorMessage}</Alert>}
             <h2>Admission form</h2>
             <Form>
               <Form.Group className='padd'>
@@ -133,6 +151,7 @@ const AddPatients = () => {
                   onChange={e => setName(e.target.value)}
                 />
               </Form.Group>
+              {errorMessage.name && <div className="d-flex justify-content-center text-danger">{errorMessage.name}</div>}
               <br />
               <Form.Group className='padd'>
                 <p>Age</p>
@@ -144,6 +163,7 @@ const AddPatients = () => {
                   onChange={e => setAge(e.target.value)}
                 />
               </Form.Group>
+              {errorMessage.age && <div className="d-flex justify-content-center text-danger">{errorMessage.age}</div>}
               <br />
               <Form.Group className='padd'>
                 <p>Gender</p>
@@ -154,6 +174,7 @@ const AddPatients = () => {
                   <option>Other</option>
                 </Form.Control>
               </Form.Group>
+              {errorMessage.gender && <div className="d-flex justify-content-center text-danger">{errorMessage.gender}</div>}
               <br />
               <Form.Group className='padd'>
                 <p>Address :</p>
@@ -164,6 +185,7 @@ const AddPatients = () => {
                   onChange={e => setAddress(e.target.value)}
                 />
               </Form.Group>
+              {errorMessage.address && <div className="d-flex justify-content-center text-danger">{errorMessage.address}</div>}
               <br />
               <Form.Group className='padd'>
                 <p>Mobile :</p>
@@ -176,6 +198,7 @@ const AddPatients = () => {
                   onChange={e => setMobile(e.target.value.slice(0, 10))}
                 />
               </Form.Group>
+              {errorMessage.mobile && <div className="d-flex justify-content-center text-danger">{errorMessage.mobile}</div>}
               <br />
               <Button onClick={functionPopup}>Submit</Button>
             </Form>
@@ -183,7 +206,7 @@ const AddPatients = () => {
         </motion.div>
       </Layout>
       <Dialog open={open}>
-        <DialogTitle>Appointment Confirmation</DialogTitle>
+        <DialogTitle><h2>Appointment Confirmation</h2></DialogTitle>
         <DialogContent>
           <Form>
             <h3>Your details</h3>
