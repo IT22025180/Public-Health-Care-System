@@ -34,6 +34,7 @@ const FCReportForm = ({ submitted, data }) => {
     vContact: Yup.string().matches(/^0\d{9}$/, 'Invalid Contact Number').required('Contact Number is Required'),
     vId: Yup.string().required('NIC is required').matches(/^\d{11}(V|v|\d)$/, 'Invalid NIC Number'),
     violationType: Yup.string().required('Violation Type is required').oneOf(['foodViolation', 'dengueViolation'], 'Invalid Violation Type'),
+    evidence: Yup.array().min(1, 'At least one Image is required').required('At least one document is required'),
   });
 
   const addFCReport = async () => {
@@ -51,6 +52,7 @@ const FCReportForm = ({ submitted, data }) => {
           vContact,
           vId,
           violationType,  
+          evidence,
         },
         { abortEarly: false }
       );
@@ -189,6 +191,7 @@ const FCReportForm = ({ submitted, data }) => {
           <h4>Upload Evidence</h4>
           <div>
             <input type="file" name="photo" onChange={handleImageChange} multiple  />
+            {errorMessage.evidence && <div className="errorMessage">{errorMessage.evidence}</div>}
           </div>
           <button className="button" type="button" onClick={addFCReport}>
             Submit Report
