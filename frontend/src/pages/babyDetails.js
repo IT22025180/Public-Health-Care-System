@@ -71,7 +71,7 @@ const BabyDetails = ({submitted,data}) => {
             setbweight('');
             setbcontactnumber('');
             setbspecialnotes('');
-            navigate('/Babytable');
+           // navigate('/Babytable');
         } catch (error) {
             if (error instanceof Yup.ValidationError) {
                 const errors = {};
