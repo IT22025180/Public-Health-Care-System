@@ -85,7 +85,7 @@ const RaidForm= ({submitted,data}) => {
 
         <div className='input'>
             <label htmlFor='date'>Date</label>
-            <input onChange={e=>setfdate(e.target.value.toString())} type='date' id='date' autoComplete='off' placeholder='Date'/>
+            <input onChange={e=>setfdate(e.target.value.toString())} type='datetime-local' id='date' autoComplete='off' placeholder='Date'/>
             {errorMessage. date === <div className="text-danger">{errorMessage. date}</div>}
         </div>
 

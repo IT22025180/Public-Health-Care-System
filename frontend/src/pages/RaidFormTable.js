@@ -73,8 +73,8 @@ const RaidFormTable = () => {
                             filteredformtabledata.map((formtable) => (
                                 <tr key={formtable._id}>
                                     <td>{formtable.location}</td>
-                                    <td>{formtable.date}</td>
-                                    <td>{formtable.time}</td>
+                                    <td>{new Date(formtable.date).toLocaleDateString()}</td>
+                                    <td>{new Date(formtable.date).toLocaleTimeString()}</td>
                                     <td>{formtable.officer}</td>
                                     <td>{formtable.sNote}</td>
                                     <td className='actionButtons'>
