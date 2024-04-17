@@ -13,7 +13,9 @@ const addComplain = async (req, res) => {
 
 
 
-        console.log(req.files);
+        console.log(req.files);//checking the image files in memorystorage
+
+        //adding images to the array
         const imagesData = req.files.map(file => ({
             data: file.buffer.toString('base64'),
             contentType: file.mimetype,
@@ -55,7 +57,7 @@ const addComplain = async (req, res) => {
 const getComplain = async (req, res) => {
     try {
         const allComplain = await Complain.find();
-        res.status(200).json( allComplain );
+        res.status(200).json(allComplain);
     } catch (error) {
         console.error('Error getting Complain:', error);
         res.status(500).json({ success: false, message: 'Internal server error' });
@@ -66,7 +68,7 @@ const updateComplain = async (req, res) => {
 
     try {
 
-        const { _id, fname, lname, mobile, email, NIC, yaddress, ctype, cdesc} = req.body;
+        const { _id, fname, lname, mobile, email, NIC, yaddress, ctype, cdesc } = req.body;
 
         const updatedComplain = await Complain.findOneAndUpdate({ _id }, {
             _id,
@@ -78,7 +80,7 @@ const updateComplain = async (req, res) => {
             yaddress,
             ctype,
             cdesc,
-            
+
         }, { new: true });
 
         if (!updatedComplain) {
