@@ -116,8 +116,6 @@ const Editbabydetails = () => {
                         
                         <button onClick={confirmUpdate} className='bdddupdate'>Update</button>
 
-
-
                     </form>
 
                 </div>
