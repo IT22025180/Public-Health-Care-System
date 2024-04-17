@@ -84,6 +84,9 @@ const filteredBabyData = babydata.filter(baby => {
                     <TableCell>Weight(Kg)</TableCell>
                     <TableCell>Contact Number</TableCell>
                     <TableCell>Special Notes</TableCell>
+                    <TableCell>Birth Date</TableCell>
+                    <TableCell>Gardian name</TableCell>
+
                     <TableCell>Edit</TableCell>
                     <TableCell>Delete</TableCell>
                 </TableRow>
@@ -97,11 +100,12 @@ const filteredBabyData = babydata.filter(baby => {
                     <TableCell>{baby.weight}</TableCell>
                     <TableCell>{baby.co_no}</TableCell>
                     <TableCell>{baby.notes}</TableCell>
+                    <TableCell>{baby.BDate}</TableCell>
+                    <TableCell>{baby.Gname}</TableCell>
 
-                   
                     <TableCell className='actionButtons'>
-                    {baby._id && baby.bname && baby.age && baby.weight  && baby.co_no  && baby.notes  && (
-                        <Button onClick={() => navigate(`/Editbabydetails/${baby._id}/${baby.bname}/${baby.age}/${baby.weight}/${baby.co_no}/${baby.notes}`)}>Edit</Button>
+                    {baby._id && baby.bname && baby.age && baby.weight  && baby.co_no  && baby.notes  && baby.BDate && baby.Gname &&(
+                        <Button onClick={() => navigate(`/Editbabydetails/${baby._id}/${baby.bname}/${baby.age}/${baby.weight}/${baby.co_no}/${baby.notes}/${baby.BDate}/${baby.Gname}`)}>Edit</Button>
                     )}
                     </TableCell>
                  

@@ -5,7 +5,9 @@ const AddBaby = new mongoose.Schema({
     age : Number,
     weight: Number,
     co_no : String,
-    notes : String
+    notes : String,
+    BDate:String,
+    Gname:String,
 },
 {
     collection : "Baby"

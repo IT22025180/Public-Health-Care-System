@@ -16,6 +16,8 @@ const BabyDetails = ({submitted,data}) => {
     const[weight,setbweight]=useState('');
     const[contactnumber,setbcontactnumber]=useState('');
     const[specialnotes,setbspecialnotes]=useState('');
+    const[BirthDate,setbbirthdate]=useState('');
+    const[GardianName,setGardian]=useState('');
     const navigate=useNavigate();
     const[errorMessage,setErrorMessage]=useState('');
 
@@ -42,6 +44,8 @@ const BabyDetails = ({submitted,data}) => {
                     weight,
                     contactnumber,
                     specialnotes,
+                    BirthDate,
+                    GardianName,
                 },
                 { abortEarly: false }
             );
@@ -55,6 +59,9 @@ const BabyDetails = ({submitted,data}) => {
                 weight: weight,
                 co_no: contactnumber,
                 notes: specialnotes,
+                BDate:BirthDate,
+                Gname:GardianName,
+                
             });
     
             console.log('Baby data adding is successful', response.data);
@@ -71,6 +78,8 @@ const BabyDetails = ({submitted,data}) => {
             setbweight('');
             setbcontactnumber('');
             setbspecialnotes('');
+            setbbirthdate('');
+            setGardian('');
            // navigate('/Babytable');
         } catch (error) {
             if (error instanceof Yup.ValidationError) {
@@ -129,6 +138,15 @@ const BabyDetails = ({submitted,data}) => {
 
         </div>
 
+        <div className='input'>
+        <label htmlFor='birthdate'>Birth Date</label>
+        <input value={BirthDate} onChange={e=>setbbirthdate(e.target.value)} type='date'  id='birthdate' autoComplete='off' placeholder='Birthdate'/>
+        </div>
+
+        <div>
+        <label htmlFor='gardian name'>Gardian name</label>
+        <input value={GardianName} onChange={e=>setGardian(e.target.value)} type='text'  id='Gardian name' autoComplete='off' placeholder='gardian name'/>
+        </div>
         
         <button  onClick={addbaby} className='bddsave' type='submit'>Save</button>
        

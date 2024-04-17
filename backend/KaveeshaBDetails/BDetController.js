@@ -5,13 +5,15 @@ const { error } = require('console');
 const addBaby = async(req,res) => {
     try{
         
-            const{ bname, age, weight, co_no, notes} = req.body;
+            const{ bname, age, weight, co_no, notes,BDate,Gname} = req.body;
             const newBaby =  new Baby({
                 bname,      
                 age,
                 weight,
                 co_no,
-                notes          
+                notes,
+                BDate, 
+                Gname        
             });
 
             await newBaby.save();
@@ -37,7 +39,7 @@ const updateBaby = async (req,res) => {
 
     try{
 
-        const { _id, bname, age, weight, co_no, notes} = req.body;
+        const { _id, bname, age, weight, co_no, notes,BDate,Gname} = req.body;
 
         const updatedBaby = await Baby.findOneAndUpdate({_id} ,{
             _id,
@@ -45,7 +47,9 @@ const updateBaby = async (req,res) => {
             age,
             weight,
             co_no,
-            notes   
+            notes,  
+            BDate, 
+            Gname   
         }, { new : true});
 
         if(!updatedBaby){

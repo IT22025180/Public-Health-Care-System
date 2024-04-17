@@ -10,17 +10,19 @@ import { Alert } from 'react-bootstrap';
 
 const Editbabydetails = () => {
 
-    const { _id, bname, age, weight, co_no, notes } = useParams();
+    const { _id, bname, age, weight, co_no, notes ,BDate,Gname} = useParams();
     const [id_u, setID] = useState(_id);
     const [bname_u, setBname] = useState(bname);
     const [age_u, setBage] = useState(age);
     const [weight_u, setBweight] = useState(weight);
     const [co_no_u, setBco_no] = useState(co_no);
     const [notes_u, setBnotes] = useState(notes);
+    const[BDate_u,setBdate]=useState(BDate);
+    const[Gname_u,setGname]=useState(Gname);
     const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate();
 
-    const updateBaby = async (_id, bname, age, weight, co_no, notes) => {
+    const updateBaby = async (_id, bname, age, weight, co_no, notes,BDate,Gname) => {
 
         try {
             const response = await Axios.post('http://localhost:4000/api/updateBaby', {
@@ -29,7 +31,9 @@ const Editbabydetails = () => {
                 age,
                 weight,
                 co_no,
-                notes
+                notes,
+                BDate,
+                Gname
             });
 
             console.log("baby data update is successful", response.data);
@@ -40,7 +44,7 @@ const Editbabydetails = () => {
 
     const update = async () => {
         try {
-            const response = await updateBaby(id_u, bname_u, age_u, weight_u, co_no_u, notes_u);
+            const response = await updateBaby(id_u, bname_u, age_u, weight_u, co_no_u, notes_u,BDate_u,Gname_u);
 
             console.log(response);
             setID(_id);
@@ -49,6 +53,8 @@ const Editbabydetails = () => {
             setBweight('');
             setBco_no('');
             setBnotes('');
+            setBdate('');
+            setGname('');
            // navigate('/Babytable');
         } catch (error) {
             console.log("Error", error);
@@ -57,7 +63,7 @@ const Editbabydetails = () => {
 
     const confirmUpdate = (event) => {
         event.preventDefault(); 
-        if (!bname_u || !age_u || !weight_u || !co_no_u || !notes_u) {
+        if (!bname_u || !age_u || !weight_u || !co_no_u || !notes_u || !BDate_u ||!Gname_u) {
             setErrorMessage('Please fill in all required fields');
             return; 
         }
@@ -112,7 +118,15 @@ const Editbabydetails = () => {
                             <input value={notes_u} onChange={e => setBnotes(e.target.value)} type='text' id='specialnotes' autoComplete='off' placeholder='Special Notes' />
                         </div>
 
+                        <div className='input'>
+                        <label htmlFor='birthdate'>Birth Date</label>
+                        <input value={BDate_u} onChange={e => setBdate(e.target.value)} type='date'/>
+                        </div>
 
+                        <div>
+                        <label htmlFor='gardian name'>Gardian name</label>
+                        <input value={Gname_u} onChange={e => setGname(e.target.value)} type='text'/>
+                        </div>
                         
                         <button onClick={confirmUpdate} className='bdddupdate'>Update</button>
 
