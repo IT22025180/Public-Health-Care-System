@@ -4,6 +4,7 @@ const AddCampaign = new mongoose.Schema({
     venue : String,
     date : String,
     time : String,
+    etime : String,
     drName : String
 
 },

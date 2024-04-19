@@ -73,6 +73,11 @@ const DengueCampaigns = ({ submitted, data }) => {
                     </div>
                     {errorMessage.time && <div className="text-danger">{errorMessage.time}</div>}
                     <div className="input">
+                        <label className='stime' htmlFor="etime">End Time</label>
+                        <input onChange={e => settime(e.target.value)} type="etime" id="etime" name="etime" autoComplete='off' placeholder='End Time' />
+                    </div>
+                    {errorMessage.etime && <div className="text-danger">{errorMessage.etime}</div>}
+                    <div className="input">
                         <label className='drname' htmlFor="conductedby">Conducted by</label>
                         <input onChange={e => setdrName(e.target.value)} type="conductedby" id="conductedby" name="conductedby" autoComplete='off' placeholder='Conductedby' />
                     </div>
@@ -83,7 +88,7 @@ const DengueCampaigns = ({ submitted, data }) => {
                         <button onClick={addcamp} type='submit' value="Submit">Save</button>
 
                         <Link to="/DengCampTab">
-                        <button type='submit' value="Cancel">View table</button>
+                        <button type='submit' value="Cancel">View Campaign details</button>
                         </Link>
     
                     </div>

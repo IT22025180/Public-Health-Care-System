@@ -6,6 +6,8 @@ import Swal from 'sweetalert2';
 import { Link, useNavigate ,useParams } from 'react-router-dom';
 import logo1 from '../webImages/logo1.png';
 import DengueCampaigns from './DengueCampaignSchedule';
+import { Alert, Button, Card, Col, Container, Form, Row } from 'react-bootstrap';
+import denimg3 from '../webImages/dengueimg3.jpeg';
 
 
 const DengCampTab = () => {
@@ -81,7 +83,7 @@ const generateReport = () => {
     let y = 75;
 
     filteredcampdata.forEach((camp, index) => {
-        const campText = `Venue: ${camp.venue}\nDate: ${camp.date}\nStarting Time: ${camp.time}\nConducted By: ${camp.drName}\n\n`;
+        const campText = `Venue: ${camp.venue}\nDate: ${camp.date}\nStarting Time: ${camp.time}\nEnd Time: ${camp.etime}\nConducted By: ${camp.drName}\n\n`;
         doc.text(campText, 10, y);
         y += 30;
     });
@@ -100,6 +102,7 @@ const generateReport = () => {
                     <th>Venue</th>
                     <th>Date</th>
                     <th>Starting time</th>
+                    <th>End time</th>
                     <th>Conducted by</th>
                     <th>Edit</th>
                     <th>Delete</th>
@@ -113,9 +116,10 @@ const generateReport = () => {
                     <td>{camp.venue}</td>
                     <td>{camp.date}</td>
                     <td>{camp.time}</td>
+                    <td>{camp.etime}</td>
                     <td>{camp.drName}</td>
                     <td className='actionButtons'>
-                                    <Link to={`/Editcampdetails/${camp._id}/${camp.venue}/${camp.date}/${camp.time}/${camp.drName}`}>
+                                    <Link to={`/Editcampdetails/${camp._id}/${camp.venue}/${camp.date}/${camp.time}/${camp.etime}/${camp.drName}`}>
                                         <button>Edit</button>
                                     </Link>
                                 </td>
@@ -134,6 +138,7 @@ const generateReport = () => {
                
             </tbody>
         </table>
+
         </div>
   )
 }
