@@ -20,13 +20,13 @@ const AddClinic = () => {
     const [venue, setVenue] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
 
-    
+
 
     const validateSchema = Yup.object().shape({
         ctype: Yup.string().required('Clinic type is required').oneOf(['Dengue', 'Dental'], 'Invalid Clinic Type'),
         date: Yup.string().required('Date is Required'),
         time: Yup.string().required('Time is required'),
-        venue: Yup.string().required('Venue is required')
+        venue: Yup.string().required('Venue is required').matches(/^[A-Za-z\s,./0-9]+$/, 'Name must contain only letters and numbers'),
     })
 
 
@@ -122,7 +122,7 @@ const AddClinic = () => {
                         <Form>
                             <Form.Group>
                                 <Form.Control
-                                    type='date'
+                                    type='datetime-local'
                                     value={date}
                                     onChange={e => setDate(e.target.value.toString())} />
                             </Form.Group>

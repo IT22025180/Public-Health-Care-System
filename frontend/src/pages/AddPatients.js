@@ -28,10 +28,10 @@ const AddPatients = () => {
   const [open, openConfirm] = useState(false);
 
   const validateSchema = Yup.object().shape({
-    name: Yup.string().required('Name is required'),
+    name: Yup.string().required('Name is required').matches(/^[A-Za-z\s]+$/, 'Name must contain only letters'),
     gender: Yup.string().required('Gender is Required'),
     age: Yup.number().required('Age is required').min(1, 'Age must be greater than 0'),
-    address: Yup.string().required('Address is required'),
+    address: Yup.string().required('Address is required').matches(/^[A-Za-z\s,./0-9]+$/, 'Address must contain only letters and numbers'),
     mobile: Yup.string().matches(/^0\d{9}$/, 'Invalid Contact Number').required('Contact Number is Required'),
   })
 

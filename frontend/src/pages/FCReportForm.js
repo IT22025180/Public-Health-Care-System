@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Layout from '../components/Layout';
 import Axios from 'axios';
 import Swal from "sweetalert2";
-import * as Yup from 'yup';
 
 const FCReportForm = ({ submitted, data }) => {
 
@@ -22,41 +21,8 @@ const FCReportForm = ({ submitted, data }) => {
   const [errorMessage, setErrorMessage] = useState('');
   const [violationType, setViolationType] = useState('');
 
-  const validateSchema = Yup.object().shape({
-    ROname: Yup.string().required('Report ID is Required').matches(/^[A-Za-z\s]+$/, 'Name must contain only letters'),
-    Roemail: Yup.string().matches(/^[a-zA-Z0-9._%+-]+@gmail\.com$/, 'Invalid Gmail address').required('Email is Required'),
-    ROcontact: Yup.string().matches(/^0\d{9}$/, 'Invalid Contact Number').required('Contact number is Required'),
-    date: Yup.string().required('Date is Required'),
-    location: Yup.string().required('Location is Required').matches(/^[A-Za-z\s,.0-9]+$/, 'Location must contain only letters'),
-    description: Yup.string().required('Description is Required').matches(/^[A-Za-z\s,.0-9]+$/, 'Description must contain only letters'),
-    vName: Yup.string().required('Name is Required').matches(/^[A-Za-z\s]+$/, 'Name must contain only letters'),
-    vEmail: Yup.string().matches(/^[a-zA-Z0-9._%+-]+@gmail\.com$/, 'Invalid Gmail address').required('Email is Required'),
-    vContact: Yup.string().matches(/^0\d{9}$/, 'Invalid Contact Number').required('Contact Number is Required'),
-    vId: Yup.string().required('NIC is required').matches(/^\d{11}(V|v|\d)$/, 'Invalid NIC Number'),
-    violationType: Yup.string().required('Violation Type is required').oneOf(['foodViolation', 'dengueViolation'], 'Invalid Violation Type'),
-    evidence: Yup.array().min(1, 'At least one Image is required').required('At least one document is required'),
-  });
-
   const addFCReport = async () => {
     try {
-      await validateSchema.validate(
-        {
-          ROname,
-          Roemail,
-          ROcontact,
-          date,
-          location,
-          description,
-          vName,
-          vEmail,
-          vContact,
-          vId,
-          violationType,  
-          evidence,
-        },
-        { abortEarly: false }
-      );
-
       const formData = new FormData();
       formData.append('ro_name', ROname);
       formData.append('ro_email', Roemail);
@@ -74,11 +40,6 @@ const FCReportForm = ({ submitted, data }) => {
         formData.append("images", evidence[i]);
       }
 
-      for (var pair of formData.entries()) {
-        console.log(pair[0] + ', ' + pair[1]);
-      }
-      console.log(formData.get("images"));
-
       await Axios.post('http://localhost:4000/api/addVioR', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
@@ -93,23 +54,25 @@ const FCReportForm = ({ submitted, data }) => {
         window.location.href = '/F&CReportViolationTabe';
       });
     } catch (error) {
-      if (error instanceof Yup.ValidationError) {
-        const errors = {};
-        error.inner.forEach(err => {
-          errors[err.path] = err.message;
-        });
-        setErrorMessage(errors);
-      } else {
-        console.error('Error', error);
-      }
+      console.error('Error', error);
     }
   };
 
   const handleImageChange = (e) => {
     const files = Array.from(e.target.files).slice(0, 4);
-    console.log(files);
     setEvidence(files);
   };
+
+  const handleKeyPress = (e) => {
+    // Prevent the default behavior if a number key is pressed
+    if (/\d/.test(e.key)) {
+      e.preventDefault();
+    }
+    if (/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(e.key)) {
+      e.preventDefault();
+    }
+  };
+
 
   return (
     <Layout>
@@ -121,23 +84,20 @@ const FCReportForm = ({ submitted, data }) => {
           <div className='ROinfo'>
             <div>
               <label>Name:</label>
-              <input type="text" name="name" value={ROname} onChange={(e) => setROname(e.target.value)} />
-              {errorMessage.ROname && <div className="errorMessage">{errorMessage.ROname}</div>}
+              <input type="text" name="name" value={ROname} onChange={(e) => setROname(e.target.value)} onKeyDown={handleKeyPress} />
             </div>
             <div>
               <label>Email:</label>
               <input type="email" name="email" value={Roemail} onChange={(e) => setRoemail(e.target.value)} />
-              {errorMessage.Roemail && <div className="errorMessage">{errorMessage.Roemail}</div>}
+              {errorMessage && <span className="error">{errorMessage}</span>}
             </div>
             <div>
               <label>Contact Number:</label>
               <input type="text" name="contactNumber" value={ROcontact} onChange={(e) => setROcontact(e.target.value)} />
-              {errorMessage.ROcontact && <div className="errorMessage">{errorMessage.ROcontact}</div>}
             </div>
             <div>
               <label>Date:</label>
               <input type="date" name="date" value={date} onChange={(e) => setdate(e.target.value)} />
-              {errorMessage.date && date === '' && <div className="errorMessage">Invalid Date</div>}
             </div>
           </div>
 
@@ -145,8 +105,7 @@ const FCReportForm = ({ submitted, data }) => {
           <div className='Vdetails'>
             <div>
               <label>Location:</label>
-              <input type="text" name="location" value={location} onChange={(e) => setlocation(e.target.value)} />
-              {errorMessage.location && <div className="errorMessage">{errorMessage.location}</div>}
+              <input type="text" name="location" value={location} onChange={(e) => setlocation(e.target.value)} onKeyDown={handleKeyPress} />
             </div>
             <div>
               <label>Violation Type:</label>
@@ -155,12 +114,10 @@ const FCReportForm = ({ submitted, data }) => {
               <span style={{ marginRight: '40px' }}></span>
               <input type="radio" id="dengueViolation" name="violationType" value="dengueViolation" checked={violationType === 'dengueViolation'} onChange={() => setViolationType('dengueViolation')} />
               Dengue Violation
-              {errorMessage.violationType && <div className="errorMessage">{errorMessage.violationType}</div>}
             </div>
             <div>
               <label>Violation Description:</label>
-              <textarea name="description" value={description} onChange={(e) => setdescription(e.target.value)} />
-              {errorMessage.description && <div className="errorMessage">{errorMessage.description}</div>}
+              <textarea name="description" value={description} onChange={(e) => setdescription(e.target.value)} onKeyDown={handleKeyPress} />
             </div>
           </div>
 
@@ -168,30 +125,25 @@ const FCReportForm = ({ submitted, data }) => {
           <div className='Vinfo'>
             <div>
               <label>Name:</label>
-              <input type="text" name="name" value={vName} onChange={(e) => setvName(e.target.value)} />
-              {errorMessage.vName && <div className="errorMessage">{errorMessage.vName}</div>}
+              <input type="text" name="name" value={vName} onChange={(e) => setvName(e.target.value)} onKeyDown={handleKeyPress} />
             </div>
             <div>
               <label>Email:</label>
               <input type="email" name="email" value={vEmail} onChange={(e) => setvEmail(e.target.value)} />
-              {errorMessage.vEmail && <div className="errorMessage">{errorMessage.vEmail}</div>}
             </div>
             <div>
               <label>Contact Number:</label>
               <input type="text" name="contactNumber" value={vContact} onChange={(e) => setvContact(e.target.value)} />
-              {errorMessage.vContact && <div className="errorMessage">{errorMessage.vContact}</div>}
             </div>
             <div>
               <label>NIC Number:</label>
               <input type="text" name="idNumber" value={vId} onChange={(e) => setvId(e.target.value)} />
-              {errorMessage.vId && <div className="errorMessage">{errorMessage.vId}</div>}
             </div>
           </div>
 
           <h4>Upload Evidence</h4>
           <div>
-            <input type="file" name="photo" onChange={handleImageChange} multiple  />
-            {errorMessage.evidence && <div className="errorMessage">{errorMessage.evidence}</div>}
+            <input type="file" name="photo" onChange={handleImageChange} multiple />
           </div>
           <button className="button" type="button" onClick={addFCReport}>
             Submit Report
