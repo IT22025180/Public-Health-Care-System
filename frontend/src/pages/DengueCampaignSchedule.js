@@ -69,12 +69,12 @@ const DengueCampaigns = ({ submitted, data }) => {
                     {errorMessage.date && date === '' && <div className="text-danger">Invalid Date</div>}
                     <div className="input">
                         <label className='stime' htmlFor="stime">Starting Time</label>
-                        <input onChange={e => settime(e.target.value)} type="stime" id="stime" name="stime" autoComplete='off' placeholder='Starting Time' />
+                        <input onChange={e => settime(e.target.value)} type="time" id="stime" name="stime" autoComplete='off' placeholder='Starting Time' />
                     </div>
                     {errorMessage.time && <div className="text-danger">{errorMessage.time}</div>}
                     <div className="input">
                         <label className='stime' htmlFor="etime">End Time</label>
-                        <input onChange={e => settime(e.target.value)} type="etime" id="etime" name="etime" autoComplete='off' placeholder='End Time' />
+                        <input onChange={e => settime(e.target.value)} type="time" id="etime" name="etime" autoComplete='off' placeholder='End Time' />
                     </div>
                     {errorMessage.etime && <div className="text-danger">{errorMessage.etime}</div>}
                     <div className="input">

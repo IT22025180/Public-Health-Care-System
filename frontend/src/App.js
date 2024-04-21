@@ -235,7 +235,7 @@ function App() {
 
           <Route path='/Complains' element={<ComplaintForm />} />
           <Route path='/denguecamp' element={<DengueCampaigns />} />
-          <Route path='/Editcampdetails/:_id/:venue/:date/:time/:drName' element={<Editcampdetails/>}/>
+          <Route path='/Editcampdetails/:_id/:venue/:date/:time/:etime/:drName' element={<Editcampdetails/>}/>
 
           <Route path='/Fine-And-court' element={<FineAndCourt />} />
           <Route path='/Fine-And-court-Submit-Reports' element={<FCReportForm />} />
