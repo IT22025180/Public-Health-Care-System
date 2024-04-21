@@ -7,11 +7,12 @@ import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2';
 import * as Yup from 'yup';
 
-const VaccineReg = ({submitted,data}) => {
+const VaccineReg = () => {
     const [vname, setVname] = useState('');
     const [manf_date, setManf_date] = useState('');
     const [expi_Date, setExpi_Date] = useState('');
     const [quantity, setQuantity] = useState('');
+    
     const [notes, setNotes] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
 
@@ -19,50 +20,24 @@ const VaccineReg = ({submitted,data}) => {
         vname: Yup.string().required('vaccine name is Required').matches(/^[A-Za-z\s]+$/, 'Name must contain only letters'),
         manf_date: Yup.string().required('Manfacture Date is Required'),
         expi_Date: Yup.string().required('Expire Date is Required'),
-        quantity:Yup.string().required('Quantity is Required').matches(/^[.0-9]/,'Quantity must be a number'),
+        quantity: Yup.number().required('Quantity is Required'),
+        
         notes: Yup.string().required('Note is Required').matches(/^[A-Za-z\s,.0-9]+$/, 'notes must contain only letters'),
-
-
-      });
+    });
 
     const navigate = useNavigate();
-
-    useEffect(() => {
-        if (!submitted) {
-            setVname('');
-            setManf_date('');
-            setExpi_Date('');
-            setQuantity('');
-            setNotes('');
-            setErrorMessage('');
-        }
-    }, [submitted]);
-
-    useEffect(() => {
-        if (data?.id && data.id !== 0) {
-            setVname(data.vname);
-            setManf_date(data.manf_date);
-            setExpi_Date(data.expi_Date);
-            setQuantity(data.quantity);
-            setNotes(data.notes);
-        }
-    }, [data]);
 
     const navtoTable = () => {
         navigate('/VaccineRegTab');
     }
 
     const addvacc = async () => {
-
-    
         // Show SweetAlert confirmation message
         Swal.fire({
             title: "Do you want to save the data?",
             showCancelButton: true,
             confirmButtonText: "Save",
-            
         }).then((result) => {
-            
             if (result.isConfirmed) {
                 // User clicked "Save"
                 // Perform API call or any other action here
@@ -72,32 +47,29 @@ const VaccineReg = ({submitted,data}) => {
             }
         });
     };
-    
+
     const saveData = async () => {
         try {
-
-            await validateSchema.validate(
-                {
-                    vname,
-                    manf_date,
-                    expi_Date,
-                    quantity,
-                    notes,
-  
-                },
-                { abortEarly: false }
-              );
+            await validateSchema.validate({
+                vname,
+                manf_date,
+                expi_Date,
+                quantity,
+                
+                notes,
+            }, { abortEarly: false });
 
             const response = await Axios.post('http://localhost:4000/api/addVac', {
                 vname: vname,
                 manf_date: manf_date,
                 expi_Date: expi_Date,
                 quantity: quantity,
+                
                 notes: notes,
             });
-    
+
             console.log('Successfully', response.data);
-    
+
             // Show success message
             Swal.fire("Saved!", "", "success");
         } catch (error) {
@@ -112,7 +84,7 @@ const VaccineReg = ({submitted,data}) => {
               }
         }
     };
-    
+
     return (
         <div> 
             <Header />
@@ -137,7 +109,7 @@ const VaccineReg = ({submitted,data}) => {
                     </div>
                     <div className='input'>
                         <label htmlFor='Quantity'>Quantity :</label>
-                        <input onChange={e => setQuantity(e.target.value)} type='text' id='Quantity' autoComplete='off' placeholder='Quantity' value={quantity} />
+                        <input onChange={e => setQuantity(e.target.value)} type='number' id='Quantity' autoComplete='off' placeholder='Quantity' value={quantity} />
                         {errorMessage.quantity && <div className="text-danger">{errorMessage.quantity}</div>}
                     </div>
                     <div className='input'>

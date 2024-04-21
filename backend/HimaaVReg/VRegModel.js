@@ -5,6 +5,7 @@ const AddVac = new mongoose.Schema({
     manf_date : String,
     expi_Date: String,
     quantity: Number,
+    
     notes : String,
 },
 {

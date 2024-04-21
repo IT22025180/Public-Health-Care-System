@@ -137,6 +137,7 @@ const VaccineRegTab = () => {
               <th>Manufactured Date</th>
               <th>Expire Date</th>
               <th>Quantity</th>
+              
               <th>Notes</th>
               <th>Update</th>
               <th>Delete</th>
@@ -150,6 +151,7 @@ const VaccineRegTab = () => {
                   <th>{vaccine.manf_date}</th>
                   <th>{vaccine.expi_Date}</th>
                   <th>{vaccine.quantity}</th>
+                  
                   <th>{vaccine.notes}</th>
                   <td className='actionButtons'>
                     {vaccine._id && vaccine.vname && vaccine.manf_date && vaccine.expi_Date && vaccine.quantity && vaccine.notes &&(
