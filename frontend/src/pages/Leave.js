@@ -37,6 +37,8 @@ const Leave = ({ submitted, data }) => {
       setLeaveFor(data.doleave);
       setLeaveStart(data.leavestrt);
       setLeaveEnd(data.leaveend);
+      navigate('/LeaveTable');
+
     }
   }, [data]);
 
@@ -78,6 +80,7 @@ const Leave = ({ submitted, data }) => {
           leaveFor,
           leaveStart,
           leaveEnd,
+
         },
         { abortEarly: false }
       );
