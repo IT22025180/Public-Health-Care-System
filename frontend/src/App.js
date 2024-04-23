@@ -57,8 +57,8 @@ import Editbabydetails from './pages/Editbabydetails';
 import Editbabyvaccination from './pages/Editbabyvaccination';
 import Edittriposha from './pages/Edittriposha';
 
-import EditVReg from './pages/EditVReg'; 
-import EditVApp from './pages/EditVApp'; 
+import EditVReg from './pages/EditVReg';
+import EditVApp from './pages/EditVApp';
 
 
 import FCRFEdit from './pages/FCRFEdit';
@@ -148,21 +148,21 @@ function App() {
           <Route path='/RF' element={<RaidForm />} />
           <Route path='/F&CDReportViolationTabe' element={<FCRVTable />} />
 
-        <Route path='/RF' element={<RaidForm/>}/>
-        <Route path='/F&CDReportViolationTabe' element={<FCRVTable/>}/>
-        <Route path='/DengueAssignTable' element={<DengueAssignTable/>}/>
+          <Route path='/RF' element={<RaidForm />} />
+          <Route path='/F&CDReportViolationTabe' element={<FCRVTable />} />
+          <Route path='/DengueAssignTable' element={<DengueAssignTable />} />
 
 
 
-        <Route path='/addclinics' element = {<AddClinic/>}/>
-        <Route path='/addpatient' element = {<AddPatients/>}/>
-        <Route path='/dengueCli' element = {<Dengue/>}/>
-        <Route path='/raids' element={<Raids/>}/>
-        <Route path='/raidform' element={<RaidForm/>}/>
-        <Route path='/raidformtable' element={< RaidFormTable/>}/>
-        <Route path='/raidsubform' element={< RaidSubForm/>}/>
-        <Route path='/raidsubtable' element={< RaidSubTable/>}/>
-        
+          <Route path='/addclinics' element={<AddClinic />} />
+          <Route path='/addpatient' element={<AddPatients />} />
+          <Route path='/dengueCli' element={<Dengue />} />
+          <Route path='/raids' element={<Raids />} />
+          <Route path='/raidform' element={<RaidForm />} />
+          <Route path='/raidformtable' element={< RaidFormTable />} />
+          <Route path='/raidsubform' element={< RaidSubForm />} />
+          <Route path='/raidsubtable' element={< RaidSubTable />} />
+
 
 
           <Route path='/addclinics' element={<AddClinic />} />
@@ -232,10 +232,12 @@ function App() {
           <Route path='/DengCampTab' element={<DengCampTab />} />
           <Route path='/dengueCli' element={<Dengue />} />
           <Route path='/RF' element={<RaidForm />} />
-
           <Route path='/Complains' element={<ComplaintForm />} />
           <Route path='/denguecamp' element={<DengueCampaigns />} />
-          <Route path='/Editcampdetails/:_id/:venue/:date/:time/:etime/:drName' element={<Editcampdetails/>}/>
+
+          <Route path='/Editcampdetails/:_id/:venue/:date/:time/:etime/:drName' element={<Editcampdetails />} />
+          <Route path='/Editcampdetails/:_id/:venue/:date/:time/:drName' element={<Editcampdetails />} />
+
 
           <Route path='/Fine-And-court' element={<FineAndCourt />} />
           <Route path='/Fine-And-court-Submit-Reports' element={<FCReportForm />} />
@@ -256,9 +258,9 @@ function App() {
           <Route path='/VaccineRegTab' element={<VaccineRegTab />} />
           <Route path='/vaccineapptab' element={<VaccineAppTab />} />
           <Route path='/VaccineRequestTab' element={<VaccineRequestTab />} />
-          <Route path='/EditVReg/:_id/:vname/:manf_date/:expi_Date/:quantity/:notes' element={<EditVReg/>}/>
+          <Route path='/EditVReg/:_id/:vname/:manf_date/:expi_Date/:quantity/:notes' element={<EditVReg />} />
           <Route path='/EditVApp/:_id/:v_name/:quantity/:date/:location' element={<EditVApp />} />
-  
+
 
 
           <Route path='/staff' element={<Staff />} />
