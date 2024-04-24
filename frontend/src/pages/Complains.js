@@ -224,6 +224,48 @@ const ComplaintForm = () => {
     navigate('/Complainstable');
   }
 
+  const handleKeyPress = (e) => {
+    // Prevent the default behavior if a number key is pressed
+    if (/\d/.test(e.key)) {
+      e.preventDefault();
+    }
+    if (/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(e.key)) {
+      e.preventDefault();
+    }
+  }
+
+  const handleKeyPress1 = (e) => {
+    // Allow Backspace key
+    if (e.key === "Backspace") {
+      return;
+    }
+    // Prevent the default behavior if a letter is pressed
+    if (/[a-zA-Z]/.test(e.key)) {
+      e.preventDefault();
+    }
+    if (/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(e.key)) {
+      e.preventDefault();
+    }
+    if (e.target.value.length >= 10 && e.key !== "Backspace") {
+      e.preventDefault();
+    }
+  }
+
+  const handleKeyPress2 = (e) => {
+    if (e.key === "Backspace") {
+      return;
+    }
+    if (/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(e.key)) {
+      e.preventDefault();
+    }
+    if (!/[Vv0-9]/.test(e.key)) {
+      e.preventDefault();
+    }
+    if (e.target.value.length >= 12 && e.key !== "Backspace") {
+      e.preventDefault();
+    }
+  }
+
   return (
     <Layout>
       <motion.div className=""
@@ -244,6 +286,7 @@ const ComplaintForm = () => {
                   <Form.Control
                     type="text"
                     name="firstName"
+                    onKeyDown={handleKeyPress}
                     value={formData.fname}
                     onChange={(e) =>
                       setFormData({ ...formData, fname: e.target.value })
@@ -260,6 +303,7 @@ const ComplaintForm = () => {
                   <Form.Control
                     type="text"
                     name="lastName"
+                    onKeyDown={handleKeyPress}
                     value={formData.lname}
                     onChange={(e) =>
                       setFormData({ ...formData, lname: e.target.value })
@@ -277,7 +321,8 @@ const ComplaintForm = () => {
                   <Form.Control
                     type="number"
                     name="mobile"
-                    // pattern="[0-9]{10}"
+                    onKeyDown={handleKeyPress1}
+                    maxLength={10}
                     value={formData.mobile}
                     onChange={(e) =>
                       setFormData({ ...formData, mobile: e.target.value })
@@ -310,6 +355,8 @@ const ComplaintForm = () => {
                   <Form.Control
                     type="text"
                     name="nic"
+                    onKeyDown={handleKeyPress2}
+                    maxLength={12}
                     value={formData.NIC}
                     onChange={(e) =>
                       setFormData({ ...formData, NIC: e.target.value })
@@ -443,12 +490,14 @@ const ComplaintForm = () => {
                 {errorMessage.area && <div className="text-danger">{errorMessage.area}</div>}
               </Col>
             </Row>
+            <div className="buttons">
             <Button variant="primary" type="submit" onClick={addComplain}>
               Submit
             </Button>
-            <Button onClick={navtoComplains}>
+            <Button  onClick={navtoComplains}>
               Complainstable
             </Button>
+            </div>
           </Form>
         </Container>
       </motion.div>
