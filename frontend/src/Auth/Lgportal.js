@@ -54,29 +54,27 @@ const Lgportal = () => {
     } else {
         return (
             <div>
-                <Layout>
-
+                <div>
                     <div>
                         <div>
-                            <div>
-                                <h1>Login</h1>
-                                <input
-                                    type='text'
-                                    placeholder='username'
-                                    value={checkdata.username}
-                                    onChange={(e) => setCheckdata({ ...checkdata, username: e.target.value })} />
-                                <input
-                                    type='password'
-                                    placeholder='password'
-                                    value={checkdata.password}
-                                    onChange={(e) => setCheckdata({ ...checkdata, password: e.target.value })} />
-                                {error && <p>{error}</p>}
-                                <button type='submit' onClick={checkUser}>Login</button>
+                            <h1>Login</h1>
+                            <input
+                                type='text'
+                                placeholder='username'
+                                value={checkdata.username}
+                                onChange={(e) => setCheckdata({ ...checkdata, username: e.target.value })} />
+                            <input
+                                type='password'
+                                placeholder='password'
+                                value={checkdata.password}
+                                onChange={(e) => setCheckdata({ ...checkdata, password: e.target.value })} />
+                            {error && <p>{error}</p>}
+                            <button type='submit' onClick={checkUser}>Login</button>
 
-                            </div>
                         </div>
                     </div>
-                </Layout>
+                </div>
+
             </div>
         )
     }

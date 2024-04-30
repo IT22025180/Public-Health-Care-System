@@ -37,41 +37,39 @@ const DoctorLogin = () => {
 
 
     return (
-        <Layout>
+        <div>
             <div>
                 <div>
-                    <div>
-                        <h1>
-                            <form>
-                                <h1>
-                                    Register test
-                                </h1>
+                    <h1>
+                        <form>
+                            <h1>
+                                Register test
+                            </h1>
 
-                                <input
-                                    type='text'
-                                    placeholder='This name will be display in pages'
-                                    value={name}
-                                    onChange={(e) => setName(e.target.value)} />
-                                <input
-                                    type='text'
-                                    placeholder='username'
-                                    value={username}
-                                    onChange={(e) => setUsername(e.target.value)} />
-                                <input
-                                    type='password'
-                                    placeholder='password'
-                                    value={password}
-                                    onChange={(e) => setPassword(e.target.value)} />
-                                {error && <p>{error}</p>}
-                                <button type='submit' onClick={addUser}>
-                                    Submit
-                                </button>
-                            </form>
-                        </h1>
-                    </div>
+                            <input
+                                type='text'
+                                placeholder='This name will be display in pages'
+                                value={name}
+                                onChange={(e) => setName(e.target.value)} />
+                            <input
+                                type='text'
+                                placeholder='username'
+                                value={username}
+                                onChange={(e) => setUsername(e.target.value)} />
+                            <input
+                                type='password'
+                                placeholder='password'
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)} />
+                            {error && <p>{error}</p>}
+                            <button type='submit' onClick={addUser}>
+                                Submit
+                            </button>
+                        </form>
+                    </h1>
                 </div>
             </div>
-        </Layout>
+        </div>
     )
 }
 
