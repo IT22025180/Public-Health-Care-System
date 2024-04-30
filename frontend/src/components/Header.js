@@ -1,6 +1,7 @@
 import React from 'react'
 import './Header.css'
 import { Link, NavLink } from 'react-router-dom'
+import { Button } from 'bootstrap'
 
 const Header = () => {
     return (
@@ -53,11 +54,8 @@ const Header = () => {
                             </li>
                             <li className='nav-item'>
                                 <NavLink to='/mainMidwife' className='nav-link'>Midwife</NavLink>
-                            </li>
+                            </li>      
                         </ul>
-                        <form class="d-flex mt-3 justify-content-center align-items-center " role="search">
-
-                        </form>
                     </div>
                 </div>
             </nav>
