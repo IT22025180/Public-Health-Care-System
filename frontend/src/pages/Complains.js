@@ -494,9 +494,7 @@ const ComplaintForm = () => {
             <Button variant="primary" type="submit" onClick={addComplain}>
               Submit
             </Button>
-            <Button  onClick={navtoComplains}>
-              Complainstable
-            </Button>
+            
             </div>
           </Form>
         </Container>

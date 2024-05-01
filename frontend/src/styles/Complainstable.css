@@ -2,3 +2,98 @@
     display: flex;
     flex-direction: row;
 }
+.Complainstable {
+    padding: 20px;
+  }
+  
+  .Complainstable input[type="text"] {
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 300px;
+  }
+  
+  .Complainstable .pdfButton {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    margin-right: 10px; /* Add space between buttons */
+  }
+  
+  .Complainstable .pdfButton:last-child {
+    margin-right: 0; /* Remove margin from last button */
+  }
+  
+  .Complainstable .pdfButton:hover {
+    background-color: #45a049;
+    cursor: pointer;
+  }
+  
+  .Complainstable .pdfButton:active {
+    background-color: #3e8e41;
+  }
+  
+  .Complainstable .updateButton {
+    background-color: #2196F3;
+  }
+  
+  .Complainstable .deleteButton {
+    background-color: #f44336;
+  }
+  
+  .Complainstable .buttonContainer {
+    display: flex;
+    align-items: center;
+  }
+  
+  .Complainstable .buttonContainer button {
+    margin-right: 10px;
+  }
+  
+  .Complainstable .buttonContainer button:last-child {
+    margin-right: 0;
+  }
+  
+  .Complainstable .MuiTable-root {
+    width: 100%;
+  }
+  
+  .Complainstable .MuiTableHead-root {
+    background-color: #f2f2f2;
+  }
+  
+  .Complainstable .MuiTableCell-head {
+    font-weight: bold;
+  }
+  
+  .Complainstable .imge {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .Complainstable .imge img {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 5px;
+  }
+  
+  .Complainstable .MuiTableRow-root:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  .Complainstable .MuiTableCell-root {
+    text-align: left;
+    padding: 10px;
+  }
+  
+  .Complainstable .MuiTableRow-root:hover {
+    background-color: #e0e0e0;
+  }

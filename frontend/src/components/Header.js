@@ -129,7 +129,7 @@ const Header = () => {
                                 </li>
 
                                 <NavDropdown title="Complains" id="navbarDropdown">
-                                    <NavDropdown.Item as={NavLink} to="/Complains">Complains</NavDropdown.Item>
+                                    <NavDropdown.Item as={NavLink} to="/ComplainsHome">Complains</NavDropdown.Item>
                                     <NavDropdown.Item as={NavLink} to="/RaidsHome">Raids</NavDropdown.Item>
                                     <NavDropdown.Item as={NavLink} to="/Fine-And-court">Fine & Court</NavDropdown.Item>
                                 </NavDropdown>
@@ -176,7 +176,7 @@ const Header = () => {
                                 </li>
 
                                 <NavDropdown title="Complains" id="navbarDropdown">
-                                    <NavDropdown.Item as={NavLink} to="/Complains">Complains</NavDropdown.Item>
+                                    <NavDropdown.Item as={NavLink} to="/ComplainsHome">Complains</NavDropdown.Item>
                                     <NavDropdown.Item as={NavLink} to="/RaidsHome">Raids</NavDropdown.Item>
                                     <NavDropdown.Item as={NavLink} to="/Fine-And-court">Fine & Court</NavDropdown.Item>
                                 </NavDropdown>

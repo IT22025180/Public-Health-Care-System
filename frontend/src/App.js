@@ -38,6 +38,7 @@ import StaffLogin from './pages/StaffLogin';
 import FCDMTable from './pages/FCDMTable';
 import ComplaintForm from './pages/Complains';
 import Complainstable from './pages/Complainstable';
+import ComplainsHome from './pages/ComplainsHome';
 import RaidForm from './pages/RaidForm';
 import EditLeave from './pages/EditLeave';
 import FCRVTable from './pages/FCRVTable';
@@ -261,7 +262,7 @@ function App() {
           <Route path='/EditVReg/:_id/:vname/:manf_date/:expi_Date/:quantity/:notes' element={<EditVReg />} />
           <Route path='/EditVApp/:_id/:v_name/:quantity/:date/:location' element={<EditVApp />} />
 
-
+          <Route path='/ComplainsHome' element={<ComplainsHome />} />
 
           <Route path='/staff' element={<Staff />} />
           <Route path='/Leave' element={<Leave />} />
