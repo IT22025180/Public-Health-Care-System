@@ -195,33 +195,35 @@ const Header = () => {
                 <Dialog open={open} className="dialog-container">
                     <div className="dialog-content">
                         <div>
-                            <div className='lgheader'>
-                                <h1>Login</h1>
-                                <FaTimes onClick={closePopup} />
-                            </div>
+                            <h2>Staff Login</h2>
+                            <br />
                             <div className="input-group">
                                 <input
                                     type='text'
                                     value={checkdata.username}
                                     onChange={(e) => setCheckdata({ ...checkdata, username: e.target.value })}
                                     className="input-field"
+                                    placeholder=''
                                 />
                                 <label className="placeholder-label">Username</label>
                             </div>
-                            <br /><br />
+                            <br />
                             <div className="input-group">
                                 <input
                                     type='password'
                                     value={checkdata.password}
                                     onChange={(e) => setCheckdata({ ...checkdata, password: e.target.value })}
                                     className="input-field"
+                                    placeholder=''
                                 />
                                 <label className="placeholder-label">Password</label>
                             </div>
                             <br />
 
                             {error && <p className="error-message">{error}</p>}
-                            <Button type='submit' onClick={checkUser} className="login-button">Login</Button>
+                            <Button type='submit' onClick={checkUser} className="btnlg">Login</Button>
+
+                            <Button type='submit' onClick={closePopup} className="btnlg2">Go Back</Button>
                         </div>
                     </div>
                 </Dialog>
