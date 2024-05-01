@@ -155,7 +155,6 @@ const Header = () => {
                         </button>
                         <div className="collapse navbar-collapse sidebar" id="navbarTogglerDemo01">
                             <div class="offcanvas-header text-white border-bottom">
-
                                 <Link to="/" className="navbar-brand" ><img src='../../natLogo.png' alt='natlogo' height={50} width={40} /></Link>
                                 <Link to="/" className="navbar-brand fs-4 title" >Public Health Information System</Link>
                             </div>
