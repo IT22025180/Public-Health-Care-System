@@ -57,8 +57,8 @@ const Dengue = () => {
                                     {filteredDgClinicData && filteredDgClinicData.length > 0 ? (
                                         filteredDgClinicData.map((clinic) => (
                                             <TableRow key={clinic._id}>
-                                                <TableCell>{clinic.date}</TableCell>
-                                                <TableCell>{clinic.time}</TableCell>
+                                                <TableCell>{new Date(clinic.date).toLocaleDateString()}</TableCell>
+                                                <TableCell>{new Date(clinic.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</TableCell>
                                                 <TableCell>{clinic.venue}</TableCell>
                                                 <TableCell>
                                                     <Button onClick={() => navigate(`/addpatients/${clinic._id}/${clinic.date}/${clinic.time}/${clinic.venue}/${clinic.ctype}`)}>Join</Button>

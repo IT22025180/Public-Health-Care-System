@@ -1,31 +1,98 @@
 import React, { useState } from 'react'
 import './Header.css'
-import { Link, NavLink } from 'react-router-dom'
-import { Button } from 'bootstrap'
-import { Dialog, DialogTitle, DialogContent } from '@mui/material';
+import { Link, NavLink, useNavigate } from 'react-router-dom'
+import { Dialog, DialogTitle } from '@mui/material';
 import Lgportal from '../Auth/Lgportal';
-import { FaCut, FaTimes } from 'react-icons/fa';
+import { FaTimes } from 'react-icons/fa';
+import { Button, NavDropdown } from 'react-bootstrap';
+import Axios from 'axios';
+import Swal from 'sweetalert2';
+
 
 const Header = () => {
 
     const [open, setopen] = useState(false);
 
     const functionPopup = () => {
-
         setopen(true);
     }
 
     const closePopup = () => {
-
         setopen(false);
     }
 
     const user = localStorage.getItem('token');
+    const uname = localStorage.getItem('name');
 
-    const logout = () => {
-        localStorage.removeItem('token');
-        window.location.reload();
+    const logoutopen = () => {
+        Swal.fire({
+            title: "Are you sure want to logout?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, Logout me!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: "Success",
+                    text: "Your have been logged out",
+                    icon: "success",
+                    showConfirmButton: false,
+                    timer: 1500
+                }).then(() => {
+                    logout();
+                    window.location.reload();
+                })
+            }
+        });
     }
+
+    const logout = async () => {
+        localStorage.removeItem('token');
+    }
+
+    //logins
+    const [error, setError] = useState('');
+    const [checkdata, setCheckdata] = useState({
+        username: "",
+        password: ""
+    });
+
+    const checkUser = async (e) => {
+        e.preventDefault();
+
+        try {
+            const { data: res } = await Axios.post('http://localhost:4000/api/checkLogin', checkdata);
+
+            const { token, name } = res;
+
+            localStorage.setItem('token', token);
+            localStorage.setItem('name', name);
+
+            setopen(false);
+
+
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Login Success",
+                showConfirmButton: false,
+                timer: 1500
+            });
+
+        } catch (error) {
+
+            if (error.response &&
+                error.response.status >= 400 &&
+                error.response.status <= 500) {
+                setError(error.response.data.message)
+            }
+        }
+    }
+
+
+
 
 
 
@@ -61,28 +128,16 @@ const Header = () => {
                                     <NavLink to='/DengueHomePage' className='nav-link'>Dengue</NavLink>
                                 </li>
 
-                                <li className="nav-item dropdown" onMouseEnter={() => document.getElementById("navbarDropdown").click()}>
-                                    <a
-                                        className="nav-link dropdown-toggle"
-                                        href="#"
-                                        id="navbarDropdown"
-                                        role="button"
-                                        data-bs-toggle="dropdown"
-                                        aria-expanded="false"
-                                    >
-                                        Complains
-                                    </a>
-                                    <ul className='dropdown-menu' aria-labelledby='navbarDropdown'>
-                                        <li><NavLink to='/Complains' className='dropdown-item'>Complains</NavLink></li>
-                                        <li><NavLink to='/RaidsHome' className='dropdown-item'>Raids</NavLink></li>
-                                        <li><NavLink to='/Fine-And-court' className='dropdown-item'>Fine & Court</NavLink></li>
-                                    </ul>
-                                </li>
+                                <NavDropdown title="Complains" id="navbarDropdown">
+                                    <NavDropdown.Item as={NavLink} to="/Complains">Complains</NavDropdown.Item>
+                                    <NavDropdown.Item as={NavLink} to="/RaidsHome">Raids</NavDropdown.Item>
+                                    <NavDropdown.Item as={NavLink} to="/Fine-And-court">Fine & Court</NavDropdown.Item>
+                                </NavDropdown>
                                 <li className='nav-item'>
                                     <NavLink to='/mainMidwife' className='nav-link'>Midwife</NavLink>
                                 </li>
                                 <li className='nav-item'>
-                                    <button className='btn btn-primary loginbtn' onClick={logout}>Logout</button>
+                                    <button className='btn btn-primary loginbtn' onClick={logoutopen}>Welcome  {uname}</button>
                                 </li>
                             </ul>
                         </div>
@@ -122,23 +177,11 @@ const Header = () => {
                                     <NavLink to='/DengueHomePage' className='nav-link'>Dengue</NavLink>
                                 </li>
 
-                                <li className="nav-item dropdown" onMouseEnter={() => document.getElementById("navbarDropdown").click()}>
-                                    <a
-                                        className="nav-link dropdown-toggle"
-                                        href="#"
-                                        id="navbarDropdown"
-                                        role="button"
-                                        data-bs-toggle="dropdown"
-                                        aria-expanded="false"
-                                    >
-                                        Complains
-                                    </a>
-                                    <ul className='dropdown-menu' aria-labelledby='navbarDropdown'>
-                                        <li><NavLink to='/Complains' className='dropdown-item'>Complains</NavLink></li>
-                                        <li><NavLink to='/RaidsHome' className='dropdown-item'>Raids</NavLink></li>
-                                        <li><NavLink to='/Fine-And-court' className='dropdown-item'>Fine & Court</NavLink></li>
-                                    </ul>
-                                </li>
+                                <NavDropdown title="Complains" id="navbarDropdown">
+                                    <NavDropdown.Item as={NavLink} to="/Complains">Complains</NavDropdown.Item>
+                                    <NavDropdown.Item as={NavLink} to="/RaidsHome">Raids</NavDropdown.Item>
+                                    <NavDropdown.Item as={NavLink} to="/Fine-And-court">Fine & Court</NavDropdown.Item>
+                                </NavDropdown>
                                 <li className='nav-item'>
                                     <NavLink to='/mainMidwife' className='nav-link'>Midwife</NavLink>
                                 </li>
@@ -149,10 +192,40 @@ const Header = () => {
                         </div>
                     </div>
                 </nav>
-                <Dialog open={open}>
-                    <Lgportal />
-                    <FaTimes onClick={closePopup} />
+                <Dialog open={open} className="dialog-container">
+                    <div className="dialog-content">
+                        <div>
+                            <div className='lgheader'>
+                                <h1>Login</h1>
+                                <FaTimes onClick={closePopup} />
+                            </div>
+                            <div className="input-group">
+                                <input
+                                    type='text'
+                                    value={checkdata.username}
+                                    onChange={(e) => setCheckdata({ ...checkdata, username: e.target.value })}
+                                    className="input-field"
+                                />
+                                <label className="placeholder-label">Username</label>
+                            </div>
+                            <br /><br />
+                            <div className="input-group">
+                                <input
+                                    type='password'
+                                    value={checkdata.password}
+                                    onChange={(e) => setCheckdata({ ...checkdata, password: e.target.value })}
+                                    className="input-field"
+                                />
+                                <label className="placeholder-label">Password</label>
+                            </div>
+                            <br />
+
+                            {error && <p className="error-message">{error}</p>}
+                            <Button type='submit' onClick={checkUser} className="login-button">Login</Button>
+                        </div>
+                    </div>
                 </Dialog>
+
             </>
         )
     }

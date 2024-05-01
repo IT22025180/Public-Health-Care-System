@@ -154,7 +154,7 @@ const AdminClinic = () => {
                                     <TableRow key={clinic._id}>
                                         <TableCell>{index + 1}</TableCell>
                                         <TableCell>{new Date(clinic.date).toLocaleDateString()}</TableCell>
-                                        <TableCell>{new Date(clinic.date).toLocaleTimeString()}</TableCell>
+                                        <TableCell>{new Date(clinic.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</TableCell>
                                         <TableCell>{clinic.ctype}</TableCell>
                                         <TableCell>{clinic.venue}</TableCell>
                                         <TableCell>
