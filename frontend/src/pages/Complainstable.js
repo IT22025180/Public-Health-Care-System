@@ -70,7 +70,8 @@ const Complainstable = () => {
 
     //search
     const filteredComplainsData = complainsdata.filter(Complains => {
-        return Complains.fname.toLowerCase().includes(searchQuery.toLowerCase());
+        const fullName = `${Complains.fname} ${Complains.lname} ${Complains.email} ${Complains.yaddress} ${Complains.cdesc} ${Complains.area}`.toLowerCase();
+        return fullName.includes(searchQuery.toLowerCase());
     });
 
     const generatePDF = (Complains) => {
