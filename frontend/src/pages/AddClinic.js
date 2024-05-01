@@ -16,7 +16,6 @@ const AddClinic = () => {
 
     const [ctype, setCtype] = useState('');
     const [date, setDate] = useState('');
-    const [time, setTime] = useState('');
     const [venue, setVenue] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
 
@@ -25,7 +24,6 @@ const AddClinic = () => {
     const validateSchema = Yup.object().shape({
         ctype: Yup.string().required('Clinic type is required').oneOf(['Dengue', 'Dental'], 'Invalid Clinic Type'),
         date: Yup.string().required('Date is Required'),
-        time: Yup.string().required('Time is required'),
         venue: Yup.string().required('Venue is required').matches(/^[A-Za-z\s,./0-9]+$/, 'Name must contain only letters and numbers'),
     })
 
@@ -37,7 +35,6 @@ const AddClinic = () => {
                 {
                     ctype,
                     date,
-                    time,
                     venue,
                 },
                 { abortEarly: false }
@@ -47,7 +44,6 @@ const AddClinic = () => {
 
                 ctype: ctype,
                 date: date,
-                time: time,
                 venue: venue,
             });
 
@@ -61,7 +57,7 @@ const AddClinic = () => {
             });
             setCtype('');
             setDate('');
-            setTime('');
+
             setVenue('');
         } catch (error) {
             if (error instanceof Yup.ValidationError) {
@@ -118,7 +114,7 @@ const AddClinic = () => {
                     {errorMessage.ctype && <div className="d-flex justify-content-center text-danger">{errorMessage.ctype}</div>}
                     <br />
                     <div className='slcbtn'>
-                        <p>Select date :</p>
+                        <p>Select date and Time:</p>
                         <Form>
                             <Form.Group>
                                 <Form.Control
@@ -130,42 +126,6 @@ const AddClinic = () => {
 
                     </div>
                     {errorMessage.date && <div className="d-flex justify-content-center text-danger">{errorMessage.date}</div>}
-                    <br />
-                    <div className='slcbtn'>
-                        <p>Select time : </p>
-
-                        <Form.Group>
-                            <Form.Control as='select' size='sm' onChange={e => setTime(e.target.value)}>
-                                <option >Select time</option>
-                                <option >07 : 00</option>
-                                <option >07 : 30</option>
-                                <option >08 : 00</option>
-                                <option >08 : 30</option>
-                                <option >09 : 00</option>
-                                <option >09 : 30</option>
-                                <option >10 : 00</option>
-                                <option >10 : 30</option>
-                                <option >11 : 00</option>
-                                <option >11 : 30</option>
-                                <option >12 : 00</option>
-                                <option >12 : 30</option>
-                                <option >13 : 00</option>
-                                <option >13 : 30</option>
-                                <option >14 : 00</option>
-                                <option >14 : 30</option>
-                                <option >15 : 00</option>
-                                <option >15 : 30</option>
-                                <option >16 : 00</option>
-                                <option >16 : 30</option>
-                                <option >17 : 00</option>
-                                <option >17 : 30</option>
-                                <option >18 : 00</option>
-                                <option >18 : 30</option>
-                                <option >19 : 00</option>
-                            </Form.Control>
-                        </Form.Group>
-                    </div>
-                    {errorMessage.time && <div className="d-flex justify-content-center text-danger">{errorMessage.time}</div>}
                     <br />
                     <div className='slcbtn'>
                         <p>Venue:</p>

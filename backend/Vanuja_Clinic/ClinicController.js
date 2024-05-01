@@ -2,81 +2,79 @@ const mongoose = require('mongoose');
 const Clinics = require('./ClinicModel');
 
 
-const addClinic = async(req,res) => {
-    try{
-        
-            const{ ctype, date , time, drName , venue} = req.body;
+const addClinic = async (req, res) => {
+    try {
 
-            formattedDate = Array.isArray(date) ?  date.join(', ') : date;
-            const newClinic =  new Clinics({
-                ctype,        
-                date : formattedDate,
-                time,
-                drName,
-                venue    
-            });
+        const { ctype, date, drName, venue } = req.body;
 
-            await newClinic.save();
-            res.json({ success : true , message : 'Clinic added successfully'});
-        }
-    catch(error){
-        console.error('Error adding Clinic: ' , error);
-        res.status(500).json({ success : false , message : 'Internal server error'});
+        formattedDate = Array.isArray(date) ? date.join(', ') : date;
+        const newClinic = new Clinics({
+            ctype,
+            date: formattedDate,
+            drName,
+            venue
+        });
+
+        await newClinic.save();
+        res.json({ success: true, message: 'Clinic added successfully' });
+    }
+    catch (error) {
+        console.error('Error adding Clinic: ', error);
+        res.status(500).json({ success: false, message: 'Internal server error' });
     }
 }
 
-const getClinic = async (req,res) => {
-    try{
+const getClinic = async (req, res) => {
+    try {
         const allClinics = await Clinics.find();
-        res.json({allClinics});
-    }catch(error){
-        console.error('Error getting Clinic:' , error);
-        res.status(500).json({ success : false , message : 'Internal server error'});
+        res.json({ allClinics });
+    } catch (error) {
+        console.error('Error getting Clinic:', error);
+        res.status(500).json({ success: false, message: 'Internal server error' });
     }
 }
 
-const updateClinic = async (req,res) => {
+const updateClinic = async (req, res) => {
 
-    try{
+    try {
 
-        const { _id, ctype, date , time , venue} = req.body;
+        const { _id, ctype, date, venue } = req.body;
 
-        formattedDate_u = Array.isArray(date) ?  date.join(', ') : date;
+        formattedDate_u = Array.isArray(date) ? date.join(', ') : date;
 
-        const updatedClinic= await Clinics.findOneAndUpdate({_id} ,{
+        const updatedClinic = await Clinics.findOneAndUpdate({ _id }, {
 
-                _id,
-                ctype,        
-                date : formattedDate_u,
-                time,
-                venue,     
-        }, { new : true});
+            _id,
+            ctype,
+            date: formattedDate_u,
+            venue,
+        }, { new: true });
 
-        if(!updatedClinic){
-            return res.status(404).json({ success : false, message :'Selected Clinic not found'});
+        if (!updatedClinic) {
+            return res.status(404).json({ success: false, message: 'Selected Clinic not found' });
         }
 
-        res.json({ success : true, message : 'Clinic updated successfully' , data : updatedClinic});
-    }catch(error){
-        console.error('Error updating Clinic:' , error);
-        res.status(500).json({ success : false , message : 'Internal server error'});
+        res.json({ success: true, message: 'Clinic updated successfully', data: updatedClinic });
+    } catch (error) {
+        console.error('Error updating Clinic:', error);
+        res.status(500).json({ success: false, message: 'Internal server error' });
     }
 }
 
-const deleteClinic = async (req,res) => {
-    try{
-        const {_id} = req.body;
+const deleteClinic = async (req, res) => {
+    try {
+        const { _id } = req.body;
 
-        const deletedClinic = await Clinics.findOneAndDelete({_id});
+        const deletedClinic = await Clinics.findOneAndDelete({ _id });
 
-        if(!deletedClinic){
-            return res.status(404).json({ success: false , message : 'Clinic not found'});
+        if (!deletedClinic) {
+            return res.status(404).json({ success: false, message: 'Clinic not found' });
         }
 
-        res.json({ success : true , message : 'Clinic deleted successfully' , data : deletedClinic});
-    }catch(error){
-        console.error('Error deleting Clinic:' , error);
-        res.status(500).json({ success : false , message : 'Internal server error'});
+        res.json({ success: true, message: 'Clinic deleted successfully', data: deletedClinic });
+    } catch (error) {
+        console.error('Error deleting Clinic:', error);
+        res.status(500).json({ success: false, message: 'Internal server error' });
     }
 }
 exports.addClinic = addClinic;

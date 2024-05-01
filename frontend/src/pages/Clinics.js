@@ -30,6 +30,8 @@ const Clinics = () => {
     }
   ];
 
+  const user = localStorage.getItem('token');
+
   return (
     <Layout>
       <motion.div className=''
@@ -57,7 +59,7 @@ const Clinics = () => {
           </div>
         </div>
       </motion.div>
-      <AddClinic />
+      {user && <AddClinic />}
     </Layout>
   )
 }
