@@ -1,9 +1,6 @@
-.imge{
-    display: flex;
-    flex-direction: row;
-}
 .Complainstable {
     padding: 20px;
+
   }
   
   .Complainstable input[type="text"] {
@@ -31,7 +28,7 @@
   }
   
   .Complainstable .pdfButton:hover {
-    background-color: #45a049;
+    background-color: #2e6931;
     cursor: pointer;
   }
   
@@ -39,13 +36,13 @@
     background-color: #3e8e41;
   }
   
-  .Complainstable .updateButton {
+  /* .Complainstable .updateButton {
     background-color: #2196F3;
   }
   
   .Complainstable .deleteButton {
     background-color: #f44336;
-  }
+  } */
   
   .Complainstable .buttonContainer {
     display: flex;
@@ -73,7 +70,7 @@
   }
   
   .Complainstable .imge {
-    display: flex;
+    display:inline;
     justify-content: center;
     align-items: center;
     margin-bottom: 10px;
@@ -83,6 +80,7 @@
     max-width: 100%;
     max-height: 100%;
     border-radius: 5px;
+    margin-right: 10px; /* Add more space between images */
   }
   
   .Complainstable .MuiTableRow-root:nth-child(even) {
@@ -92,10 +90,50 @@
   .Complainstable .MuiTableCell-root {
     text-align: left;
     padding: 10px;
+    border-bottom: 1px solid #ddd; /* Add column lines */
   }
   
   .Complainstable .MuiTableRow-root:hover {
     background-color: #e0e0e0;
   }
   
+  /* Adjust the width of the First Name and Address columns */
+  .Complainstable .fname-column,
+  .Complainstable .address-column,
+  .Complainstable .lname-column,
+  .Complainstable .email-column,
+  .Complainstable .yaddress-column,
+  .Complainstable .cdesc-column,
+  .Complainstable .area-column
+  {
+    max-width: 100px; /* Adjust the value as needed */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    word-wrap: break-word;
+  }
   
+  
+
+
+  .Complainstable .MuiTable-root {
+    width: 100%;
+    border-collapse: collapse; /* Collapse table borders */
+  }
+  
+  .Complainstable .MuiTableHead-root {
+    background-color: #f2f2f2;
+    border-bottom: 1px solid #ddd; /* Add bottom border */
+  }
+  
+  .Complainstable .MuiTableCell-head {
+    font-weight: bold;
+    border-right: 1px solid #ddd; /* Add right border */
+    padding: 10px;
+  }
+  
+  .Complainstable .MuiTableCell-root {
+    text-align: left;
+    padding: 10px;
+    border-right: 1px solid #ddd; /* Add right border */
+  }

@@ -165,15 +165,15 @@ const Complainstable = () => {
                             {filteredComplainsData && filteredComplainsData.length > 0 ? (
                                 filteredComplainsData.map((Complains) => (
                                     <TableRow key={Complains._id}>
-                                        <TableCell>{Complains.fname}</TableCell>
-                                        <TableCell>{Complains.lname} </TableCell>
+                                        <TableCell className="fname-column">{Complains.fname}</TableCell>
+                                        <TableCell className="lname-column">{Complains.lname} </TableCell>
                                         <TableCell>{Complains.mobile} </TableCell>
-                                        <TableCell>{Complains.email}</TableCell>
+                                        <TableCell className="email-column">{Complains.email}</TableCell>
                                         <TableCell>{Complains.NIC}</TableCell>
-                                        <TableCell>{Complains.yaddress}</TableCell>
+                                        <TableCell className="yaddress-column">{Complains.yaddress}</TableCell>
                                         <TableCell>{Complains.ctype}</TableCell>
-                                        <TableCell>{Complains.cdesc}</TableCell>
-                                        <TableCell>{Complains.area}</TableCell>
+                                        <TableCell className="cdesc-column">{Complains.cdesc}</TableCell>
+                                        <TableCell className="area-column">{Complains.area}</TableCell>
                                         <TableCell>
                                             {Array.isArray(Complains.images) ? (
                                                 Complains.images.map((image, index) => (
