@@ -9,7 +9,7 @@
   .Complainstable input[type="text"] {
     padding: 10px;
     margin-bottom: 10px;
-    width: 300px;
+    width: 100px;
   }
   
   .Complainstable .pdfButton {
@@ -97,3 +97,5 @@
   .Complainstable .MuiTableRow-root:hover {
     background-color: #e0e0e0;
   }
+  
+  

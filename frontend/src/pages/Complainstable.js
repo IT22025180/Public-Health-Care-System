@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 import jsPDF from 'jspdf';
 import logo1 from '../webImages/logo1.png';
 import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
-import { FaEdit, FaTrash } from 'react-icons/fa';
+import { FaEdit, FaTrash,FaFilePdf } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 
 const Complainstable = () => {
@@ -190,7 +190,7 @@ const Complainstable = () => {
                                         <TableCell >
                                             <Button onClick={() => navigate(`/updateComp/${Complains._id}/${Complains.fname}/${Complains.lname}/${Complains.mobile}/${Complains.email}/${Complains.NIC}/${Complains.yaddress}/${Complains.ctype}/${Complains.cdesc}`)}><FaEdit /></Button>
                                             <Button onClick={() => confirmDelete(Complains._id)}><FaTrash /></Button>
-                                            <button className="pdfButton" onClick={() => generatePDF(Complains)}>Generate PDF</button>
+                                            <button className="pdfButton" onClick={() => generatePDF(Complains)}><FaFilePdf/></button>
                                         </TableCell>
                                     </TableRow>
                                 ))
