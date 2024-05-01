@@ -9,6 +9,7 @@ import { Dialog, DialogTitle, DialogContent } from '@mui/material';
 import jspdf from 'jspdf';
 import { motion } from 'framer-motion';
 import * as Yup from 'yup';
+import logo1 from '../webImages/logo1.png';
 
 const AddPatients = () => {
 
@@ -27,10 +28,10 @@ const AddPatients = () => {
   const [open, openConfirm] = useState(false);
 
   const validateSchema = Yup.object().shape({
-    name: Yup.string().required('Name is required'),
+    name: Yup.string().required('Name is required').matches(/^[A-Za-z\s]+$/, 'Name must contain only letters'),
     gender: Yup.string().required('Gender is Required'),
     age: Yup.number().required('Age is required').min(1, 'Age must be greater than 0'),
-    address: Yup.string().required('Address is required'),
+    address: Yup.string().required('Address is required').matches(/^[A-Za-z\s,./0-9]+$/, 'Address must contain only letters and numbers'),
     mobile: Yup.string().matches(/^0\d{9}$/, 'Invalid Contact Number').required('Contact Number is Required'),
   })
 
@@ -67,11 +68,35 @@ const AddPatients = () => {
 
   //generatePDF
   const confirmWithGetPDF = () => {
-
     const doc = new jspdf();
     let y = 10;
 
-    const genPDF = `Public Health Information System\n\nPatient details\n\n 
+    const logo = new Image();
+    logo.src = logo1; // Use the imported logo image
+    doc.addImage(logo, 'PNG', 6, 7, 20, 20); // Adjust the position and dimensions as needed
+
+    // Add Public Health Information System as the letterhead
+    doc.setFontSize(12);
+    doc.text('Public Health Information System', 70, 15); // Adjust the position as needed
+    doc.text('Suwasiripaya, No. 385, Rev. Baddegama Wimalawansa Thero Mawatha,', 70, 20);
+    doc.text('Colombo 10, Sri Lanka.', 70, 25);
+    doc.text('Tel: 112 694033, 112 675011, 112 675449, 112 693493', 70, 30);
+
+    // Add page border
+    doc.setDrawColor(0);
+    doc.setLineWidth(0.5);
+    doc.rect(0, 0, doc.internal.pageSize.width, doc.internal.pageSize.height, 'S');
+
+    // Add horizontal line
+    doc.setLineWidth(0.5);
+    doc.line(5, 45, 205, 45);
+
+    // Leave summary topic
+    doc.setFontSize(18);
+    doc.setTextColor(0, 0, 0); // Set text color to black
+    doc.text('Patient details', 90, 60); // Adjust the position as needed
+
+    const genPDF = `\n\n 
                       Name : ${name}\n
                       Gender : ${gender}\n
                       Age : ${age}\n
@@ -86,15 +111,15 @@ const AddPatients = () => {
                       \n
                       Public Health Information Technical Team
                       `;
-    doc.text(genPDF, 10, y);
-    y += 50;
+    doc.text(genPDF, 10, 50);
+
 
     doc.save(`${name}_${ctype}_appointment_report.pdf`);
 
-
     addPatient();
-
   }
+
+  //add patients
   const addPatient = async () => {
     openConfirm(false);
     try {

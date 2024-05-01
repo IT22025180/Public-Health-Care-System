@@ -30,14 +30,15 @@ const Clinics = () => {
     }
   ];
 
+  const user = localStorage.getItem('token');
+
   return (
     <Layout>
-      <motion.div className="progress-bar"
+      <motion.div className=''
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -50 }}
         transition={{ duration: 0.5 }}
-
       >
         <br />
         <div className="home-page">
@@ -58,7 +59,7 @@ const Clinics = () => {
           </div>
         </div>
       </motion.div>
-      <AddClinic />
+      {user && <AddClinic />}
     </Layout>
   )
 }

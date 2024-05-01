@@ -15,7 +15,7 @@ const AdminClinic = () => {
     const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate();
 
-    //popup components line 16 to line 24 & line 123 to line 153
+
     const [open, openPatients] = useState(false);
 
     const functionPopup = (clinicID) => {
@@ -153,8 +153,8 @@ const AdminClinic = () => {
 
                                     <TableRow key={clinic._id}>
                                         <TableCell>{index + 1}</TableCell>
-                                        <TableCell>{clinic.date}</TableCell>
-                                        <TableCell>{clinic.time}</TableCell>
+                                        <TableCell>{new Date(clinic.date).toLocaleDateString()}</TableCell>
+                                        <TableCell>{new Date(clinic.date).toLocaleTimeString()}</TableCell>
                                         <TableCell>{clinic.ctype}</TableCell>
                                         <TableCell>{clinic.venue}</TableCell>
                                         <TableCell>

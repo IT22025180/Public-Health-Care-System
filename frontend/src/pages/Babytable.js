@@ -3,6 +3,8 @@ import '../styles/babytable.css'
 import  Axios  from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
+import Layout from '../components/Layout';
 
 const Babytable = () => {
 
@@ -65,57 +67,66 @@ const filteredBabyData = babydata.filter(baby => {
 });
 
   return (
+    <Layout>
     <div className='babytable'>
         
         <form className= "babysearch_bar">
         
         <input  placeholder="Search name" type='text' value={searchQuery} onChange={e => setSearchQuery(e.target.value)} />
     </form>
- 
-        <table border ={1} cellPadding={10} cellSpacing={0}>
-            <thead>
-                <tr>
-                    <th>Baby Name</th>
-                    <th>Age(Year)</th>
-                    <th>Weight(Kg)</th>
-                    <th>Contact Number</th>
-                    <th>Special Notes</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
-                </tr>
-            </thead>
-            <tbody>
+    <TableContainer component={Paper}>
+
+        <Table border ={1} cellPadding={10} cellSpacing={0}>
+            <TableHead>
+                <TableRow>
+                    <TableCell>Baby Name</TableCell>
+                    <TableCell>Age(Year)</TableCell>
+                    <TableCell>Weight(Kg)</TableCell>
+                    <TableCell>Contact Number</TableCell>
+                    <TableCell>Special Notes</TableCell>
+                    <TableCell>Birth Date</TableCell>
+                    <TableCell>Gardian name</TableCell>
+
+                    <TableCell>Edit</TableCell>
+                    <TableCell>Delete</TableCell>
+                </TableRow>
+            </TableHead>
+            <TableBody>
             {filteredBabyData && filteredBabyData.length > 0 ? (
                         filteredBabyData.map((baby) =>(
-                <tr key={baby._id}>
-                    <td>{baby.bname}</td>
-                    <td>{baby.age} </td>
-                    <td>{baby.weight}</td>
-                    <td>{baby.co_no}</td>
-                    <td>{baby.notes}</td>
+                <TableRow key={baby._id}>
+                    <TableCell>{baby.bname}</TableCell>
+                    <TableCell>{baby.age} </TableCell>
+                    <TableCell>{baby.weight}</TableCell>
+                    <TableCell>{baby.co_no}</TableCell>
+                    <TableCell>{baby.notes}</TableCell>
+                    <TableCell>{baby.BDate}</TableCell>
+                    <TableCell>{baby.Gname}</TableCell>
 
-                   
-                    <td className='actionButtons'>
-                    {baby._id && baby.bname && baby.age && baby.weight  && baby.co_no  && baby.notes  && (
-                        <button onClick={() => navigate(`/Editbabydetails/${baby._id}/${baby.bname}/${baby.age}/${baby.weight}/${baby.co_no}/${baby.notes}`)}>Edit</button>
+                    <TableCell className='actionButtons'>
+                    {baby._id && baby.bname && baby.age && baby.weight  && baby.co_no  && baby.notes  && baby.BDate && baby.Gname &&(
+                        <Button onClick={() => navigate(`/Editbabydetails/${baby._id}/${baby.bname}/${baby.age}/${baby.weight}/${baby.co_no}/${baby.notes}/${baby.BDate}/${baby.Gname}`)}>Edit</Button>
                     )}
-                    </td>
+                    </TableCell>
                  
                     
-                    <td  className='deleteButtons'>
-                        <button onClick={()=> confirmDelete(baby._id)}>Delete</button>
-                    </td>
-                </tr>
+                    <TableCell  className='deleteButtons'>
+                        <Button onClick={()=> confirmDelete(baby._id)}>Delete</Button>
+                    </TableCell>
+                </TableRow>
                     ))
                     ):(
-                        <tr>
-                            <td>You have not baby data</td>
-                        </tr>  
+                        <TableRow>
+                            <TableCell>You have not baby data</TableCell>
+                        </TableRow>  
                 )}
 
-            </tbody>
-        </table>
+            </TableBody>
+        </Table>
+        </TableContainer>
+
     </div>
+    </Layout>
   )
 }
 

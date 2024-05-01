@@ -5,105 +5,53 @@ import Swal from 'sweetalert2';
 import Layout from '../components/Layout';
 
 const VaccineRequestTab = () => {
-    //state variables
-    const[vaccinereqdata,setvaccinereqdata]=useState([]);
+
+    const [vacreqData, setvacreqData] = useState([]);
+
+
+    useEffect(() => {
+        getvacreqData();
+      }, []);
     
 
-    
-
-
-
-    useEffect(()=>{
-        getvaccinereqdata();
-    },[]);
-
-    const getvaccinereqdata =()=>{
+    const getvacreqData = () => {
         Axios.get('http://localhost:4000/api/VacccinesReq')
-        .then(response => {
-            console.log('data from server',response.data);
-            setvaccinereqdata(response.data.allVaccineRq);
-        })
-        .catch(error=>{
-            console.error("Axios error: ",error);
-        })
-    }
-
-
-    //delete
-
-    const deletevaccinereqdata = (id) => {
-        // Display SweetAlert confirmation dialog
-    Swal.fire({
-        title: "Are you sure?",
-        text: "You won't be able to revert this!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it!"
-    }).then((result) => {
-        if (result.isConfirmed) {
-            // If confirmed, proceed with deletion
-
-        Axios.post('http://localhost:4000/api/deleteVacRq',{_id: id})
-        .then(response =>{
-            console.log('Vaccine Data deleted successfully');
-            setvaccinereqdata(prevData => prevData.filter(vaccinereq => vaccinereq._id !== id));
-            // Display success message
-            Swal.fire({
-                title: "Deleted!",
-                text: "Your file has been deleted.",
-                icon: "success"
-        });
-    })
-            
-        .catch(error =>{
-            console.error('Error deleting vaccineappdata:',error);
-        })
-    }
-});
-}
-
-
-
-    //update
-
-
-
-
-  
+          .then(response => {
+            console.log('data from server', response.data);
+            setvacreqData(response.data.allVaccineRq);
+          })
+          .catch(error => {
+            console.error("Axios error: ", error);
+          })
+      };
 
   return (
-    <div className='VaccineReqTab'>
+   <Layout>
+     <div className='VaccineReqTab'>
+        <h2>Vaccine Status</h2>
 
     
 
         <table border ={1} cellPadding={10} cellSpacing={0}>
             <thead>
                 <tr>
-                    <th>Vaccine Name</th>
-                    <th>Quantity</th>
-                    <th>Update</th>
-                    <th>Delete</th>
+                    <th>Vaccine type</th>
+                    <th>Estimated date</th>
+                    <th>qunatity</th>
+                    <th>status</th>
                 </tr>
             </thead>
             <tbody>
-                {vaccinereqdata && vaccinereqdata.length > 0 ?(                  
-                    vaccinereqdata.map((vaccinereq)=>(
-                        <tr key={vaccinereq._id}>
-                            <td>{vaccinereq.vName}</td>
-                            <td>{vaccinereq.quantity}</td>
+                {vacreqData && vacreqData.length > 0 ?(                  
+                    vacreqData.map((vacreqData)=>(
+                        <tr key={vacreqData._id}>
+                            <td>{vacreqData.type}</td>
+                            <td>{vacreqData.esti_Date}</td>
+                            <td>{vacreqData.quantity}</td>
+                            <td>{vacreqData.notification}</td>
 
-                            
-                            
-                        
-                        <td className='actionButtons'>
-                            <button  >Edit</button>
-                        </td>
 
-                        <td onClick={() => deletevaccinereqdata(vaccinereq._id)} className='deleteButtons'>
-                            <button >Delete</button>
-                        </td>
+                       
     
                     </tr>
 
@@ -118,6 +66,7 @@ const VaccineRequestTab = () => {
             </tbody>
         </table>
         </div>
+   </Layout>
   )
 }
 

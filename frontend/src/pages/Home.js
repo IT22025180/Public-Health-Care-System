@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Layout from '../components/Layout';
 import { Button, Container } from 'react-bootstrap';
 import '../styles/home.css';
@@ -14,6 +14,7 @@ import Ssta from '../webImages/Slidestaff.jpg';
 import Sdeng from '../webImages/Slidedengue.jpg';
 import Sraid from '../webImages/Slideraids.jpg';
 import { motion } from 'framer-motion';
+import Aos from 'aos';
 
 
 const Home = () => {
@@ -23,6 +24,11 @@ const Home = () => {
     const slideShowContainer = document.getElementById('slideshow-container');
     slideShowContainer.scrollIntoView({ behavior: 'smooth' });
   };
+
+
+  useEffect(() => {
+    Aos.init();
+  }, []);
 
   const navigate = useNavigate();
 
@@ -62,31 +68,22 @@ const Home = () => {
               </div>
             </div>
           </div>
-
-
-          <motion.div
-            className=""
-            initial="offscreen"
-            animate="onscreen"
-            transition={{ type: "spring", bounce: 0.4, duration: 0.8 }}
+          <Container id='slideshow-container' className='Lcontainer'
           >
-            <Container id='slideshow-container' className='Lcontainer'>
-              <div className='leftflex'>
-                <div className='clinicsub'>
-                  <br />
-                  <br />
-                  <h2>Our Clinic schedules</h2>
-                  <p className='fs-5 text-center'>Public health Information system organizing a dengue & dental clinic services on giving dates click the button below to view and join the appointments</p>
-                  <Button onClick={() => navigate(`/clinics`)}>Click here </Button>
-                </div>
+            <div className='leftflex' data-aos="fade-left">
+              <div className='clinicsub'>
                 <br />
-                <img src={img} alt='clinics' width={300} height={300} />
+                <br />
+                <h2>Our Clinic schedules</h2>
+                <p className='fs-5 text-center'>Public health Information system organizing a dengue & dental clinic services on giving dates click the button below to view and join the appointments</p>
+                <Button onClick={() => navigate(`/clinics`)}>Click here </Button>
               </div>
-            </Container>
-          </motion.div>
-
+              <br />
+              <img src={img} alt='clinics' width={300} height={300} />
+            </div>
+          </Container>
           <br />
-          <Container className='Rcontainer'>
+          <Container className='Rcontainer' data-aos="fade-right">
             <div className='rightflex'>
               <img src={vimg} alt='vaccine' width={300} height={300} />
               <div className='clinicsub'>
@@ -100,7 +97,7 @@ const Home = () => {
             </div>
           </Container>
           <br />
-          <Container className='Lcontainer'>
+          <Container className='Lcontainer' data-aos="fade-left">
             <div className='leftflex'>
               <div className='clinicsub'>
                 <br />

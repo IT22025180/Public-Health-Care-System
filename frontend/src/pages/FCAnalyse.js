@@ -2,10 +2,9 @@ import React, { useEffect, useState } from "react";
 import '../styles/FCRS.css';
 import Layout from '../components/Layout';
 import Axios from "axios";
-import Swal from "sweetalert2";
-import jsPDF from 'jspdf';
 import 'jspdf-autotable';
-import { Link } from "react-router-dom";
+import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 
 const FCRS = () => {
   const [RVdata, setRVdata] = useState([]);
@@ -13,6 +12,8 @@ const FCRS = () => {
   const [decision, setDecision] = useState("");
   const [showImageModal, setShowImageModal] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     getReportData();
@@ -59,6 +60,37 @@ const FCRS = () => {
     setShowImageModal(false);
   };
 
+  const handleSubmit = () => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You are about to submit the decision!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, submit it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        handleDecisionSubmit();
+        Swal.fire(
+          'Submitted!',
+          'Your decision has been submitted.',
+          'success'
+        ).then(() => {
+          navigate('/FCNotify', {
+            state: {
+              v_name: selectedReport.v_name,
+              v_email: selectedReport.v_email,
+              date: selectedReport.date,
+              v_type: selectedReport.v_type,
+              decision: selectedReport.decision
+            }
+          });
+        });
+      }
+    });
+  };
+
   return (
     <Layout>
       <h2>Violation Report Status</h2>
@@ -94,7 +126,7 @@ const FCRS = () => {
                   <td>{report.v_nic}</td>
                   <td>{report.decision || 'Pending'}</td>
                   <td>
-                    <button onClick={() => handleAnalyse(report)}>Analyse</button>
+                    <button className="analyse" onClick={() => handleAnalyse(report)}>Analyse</button>
                   </td>
                 </tr>
               ))
@@ -109,7 +141,10 @@ const FCRS = () => {
       {selectedReport && (
         <div className="analyseDataBox">
           <div className="analyseData">
+            <h2>Analyse Report</h2>
             <strong>Raid Officer Name :</strong> {selectedReport.ro_name} <br />
+            <strong>Raid Officer Email :</strong> {selectedReport.ro_email} <br />
+            <strong>Raid Officer Contact Number :</strong> {selectedReport.ro_mobile} <br />
             <strong>Date :</strong> {selectedReport.date} <br />
             <strong>Violation Location :</strong> {selectedReport.v_location} <br />
             <strong>Violation Type :</strong> {selectedReport.v_type} <br />
@@ -125,7 +160,7 @@ const FCRS = () => {
                   key={index}
                   src={`data:${evidence.contentType};base64,${evidence.data}`}
                   alt={`Image ${index + 1}`}
-                  style={{ maxWidth: '400px', maxHeight: '400px', cursor: 'pointer' }}
+                  style={{ maxWidth: '400px', maxHeight: '400px', cursor: 'pointer', margin: '10px' }}
                   onClick={() => openImageModal(evidence)}
                 />
               ))
@@ -133,11 +168,11 @@ const FCRS = () => {
               <span>No evidence</span>
             )}
             <br />
-            <strong>Decision :</strong>
-            <input type="radio" id="fineViolation" name="decision" value="Fine Only" onChange={() => setDecision("Fine Only")} /> Fine Only
-            <input type="radio" id="courtAction" name="decision" value="Court Action" onChange={() => setDecision("Court Action")} /> Court Action
-            <div className="subBtn">
-              <button onClick={handleDecisionSubmit}>Submit</button>
+            <strong>Decision :</strong> <br />
+            <input type="radio" id="fineViolation" name="decision" value="Fine Only" onChange={() => setDecision("Fine Only")} style={{ marginLeft: '80px' }} /> Fine Only
+            <input type="radio" id="courtAction" name="decision" value="Court Action" onChange={() => setDecision("Court Action")} style={{ marginLeft: '20px' }} /> Court Action
+            <div className="submitAnal">
+              <button onClick={handleSubmit}>Submit</button>
             </div>
           </div>
         </div>
@@ -148,6 +183,7 @@ const FCRS = () => {
             <span className="close" onClick={closeImageModal}>&times;</span>
             <img src={`data:${selectedImage.contentType};base64,${selectedImage.data}`} alt="Full size" />
           </div>
+
         </div>
       )}
     </Layout>

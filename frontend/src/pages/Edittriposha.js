@@ -96,7 +96,7 @@ const update = async()=>{
         
 
        
-            <button  onClick={confirmUpdate} className='tbsave'type='button'>Update</button>
+            <button  onClick={confirmUpdate} className='tbupdate'type='button'>Update</button>
        
 
     </form>

@@ -111,11 +111,6 @@ const VaccineRegTab = () => {
     doc.setFontSize(12);
     doc.text(summaryDescription, 15, 75);
 
-    // Date and signature
-    const currentDate = new Date().toLocaleDateString('en-US');
-    doc.setFontSize(12);
-    doc.text(`Date: ${currentDate}`, 15, 170); 
-    doc.text('Signature:', 15, 180); 
 
     // Save the PDF with a filename
     doc.save('vaccine_registration_summary.pdf');
@@ -134,7 +129,7 @@ const VaccineRegTab = () => {
           <label>Search</label>
           <input type='text' value={searchQuery} onChange={e => setSearchQuery(e.target.value)} />
         </form>
-
+        
         <table border={1} cellPadding={10} cellSpacing={0}>
           <thead>
             <tr>
@@ -142,6 +137,7 @@ const VaccineRegTab = () => {
               <th>Manufactured Date</th>
               <th>Expire Date</th>
               <th>Quantity</th>
+              
               <th>Notes</th>
               <th>Update</th>
               <th>Delete</th>
@@ -151,11 +147,12 @@ const VaccineRegTab = () => {
             {filteredVaccineData && filteredVaccineData.length > 0 ? (
               filteredVaccineData.map((vaccine) => (
                 <tr key={vaccine._id}>
-                  <td>{vaccine.vname}</td>
-                  <td>{vaccine.manf_date}</td>
-                  <td>{vaccine.expi_Date}</td>
-                  <td>{vaccine.quantity}</td>
-                  <td>{vaccine.notes}</td>
+                  <th>{vaccine.vname}</th>
+                  <th>{vaccine.manf_date}</th>
+                  <th>{vaccine.expi_Date}</th>
+                  <th>{vaccine.quantity}</th>
+                  
+                  <th>{vaccine.notes}</th>
                   <td className='actionButtons'>
                     {vaccine._id && vaccine.vname && vaccine.manf_date && vaccine.expi_Date && vaccine.quantity && vaccine.notes &&(
                       <button onClick={() => navigate(`/EditVReg/${vaccine._id}/${vaccine.vname}/${vaccine.manf_date}/${vaccine.expi_Date}/${vaccine.quantity}/${vaccine.notes}`)}>Edit</button>
@@ -174,7 +171,7 @@ const VaccineRegTab = () => {
             )}
           </tbody>
         </table>
-
+        
         <button className="generate" onClick={generatePDF}>Generate PDF</button>
       </div>
     </Layout>

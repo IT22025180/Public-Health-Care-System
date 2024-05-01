@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import '../styles/FCDMTable.css';
 import Swal from "sweetalert2";
-import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import Layout from '../components/Layout';
 import { Link } from 'react-router-dom';
@@ -56,38 +55,27 @@ const FCDMTable = () => {
     });
   };
 
-  // Search
-  const filterData = DMdata.filter(dmdata => {
-    return dmdata.ro_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      dmdata.r_id.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      dmdata.date.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      dmdata.v_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      dmdata.v_type.toLowerCase().includes(searchQuery.toLowerCase());
-  });
+  // filterData
+  const filterData = () => {
+    return DMdata.filter(ddata => {
+      const searchQueryLower = searchQuery.toLowerCase();
+      const includesSearchQuery = (value) => {
+        if (typeof value === 'string' || typeof value === 'number') {
+          return value.toString().toLowerCase().includes(searchQueryLower);
+        }
+        return false;
+      };
 
-  // Report Generate
-  const GenReport = () => {
-    const doc = new jsPDF();
-    const title = "Fine And Court Document Management Report";
-    const titleMargin = 20;
-    const tableMargin = 20;
-    const titleWidth = doc.getTextWidth(title);
-    const center = (doc.internal.pageSize.width / 2) - (titleWidth / 2);
-
-    doc.text(title, center, titleMargin);
-
-    doc.autoTable({
-      head: [['Report ID', 'Raid Officer', 'Date', 'Violator Name', 'Violation Type', 'Documents',]],
-      body: DMdata.map((val) => [val.r_id, val.ro_name, val.date, val.v_name, val.v_type, val.documents]),
-      startY: titleMargin + tableMargin
+      return includesSearchQuery(ddata.r_id) ||
+        includesSearchQuery(ddata.ro_name) ||
+        includesSearchQuery(ddata.date) ||
+        includesSearchQuery(ddata.v_name) ||
+        includesSearchQuery(ddata.v_type);
     });
-
-    doc.save('Fine and Court Document Management Report.pdf');
   };
 
-  // Update - Submit edited data
   const updateDocument = (ddata) => {
-    setEditData(ddata); // Set the editData state with the data being edited
+    setEditData(ddata);
   };
 
   return (
@@ -112,15 +100,15 @@ const FCDMTable = () => {
               </tr>
             </thead>
             <tbody>
-              {filterData && filterData.length > 0 ? (
-                filterData.map((ddata) => (
+              {filterData().length > 0 ? (
+                filterData().map((ddata) => (
                   <tr key={ddata._id}>
                     <td>{ddata.r_id}</td>
                     <td>{ddata.ro_name}</td>
                     <td>{ddata.date}</td>
                     <td>{ddata.v_name}</td>
                     <td>{ddata.v_type}</td>
-                    <td className="evidence-cell">
+                    <td className="evidence-cellDM">
                       {Array.isArray(ddata.documents) && ddata.documents.length > 0 ? (
                         ddata.documents.map((documents, index) => (
                           <div key={index}>
@@ -150,9 +138,6 @@ const FCDMTable = () => {
               )}
             </tbody>
           </table>
-        </div>
-        <div className='genButton'>
-          <button onClick={GenReport}>Generate Report</button>
         </div>
       </>
     </Layout>

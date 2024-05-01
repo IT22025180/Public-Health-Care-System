@@ -3,6 +3,8 @@ import '../styles/bvaccinetable.css'
 import  Axios  from 'axios'
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
+import Layout from '../components/Layout';
 
 const Bvaccinetable = () => {
 
@@ -57,45 +59,53 @@ const confirmDelete = (id) => {
     });
 };
   return (
+    <Layout>
+
     <div className='Bvaccinetable'>
-        <table border ={1} cellPadding={10} cellSpacing={0}>
-            <thead>
-                <tr>
-                    <th>Vaccine Type</th>
-                    <th>Estimated Date</th>
-                    <th>Quantity</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
-                </tr>
-            </thead>
-            <tbody>
+            <TableContainer component={Paper}>
+
+        <Table border ={1} cellPadding={10} cellSpacing={0}>
+            <TableHead>
+                <TableRow>
+                    <TableCell>Vaccine Type</TableCell>
+                    <TableCell>Estimated Date</TableCell>
+                    <TableCell>Quantity</TableCell>
+                    <TableCell>Edit</TableCell>
+                    <TableCell>Delete</TableCell>
+                </TableRow>
+            </TableHead>
+            <TableBody>
             {bvaccinedata && bvaccinedata.length > 0 ?(
                     bvaccinedata.map((bvaccine)=>(
-                <tr key={bvaccine._id}>
-                    <td>{bvaccine.type}</td>
-                    <td>{bvaccine.esti_Date} </td>
-                    <td>{bvaccine.quantity}</td>
+                <TableRow key={bvaccine._id}>
+                    <TableCell>{bvaccine.type}</TableCell>
+                    <TableCell>{bvaccine.esti_Date} </TableCell>
+                    <TableCell>{bvaccine.quantity}</TableCell>
                     
-                    <td className='actionButtons'>
+                    <TableCell className='actionButtons'>
                     {bvaccine._id && bvaccine.type && bvaccine.esti_Date && bvaccine.quantity  && (
-                        <button onClick={() => navigate(`/Editbabyvaccination/${bvaccine._id}/${bvaccine.type}/${bvaccine.esti_Date}/${bvaccine.quantity}`)}>Edit</button>
+                        <Button onClick={() => navigate(`/Editbabyvaccination/${bvaccine._id}/${bvaccine.type}/${bvaccine.esti_Date}/${bvaccine.quantity}`)}>Edit</Button>
                     )}
-                    </td>
-                    <td className='deleteButtons'>
+                    </TableCell>
+                    <TableCell className='deleteButtons'>
                         
-                        <button onClick={() => confirmDelete(bvaccine._id)} >Delete</button>
+                        <Button onClick={() => confirmDelete(bvaccine._id)} >Delete</Button>
 
-                    </td>
-                </tr>
+                    </TableCell>
+                </TableRow>
                     ))
                     ):(
-                        <tr>
-                            <td>You have not baby vaccine data</td>
-                        </tr>  
+                        <TableRow>
+                            <TableCell>You have not baby vaccine data</TableCell>
+                        </TableRow>  
                 )}
-            </tbody>
-        </table>
+            </TableBody>
+        </Table>
+        </TableContainer>
+
         </div>
+        </Layout>
+
   )
 }
 

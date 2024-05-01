@@ -6,6 +6,7 @@ import image2 from '../webImages/va2.png';
 import image3 from '../webImages/raids.png';
 import { useNavigate } from 'react-router-dom';
 
+
 const Staff = () => {
 
   const navigate = useNavigate();
@@ -17,7 +18,7 @@ const Staff = () => {
       id: 1,
       title: 'Dengue Schedules',
       buttonText: 'View',
-      buttonLink: '/Dengueschedules',
+      buttonLink: '/DengueAssignTable',
       className: 'dengue-card',
       image: image1
     },

@@ -94,7 +94,7 @@ const Editbabyvaccination = () => {
 
 
         
-            <button onClick={confirmUpdatee} className='bvsave'type='button'>Update</button>
+            <button onClick={confirmUpdatee} className='bvvupdate'type='button'>Update</button>
         
 
     </form>

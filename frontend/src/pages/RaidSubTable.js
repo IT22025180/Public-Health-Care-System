@@ -5,6 +5,7 @@ import Axios from 'axios';
 import jsPDF from 'jspdf';
 import { Link, useNavigate } from 'react-router-dom';
 
+
 const RaidSubTable = () => {
     const [submissiondata, setSubmissionData] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
@@ -78,6 +79,7 @@ const RaidSubTable = () => {
             <div className="search">
             <input  placeholder="Search name" type='text' value={searchQuery} onChange={e => setSearchQuery(e.target.value)} />
                 </div>
+                
                 <table border={1} cellPadding={10} cellSpacing={0}>
                     <thead>
                         <tr>
@@ -93,31 +95,32 @@ const RaidSubTable = () => {
                         {filteredsubmissiondata && filteredsubmissiondata.length > 0 ? (
                             filteredsubmissiondata.map(submission => (
                                 <tr key={submission._id}>
-                                    <td>{submission.location}</td>
-                                    <td>{submission.details}</td>
-                                    <td>{submission.specialNotes}</td>
-                                    <td className='actionButtons'>
+                                    <th>{submission.location}</th>
+                                    <th>{submission.details}</th>
+                                    <th>{submission.specialNotes}</th>
+                                    <tbody className='actionButtons'>
                 
                                         <Link to ={`/RaidSubFormEdit/${submission._id}/${submission.location}/${submission.details}/${submission.specialNotes}`}>
                                         <button>Edit</button>
                                         </Link>
 
-                                    </td>
-                                    <td className='deleteButtons'>
+                                    </tbody>
+                                    <th className='deleteButtons'>
                                         <button onClick={() => submissionDelete(submission._id)}>Delete</button>
-                                    </td>
-                                    <td> 
+                                    </th>
+                                    <tbody> 
                         <button className="pdfButton" onClick={() =>generatePDF(RaidSubTable)}>generatePDF</button>
-                        </td>
+                        </tbody>
                                 </tr>
                             ))
                         ) : (
                             <tr>
-                                <td colSpan="5"><center>You have no submission data.</center></td>
+                                <th colSpan="5"><center>You have no submission data.</center></th>
                             </tr>
                         )}
                     </tbody>
                 </table>
+                
             </div>
         </Layout>
     );

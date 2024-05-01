@@ -5,10 +5,12 @@ const VaccineRq = require('./VReqModel');
 const addVacRq = async(req,res) => {
     try{
         
-            const{ vName, quantity} = req.body;
+            const{ type, quantity,esti_Date,notification} = req.body;
             const newVaccineRq =  new VaccineRq({
-                vName,        
-                quantity    
+                type,        
+                quantity,
+                esti_Date,
+                notification, 
             });
 
             await newVaccineRq.save();

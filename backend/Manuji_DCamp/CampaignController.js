@@ -5,13 +5,14 @@ const { error } = require('console');
 const addCampaign = async(req,res) => {
     try{
         
-            const{ venue , date , time , drName} = req.body;
+            const{ venue , date , time , etime, drName} = req.body;
 
             const formatteddate = Array.isArray(date) ? date.join(', ') : date;
             const newCampaign =  new Campaigns({
                 venue,      
                 date : formatteddate,
                 time,
+                etime,
                 drName          
             });
 
@@ -38,13 +39,14 @@ const updateCampaign = async (req,res) => {
 
     try{
 
-        const { _id, venue , date , time , drName} = req.body;
+        const { _id, venue , date , time , etime, drName} = req.body;
 
         const updatedCampaign = await Campaigns.findOneAndUpdate({_id} ,{
         
             venue,
             date,
             time,
+            etime,
             drName
         }, { new : true});
 

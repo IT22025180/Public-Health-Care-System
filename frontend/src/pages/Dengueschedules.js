@@ -1,19 +1,16 @@
-// Dengueschedules.jsx
-
 import React, { useEffect, useState } from 'react';
 import Layout from '../components/Layout';
 import Axios from 'axios';
 import { Dialog, DialogTitle, DialogContent } from '@mui/material';
 import Swal from 'sweetalert2';
 import Alert from 'react-bootstrap/Alert';
-import { Link } from 'react-router-dom'; // Import Link from react-router-dom
+import { Link } from 'react-router-dom';
 
 const Dengueschedules = () => {
   const [campdata, setcampdata] = useState([]);
   const [stcampdata, setstcampdata] = useState([]);
   const [open, openConfirm] = useState(false);
   const [staffmember, setstaffmember] = useState('');
-  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     getcampdata();
@@ -64,17 +61,9 @@ const Dengueschedules = () => {
     }
   }
 
-  const filteredcampdata = campdata.filter(camp => {
-    return camp.date?.toLowerCase().includes(searchQuery.toLowerCase());
-  });
-
   return (
     <Layout>
       <div className='Dcamptable'>
-        <form className="campsearch_bar">
-          <input placeholder="Search name" type='text' value={searchQuery} onChange={e => setSearchQuery(e.target.value)} />
-        </form>
-
         <table border={1} cellPadding={10} cellSpacing={0}>
           <thead>
             <tr>
@@ -86,8 +75,8 @@ const Dengueschedules = () => {
             </tr>
           </thead>
           <tbody>
-            {filteredcampdata && filteredcampdata.length > 0 ? (
-              filteredcampdata.map((camp) => (
+            {campdata && campdata.length > 0 ? (
+              campdata.map((camp) => (
                 <tr key={camp._id}>
                   <td>{camp.venue}</td>
                   <td>{camp.date}</td>
@@ -100,7 +89,7 @@ const Dengueschedules = () => {
               ))
             ) : (
               <tr>
-                <td>You have not camp data</td>
+                <td>You have no camp data</td>
               </tr>
             )}
           </tbody>
@@ -113,7 +102,7 @@ const Dengueschedules = () => {
           <p>{stcampdata.date}</p>
           <p>{stcampdata.time}</p>
           <input type='text' value={staffmember} onChange={(e) => setstaffmember(e.target.value)}></input>
-          <Link to="/DengueAssignTable"> {/* Use Link to navigate */}
+          <Link to="/DengueAssignTable">
             <button onClick={addstaffdengue}>Submit</button>
           </Link>
           <button onClick={closepopup}>Close</button>

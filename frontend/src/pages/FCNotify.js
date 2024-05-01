@@ -1,7 +1,9 @@
-import { useState } from "react";
-import emailjs from '@emailjs/browser'
-import '../styles/FCNotify.css'
+import { useState, useEffect } from "react";
+import emailjs from '@emailjs/browser';
+import Swal from 'sweetalert2';
+import '../styles/FCNotify.css';
 import Layout from '../components/Layout';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const FCNotify = () => {
   const [email, setemail] = useState('');
@@ -13,6 +15,20 @@ const FCNotify = () => {
   const [aname, setaname] = useState('');
   const [violationType, setViolationType] = useState('');
   const [cNumber, setcNumber] = useState('');
+
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (location.state) {
+      const { v_name, v_email, date, v_type, decision} = location.state;
+      setName(v_name);
+      setemail(v_email);
+      setvdate(date);
+      setViolationType(v_type);
+      setPanelty(decision);
+    }
+  }, [location.state]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -47,6 +63,16 @@ const FCNotify = () => {
         setpoliceStation('');
         setdate('');
         setaname('');
+        // Show success message
+        Swal.fire({
+          icon: 'success',
+          title: 'Success',
+          text: 'Email sent successfully!',
+          allowOutsideClick: false,
+          confirmButtonText: 'OK'
+        }).then(() => {
+          navigate('/Fine-And-court');
+        });
       })
       .catch((error) => {
         console.error('Error sending Email', error);

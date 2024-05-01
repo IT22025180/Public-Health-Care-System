@@ -4,6 +4,9 @@ import Axios from 'axios';
 import jsPDF from 'jspdf';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import logo1 from '../webImages/logo1.png';
+import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
+import Layout from '../components/Layout';
 
 
 const Thriposhatable = () => {
@@ -65,7 +68,32 @@ const confirmDelete = (id) => {
             return;
         }
         const doc = new jsPDF();
-        let y = 10;
+
+        const logo = new Image();
+    logo.src = logo1; // Use the imported logo image
+    doc.addImage(logo, 'PNG', 6, 7, 20, 20); // Adjust the position and dimensions as needed
+
+    // Add Public Health Information System as the letterhead
+    doc.setFontSize(12);
+    doc.text('Public Health Information System', 70, 15); // Adjust the position as needed
+    doc.text('Suwasiripaya, No. 385, Rev. Baddegama Wimalawansa Thero Mawatha,', 70, 20);
+    doc.text('Colombo 10, Sri Lanka.', 70, 25);
+    doc.text('Tel: 112 694033, 112 675011, 112 675449, 112 693493', 70, 30);
+
+    // Add page border
+    doc.setDrawColor(0);
+    doc.setLineWidth(0.5);
+    doc.rect(0, 0, doc.internal.pageSize.width, doc.internal.pageSize.height, 'S');
+
+    // Add horizontal line
+    doc.setLineWidth(0.5);
+    doc.line(5, 45, 205, 45);
+
+    // Leave summary topic
+    doc.setFontSize(18);
+    doc.setTextColor(0, 0, 0); // Set text color to black
+    doc.text('Thriposha Destribution Summary', 60, 60); // Adjust the position as needed
+        let y = 75;
         thriposhadata.forEach((thriposha, index) => {
             const thriposhaText = `Thriposha Type: ${thriposha.type}\nEstimated Date: ${thriposha.esti_Date}\nQuantity: ${thriposha.quantity}\n\n`;
             doc.text(thriposhaText, 10, y);
@@ -75,45 +103,52 @@ const confirmDelete = (id) => {
     };
 
   return (
+    <Layout>
+
     <div className='thriposhatable'>
-        <table border ={1} cellPadding={10} cellSpacing={0}>
-            <thead>
-                <tr>
-                    <th>Thriposha Type</th>
-                    <th>Estimated Date</th>
-                    <th>Quantity</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
-                </tr>
-            </thead>
-            <tbody>
+        <TableContainer component={Paper}>
+
+        <Table border ={1} cellPadding={10} cellSpacing={0}>
+            <TableHead>
+                <TableRow>
+                    <TableCell>Thriposha Type</TableCell>
+                    <TableCell>Estimated Date</TableCell>
+                    <TableCell>Quantity</TableCell>
+                    <TableCell>Edit</TableCell>
+                    <TableCell>Delete</TableCell>
+                </TableRow>
+            </TableHead>
+            <TableBody>
             {thriposhadata && thriposhadata.length > 0 ?(
                     thriposhadata.map((thriposha)=>(
-                <tr key={thriposha._id}>
-                    <td>{thriposha.type}</td>
-                    <td>{thriposha.esti_Date} </td>
-                    <td>{thriposha.quantity}</td>
+                <TableRow key={thriposha._id}>
+                    <TableCell>{thriposha.type}</TableCell>
+                    <TableCell>{thriposha.esti_Date} </TableCell>
+                    <TableCell>{thriposha.quantity}</TableCell>
 
-                    <td className='actionButtons'>
+                    <TableCell className='actionButtons'>
                     {thriposha._id && thriposha.type && thriposha.esti_Date && thriposha.quantity  && (
-                        <button onClick={() => navigate(`/Edittriposha/${thriposha._id}/${thriposha.type}/${thriposha.esti_Date}/${thriposha.quantity}`)}>Edit</button>
+                        <Button onClick={() => navigate(`/Edittriposha/${thriposha._id}/${thriposha.type}/${thriposha.esti_Date}/${thriposha.quantity}`)}>Edit</Button>
                     )}
-                    </td>
-                    <td className='deleteButtons'>
-                        <button onClick={() => confirmDelete(thriposha._id)} >Delete</button>
-                    </td>
-                </tr>
+                    </TableCell>
+                    <TableCell className='deleteButtons'>
+                        <Button onClick={() => confirmDelete(thriposha._id)} >Delete</Button>
+                    </TableCell>
+                </TableRow>
                     ))
                     ):(
-                        <tr>
-                            <td>You have not baby data</td>
-                        </tr>  
+                        <TableRow>
+                            <TableCell>You have not baby data</TableCell>
+                        </TableRow>  
                 )}
-            </tbody>
-        </table>
+            </TableBody>
+        </Table>
+        </TableContainer>
 
         <button className='generate' onClick={generatePDF}>Generate Report</button>
     </div>
+    </Layout>
+
   )
 }
 

@@ -11,24 +11,26 @@ import { useNavigate ,useParams } from 'react-router-dom';
 
 const Editcampdetails = () => {
 
-  const {_id , venue, date, time, drName} = useParams();
+  const {_id , venue, date, time, etime, drName} = useParams();
   const [id_u , setID] = useState(_id);
   const [venue_u, setvenue] = useState(venue);
   const [date_u, setdate] = useState(date);
   const [time_u, settime] = useState(time);
+  const [etime_u, setetime] = useState(etime);
   const [drName_u, setdrName] = useState(drName);
   const [errorMessage, setErrorMessage] = useState({});
   const navigate = useNavigate();
 
-  const updateCampaign = async(_id,venue,date,time,drName) => {
+  const updateCampaign = async(_id,venue,date,time,etime,drName) => {
        try{
 
-        const response = await Axios.post('http://localhost:4000/api/updateCampaign',{
+        const response = await Axios.post('http://localhost:4000/api/updateCamp',{
             _id:_id,
             venue,
             date,
             time,
-            drName,
+            etime,
+            drName
             });
 
             console.log("Campaign details updated successfully" , response.data);
@@ -41,7 +43,7 @@ const Editcampdetails = () => {
 
     try{
 
-            const response = await updateCampaign(id_u,venue_u,date_u,time_u ,drName_u);
+            const response = await updateCampaign(id_u,venue_u,date_u,time_u ,etime_u,drName_u);
 
 
       console.log(response);
@@ -49,6 +51,7 @@ const Editcampdetails = () => {
         setvenue('');
         setdate('');
         settime('');
+        setetime('');
         setdrName('');
         navigate('/DengCampTab');
    }catch(error){
@@ -61,7 +64,7 @@ const Editcampdetails = () => {
       const confirmUpdate = (event) => {
         event.preventDefault();
 
-        if(!venue_u || !date_u || !time_u || !drName_u){
+        if(!venue_u || !date_u || !time_u || !etime_u || !drName_u){
             setErrorMessage('Please fill in all required fields');
             return;
         }
@@ -99,15 +102,27 @@ const Editcampdetails = () => {
                 </div>
                 <div className="input">
                     <label className='stime' htmlFor="stime">Starting Time</label>
-                    <input value={time_u} onChange={e => settime(e.target.value)} type="stime" id="stime" name="stime" autoComplete='off' placeholder='Starting Time' />
+                    <input value={time_u} onChange={e => settime(e.target.value)} type="time" id="stime" name="stime" autoComplete='off' placeholder='Starting Time' />
                 </div>
+                <div className="input">
+                        <label htmlFor="etime">End Time</label>
+                        <input
+                            value={etime_u}
+                            onChange={(e) => setetime(e.target.value)}
+                            type="time"
+                            id="etime"
+                            name="etime"
+                            autoComplete="off"
+                            placeholder="End Time"
+                        />
+                    </div>
                 <div className="input">
                     <label className='drname' htmlFor="conductedby">Conducted by</label>
-                    <input value={drName_u} onChange={e => setdrName(e.target.value)} type="conductedby" id="conductedby" name="conductedby" autoComplete='off' placeholder='Conductedby' />
+                    <input value={drName_u} onChange={e => setdrName(e.target.value)} type="text" id="conductedby" name="conductedby" autoComplete='off' placeholder='Conductedby' />
                 </div>
                 <div className="input">
-                    <button onClick={confirmUpdate} type='submit' value="Submit">Update</button>
-                    <button type='submit' value="Cancel">Cancel</button>
+                    <button onClick={confirmUpdate} type='button' value="Submit">Update</button>
+                    <button type='button' value="Cancel">Cancel</button>
 
                 </div>
             </form>
