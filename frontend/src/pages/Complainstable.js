@@ -128,7 +128,6 @@ const Complainstable = () => {
         doc.text(Complains.NIC, 15, 120);
         doc.text(Complains.date, 15, 130);
         doc.text(Complains.yaddress, 15, 140);
-        //doc.text(Complains.images, 15, 150);
         doc.text(Complains.ctype, 15, 160);
         doc.text(Complains.cdesc, 15, 170);
         doc.text(Complains.area, 15, 180);
@@ -208,5 +207,5 @@ const Complainstable = () => {
     )
 }
 
-export default Complainstable
+export default Complainstable;
 

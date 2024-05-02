@@ -100,7 +100,6 @@ const Upcomp = ()=>{
                 <Form.Control
                   type="number"
                   name="mobile"
-                 // pattern="[0-9]{10}"
                   value={mobile_u}
                   onChange={(e) =>
                     setmobile(e.target.value )
