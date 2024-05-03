@@ -1,4 +1,4 @@
-.Chome-page {
+.Cchome-page {
     max-width: 1200px;
     margin: 0 auto;
     padding: 50px 20px;
@@ -9,20 +9,20 @@
     margin-bottom: 50px;
   }
   
-  .Ccard-container {
+  .Cccard-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
   }
   
-  .Ccard {
+  .Cccard {
     width: 31%;
     margin-bottom: 30px;
     border-radius: 10px;
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.297);
   }
   
-  .Ccard-image {
+  .Cccard-image {
     width: 200px;
     height: auto;
     object-fit: cover;
@@ -32,17 +32,17 @@
     padding-top: 30px;
   }
   
-  .Ccard-body {
+  .Cccard-body {
     padding: 20px;
   }
   
-  .Ccard-title {
+  .Cccard-title {
     font-size: 24px;
     margin-bottom: 20px;
     text-align: center;
   }
   
-  .Ccard-text {
+  .Cccard-text {
     font-size: 18px;
     margin-bottom: 20px;
   }
@@ -71,7 +71,7 @@
   .tabBtn button:hover {
     background-color: #0056b3;
   }
-  .Chome{
+  .Cchome{
     text-align: center;
     font-size: 25px;
   }

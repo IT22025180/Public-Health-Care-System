@@ -25,21 +25,21 @@ const ComplainsHome = () => {
 
   return (
       <Layout>  
-            <div className="Chome-page">
+            <div className="Cchome-page">
               <h1><b>Complains Management</b></h1>
-              <div className="Chome">
+              <div className="Cchome">
                 <h3><b>Welcome to the Complaints Management section of our Public Health Information System.</b></h3><br></br>
                 <p><center><i>Easily submit food and dengue complaints. Our team acts swiftly to address concerns. Your voice matters for a healthier community. Whether it's about food safety or dengue prevention, we're here to listen. With our streamlined process, expect efficient resolution and ongoing support. Together, let's build a safer and healthier environment for all.<br></br>
                     
                 </i></center></p>
             </div>
-              <div className="Ccard-container">
+              <div className="Cccard-container">
                 {cards.map((card) => (
-                  <div key={card.id} className="Ccard">
-                    <img src={card.image} alt={card.title} className="Ccard-image" />
-                    <div className="Ccard-body">
-                      <h2 className="Ccard-title">{card.title}</h2>
-                      <p className="Ccard-text">{card.description}</p>
+                  <div key={card.id} className="Cccard">
+                    <img src={card.image} alt={card.title} className="Cccard-image" />
+                    <div className="Cccard-body">
+                      <h2 className="Cccard-title">{card.title}</h2>
+                      <p className="Cccard-text">{card.description}</p>
                       <a href={card.buttonLink} className="btn btn-primary">
                         {card.buttonText}
                       </a>
