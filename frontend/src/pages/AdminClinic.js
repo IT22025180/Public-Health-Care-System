@@ -12,9 +12,9 @@ const AdminClinic = () => {
     const [clinics, setClinics] = useState([]);
     const [selectedClinicId, setSelectedClinicId] = useState(null);
     const [joinedPatients, setJoinedPatients] = useState([]);
-    const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate();
 
+    const uname = localStorage.getItem('name');
 
     const [open, openPatients] = useState(false);
 
@@ -27,18 +27,22 @@ const AdminClinic = () => {
         openPatients(false);
     }
 
-    const getClinics = async () => {
-        try {
-            const response = await Axios.get('http://localhost:4000/api/Clinics');
-            setClinics(response.data.allClinics);
-        } catch (error) {
-            console.error('Axios error:', error);
-        }
+    const getClinics = async (uname) => {
+        Axios.get(`http://localhost:4000/api/DcClinics/${uname}`)
+            .then(response => {
+                console.log('Data from server: ', response.data);
+                setClinics(response.data);
+            })
+            .catch(error => {
+                console.error("Axios error: ", error);
+            });
     };
 
     useEffect(() => {
-        getClinics();
-    }, []);
+        if (uname) {
+            getClinics(uname);
+        }
+    }, [uname]);
 
     const getPatients = async () => {
         try {
@@ -88,50 +92,6 @@ const AdminClinic = () => {
     //search
     const selectedPatients = joinedPatients.filter(patient => patient.clinicID === selectedClinicId);
 
-    //popup update
-
-
-    const [popupup, setpopupup] = useState(false);
-    const [updatedClinic, setUpdatedClinic] = useState([]);
-    const [ctype, setCtype] = useState(updatedClinic.ctype);
-    const [date, setDate] = useState(updatedClinic.date);
-    const [time, setTime] = useState(updatedClinic.time);
-    const [venue, setVenue] = useState(updatedClinic.venue);
-
-
-    const popupUpdate = (clinic) => {
-
-        setUpdatedClinic(clinic);
-        setpopupup(true);
-    }
-
-    const closeUpdate = () => {
-        setpopupup(false);
-    }
-
-    const updateClnic = async () => {
-
-        try {
-
-            const response = await Axios.post('http://localhost:4000/api/updateClinic', {
-                _id: updatedClinic._id,
-                date: date,
-                time: time,
-                venue: venue,
-                ctype: ctype
-            });
-
-            setpopupup(false)
-            console.log("Clinic update is successful", response.data);
-        } catch (error) {
-            console.error('error', error);
-        }
-    }
-
-
-
-
-
     return (
         <Layout>
             <div>
@@ -158,7 +118,7 @@ const AdminClinic = () => {
                                         <TableCell>{clinic.ctype}</TableCell>
                                         <TableCell>{clinic.venue}</TableCell>
                                         <TableCell>
-                                            <Button onClick={() => navigate(`/updateCli/${clinic._id}/${clinic.date}/${clinic.time}/${clinic.ctype}/${clinic.venue}`)}><FaEdit /></Button>
+                                            <Button onClick={() => navigate(`/updateCli/${clinic._id}/${clinic.date}/${clinic.ctype}/${clinic.venue}`)}><FaEdit /></Button>
                                             <Button variant='danger' color='red' onClick={() => confirmDelete(clinic._id)}><FaTrash /></Button>
                                             <Button onClick={() => functionPopup(clinic._id)} >View joined patients</Button>
                                         </TableCell>

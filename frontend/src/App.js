@@ -107,8 +107,6 @@ function App() {
           <Route path='/DengueAssignTable' element={<DengueAssignTable />} />
           <Route path='/VaccineAssignTable' element={<VaccineAssignTable />} />
 
-
-          <Route path='/' element={<Home />} />
           <Route path='/vaccines' element={<Vaccines />} />
           <Route path='/vaccinereg' element={<VaccineReg />} />
           <Route path='/staff' element={<Staff />} />
@@ -118,7 +116,6 @@ function App() {
           <Route path='/Raidsschedules' element={<Raidsschedules />} />
           <Route path='/LeaveTable' element={<LeaveTable />} />
           <Route path='/StaffLogin' element={<StaffLogin />} />
-          <Route path="/" element={<LeaveTable />} />
           <Route path="/EditLeave/:id" element={<EditLeave />} />
           <Route path='/DengueAssignTable' element={<DengueAssignTable />} />
           <Route path='/VaccineAssignTable' element={<VaccineAssignTable />} />
@@ -156,7 +153,6 @@ function App() {
 
 
           <Route path='/addclinics' element={<AddClinic />} />
-          <Route path='/addpatient' element={<AddPatients />} />
           <Route path='/dengueCli' element={<Dengue />} />
           <Route path='/raids' element={<Raids />} />
           <Route path='/raidform' element={<RaidForm />} />
@@ -166,8 +162,7 @@ function App() {
 
 
 
-          <Route path='/addclinics' element={<AddClinic />} />
-          <Route path='/addpatient' element={<AddPatients />} />
+
           <Route path='/dengueCli' element={<Dengue />} />
           <Route path='/raids' element={<Raids />} />
           <Route path='/raidform' element={<RaidForm />} />
@@ -177,9 +172,8 @@ function App() {
 
 
 
-          <Route path='/addclinics' element={<AddClinic />} />
-          <Route path='/addpatients/:_id/:date/:time/:venue/:ctype' element={<AddPatients />} />
-          <Route path='/updateCli/:_id/:date/:time/:venue/:ctype' element={<UpdateClinic />} />
+          <Route path='/addpatients/:_id/:date/:venue/:ctype' element={<AddPatients />} />
+
           <Route path='/dengueCli' element={<Dengue />} />
           <Route path='/dentalCli' element={<Dental />} />
           <Route path='/adminClinics' element={<AdminClinic />} />
@@ -206,8 +200,8 @@ function App() {
 
 
           <Route path='/addclinics' element={<AddClinic />} />
-          <Route path='/addpatients/:_id/:date/:time/:venue/:ctype' element={<AddPatients />} />
-          <Route path='/updateCli/:_id/:date/:time/:venue/:ctype' element={<UpdateClinic />} />
+
+          <Route path='/updateCli/:_id/:date/:venue/:ctype' element={<UpdateClinic />} />
           <Route path='/dengueCli' element={<Dengue />} />
           <Route path='/dentalCli' element={<Dental />} />
           <Route path='/adminClinics' element={<AdminClinic />} />
@@ -284,13 +278,12 @@ function App() {
           <Route path='/Bvaccinetable' element={<Bvaccinetable />} />
           <Route path='/Thriposhatable' element={<Thriposhatable />} />
           <Route path='/addclinics' element={<AddClinic />} />
-          <Route path='/addpatient' element={<AddPatients />} />
           <Route path='/dengueCli' element={<Dengue />} />
           <Route path='/raids' element={<Raids />} />
           <Route path='/raidform' element={<RaidForm />} />
           <Route path='/raidsubform' element={<RaidSubForm />} />
-          <Route path='/updateCli/:_id/:date/:time/:venue/:ctype' element={<UpdateClinic />} />
-          <Route path='/addpatients/:_id/:date/:time/:venue/:ctype' element={<AddPatients />} />
+
+
           <Route path='/dengueCli' element={<Dengue />} />
           <Route path='/dentalCli' element={<Dental />} />
           <Route path='/adminClinics' element={<AdminClinic />} />

@@ -52,6 +52,7 @@ const Dental = () => {
                                     <TableRow>
                                         <TableCell>Date </TableCell>
                                         <TableCell>Time</TableCell>
+                                        <TableCell>Doctor name</TableCell>
                                         <TableCell>Venue</TableCell>
                                         <TableCell>Actions</TableCell>
                                     </TableRow>
@@ -63,9 +64,10 @@ const Dental = () => {
 
                                                 <TableCell>{new Date(clinic.date).toLocaleDateString()}</TableCell>
                                                 <TableCell>{new Date(clinic.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</TableCell>
+                                                <TableCell>Dr .{clinic.uname}</TableCell>
                                                 <TableCell>{clinic.venue}</TableCell>
                                                 <TableCell>
-                                                    <Button onClick={() => navigate(`/addpatients/${clinic._id}/${clinic.date}/${clinic.time}/${clinic.venue}/${clinic.ctype}`)}>Join</Button>
+                                                    <Button onClick={() => navigate(`/addpatients/${clinic._id}/${clinic.date}/${clinic.venue}/${clinic.ctype}`)}>Join</Button>
                                                 </TableCell>
                                             </TableRow>
                                         ))

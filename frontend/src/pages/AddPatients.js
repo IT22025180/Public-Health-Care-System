@@ -16,7 +16,7 @@ const AddPatients = () => {
 
   //const navigate = useNavigate();
 
-  const { _id, date, time, venue, ctype } = useParams();
+  const { _id, date, venue, ctype } = useParams();
 
   const [name, setName] = useState('');
   const [gender, setGender] = useState('');
@@ -104,8 +104,8 @@ const AddPatients = () => {
                       Address : ${address}\n\n\n
                       Clinic details \n\n
                       Type : ${ctype}\n
-                      Date : ${date}\n
-                      Time : ${time}\n
+                      Date : ${new Date(date).toLocaleDateString()}\n
+                      Time : ${new Date(date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}\n
                       Venue : ${venue}\n\n
                       Please be on time\tThank you
                       \n
@@ -243,8 +243,8 @@ const AddPatients = () => {
             <br />
             <h3>Clinic details</h3>
             <p>Type : {ctype}</p>
-            <p>Date : {date}</p>
-            <p>TIme : {time}</p>
+            <p>Date : {new Date(date).toLocaleDateString()}</p>
+            <p>TIme : {new Date(date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>
             <p>Venue : {venue}</p>
 
             <Button onClick={addPatient}>Confirm appointment</Button>

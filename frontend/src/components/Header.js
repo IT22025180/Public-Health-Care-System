@@ -79,6 +79,8 @@ const Header = () => {
                 title: "Login Success",
                 showConfirmButton: false,
                 timer: 1500
+            }).then(() => {
+                window.location.reload();
             });
 
         } catch (error) {
@@ -90,11 +92,6 @@ const Header = () => {
             }
         }
     }
-
-
-
-
-
 
     if (user) {
         return (

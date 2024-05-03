@@ -6,8 +6,6 @@ import '../styles/addClinics.css'
 import Axios from 'axios'
 import Swal from 'sweetalert2'
 import { useNavigate } from 'react-router-dom';
-import teeth from '../webImages/teeth.jpg'
-import dengue from '../webImages/dengueM.jpg'
 import * as Yup from 'yup';
 
 const AddClinic = () => {
@@ -19,7 +17,7 @@ const AddClinic = () => {
     const [venue, setVenue] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
 
-
+    const uname = localStorage.getItem('name');
 
     const validateSchema = Yup.object().shape({
         ctype: Yup.string().required('Clinic type is required').oneOf(['Dengue', 'Dental'], 'Invalid Clinic Type'),
@@ -45,6 +43,7 @@ const AddClinic = () => {
                 ctype: ctype,
                 date: date,
                 venue: venue,
+                uname: uname
             });
 
             console.log("Clinic adding is successful", response.data);
@@ -86,7 +85,7 @@ const AddClinic = () => {
             <div className='clcontainer'>
                 <div className='cl1'>
                     <FaUser />
-                    <p>Dr. kk</p>
+                    <p><b>Dr. kk</b></p>
                 </div>
                 <div className='frm'>
                     <h2>Add a Clinic appointment </h2>
