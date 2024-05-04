@@ -81,6 +81,8 @@ function App() {
     const user = localStorage.getItem('token');
     setIsLoggedIn(user ? true : false);
   }, []);
+
+
   return (
     <Router>
       <Routes>
@@ -126,7 +128,6 @@ function App() {
             <Route path='/dclogin' element={<DoctorLogin />} />
           </>
         )}
-
 
         {/* Vihanga */}
         <Route path='/Complains' element={<ComplaintForm />} />

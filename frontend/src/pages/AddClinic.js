@@ -17,6 +17,7 @@ const AddClinic = () => {
     const [venue, setVenue] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
 
+
     const uname = localStorage.getItem('name');
 
     const validateSchema = Yup.object().shape({
@@ -85,7 +86,7 @@ const AddClinic = () => {
             <div className='clcontainer'>
                 <div className='cl1'>
                     <FaUser />
-                    <p><b>Dr. kk</b></p>
+                    <p><b>Dr {uname}</b></p>
                 </div>
                 <div className='frm'>
                     <h2>Add a Clinic appointment </h2>
