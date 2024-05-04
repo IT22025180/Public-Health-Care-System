@@ -247,9 +247,11 @@ const AddPatients = () => {
             <p>TIme : {new Date(date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>
             <p>Venue : {venue}</p>
 
-            <Button onClick={addPatient}>Confirm appointment</Button>
-            <Button onClick={confirmWithGetPDF}>Confirm with get pdf</Button>
-            <Button onClick={closepopup}>Decline</Button>
+            <div className='btns'>
+              <Button className='btnaddp' onClick={addPatient}>Confirm appointment</Button>
+              <Button className='btnaddp' onClick={confirmWithGetPDF}>Confirm with get pdf</Button>
+              <Button className='btnaddp' onClick={closepopup}>Decline</Button>
+            </div>
           </Form>
         </DialogContent>
       </Dialog>
