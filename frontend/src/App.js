@@ -69,6 +69,7 @@ import FCRS from './pages/FCRS';
 import FCNotify from './pages/FCNotify';
 import Editcampdetails from './pages/Editcampdetails';
 import Upcomp from './pages/UpdateComplain';
+import FCSendEvi from './pages/FCSendEvi';
 import { useEffect, useState } from 'react';
 
 function App() {
@@ -145,6 +146,7 @@ function App() {
         <Route path='/FCNotify' element={<FCNotify />} />
         <Route path="/FCRVEdit/:_id/:ro_name/:ro_email/:ro_mobile/:date/:v_location/:v_type/:v_description/:v_name/:v_nic/:v_mobile/:v_email" element={<FCRFEdit />} />
         <Route path='/F&CDReportViolationTabe' element={<FCRVTable />} />
+        <Route path='/FCSendEvi' element={<FCSendEvi />} />
 
         {/* Yasara */}
         <Route path='/raids' element={<Raids />} />
