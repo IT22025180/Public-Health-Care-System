@@ -139,7 +139,6 @@ function App() {
         <Route path='/Fine-And-court' element={<FineAndCourt />} />
         <Route path='/Fine-And-court-Submit-Reports' element={<FCReportForm />} />
         <Route path='/Fine-And-court-Document-Management' element={<FCDocManage />} />
-        <Route path='/F&CDReportViolationTabe' element={<FCRVTable />} />
         <Route path='/F&CDocumentManagementTabe' element={<FCDMTable />} />
         <Route path='/Fine-And-court-Analyse' element={<FCAnalyse />} />
         <Route path='/FCDMEdit/:_id/:r_id/:ro_name/:date/:v_name/:v_type' element={<FCDMEdit />} />
