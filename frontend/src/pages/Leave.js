@@ -127,16 +127,7 @@ const Leave = ({ submitted, data }) => {
         <div className="leave">
           <form className="emailForm">
             <h2>Leave Request Form</h2>
-            <div>
-              <label>Name:</label>
-              <input
-                onChange={(e) => setName(e.target.value)}
-                type="text"
-                name="name"
-                value={name}
-              />{errorMessage.name && <div className="errorMessage">{errorMessage.name}</div>}
-
-            </div>
+           
             <div>
               <label>Staff ID:</label>
               <input
@@ -145,6 +136,16 @@ const Leave = ({ submitted, data }) => {
                 name="staffId"
                 value={staffId}
               />{errorMessage.staffId && <div className="errorMessage">{errorMessage.staffId}</div>}
+
+            </div>
+            <div>
+              <label>Name:</label>
+              <input
+                onChange={(e) => setName(e.target.value)}
+                type="text"
+                name="name"
+                value={name}
+              />{errorMessage.name && <div className="errorMessage">{errorMessage.name}</div>}
 
             </div>
             <div>
