@@ -122,6 +122,7 @@ function App() {
             <Route path='/adminClinics' element={<AdminClinic />} />
             <Route path='/genPatientReport' element={<PatientReport />} />
             <Route path='/updateCli/:_id/:date/:venue/:ctype' element={<UpdateClinic />} />
+            <Route path='/dclogin' element={<DoctorLogin />} />
           </>
         )}
 
@@ -176,7 +177,7 @@ function App() {
         <Route path='/Editbabyvaccination/:_id/:type/:esti_Date/:quantity' element={<Editbabyvaccination />} />
         <Route path='/Edittriposha/:_id/:type/:esti_Date/:quantity' element={<Edittriposha />} />
 
-        <Route path='/dclogin' element={<DoctorLogin />} />
+
         <Route path='/login' element={<Lgportal />} />
         <Route path='/popup' element={<ModelPopup />} />
 

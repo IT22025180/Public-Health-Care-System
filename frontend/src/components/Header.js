@@ -12,6 +12,7 @@ import Swal from 'sweetalert2';
 const Header = () => {
 
     const [open, setopen] = useState(false);
+    const navigate = useNavigate();
 
     const functionPopup = () => {
         setopen(true);
@@ -50,6 +51,7 @@ const Header = () => {
 
     const logout = async () => {
         localStorage.removeItem('token');
+        navigate('/');
     }
 
     //logins
