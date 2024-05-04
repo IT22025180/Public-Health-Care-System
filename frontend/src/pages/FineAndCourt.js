@@ -62,7 +62,7 @@ const FineAndCourt = () => {
         </div>
       </div>
       <div className='tabBtn'>
-        <Link to='/F&CDReportViolationTabe'><button>Report Table</button></Link>
+        <Link to='/F&CDReportViolationTable'><button>Report Table</button></Link>
         <Link to='/FCRS'><button>Report Status</button></Link>
         <Link to='/F&CDocumentManagementTabe'><button>Documents Table</button></Link>
       </div>

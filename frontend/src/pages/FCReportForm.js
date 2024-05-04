@@ -51,7 +51,7 @@ const FCReportForm = ({ submitted, data }) => {
         title: 'Success!',
         text: 'Report Submitted Successfully.',
       }).then(() => {
-        window.location.href = '/F&CReportViolationTabe';
+        window.location.href = '/F&CDReportViolationTable';
       });
     } catch (error) {
       console.error('Error', error);

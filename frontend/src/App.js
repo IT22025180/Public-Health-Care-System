@@ -145,7 +145,7 @@ function App() {
         <Route path='/FCRS' element={<FCRS />} />
         <Route path='/FCNotify' element={<FCNotify />} />
         <Route path="/FCRVEdit/:_id/:ro_name/:ro_email/:ro_mobile/:date/:v_location/:v_type/:v_description/:v_name/:v_nic/:v_mobile/:v_email" element={<FCRFEdit />} />
-        <Route path='/F&CDReportViolationTabe' element={<FCRVTable />} />
+        <Route path='/F&CDReportViolationTable' element={<FCRVTable />} />
         <Route path='/FCSendEvi' element={<FCSendEvi />} />
 
         {/* Yasara */}
