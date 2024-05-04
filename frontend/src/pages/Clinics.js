@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Layout from '../components/Layout'
 import '../styles/Clinics.css';
 //import { Button } from 'react-bootstrap';
@@ -7,6 +7,8 @@ import '../styles/Clinics.css';
 import imageDgC from '../webImages/dentalC.png';
 import imageDtC from '../webImages/dngC.png';
 import AddClinic from './AddClinic';
+import Aos from 'aos';
+import 'aos/dist/aos.css';
 import { motion, useScroll } from 'framer-motion'
 
 const Clinics = () => {
@@ -32,18 +34,18 @@ const Clinics = () => {
 
   const user = localStorage.getItem('token');
 
+  useEffect(() => {
+    Aos.init({ duration: 1000 }); // Initialize AOS with your desired options
+  }, []);
   return (
     <Layout>
-      <motion.div className=''
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -50 }}
-        transition={{ duration: 0.5 }}
-      >
-        <br />
+      <br />
+      <div data-aos="fade-up"
+        data-aos-anchor-placement="center-bottom">
+
         <div className="home-page">
           <h1>Select Clinic Type</h1><br /><br />
-          <div className="card-container">
+          <div className="card-container" data-aos="fade-right">
             {cards.map((card) => (
               <div key={card.id} className="Ccard">
                 <img src={card.image} alt={card.title} className="Ccard-image" />
@@ -58,8 +60,10 @@ const Clinics = () => {
             ))}
           </div>
         </div>
-      </motion.div>
-      {user && <AddClinic />}
+      </div>
+      <div data-aos="fade-up">
+        {user && <AddClinic />}
+      </div>
     </Layout>
   )
 }
