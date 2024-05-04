@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { useNavigate, useParams } from 'react-router-dom';
 import Layout from "../components/Layout";
 import  Axios  from "axios";
-import { Button, Col, Container, Form, Row } from "react-bootstrap";
+import { Alert, Button, Col, Container, Form, Row } from "react-bootstrap";
+import Swal from "sweetalert2";
 
 const Upcomp = () => {
   const { _id, fname, lname, mobile, email, NIC, yaddress, ctype, cdesc } = useParams();
@@ -52,11 +53,37 @@ const Upcomp = () => {
 
   }
 
+  const confirmUpdate = () => {
+
+    if (!fname_u || !lname_u || !mobile_u || !NIC_u || !yaddress_u || !ctype_u || !cdesc_u) {
+        setErrorMessage('Please fill in all required fields');
+        return;
+    }
+
+    Swal.fire({
+        title: "Do you want to save the changes?",
+        showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: "Save",
+        denyButtonText: `Don't save`
+    }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+            Swal.fire("Saved!", "Complain updated successfully !! ", "success");
+            update();
+        } else if (result.isDenied) {
+            Swal.fire("Changes are not saved", "", "info");
+        }
+    });
+}
+
   return (<div >
     <Layout>
       <Container>
         <h1>Public Health Complaint Form</h1>
        
+        {errorMessage && <Alert variant='danger'>{errorMessage}</Alert>}
+
         <Form>
           <Row>
             <Col>
