@@ -278,7 +278,7 @@ const ComplaintForm = () => {
         <Container>
           <h1>Public Health Complaint Form</h1>
 
-          <Form>
+          <Form className="comform">
             <Row>
               <Col>
                 <Form.Group controlId="firstName">
