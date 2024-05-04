@@ -104,7 +104,7 @@ const Complainstable = () => {
         doc.text('Complain Summery', 90, 60);
 
         let xPos = 15;
-        let yPos = 185; // Fixed yPos for all images
+        let yPos = 195; // Fixed yPos for all images
         const verticalSpacing = 10; // Adjust vertical spacing between rows
         if (Array.isArray(Complains.images)) {
             Complains.images.forEach((image, index) => {
@@ -121,16 +121,17 @@ const Complainstable = () => {
             doc.text('No images available', 15, 70);
         };
 
-        doc.text(Complains.fname, 15, 80);
-        doc.text(Complains.lname, 15, 90);
-        doc.text(Complains.mobile.toString(), 15, 100);
-        doc.text(Complains.email, 15, 110);
-        doc.text(Complains.NIC, 15, 120);
-        doc.text(Complains.date, 15, 130);
-        doc.text(Complains.yaddress, 15, 140);
-        doc.text(Complains.ctype, 15, 160);
-        doc.text(Complains.cdesc, 15, 170);
-        doc.text(Complains.area, 15, 180);
+        doc.text(`First Name: ${Complains.fname}`, 15, 80);
+        doc.text(`Last Name: ${Complains.lname}`, 15, 90);
+        doc.text(`Mobile: ${Complains.mobile}`.toString(), 15, 100);
+        doc.text(`Email: ${Complains.email}`, 15, 110);
+        doc.text(`NIC: ${Complains.NIC}`, 15, 120);
+        doc.text(`Date: ${Complains.date}`, 15, 130);
+        doc.text(`Address: ${Complains.yaddress}`, 15, 140);
+        doc.text(`Type: ${Complains.ctype}`, 15, 160);
+        doc.text(`Description: ${Complains.cdesc}`, 15, 170);
+        doc.text(`Area: ${Complains.area}`, 15, 180);
+        doc.text('Images:',15,190);
 
         doc.save(`Complain_Summary_${Complains.fname}.pdf`);
     };
