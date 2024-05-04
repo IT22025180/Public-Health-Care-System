@@ -4,6 +4,7 @@ import Layout from "../components/Layout";
 import  Axios  from "axios";
 import { Alert, Button, Col, Container, Form, Row } from "react-bootstrap";
 import Swal from "sweetalert2";
+import "../styles/UpdateComplain.css";
 
 const Upcomp = () => {
   const { _id, fname, lname, mobile, email, NIC, yaddress, ctype, cdesc } = useParams();
@@ -235,9 +236,11 @@ const Upcomp = () => {
 
             </Col>
           </Row>
-          <Button variant="primary" type="button" onClick={confirmUpdate}>
-            Update
+          <div className="but-container">
+          <Button className="but" variant="primary" type="button" onClick={confirmUpdate}>
+          Update
           </Button>
+          </div>
 
         </Form>
       </Container>
