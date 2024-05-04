@@ -8,8 +8,8 @@ import imageDgC from '../webImages/dentalC.png';
 import imageDtC from '../webImages/dngC.png';
 import AddClinic from './AddClinic';
 import Aos from 'aos';
-import 'aos/dist/aos.css';
-import { motion, useScroll } from 'framer-motion'
+import 'aos/dist/aos.css'; //anim
+import { motion, useScroll } from 'framer-motion' //anim
 
 const Clinics = () => {
   //const navigate = useNavigate();
@@ -35,12 +35,12 @@ const Clinics = () => {
   const user = localStorage.getItem('token');
 
   useEffect(() => {
-    Aos.init({ duration: 1000 }); // Initialize AOS with your desired options
+    Aos.init({ duration: 1000 }); // Initialize AOS with your desired options //anim
   }, []);
   return (
     <Layout>
       <br />
-      <div data-aos="fade-up"
+      <div data-aos="fade-up" //anim
         data-aos-anchor-placement="center-bottom">
 
         <div className="home-page">
@@ -64,7 +64,7 @@ const Clinics = () => {
       <div data-aos="fade-up">
         {user && <AddClinic />}
       </div>
-    </Layout>
+    </Layout >
   )
 }
 
