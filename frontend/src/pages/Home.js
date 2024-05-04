@@ -35,12 +35,10 @@ const Home = () => {
 
 
   return (
-    <div data-aos="flip-left"
-      data-aos-easing="ease-out-cubic"
-      data-aos-duration="2000">
+    <div >
       <Layout>
         <div >
-          <div className='contain' >
+          <div className='contain' data-aos="zoom-in">
             <div className='slider-frame'>
               <div className='slider-img'>
                 <div className='img-container'>

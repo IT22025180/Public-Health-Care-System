@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Header.css'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { Dialog, DialogTitle } from '@mui/material';
@@ -7,6 +7,8 @@ import { FaTimes } from 'react-icons/fa';
 import { Button, NavDropdown } from 'react-bootstrap';
 import Axios from 'axios';
 import Swal from 'sweetalert2';
+import Aos from 'aos';
+import 'aos/dist/aos.css';
 
 
 const Header = () => {
@@ -21,6 +23,10 @@ const Header = () => {
     const closePopup = () => {
         setopen(false);
     }
+
+    useEffect(() => {
+        Aos.init({ duration: 500 }); // Initialize AOS with your desired options
+    }, []);
 
     const user = localStorage.getItem('token');
     const uname = localStorage.getItem('name');

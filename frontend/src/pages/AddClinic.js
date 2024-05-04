@@ -7,6 +7,8 @@ import Axios from 'axios'
 import Swal from 'sweetalert2'
 import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
+import Aos from 'aos';
+import 'aos/dist/aos.css';
 
 const AddClinic = () => {
 
@@ -26,7 +28,9 @@ const AddClinic = () => {
         venue: Yup.string().required('Venue is required').matches(/^[A-Za-z\s,./0-9]+$/, 'Name must contain only letters and numbers'),
     })
 
-
+    useEffect(() => {
+        Aos.init({ duration: 1000 }); // Initialize AOS with your desired options
+    }, []);
 
     const addClnics = async () => {
         try {
@@ -84,12 +88,12 @@ const AddClinic = () => {
         <div className='contflex'>
             <hr className='hline' />
             <div className='clcontainer'>
-                <div className='cl1'>
+                <div className='cl1' data-aos="fade-up">
                     <FaUser />
                     <p><b>Dr {uname}</b></p>
                 </div>
                 <div className='frm'>
-                    <h2>Add a Clinic appointment </h2>
+                    <h2 data-aos="fade-up">Add a Clinic appointment </h2>
                     <br />
                     <div className='rdgrp'>
                         <div className='rdbtn'>
