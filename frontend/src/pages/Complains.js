@@ -41,7 +41,7 @@ const ComplaintForm = () => {
     mobile: Yup.string().matches(/^0\d{9}$/, 'Invalid Contact Number').required('Contact number is Required'),
     email: Yup.string().matches(/^[a-zA-Z0-9._%+-]+@gmail\.com$/, 'Invalid Gmail address').required('Email is Required'),
     NIC: Yup.string().required('NIC is required').matches(/^\d{11}(V|v|\d)$/, 'Invalid NIC Number'),
-    yaddress: Yup.string().required('Address is Required').matches(/^[A-Za-z\s,-./0-9]+$/, 'Address must contain only letters and numbers'),
+    yaddress: Yup.string().required('Address is Required').matches(/^[A-Za-z\s,./0-9]+$/, 'Address must contain only letters and numbers'),
     images: Yup.array().min(1, 'img is required').required('At least one document is required'),
     cdesc: Yup.string().required('Description is Required').matches(/^[A-Za-z\s,.0-9]+$/, 'Description must contain only letters & numbers'),
     ctype: Yup.string().required('Complain Type is Required'),
