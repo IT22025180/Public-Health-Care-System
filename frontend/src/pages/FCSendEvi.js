@@ -5,23 +5,21 @@ import '../styles/FCNotify.css';
 import Layout from '../components/Layout';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-const FCNotify = () => {
+const FCSendEvi = () => {
+  const [cNumber, setcNumber] = useState('');
   const [email, setemail] = useState('');
   const [Vname, setName] = useState('');
+  const [violationType, setViolationType] = useState('');
   const [vdate, setvdate] = useState('');
   const [panelty, setPanelty] = useState('');
-  const [policeStation, setpoliceStation] = useState('');
-  const [date, setdate] = useState('');
-  const [aname, setaname] = useState('');
-  const [violationType, setViolationType] = useState('');
-  const [cNumber, setcNumber] = useState('');
+  const [Evidances, setEvidances] = useState('');
 
   const location = useLocation();
   const navigate = useNavigate();
 
   useEffect(() => {
     if (location.state) {
-      const { v_name, v_email, date, v_type, decision} = location.state;
+      const { v_name, v_email, date, v_type, decision } = location.state;
       setName(v_name);
       setemail(v_email);
       setvdate(date);
@@ -33,7 +31,7 @@ const FCNotify = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const formattedDate = new Date(date);
+    const formattedDate = new Date(vdate);
 
     const serviceID = 'service_0r9kntj';
     const templateID = 'template_hrj18ia';
@@ -46,9 +44,6 @@ const FCNotify = () => {
       vtype: violationType,
       vdate: formattedDate.toLocaleDateString(),
       panelty: panelty,
-      policeStation: policeStation,
-      date: formattedDate.toLocaleDateString(),
-      aname: aname
     };
 
     emailjs.send(serviceID, templateID, templateParams, publicKey)
@@ -60,9 +55,7 @@ const FCNotify = () => {
         setViolationType('');
         setvdate('');
         setPanelty('');
-        setpoliceStation('');
-        setdate('');
-        setaname('');
+        setEvidances('');
         Swal.fire({
           icon: 'success',
           title: 'Success',
@@ -82,7 +75,7 @@ const FCNotify = () => {
     <Layout>
       <div className="form1">
         <form onSubmit={handleSubmit} className="emailForm">
-          <h2>Notify Violator</h2>
+          <h2>Send Evidences to Court</h2>
           <div>
             <label>Case Number:</label>
             <input type="Number" name="cNumber" value={cNumber} onChange={(e) => setcNumber(e.target.value)} />
@@ -115,16 +108,8 @@ const FCNotify = () => {
             <input type="text" name="panelty" value={panelty} onChange={(e) => setPanelty(e.target.value)} />
           </div>
           <div>
-            <label>Police Station:</label>
-            <input type="text" name="policeStation" value={policeStation} onChange={(e) => setpoliceStation(e.target.value)} />
-          </div>
-          <div>
-            <label>Due Date:</label>
-            <input type="Date" name="date" value={date} onChange={(e) => setdate(e.target.value)} />
-          </div>
-          <div>
-            <label>Analyse By:</label>
-            <input type="text" name="aname" value={aname} onChange={(e) => setaname(e.target.value)} />
+            <label>Evidances:</label>
+            
           </div>
           <button className='notifyBut' type="submit">Send Email</button>
         </form>
@@ -133,4 +118,4 @@ const FCNotify = () => {
   )
 }
 
-export default FCNotify;
+export default FCSendEvi;

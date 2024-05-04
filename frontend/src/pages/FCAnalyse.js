@@ -36,16 +36,16 @@ const FCRS = () => {
 
   const handleDecisionSubmit = () => {
     if (selectedReport) {
-      const updatedReport = { ...selectedReport, decision };
+      const updatedReport = { _id: selectedReport._id, decision };
       Axios.post(`http://localhost:4000/api/updateVioR`, updatedReport)
-        .then(response => {
+       .then(response => {
           console.log('Decision updated successfully:', response.data);
           const updatedRVdata = RVdata.map(report =>
-            report._id === selectedReport._id ? { ...report, decision } : report
+            report._id === selectedReport._id? {...report, decision } : report
           );
           setRVdata(updatedRVdata);
         })
-        .catch(error => {
+       .catch(error => {
           console.error('Error updating decision:', error);
         });
     }
@@ -77,15 +77,30 @@ const FCRS = () => {
           'Your decision has been submitted.',
           'success'
         ).then(() => {
-          navigate('/FCNotify', {
-            state: {
-              v_name: selectedReport.v_name,
-              v_email: selectedReport.v_email,
-              date: selectedReport.date,
-              v_type: selectedReport.v_type,
-              decision: selectedReport.decision
-            }
-          });
+          if (selectedReport.decision === 'Court Action') {
+            navigate('/FCSendEvi', {
+              state: {
+                v_name: selectedReport.v_name,
+                v_email: selectedReport.v_email,
+                date: selectedReport.date,
+                v_type: selectedReport.v_type,
+                decision: selectedReport.decision,
+                evidence: selectedReport.evidence
+              }
+            });
+            window.location.reload();
+          } else {
+            navigate('/FCNotify', {
+              state: {
+                v_name: selectedReport.v_name,
+                v_email: selectedReport.v_email,
+                date: selectedReport.date,
+                v_type: selectedReport.v_type,
+                decision: selectedReport.decision
+              }
+            });
+            window.location.reload();
+          }
         });
       }
     });

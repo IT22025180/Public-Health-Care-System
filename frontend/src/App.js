@@ -76,6 +76,7 @@ import FCNotify from './pages/FCNotify';
 
 import Editcampdetails from './pages/Editcampdetails';
 import Upcomp from './pages/UpdateComplain';
+import FCSendEvi from './pages/FCSendEvi';
 
 
 
@@ -310,6 +311,7 @@ function App() {
           <Route path='/FCRS' element={<FCRS />} />
           <Route path='/FCNotify' element={<FCNotify />} />
           <Route path='/updateComp/:_id/:fname/:lname/:mobile/:email/:NIC/:yaddress/:ctype/:cdesc' element={<Upcomp />} />
+          <Route path='/FCSendEvi' element={<FCSendEvi />} />
         </Routes>
       </Router>
     </AnimatePresence>

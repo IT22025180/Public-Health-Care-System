@@ -1,98 +1,70 @@
 .stTable {
-  background-color:rgb(225,217,241);
-  box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.065);
-  border-radius: 5px;
-  margin: 10px auto;
-  margin-left: 20px;
-  margin-right: 20px;
+  padding: 20px;
 }
 
 .stTable table {
-  width: 100%;
   border-collapse: collapse;
+  width: 100%;
 }
 
-.stTable th, .stTable td {
+.stTable th,
+.stTable td {
+  border: 1px solid #ddd;
   padding: 8px;
-  text-align: center;
-  font-size: 14px;
-  border: 1px solid #000;
+  text-align: left;
 }
 
 .stTable th {
   background-color: #f2f2f2;
+  font-weight: bold;
 }
 
 .stTable tr:nth-child(even) {
   background-color: #f2f2f2;
 }
 
-.searchrs {
+.stTable tr:hover {
+  background-color: #ddd;
+}
+
+.searchvr {
+  margin-bottom: 20px;
+}
+
+.searchvr input[type="text"] {
   width: 100%;
-  text-align: right;
-}
-
-.searchrs input {
-  width: 300px;
-  display: inline-block;
-  margin-right: 20px;
-}
-
-/*analyse Data main*/
-
-.analyseDataBox {
-  width: 80%;
+  padding: 6px;
   border: 1px solid #ccc;
-  padding: 10px;
-  margin: 40px auto;
-  border-radius: 5px;
-  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+}
+
+.stTable .image-row {
   display: flex;
-  justify-content: center;
-}
-
-.analyseData {
-  margin-top: 20px;
-  width: 80%;
-}
-
-.analyseData input[type="radio"] {
-  margin-right: 10px;
-}
-
-.submitAnal {
-  text-align: center;
-}
-
-.submitAnal button{
-  border: 0;
-  outline: none;
-  background-color: #3498db;
-  padding: 8px 10px;
-  border-radius: 5px;
-  margin-top: 30px;
-  cursor: pointer;
-}
-
-.submitAnal button:hover{
-  background-color: #2980b9;
-}
-.evidence-cell {
-  display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  height: 100px;
+}
+
+.stTable .image-row img {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 5px;
+  margin-right: 10px; /* Add more space between images */
+}
+
+.stTable .image-cell {
+  height: 100px;
+  vertical-align: middle;
+}
+
+.stTable .evidence-cell {
+  display: flex;
   flex-wrap: wrap;
 }
 
-.evidence-image-container {
-  margin: 10px;
-}
-
-.evidence-image {
-  max-width: 100%;
-  max-height: 100%;
-}
-
-.modal-content {
-  margin-left: 10px;
+.stTable .evidence-cell img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  margin: 5px;
 }

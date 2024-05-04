@@ -1,88 +1,149 @@
 .FCRVTable {
-  background-color:rgb(225,217,241);
-  box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.065);
-  border-radius: 5px;
-  margin: 10px auto;
-}
+    padding: 20px;
+  }
+  
+  .FCRVTable .buttonContainer {
+    display: flex;
+    align-items: center;
+  }
+  
+  .FCRVTable .buttonContainer button {
+    margin-right: 10px;
+  }
+  
+  .FCRVTable .buttonContainer button:last-child {
+    margin-right: 0;
+  }
+  
+  .FCRVTable .MuiTable-root {
+    width: 100%;
+  }
+  
+  .FCRVTable .MuiTableHead-root {
+    background-color: #f2f2f2;
+  }
+  
+  .FCRVTable .MuiTableCell-head {
+    font-weight: bold;
+  }
+  
+  .FCRVTable .imge {
+    display: inline;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .FCRVTable .imge img {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 5px;
+    margin-top: 5px;
+  }
+  
+  .FCRVTable .MuiTableRow-root:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  .FCRVTable .MuiTableCell-root {
+    text-align: left;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .FCRVTable .MuiTableRow-root:hover {
+    background-color: #e0e0e0;
+  }
+  
+  
+  .FCRVTable .MuiTable-root {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .FCRVTable .MuiTableHead-root {
+    background-color: #f2f2f2;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .FCRVTable .MuiTableCell-head {
+    font-weight: bold;
+    border-right: 1px solid #ddd;
+    padding: 10px;
+  }
+  
+  .FCRVTable .MuiTableCell-root {
+    text-align: left;
+    padding: 10px;
+    border-right: 1px solid #ddd;
+  }
+  
+  .FCRVTable .rvedtBtn {
+    margin-bottom: 10px;
+    background-color: #4CAF50;
+  }
+  
+  .FCRVTable .rvdeleteBtn {
+    background-color: #e74c3c;
+  }
 
-.FCRVTable table {
-  width: 100%;
-  border-collapse: collapse;
-}
+  .FCRVTable .rvdeleteBtn:hover {
+    background-color: #c0392b;
+  }
+  
+  .FCRVTable .rvedtBtn:hover { 
+    background-color: #45a049;
+  }
+  
 
-.FCRVTable th, .FCRVTable td {
-  padding: 8px;
-  text-align: center;
-  font-size: 14px;
-  border: 1px solid #000;
-}
+  .genButton {
+    display: flex;
+    justify-content: center;
+  }
 
-.FCRVTable th {
-  background-color: #f2f2f2;
-}
-
-.FCRVTable tr:nth-child(even) {
-  background-color: #f2f2f2;
-}
-
-td.evidence-cell {
-  width: 100px;
-  height: auto;
-  padding: 0;
-}
-
-td.evidence-cell img {
-  max-width: 90%;
-  max-height: 90%;
-  display: block;
-  margin: 5px auto;
-}
-
-.rvedtBtn {
-  padding: 5px 10px;
-  background-color: #4CAF50;
-  border: none;
-  border-radius: 3px;
-  cursor: pointer;
-  margin-right: 5px;
-}
-
-.rvdeleteBtn {
-  padding: 5px 10px;
-  background-color: #e74c3c;
-  border: none;
-  border-radius: 3px;
-  cursor: pointer;
-  margin-right: 5px;
-}
-
-.rvdeleteBtn:hover {
-  background-color: #c0392b;
-}
-
-.rvedtBtn:hover { 
-  background-color: #45a049;
-}
-
-.searchvr {
-  width: 100%;
-  text-align: right;
-}
-
-.searchvr input {
-  width: 300px;
+  .search {
+    width: 100%;
+    text-align: right;
+  }
+  
+  .search input {
+    width: 300px;
   display: inline-block;
-}
+  }
 
-.analyse {
-  border: 0;
-  outline: none;
-  background-color: #3498db;
-  padding: 8px 10px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.analyse:hover{
-  background-color: #2980b9;
-}
+  
+  .analyse {
+    border: 0;
+    outline: none;
+    background-color: #3498db;
+    padding: 8px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .analyse:hover {
+    background-color: #2980b9;
+  }
+  
+  .searchvr {
+    width: 100%;
+    text-align: right;
+  }
+  
+  .searchvr input {
+    width: 300px;
+    display: inline-block;
+  }
+  
+  .analyse {
+    border: 0;
+    outline: none;
+    background-color: #3498db;
+    padding: 8px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .analyse:hover {
+    background-color: #2980b9;
+  }

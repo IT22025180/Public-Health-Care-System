@@ -5,7 +5,10 @@ import Axios from "axios";
 import Swal from "sweetalert2";
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
+import logo1 from '../webImages/logo1.png';
 import { Link } from "react-router-dom";
+import { Table, TableHead, TableBody, TableRow, TableCell } from '@mui/material';
+import { FaEdit, FaTrash } from 'react-icons/fa';
 
 const FCRVTable = () => {
   const [RVdata, setRVdata] = useState([]);
@@ -78,18 +81,26 @@ const FCRVTable = () => {
 
   const GenReport = () => {
     const doc = new jsPDF('landscape');
-    const title = "Fine And Court Violation Report";
-    const titleMargin = 20;
-    const tableMargin = 20;
-    const titleWidth = doc.getTextWidth(title);
-    const center = (doc.internal.pageSize.width / 2) - (titleWidth / 2);
-
-    doc.text(title, center, titleMargin);
-
+  
+    const logo = new Image();
+    logo.src = logo1;
+    doc.addImage(logo, 'PNG', 20, 10, 20, 20);
+  
+    // Add header text
+    doc.setFontSize(12);
+    doc.text('Public Health Information System', 45, 15);
+    doc.text('Suwasiripaya, No. 385, Rev. Baddegama Wimalawansa Thero Mawatha,', 45, 20);
+    doc.text('Colombo 10, Sri Lanka.', 45, 25);
+    doc.text('Tel: 112 694033, 112 675011, 112 675449, 112 693493', 45, 30);
+  
+    
+    doc.text('', 45, 35);
+  
+    // Generate the table
     doc.autoTable({
       head: [['Raid Officer Name', 'Raid Officer Email', 'Raid Officer Contact Number', 'Date', 'Violation Location', 'Violation Type', 'Violation Description', 'Violator Name', 'Violator Email', 'Violator Contact Number', 'Violator NIC']],
       body: FilterData().map((val, i) => [val.ro_name, val.ro_email, val.ro_mobile, val.date, val.v_location, val.v_type, val.v_description, val.v_name, val.v_email, val.v_mobile, val.v_nic]),
-      startY: titleMargin + tableMargin,
+      startY: 40,
       styles: {
         cellWidth: 'auto',
         fontSize: 8,
@@ -99,8 +110,8 @@ const FCRVTable = () => {
         1: { cellWidth: 30 },
       },
     });
-
-    doc.save('Fine_And_Court_Violation_Report.pdf');
+  
+    doc.save('Violation_Report.pdf');
   };
 
 
@@ -111,66 +122,65 @@ const FCRVTable = () => {
         <input type="text" value={searchQuery} onChange={e => setSearchQuery(e.target.value)} placeholder="Search" />
       </div>
       <div className="FCRVTable">
-        <table border={1} cellPadding={10} cellSpacing={0}>
-          <thead>
-            <tr>
-              <th>Raid Officer Name</th>
-              <th>Raid Officer Email </th>
-              <th>Raid Officer Contact Number</th>
-              <th>Date</th>
-              <th>Violation Location</th>
-              <th>Violation Type</th>
-              <th>Violation Description</th>
-              <th>Violator Name</th>
-              <th>Violator Email</th>
-              <th>Violator Contact Number</th>
-              <th>Violator ID</th>
-              <th>Evidences</th>
-              <th>Edit</th>
-              <th>Delete</th>
-            </tr>
-          </thead>
-          <tbody>
+        <Table border={1} cellPadding={10} cellSpacing={0}>
+          <TableHead>
+            <TableRow>
+              <TableCell>Raid Officer Name</TableCell>
+              <TableCell>Raid Officer Email </TableCell>
+              <TableCell>Raid Officer Contact Number</TableCell>
+              <TableCell>Date</TableCell>
+              <TableCell>Violation Location</TableCell>
+              <TableCell>Violation Type</TableCell>
+              <TableCell>Violation Description</TableCell>
+              <TableCell>Violator Name</TableCell>
+              <TableCell>Violator Email</TableCell>
+              <TableCell>Violator Contact Number</TableCell>
+              <TableCell>Violator ID</TableCell>
+              <TableCell>Evidences</TableCell>
+              <TableCell>Actions</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
             {FilterData().length > 0 ? (
               FilterData().map((RVdata) => (
-                <tr key={RVdata._id}>
-                  <td>{RVdata.ro_name}</td>
-                  <td>{RVdata.ro_email}</td>
-                  <td>{RVdata.ro_mobile}</td>
-                  <td>{RVdata.date}</td>
-                  <td>{RVdata.v_location}</td>
-                  <td>{RVdata.v_type}</td>
-                  <td>{RVdata.v_description}</td>
-                  <td>{RVdata.v_name}</td>
-                  <td>{RVdata.v_email}</td>
-                  <td>{RVdata.v_mobile}</td>
-                  <td>{RVdata.v_nic}</td>
-                  <td className="evidence-cell">
+                <TableRow key={RVdata._id}>
+                  <TableCell>{RVdata.ro_name}</TableCell>
+                  <TableCell>{RVdata.ro_email}</TableCell>
+                  <TableCell>{RVdata.ro_mobile}</TableCell>
+                  <TableCell>{RVdata.date}</TableCell>
+                  <TableCell>{RVdata.v_location}</TableCell>
+                  <TableCell>{RVdata.v_type}</TableCell>
+                  <TableCell>{RVdata.v_description}</TableCell>
+                  <TableCell>{RVdata.v_name}</TableCell>
+                  <TableCell>{RVdata.v_email}</TableCell>
+                  <TableCell>{RVdata.v_mobile}</TableCell>
+                  <TableCell>{RVdata.v_nic}</TableCell>
+                  <TableCell className="evidence-cell">
                     {Array.isArray(RVdata.evidence) && RVdata.evidence.length > 0 ? (
                       RVdata.evidence.map((evidence, index) => (
-                        <img key={index} src={`data:${evidence.contentType};base64,${evidence.data}`} alt={`Image ${index + 1}`} />
+                        <div className="imge" key={index} style={{ width: "50px", height: "100px" }}>
+                          <img src={`data:${evidence.contentType};base64,${evidence.data}`} alt={`Image`} width={50} height={50} />
+                        </div>
                       ))
                     ) : (
                       <span>No evidence</span>
                     )}
-                  </td>
-                  <td>
+                  </TableCell>
+                  <TableCell>
                     <Link to={`/FCRVEdit/${RVdata._id}/${RVdata.ro_name}/${RVdata.ro_email}/${RVdata.ro_mobile}/${RVdata.date}/${RVdata.v_location}/${RVdata.v_type}/${RVdata.v_description}/${RVdata.v_name}/${RVdata.v_nic}/${RVdata.v_mobile}/${RVdata.v_email}`}>
-                      <button className="rvedtBtn">Edit</button>
+                      <button className="rvedtBtn"><FaEdit /></button>
                     </Link>
-                  </td>
-                  <td>
-                    <button className="rvdeleteBtn" onClick={() => deletereport(RVdata._id)}>Delete</button>
-                  </td>
-                </tr>
+                    <button className="rvdeleteBtn" onClick={() => deletereport(RVdata._id)}><FaTrash /></button>
+                  </TableCell>
+                </TableRow>
               ))
             ) : (
-              <tr>
-                <td colSpan="14">No Data Available</td>
-              </tr>
+              <TableRow>
+                <TableCell colSpan="14">No Data Available</TableCell>
+              </TableRow>
             )}
-          </tbody>
-        </table>
+          </TableBody>
+        </Table>
       </div>
       <div className='genButton'>
         <button onClick={GenReport}>Generate Report</button>

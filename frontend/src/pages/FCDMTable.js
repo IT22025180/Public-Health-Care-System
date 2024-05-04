@@ -5,6 +5,8 @@ import Swal from "sweetalert2";
 import 'jspdf-autotable';
 import Layout from '../components/Layout';
 import { Link } from 'react-router-dom';
+import { Table, TableHead, TableBody, TableRow, TableCell, Button } from '@mui/material';
+import { FaEdit, FaTrash } from 'react-icons/fa';
 
 const FCDMTable = () => {
   const [DMdata, setDMdata] = useState([]);
@@ -86,32 +88,31 @@ const FCDMTable = () => {
           <input type="text" value={searchQuery} onChange={e => setSearchQuery(e.target.value)} placeholder="Search" />
         </div>
         <div className="FCDMTable">
-          <table border={1} cellPadding={10} cellSpacing={0}>
-            <thead>
-              <tr>
-                <th>Case Number</th>
-                <th>Raid Officer</th>
-                <th>Date</th>
-                <th>Violator Name</th>
-                <th>Violation Type</th>
-                <th>Documents</th>
-                <th>Edit</th>
-                <th>Delete</th>
-              </tr>
-            </thead>
-            <tbody>
+          <Table border={1} cellPadding={10} cellSpacing={0}>
+            <TableHead>
+              <TableRow>
+                <TableCell>Case Number</TableCell>
+                <TableCell>Raid Officer</TableCell>
+                <TableCell>Date</TableCell>
+                <TableCell>Violator Name</TableCell>
+                <TableCell>Violation Type</TableCell>
+                <TableCell>Documents</TableCell>
+                <TableCell>Action</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
               {filterData().length > 0 ? (
                 filterData().map((ddata) => (
-                  <tr key={ddata._id}>
-                    <td>{ddata.r_id}</td>
-                    <td>{ddata.ro_name}</td>
-                    <td>{ddata.date}</td>
-                    <td>{ddata.v_name}</td>
-                    <td>{ddata.v_type}</td>
-                    <td className="evidence-cellDM">
+                  <TableRow key={ddata._id}>
+                    <TableCell>{ddata.r_id}</TableCell>
+                    <TableCell>{ddata.ro_name}</TableCell>
+                    <TableCell>{ddata.date}</TableCell>
+                    <TableCell>{ddata.v_name}</TableCell>
+                    <TableCell>{ddata.v_type}</TableCell>
+                    <TableCell className="evidence-cellDM">
                       {Array.isArray(ddata.documents) && ddata.documents.length > 0 ? (
                         ddata.documents.map((documents, index) => (
-                          <div key={index}>
+                          <div className="files" key={index}>
                             <a href={`data:${documents.contentType};base64,${documents.data}`} download={`file_${index}`}>
                               File {index + 1}
                             </a>
@@ -120,24 +121,22 @@ const FCDMTable = () => {
                       ) : (
                         <span>No evidence</span>
                       )}
-                    </td>
-                    <td>
+                    </TableCell>
+                    <TableCell>
                       <Link to={`/FCDMEdit/${encodeURIComponent(ddata._id)}/${encodeURIComponent(ddata.r_id)}/${encodeURIComponent(ddata.ro_name)}/${encodeURIComponent(ddata.date)}/${encodeURIComponent(ddata.v_name)}/${encodeURIComponent(ddata.v_type)}`}>
-                        <button className="edtBtn">Edit</button>
+                        <Button className="editButton" variant="contained" color="primary"><FaEdit /></Button>
                       </Link>
-                    </td>
-                    <td>
-                      <button className='deleteBtn' onClick={() => deleteDocument(ddata._id)}>Delete</button>
-                    </td>
-                  </tr>
+                      <Button className="deleteButton" variant="contained" color="secondary" onClick={() => deleteDocument(ddata._id)}><FaTrash /></Button>
+                    </TableCell>
+                  </TableRow>
                 ))
               ) : (
-                <tr>
-                  <td colSpan="8">No Data Available</td>
-                </tr>
+                <TableRow>
+                  <TableCell colSpan="8">No Data Available</TableCell>
+                </TableRow>
               )}
-            </tbody>
-          </table>
+            </TableBody>
+          </Table>
         </div>
       </>
     </Layout>
