@@ -121,16 +121,9 @@ function App() {
           <Route path='/DengueAssignTable' element={<DengueAssignTable />} />
           <Route path='/VaccineAssignTable' element={<VaccineAssignTable />} />
           <Route path='/RaidsAssign' element={<RaidsAssign />} />
-          <Route path='/Fine-And-court' element={<FineAndCourt />} />
-          <Route path='/Fine-And-court-Submit-Reports' element={<FCReportForm />} />
-          <Route path='/Fine-And-court-Document-Management' element={<FCDocManage />} />
           <Route path='/DengueAssignTable' element={<DengueAssignTable />} />
           <Route path='/VaccineAssignTable' element={<VaccineAssignTable />} />
           <Route path='/RaidsAssign' element={<RaidsAssign />} />
-          <Route path='/Fine-And-court' element={<FineAndCourt />} />
-          <Route path='/Fine-And-court-Submit-Reports' element={<FCReportForm />} />
-          <Route path='/Fine-And-court-Document-Management' element={<FCDocManage />} />
-          <Route path='/Fine-And-court-Analyse' element={<FCAnalyse />} />
           <Route path='/clinics' element={<Clinics />} />
           <Route path='/mainMidwife' element={<MainMidwife />} />
           <Route path='/babyDetails' element={<BabyDetails />} />
@@ -141,14 +134,12 @@ function App() {
           <Route path='/Thriposhatable' element={<Thriposhatable />} />
           <Route path='/VaccineRegTab' element={<VaccineRegTab />} />
           <Route path='/DengCampTab' element={<DengCampTab />} />
-          <Route path='/F&CDocumentManagementTabe' element={<FCDMTable />} />
+          
 
 
           <Route path='/RF' element={<RaidForm />} />
-          <Route path='/F&CDReportViolationTabe' element={<FCRVTable />} />
 
           <Route path='/RF' element={<RaidForm />} />
-          <Route path='/F&CDReportViolationTabe' element={<FCRVTable />} />
           <Route path='/DengueAssignTable' element={<DengueAssignTable />} />
 
 
@@ -235,17 +226,6 @@ function App() {
           <Route path='/Editcampdetails/:_id/:venue/:date/:time/:drName' element={<Editcampdetails />} />
 
 
-          <Route path='/Fine-And-court' element={<FineAndCourt />} />
-          <Route path='/Fine-And-court-Submit-Reports' element={<FCReportForm />} />
-          <Route path='/Fine-And-court-Document-Management' element={<FCDocManage />} />
-          <Route path='/F&CDReportViolationTabe' element={<FCRVTable />} />
-          <Route path='/F&CDocumentManagementTabe' element={<FCDMTable />} />
-
-          <Route path='/FCDMEdit/:_id/:r_id/:ro_name/:date/:v_name/:v_type' element={<FCDMEdit />} />
-          <Route path='/F&CReportViolationTabe' element={<FCRVTable />} />
-          <Route path="/FCRVEdit/:_id/:ro_name/:ro_email/:ro_mobile/:date/:v_location/:v_type/:v_description/:v_name/:v_nic/:v_mobile/:v_email" element={<FCRFEdit />} />
-
-          <Route path='/Fine-And-court-Analyse' element={<FCAnalyse />} />
           <Route path='/' element={<Home />} />
           <Route path='/vaccines' element={<Vaccines />} />
           <Route path='/vaccinereg' element={<VaccineReg />} />
@@ -292,13 +272,6 @@ function App() {
           <Route path='/Complains' element={<ComplaintForm />} />
           <Route path='/Complainstable' element={<Complainstable />} />
           <Route path='/denguecamp' element={<DengueCampaigns />} />
-          <Route path='/Fine-And-court' element={<FineAndCourt />} />
-          <Route path='/Fine-And-court-Submit-Reports' element={<FCReportForm />} />
-          <Route path='/Fine-And-court-Document-Management' element={<FCDocManage />} />
-          <Route path='/F&CDReportViolationTabe' element={<FCRVTable />} />
-          <Route path='/F&CDocumentManagementTabe' element={<FCDMTable />} />
-          <Route path='/Fine-And-court-Analyse' element={<FCAnalyse />} />
-          <Route path='/FCDMEdit/:_id/:r_id/:ro_name/:date/:v_name/:v_type' element={<FCDMEdit />} />
           <Route path='/EditLeave/:_id/:name/:staffid/:email/:position/:doleave/:leavestrt/:leaveend/:leaveType' element={<EditLeave />} />
           <Route path='/DengueHomePage' element={<DengueHomePage />} />
           <Route path='/Denguemap' element={<Denguemap />} />
@@ -308,10 +281,19 @@ function App() {
           <Route path='/RaidFormEdit/:_id/:location/:date/:time/:officer/:sNote' element={<RaidFormEdit />} />
           <Route path='/RaidSubFormEdit/:_id/:location/:details/:sNote' element={<RaidSubFormEdit />} />
           <Route path='/RaidsHome' element={<RaidsHome />} />
-          <Route path='/FCRS' element={<FCRS />} />
-          <Route path='/FCNotify' element={<FCNotify />} />
           <Route path='/updateComp/:_id/:fname/:lname/:mobile/:email/:NIC/:yaddress/:ctype/:cdesc' element={<Upcomp />} />
           <Route path='/FCSendEvi' element={<FCSendEvi />} />
+          <Route path='/FCRS' element={<FCRS />} />
+          <Route path='/FCNotify' element={<FCNotify />} />
+          <Route path='/Fine-And-court' element={<FineAndCourt />} />
+          <Route path='/Fine-And-court-Submit-Reports' element={<FCReportForm />} />
+          <Route path='/Fine-And-court-Document-Management' element={<FCDocManage />} />
+          <Route path='/F&CDReportViolationTabe' element={<FCRVTable />} />
+          <Route path='/F&CDocumentManagementTabe' element={<FCDMTable />} />
+          <Route path='/Fine-And-court-Analyse' element={<FCAnalyse />} />
+          <Route path='/FCDMEdit/:_id/:r_id/:ro_name/:date/:v_name/:v_type' element={<FCDMEdit />} />
+          <Route path='/F&CReportViolationTabe' element={<FCRVTable />} />
+          <Route path="/FCRVEdit/:_id/:ro_name/:ro_email/:ro_mobile/:date/:v_location/:v_type/:v_description/:v_name/:v_nic/:v_mobile/:v_email" element={<FCRFEdit />} />
         </Routes>
       </Router>
     </AnimatePresence>
