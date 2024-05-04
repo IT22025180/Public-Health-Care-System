@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate, useParams } from 'react-router-dom';
 import Layout from "../components/Layout";
-import Axios from "axios";
+import  Axios  from "axios";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 
 const Upcomp = () => {
@@ -21,23 +21,23 @@ const Upcomp = () => {
   const updateComp = async (_id, fname, lname, mobile, email, NIC, yaddress, ctype, cdesc) => {
     try {
 
-      const response = await Axios.post('http://localhost:4000/api/updateComplain', {
-        _id: _id,
-        fname,
-        lname,
-        mobile,
-        email,
-        NIC,
-        yaddress,
-        ctype,
-        cdesc
-      });
-
-      console.log("Complain update is successful", response.data);
-    } catch (error) {
-      console.error('error', error);
+            const response = await Axios.post('http://localhost:4000/api/updateComplain',{
+            _id : _id,
+            fname,
+            lname,
+            mobile,
+            email,
+            NIC,
+            yaddress,
+            ctype,
+            cdesc
+            });
+            navigate('/Complainstable');
+            console.log("Complain update is successful" , response.data);
+        }catch(error){
+            console.error('error' , error);
+        }
     }
-  }
 
   const update = async () => {
 
@@ -56,7 +56,7 @@ const Upcomp = () => {
     <Layout>
       <Container>
         <h1>Public Health Complaint Form</h1>
-
+       
         <Form>
           <Row>
             <Col>
@@ -208,7 +208,7 @@ const Upcomp = () => {
 
             </Col>
           </Row>
-          <Button variant="primary" type="submit" onClick={update}>
+          <Button variant="primary" type="button" onClick={confirmUpdate}>
             Update
           </Button>
 
