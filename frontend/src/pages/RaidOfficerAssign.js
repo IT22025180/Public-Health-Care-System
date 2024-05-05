@@ -15,6 +15,8 @@ const RaidOfficerAssign = () => {
   const [open, setopen] = useState(false);
   const [compstaff, setcompstaff] = useState([]);
   const [officer, setOfficer] = useState('');
+  const [datentime, setDatenTIme] = useState('');
+  const [notes, setNotes] = useState('');
   const [selectedComplainID, setSelectedComplainId] = useState(null);
 
 
@@ -95,10 +97,10 @@ const RaidOfficerAssign = () => {
     setSearchQuery(e.target.value);
   };
 
-  const filteredData = selectedOfficers.filter(officer => {
-    const fullName = `${officer.officer}`.toLowerCase();
-    return fullName.includes(searchQuery.toLowerCase());
-  });
+  // const filteredData = selectedOfficers.filter(officer => {
+  //   const fullName = `${officer.officer}`.toLowerCase();
+  //   return fullName.includes(searchQuery.toLowerCase());
+  // });
 
   return (
     <Layout>
@@ -167,7 +169,7 @@ const RaidOfficerAssign = () => {
         <p>First name : {compstaff.fname}</p>
         <p>Addr : {compstaff.yaddress}</p>
         <p>Type : {compstaff.ctype}</p>
-        <input type='text' value={officer} onChange={(e) => setOfficer(e.target.value)}
+        <input type='text' /*date , time , special notes*/ value={officer} onChange={(e) => setOfficer(e.target.value)}
         ></input>
         <Button onClick={addRaidOfficer}>Submit</Button>
         <Button onClick={closesetstaff}>Close</Button>
@@ -192,7 +194,7 @@ const RaidOfficerAssign = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {filteredData.map((officer) => (
+              {selectedOfficers.map((officer) => (
                 <TableRow key={officer._id}>
                   <TableCell>{officer.Name}</TableCell>
                   <TableCell>{officer.Type}</TableCell>
