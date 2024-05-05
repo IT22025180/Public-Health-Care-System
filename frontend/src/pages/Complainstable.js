@@ -82,14 +82,14 @@ const Complainstable = () => {
         // Add Sri Lankan national logo
         const logo = new Image();
         logo.src = logo1; // Use the imported logo image
-        doc.addImage(logo, 'PNG', 6, 7, 20, 20); // Adjust the position and dimensions as needed
+        doc.addImage(logo, 'PNG', 10, 10, 20, 20); // Adjust the position and dimensions as needed
 
         // Add Public Health Information System as the letterhead
         doc.setFontSize(12);
-        doc.text('Public Health Information System', 70, 15); // Adjust the position as needed
-        doc.text('Suwasiripaya, No. 385, Rev. Baddegama Wimalawansa Thero Mawatha,', 70, 20);
-        doc.text('Colombo 10, Sri Lanka.', 70, 25);
-        doc.text('Tel: 112 694033, 112 675011, 112 675449, 112 693493', 70, 30);
+        doc.text('Public Health Information System', 40, 15); // Adjust the position as needed
+        doc.text('Suwasiripaya, No. 385, Rev. Baddegama Wimalawansa Thero Mawatha,', 40, 20);
+        doc.text('Colombo 10, Sri Lanka.', 40, 25);
+        doc.text('Tel: 112 694033, 112 675011, 112 675449, 112 693493', 40, 30);
 
         // Add page border
         doc.setDrawColor(0);
@@ -103,7 +103,7 @@ const Complainstable = () => {
         // Leave summary topic
         doc.setFontSize(18);
         doc.setTextColor(0, 0, 0); // Set text color to black
-        doc.text('Complain Summery', 90, 60);
+        doc.text('Complain Summery', 80, 60);
 
         let xPos = 15;
         let yPos = 195; // Fixed yPos for all images
