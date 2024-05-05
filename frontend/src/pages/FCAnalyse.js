@@ -12,6 +12,7 @@ const FCRS = () => {
   const [decision, setDecision] = useState("");
   const [showImageModal, setShowImageModal] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
+  const [isDecisionValid, setIsDecisionValid] = useState(false);
 
   const navigate = useNavigate();
 
@@ -35,19 +36,26 @@ const FCRS = () => {
   };
 
   const handleDecisionSubmit = () => {
-    if (selectedReport) {
+    if (selectedReport && decision !== "") { // Check if decision is not empty
       const updatedReport = { _id: selectedReport._id, decision };
       Axios.post(`http://localhost:4000/api/updateVioR`, updatedReport)
-       .then(response => {
+        .then(response => {
           console.log('Decision updated successfully:', response.data);
           const updatedRVdata = RVdata.map(report =>
-            report._id === selectedReport._id? {...report, decision } : report
+            report._id === selectedReport._id ? { ...report, decision } : report
           );
           setRVdata(updatedRVdata);
         })
-       .catch(error => {
+        .catch(error => {
           console.error('Error updating decision:', error);
         });
+    } else {
+      // Show validation message if decision is not selected
+      Swal.fire({
+        icon: 'error',
+        title: 'Invalid Decision',
+        text: 'Please select a decision before submitting.',
+      });
     }
   };
 
@@ -61,49 +69,42 @@ const FCRS = () => {
   };
 
   const handleSubmit = () => {
-    Swal.fire({
-      title: 'Are you sure?',
-      text: 'You are about to submit the decision!',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, submit it!'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        handleDecisionSubmit();
-        Swal.fire(
-          'Submitted!',
-          'Your decision has been submitted.',
-          'success'
-        ).then(() => {
-          if (selectedReport.decision === 'Court Action') {
-            navigate('/FCSendEvi', {
-              state: {
-                v_name: selectedReport.v_name,
-                v_email: selectedReport.v_email,
-                date: selectedReport.date,
-                v_type: selectedReport.v_type,
-                decision: selectedReport.decision,
-                evidence: selectedReport.evidence
-              }
-            });
-            window.location.reload();
-          } else {
+    if (selectedReport && decision !== "") {
+      Swal.fire({
+        title: 'Are you sure?',
+        text: 'You are about to submit the decision!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, submit it!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          handleDecisionSubmit();
+          Swal.fire(
+            'Submitted!',
+            'Your decision has been submitted.',
+            'success'
+          ).then(() => {
             navigate('/FCNotify', {
               state: {
                 v_name: selectedReport.v_name,
                 v_email: selectedReport.v_email,
                 date: selectedReport.date,
                 v_type: selectedReport.v_type,
-                decision: selectedReport.decision
               }
             });
             window.location.reload();
-          }
-        });
-      }
-    });
+          });
+        }
+      });
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Invalid Decision',
+        text: 'Please select a decision before submitting.',
+      });
+    }
   };
 
   return (
@@ -184,10 +185,10 @@ const FCRS = () => {
             )}
             <br />
             <strong>Decision :</strong> <br />
-            <input type="radio" id="fineViolation" name="decision" value="Fine Only" onChange={() => setDecision("Fine Only")} style={{ marginLeft: '80px' }} /> Fine Only
-            <input type="radio" id="courtAction" name="decision" value="Court Action" onChange={() => setDecision("Court Action")} style={{ marginLeft: '20px' }} /> Court Action
+            <input type="radio" id="fineViolation" name="decision" value="Fine Only" onChange={() => { setDecision("Fine Only"); setIsDecisionValid(true); }} style={{ marginLeft: '80px' }} />Fine Only
+            <input type="radio" id="courtAction" name="decision" value="Court Action" onChange={() => { setDecision("Court Action"); setIsDecisionValid(true); }} style={{ marginLeft: '20px' }} />Court Action
             <div className="submitAnal">
-              <button onClick={handleSubmit}>Submit</button>
+              <button onClick={handleSubmit} disabled={!isDecisionValid}>Submit</button>
             </div>
           </div>
         </div>
