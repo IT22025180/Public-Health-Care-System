@@ -107,8 +107,8 @@ const RaidSubForm = () => {
                         <label htmlFor='vtype'>Vialation type</label>
                         <select value={vtype} onChange={e => setvtype(e.target.value)}>
                             <option>Select violation type</option>
-                            <option>Food </option>
-                            <option>Dengue </option>
+                            <option>Food Violation</option>
+                            <option>Dengue Violation</option>
                         </select>
                     </div>
                     <div className='input'>
