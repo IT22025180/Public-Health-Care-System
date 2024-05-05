@@ -103,7 +103,7 @@ const Complainstable = () => {
         // Leave summary topic
         doc.setFontSize(18);
         doc.setTextColor(0, 0, 0); // Set text color to black
-        doc.text('Complain Summery', 80, 60);
+        doc.text('Complain Summery', 78, 60);
 
         let xPos = 15;
         let yPos = 195; // Fixed yPos for all images
