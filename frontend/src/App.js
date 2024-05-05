@@ -70,6 +70,7 @@ import FCNotify from './pages/FCNotify';
 import Editcampdetails from './pages/Editcampdetails';
 import Upcomp from './pages/UpdateComplain';
 import FCSendEvi from './pages/FCSendEvi';
+import RaidOfficerAssign from './pages/RaidOfficerAssign'
 import { useEffect, useState } from 'react';
 
 function App() {
@@ -159,6 +160,9 @@ function App() {
         <Route path='/RaidsHome' element={<RaidsHome />} />
         <Route path='/RaidsAssign' element={<RaidsAssign />} />
         <Route path='/RF' element={<RaidForm />} />
+        <Route path='/RaidOfficerAssign' element={<RaidOfficerAssign />} />
+
+        
 
         {/* Manuji */}
         <Route path='/denguecamp' element={<DengueCampaigns />} />

@@ -10,7 +10,7 @@ const Raidoffersforcomplain = () => {
   const [officerdata, setofficerdata] = useState([]);
   const [stofficerdata, setstofficerdata] = useState([]);
   const [open, openConfirm] = useState(false);
-  const [raidofficer, setraidofficer] = useState('');
+  const [officer, setofficer] = useState('');
 
   useEffect(() => {
     getComplainsdata();
@@ -30,24 +30,24 @@ const Raidoffersforcomplain = () => {
         .then(response => {
 
             console.log('data from sever', response.data);
-            setComplainsdata(response.data);
+            setofficerdata(response.data);
         })
         .catch(error => {
             console.error("Axios error:", error);
         })
 }
 
-  const addstaffdengue = async () => {
+  const addraidofficer = async () => {
     try {
       const response = await Axios.post("http://localhost:4000/api/addraidofficer", {
-        venue: stcampdata.venue,
-        date: stcampdata.date,
-        staffmember: staffmember,
-        time: stcampdata.time,
+        Name: stofficerdata.venue,
+        Type: stofficerdata.Type,
+        officer: officer,
+        Address: stofficerdata.Address,
       });
       console.log("Successfully", response.data);
       openConfirm(false);
-      setstaffmember('');
+      setraidofficer('');
 
       Swal.fire({
         title: "Success!",
@@ -64,47 +64,45 @@ const Raidoffersforcomplain = () => {
 
   return (
     <Layout>
-      <div className='Dcamptable'>
+      <div className='Raidooficertable'>
         <table border={1} cellPadding={10} cellSpacing={0}>
           <thead>
             <tr>
-              <th>Venue</th>
-              <th>Date</th>
-              <th>Starting time</th>
-              <th>Conducted by</th>
-              <th>Assign Staff</th>
+              <th>Name</th>
+              <th>Type</th>
+              <th>Address </th>
+              <th>Assign Officer</th>
             </tr>
           </thead>
           <tbody>
-            {campdata && campdata.length > 0 ? (
-              campdata.map((camp) => (
-                <tr key={camp._id}>
-                  <td>{camp.venue}</td>
-                  <td>{camp.date}</td>
-                  <td>{camp.time}</td>
-                  <td>{camp.drName}</td>
+            {officerdata && officerdata.length > 0 ? (
+              officerdata.map((Complain) => (
+                <tr key={Complain._id}>
+                  <td>{Complain.Name}</td>
+                  <td>{Complain.Type}</td>
+                  <td>{Complain.Address}</td>
                   <td className='reportButtons'>
-                    <button onClick={() => functionPopup(camp)}>Assign Staff</button>
+                    <button onClick={() => functionPopup(Complain)}>Assign Officer</button>
                   </td>
                 </tr>
               ))
             ) : (
               <tr>
-                <td>You have no camp data</td>
+                <td>You have no Complain data</td>
               </tr>
             )}
           </tbody>
         </table>
       </div>
       <Dialog open={open}>
-        <DialogTitle>Assign staff</DialogTitle>
+        <DialogTitle>Assign Officer</DialogTitle>
         <DialogContent>
-          <p>{stcampdata.venue}</p>
-          <p>{stcampdata.date}</p>
-          <p>{stcampdata.time}</p>
-          <input type='text' value={staffmember} onChange={(e) => setstaffmember(e.target.value)}></input>
-          <Link to="/DengueAssignTable">
-            <button onClick={addstaffdengue}>Submit</button>
+          <p>{stofficerdata.Name}</p>
+          <p>{stofficerdata.Type}</p>
+          <p>{stofficerdata.Address}</p>
+          <input type='text' value={officer} onChange={(e) => setofficer(e.target.value)}></input>
+          <Link to="/Raidoffersforcomplain">
+            <button onClick={addraidofficer}>Submit</button>
           </Link>
           <button onClick={closepopup}>Close</button>
         </DialogContent>

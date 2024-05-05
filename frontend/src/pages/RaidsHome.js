@@ -5,6 +5,7 @@ import Layout from '../components/Layout';
 import img1 from '../webImages/raid f.jpg';
 import img2 from '../webImages/raid s.jpg';
 
+
 const RaidsHome = () => {
   const cards = [
     {
@@ -20,6 +21,13 @@ const RaidsHome = () => {
       image: img2,
       buttonText: 'View',
       buttonLink: '/raidsubform'
+    },
+    {
+      id: 3,
+      title: 'Add Raid officers',
+      image: img2,
+      buttonText: 'View',
+      buttonLink: '/RaidOfficerAssign'
     }
   ];
 
