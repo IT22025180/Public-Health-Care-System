@@ -21,6 +21,7 @@ const Clinics = () => {
       buttonLink: '/dengueCli',
       className: 'dengueC-card',
       image: imageDtC,
+      aosAnimation: 'fade-right'
     },
     {
       id: 2,
@@ -29,6 +30,7 @@ const Clinics = () => {
       buttonLink: '/dentalCli',
       className: 'dentalC-card',
       image: imageDgC,
+      aosAnimation: 'fade-left'
     }
   ];
 
@@ -45,9 +47,9 @@ const Clinics = () => {
 
         <div className="home-page">
           <h1>Select Clinic Type</h1><br /><br />
-          <div className="card-container" data-aos="fade-right">
+          <div className="card-container" >
             {cards.map((card) => (
-              <div key={card.id} className="Ccard">
+              <div key={card.id} className="Ccard" data-aos={card.aosAnimation}>
                 <img src={card.image} alt={card.title} className="Ccard-image" />
                 <div className="Ccard-body">
                   <h2 className="Ccard-title">{card.title}</h2>
