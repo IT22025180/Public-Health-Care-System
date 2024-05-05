@@ -80,8 +80,8 @@ const filteredBabyData = babydata.filter(baby => {
             <TableHead>
                 <TableRow>
                     <TableCell>Baby Name</TableCell>
-                    <TableCell>Age(Year)</TableCell>
-                    <TableCell>Weight(Kg)</TableCell>
+                    <TableCell>Age</TableCell>
+                    <TableCell>Weight</TableCell>
                     <TableCell>Contact Number</TableCell>
                     <TableCell>Special Notes</TableCell>
                     <TableCell>Birth Date</TableCell>
