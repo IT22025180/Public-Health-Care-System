@@ -10,6 +10,7 @@ import * as Yup from 'yup';
 import { motion, useScroll } from 'framer-motion'
 import Aos from 'aos';
 import 'aos/dist/aos.css'; //anim
+import Complainstable from "./Complainstable";
 
 const mapStyle = {
   height: "300px",
@@ -283,13 +284,7 @@ const ComplaintForm = () => {
 
   return (
     <Layout>
-      <motion.div className=""
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -50 }}
-        transition={{ duration: 0.5 }}
 
-      >
 
 <div data-aos="zoom-in" //anim
         data-aos-anchor-placement="center-bottom">
@@ -514,12 +509,16 @@ const ComplaintForm = () => {
             <Button variant="primary" type="submit" onClick={addComplain}>
               Submit
             </Button>
-            
             </div>
+            
           </Form>
+          <div className="bat">
+            <Button variant="primary" type="button" onClick={()=>navigate('/Complainstable')}>
+            View Complains
+            </Button>
+            </div>
         </Container>
         </div>
-      </motion.div>
     </Layout>
   );
 };
