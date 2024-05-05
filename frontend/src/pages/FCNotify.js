@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 import '../styles/FCNotify.css';
 import Layout from '../components/Layout';
 import { useLocation, useNavigate } from 'react-router-dom';
+import FCSendEvi from './FCSendEvi';
 
 const FCNotify = () => {
   const [email, setemail] = useState('');
@@ -17,16 +18,20 @@ const FCNotify = () => {
   const [violationType, setViolationType] = useState('');
   const [cNumber, setcNumber] = useState('');
   const [errors, setErrors] = useState({});
+  const [evidence, setEvidence] = useState([]);
   const location = useLocation();
   const navigate = useNavigate();
 
+  console.log('Evidence:', evidence);
+  
   useEffect(() => {
     if (location.state) {
-      const { v_name, v_email, date, v_type } = location.state;
+      const { v_name, v_email, date, v_type, evidence  } = location.state;
       setName(v_name);
       setemail(v_email);
       setvdate(date);
       setViolationType(v_type);
+      setEvidence(evidence);
     }
   }, [location.state]);
 
@@ -164,6 +169,9 @@ const FCNotify = () => {
           </div>
           <button className='notifyBut' type="submit">Send Email</button>
         </form>
+      </div>
+      <div>
+      <FCSendEvi evidence={evidence} />
       </div>
     </Layout>
   )
