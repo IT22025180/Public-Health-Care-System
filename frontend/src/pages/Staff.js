@@ -19,7 +19,6 @@ const Staff = () => {
   useEffect(() => {
     Aos.init({ duration: 1000 });
   }, []);
-
   const cards = [
     {
       id: 1,
@@ -27,9 +26,7 @@ const Staff = () => {
       buttonText: 'View',
       buttonLink: '/DengueAssignTable',
       className: 'dengue-card',
-      image: image1,
-      aosAnimation: 'fade-right'
-
+      image: image1
     },
     {
       id: 2,
@@ -37,40 +34,22 @@ const Staff = () => {
       buttonText: 'View',
       buttonLink: '/Vaccineschedules',
       className: 'vaccine-card',
-      image: image2,
-      aosAnimation: 'fade-up'
+      image: image2
     },
-    {
-      id: 3,
-      title: 'Raids Schedules',
-      buttonText: 'View',
-      buttonLink: '/Raidsschedules',
-      className: 'raids-card',
-      image: image3,
-      aosAnimation: 'fade-left'
-    },
+   
   ];
 
   return (
-    <div>
+    <div data-aos="flip-left"
+      data-aos-easing="ease-out-cubic"
+      data-aos-duration="2000">
       <Layout>
         <div className="home-page">
-          <h1>Staff Schedules</h1>
-          <div className="Scard-container">
-            {cards.map((card) => (
-              <div key={card.id} className="Scard" data-aos={card.aosAnimation}>
-                <img src={card.image} alt={card.title} className="Scard-image" />
-                <div className="Scard-body">
-                  <h2 className="Scard-title">{card.title}</h2>
-                  <p className="Scard-text">{card.description}</p>
-                  <a href={card.buttonLink} className="btnview">{card.buttonText}</a>
-                </div>
-              </div>
-            ))}
-          </div>
-          <hr className="horizontal-line" data-aos="fade-up" />
+          <h3>Staff Schedules</h3>
+       
+          <hr className="horizontal-line" />
 
-          <div className="slider-container" data-aos="fade-up" >
+          <div className="slider-container" >
             <div className="page-container_a">
               <div className='staff1'>
                 <h1 className="stvac">Vaccination Schedules</h1>
@@ -88,7 +67,7 @@ const Staff = () => {
                 </p>
               </div>
             </div>
-            <div className="page-container_b" data-aos="fade-up">
+            <div className="page-container_b">
 
               <div className='staff1'>
                 <h1 className="stvac"> Leave Policy Update</h1>
@@ -109,7 +88,7 @@ const Staff = () => {
                 </p>
               </div>
             </div>
-            <div className="page-container_c" data-aos="fade-up">
+            <div className="page-container_c">
 
 
               <div className='staff1'>
@@ -133,10 +112,23 @@ const Staff = () => {
             </div>
           </div>
 
-          <div className="apply-leave-box" data-aos="fade-up">
+             <div className="Scard-container">
+            {cards.map((card) => (
+              <div key={card.id} className="Scard">
+                <img src={card.image} alt={card.title} className="Scard-image" />
+                <div className="Scard-body">
+                  <h2 className="Scard-title">{card.title}</h2>
+                  <p className="Scard-text">{card.description}</p>
+                  <a href={card.buttonLink} className="btnview">{card.buttonText}</a>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="apply-leave-box">
             <h3 className='applyleave'>Please fill this form to apply for your leave.</h3>
-            <button onClick={Leave} data-aos="fade-up">Click here</button>
-            <a href="/LeaveTable" className="btn-leave-history" data-aos="fade-up">See Leave History</a>
+            <button onClick={Leave}>Click here</button>
+            <a href="/LeaveTable" className="btn-leave-history">See Leave History</a>
           </div>
         </div>
       </Layout>
