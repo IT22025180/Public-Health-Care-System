@@ -5,7 +5,9 @@ const addraidofficer = new mongoose.Schema({
     Type: String,
     Address: String,
     officer: String,
-    compID: String
+    compID: String,
+    Specialnotes:String,
+    DateTime:String
 },
     {
         collection: "RaidOfficer"

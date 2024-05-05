@@ -15,7 +15,7 @@ const RaidOfficerAssign = () => {
   const [open, setopen] = useState(false);
   const [compstaff, setcompstaff] = useState([]);
   const [officer, setOfficer] = useState('');
-  const [datentime, setDatenTIme] = useState('');
+  const [datentime, setDatenTime] = useState('');
   const [notes, setNotes] = useState('');
   const [selectedComplainID, setSelectedComplainId] = useState(null);
 
@@ -62,7 +62,8 @@ const RaidOfficerAssign = () => {
         Name: compstaff.fname,
         Type: compstaff.yaddress,
         Address: compstaff.ctype,
-        officer: officer,
+        DateTime:datentime,
+        Specialnotes:notes,
         compID: compstaff._id,
       });
       console.log("Successfully", response.data);
@@ -151,8 +152,8 @@ const RaidOfficerAssign = () => {
 
 
                     <TableCell >
-                      <Button onClick={() => popupstaffs(Complains._id)}>View assign staffs</Button>
-                      <Button className="pdfButton" onClick={() => setStaff(Complains)}>Assign staff</Button>
+                      <Button onClick={() => popupstaffs(Complains._id)}>View Schedules raids</Button>
+                      <Button className="pdfButton" onClick={() => setStaff(Complains)}>Schedule raids</Button>
                     </TableCell>
                   </TableRow>
                 ))
@@ -169,14 +170,20 @@ const RaidOfficerAssign = () => {
         <p>First name : {compstaff.fname}</p>
         <p>Addr : {compstaff.yaddress}</p>
         <p>Type : {compstaff.ctype}</p>
-        <input type='text' /*date , time , special notes*/ value={officer} onChange={(e) => setOfficer(e.target.value)}
-        ></input>
+        
+        
+        <label>Select Time:</label>
+      
+        <input type='datetime-local' value={datentime} onChange={(e) => setDatenTime(e.target.value)}></input>
+        <label> Specialnotes:</label>
+        <input type='text' value={notes} onChange={(e) => setNotes(e.target.value)}></input>
+
         <Button onClick={addRaidOfficer}>Submit</Button>
         <Button onClick={closesetstaff}>Close</Button>
       </Dialog>
       <Dialog open={openstaff}>
 
-        <DialogTitle>Appointed officers <FaTimes onClick={closepopupstaffs} /></DialogTitle>
+        <DialogTitle>Scheduled Raids<FaTimes onClick={closepopupstaffs} /></DialogTitle>
         <TextField
           label="Search officer"
           variant="outlined"
@@ -190,7 +197,12 @@ const RaidOfficerAssign = () => {
                 <TableCell>Name</TableCell>
                 <TableCell>Type</TableCell>
                 <TableCell>Address</TableCell>
-                <TableCell>Assign Officer</TableCell>
+                <TableCell>Date </TableCell>
+                <TableCell>Time </TableCell>
+                <TableCell>Special Notes  </TableCell>
+
+
+
               </TableRow>
             </TableHead>
             <TableBody>
@@ -199,7 +211,9 @@ const RaidOfficerAssign = () => {
                   <TableCell>{officer.Name}</TableCell>
                   <TableCell>{officer.Type}</TableCell>
                   <TableCell>{officer.Address}</TableCell>
-                  <TableCell>{officer.officer}</TableCell>
+                  <TableCell>{new Date(officer.DateTime).toLocaleDateString()}</TableCell>
+                  <TableCell>{new Date(officer.DateTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</TableCell>
+                  <TableCell>{officer.Specialnotes}</TableCell>
                 </TableRow>
               ))}
             </TableBody>

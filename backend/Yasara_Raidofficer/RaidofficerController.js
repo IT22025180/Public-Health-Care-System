@@ -3,14 +3,19 @@ const RaidOfficer = require('./RaidofficerModel');
 
 exports.addraidofficer = async (req, res) => {
     try {
-        const { Name, Type, Address, officer, compID } = req.body;
+        const { Name, Type, Address, officer, compID ,Specialnotes,DateTime} = req.body;
+
+        const d_dateandtime = Array.isArray(DateTime) ? date.join(',') : DateTime;
 
         const newassignraidofficer = new RaidOfficer({
             Name,
             Type,
             Address,
             officer,
-            compID
+            compID,
+            Specialnotes,
+            DateTime:d_dateandtime,
+
         });
 
         await newassignraidofficer.save();
