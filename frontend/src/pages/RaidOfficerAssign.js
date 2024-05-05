@@ -105,7 +105,7 @@ const RaidOfficerAssign = () => {
 
   return (
     <Layout>
-      <div className='OfficerAssignTable'>
+      <div className='Complainstable'>
         <h2>Assign Officer</h2>
 
         <TableContainer component={Paper}>
