@@ -39,7 +39,6 @@ import FCDMTable from './pages/FCDMTable';
 import ComplaintForm from './pages/Complains';
 import Complainstable from './pages/Complainstable';
 import ComplainsHome from './pages/ComplainsHome';
-import RaidForm from './pages/RaidForm';
 import EditLeave from './pages/EditLeave';
 import FCRVTable from './pages/FCRVTable';
 import AdminClinic from './pages/AdminClinic';
@@ -61,8 +60,6 @@ import EditVReg from './pages/EditVReg';
 import EditVApp from './pages/EditVApp';
 import FCRFEdit from './pages/FCRFEdit';
 import RaidSubTable from './pages/RaidSubTable';
-import RaidFormTable from './pages/RaidFormTable';
-import RaidFormEdit from './pages/RaidFormEdit';
 import RaidsHome from './pages/RaidsHome';
 import RaidSubFormEdit from './pages/RaidSubFormEdit';
 import FCRS from './pages/FCRS';
@@ -151,15 +148,11 @@ function App() {
 
         {/* Yasara */}
         <Route path='/raids' element={<Raids />} />
-        <Route path='/raidform' element={<RaidForm />} />
-        <Route path='/raidformtable' element={< RaidFormTable />} />
         <Route path='/raidsubform' element={< RaidSubForm />} />
         <Route path='/raidsubtable' element={< RaidSubTable />} />
-        <Route path='/RaidFormEdit/:_id/:location/:date/:time/:officer/:sNote' element={<RaidFormEdit />} />
         <Route path='/RaidSubFormEdit/:_id/:location/:details/:sNote' element={<RaidSubFormEdit />} />
         <Route path='/RaidsHome' element={<RaidsHome />} />
         <Route path='/RaidsAssign' element={<RaidsAssign />} />
-        <Route path='/RF' element={<RaidForm />} />
         <Route path='/RaidOfficerAssign' element={<RaidOfficerAssign />} />
 
 
