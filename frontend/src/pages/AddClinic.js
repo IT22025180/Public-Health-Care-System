@@ -85,15 +85,15 @@ const AddClinic = () => {
     }
 
     return (
-        <div className='contflex'>
+        <div className='contflex' data-aos="fade-up">
             <hr className='hline' />
             <div className='clcontainer'>
-                <div className='cl1' data-aos="fade-up">
+                <div className='cl1' >
                     <FaUser />
                     <p><b>Dr {uname}</b></p>
                 </div>
                 <div className='frm'>
-                    <h2 data-aos="fade-up">Add a Clinic appointment </h2>
+                    <h2 >Add a Clinic appointment </h2>
                     <br />
                     <div className='rdgrp'>
                         <div className='rdbtn'>

@@ -61,9 +61,7 @@ const Clinics = () => {
           </div>
         </div>
       </div>
-      <div data-aos="fade-up">
-        {user && <AddClinic />}
-      </div>
+      {user && <AddClinic />}
     </Layout >
   )
 }
