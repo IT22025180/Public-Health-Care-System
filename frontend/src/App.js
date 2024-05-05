@@ -148,19 +148,31 @@ function App() {
 
         {/* Yasara */}
         <Route path='/raids' element={<Raids />} />
-        <Route path='/raidsubform' element={< RaidSubForm />} />
-        <Route path='/raidsubtable' element={< RaidSubTable />} />
-        <Route path='/RaidSubFormEdit/:_id/:location/:details/:sNote' element={<RaidSubFormEdit />} />
         <Route path='/RaidsHome' element={<RaidsHome />} />
-        <Route path='/RaidsAssign' element={<RaidsAssign />} />
-        <Route path='/RaidOfficerAssign' element={<RaidOfficerAssign />} />
+
+        {isLoggedIn && (
+          <>
+            <Route path='/raidsubform' element={< RaidSubForm />} />
+            <Route path='/raidsubtable' element={< RaidSubTable />} />
+            <Route path='/RaidSubFormEdit/:_id/:location/:details/:sNote' element={<RaidSubFormEdit />} />
+            <Route path='/RaidsAssign' element={<RaidsAssign />} />
+            <Route path='/RaidOfficerAssign' element={<RaidOfficerAssign />} />
+          </>
+        )}
+
 
         {/* Manuji */}
-        <Route path='/denguecamp' element={<DengueCampaigns />} />
         <Route path='/DengCampTab' element={<DengCampTab />} />
-        <Route path='/Editcampdetails/:_id/:venue/:date/:time/:etime/:drName' element={<Editcampdetails />} />
         <Route path='/DengueHomePage' element={<DengueHomePage />} />
         <Route path='/Denguemap' element={<Denguemap />} />
+
+        {isLoggedIn && (
+          <>
+            <Route path='/denguecamp' element={<DengueCampaigns />} />
+            <Route path='/Editcampdetails/:_id/:venue/:date/:time/:etime/:drName' element={<Editcampdetails />} />
+          </>
+        )}
+
 
         {/* Kaveesha */}
         <Route path='/mainMidwife' element={<MainMidwife />} />
