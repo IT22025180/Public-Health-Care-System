@@ -39,7 +39,7 @@ const Raidoffersforcomplain = () => {
 
   const addstaffdengue = async () => {
     try {
-      const response = await Axios.post("http://localhost:4000/api/addstaffdengue", {
+      const response = await Axios.post("http://localhost:4000/api/addraidofficer", {
         venue: stcampdata.venue,
         date: stcampdata.date,
         staffmember: staffmember,
