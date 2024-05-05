@@ -51,7 +51,7 @@ const Footer = () => {
                         <div className="social-links">
                             <a href="https://www.facebook.com" className='blue'><FaFacebook /></a>
                             <a href="https://www.twitter.com" className='blue'><FaTwitter /></a>
-                            <a href="https://www.youtube.com" className='red'><FaYoutube /></a>
+                            <a href="https://youtu.be/hdSMpcDsmmA?si=QEXjTB6qJAI4d5XE" className='red'><FaYoutube /></a>
                             <br />
                             <img src={fimg} alt='nikndpuimage' />
                         </div>
