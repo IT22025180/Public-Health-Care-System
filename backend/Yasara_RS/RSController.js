@@ -5,9 +5,14 @@ const { error } = require('console');
 const addRSub = async (req, res) => {
     try {
 
-        const { location, details, specialNotes } = req.body;
+        const { vname, vemail, vcno, vnic, vtype, location, details, specialNotes } = req.body;
         const newRSub = new RS({
 
+            vname,
+            vemail,
+            vcno,
+            vnic,
+            vtype,
             location,
             details,
             specialNotes

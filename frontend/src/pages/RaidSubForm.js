@@ -9,8 +9,18 @@ const RaidSubForm = () => {
     const [location, setLocation] = useState('');
     const [details, setDetails] = useState('');
     const [specialNotes, setSpecialNotes] = useState('');
+    const [vname, setvname] = useState('');
+    const [vemail, setvemail] = useState('');
+    const [vcno, setvcno] = useState(0);
+    const [vnic, setvnic] = useState('');
+    const [vtype, setvtype] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
 
+    /**vname,
+            vemail,
+            vcno,
+            vnic,
+            vtype, */
     const navigate = useNavigate();
 
     const validateSchema = Yup.object().shape({
@@ -24,6 +34,11 @@ const RaidSubForm = () => {
             await validateSchema.validate({ location, details, specialNotes }, { abortEarly: false });
 
             const response = await Axios.post('http://localhost:4000/api/addRS', {
+                vname,
+                vemail,
+                vcno,
+                vnic,
+                vtype,
                 location,
                 details,
                 specialNotes,
@@ -33,6 +48,11 @@ const RaidSubForm = () => {
             setLocation('');
             setDetails('');
             setSpecialNotes('');
+            setvname('');
+            setvemail('');
+            setvcno(0);
+            setvnic('');
+            setvtype('');
 
             // Show success message with SweetAlert
             Swal.fire({
@@ -61,6 +81,35 @@ const RaidSubForm = () => {
             <div className='bdtitle'>
                 <h3 className='he3'>Raid Submission</h3>
                 <form className='addRS'>
+
+                    <div className='input'>
+                        <label htmlFor='vname'>Vialator name</label>
+                        <input value={vname} onChange={e => setvname(e.target.value)} type='text' id='vname' autoComplete='off' placeholder='Vialator name' />
+                        {/* {errorMessage.location && <div className="text-danger">{errorMessage.location}</div>} */}
+                    </div>
+                    <div className='input'>
+                        <label htmlFor='vemail'>Vialator email</label>
+                        <input value={vemail} onChange={e => setvemail(e.target.value)} type='text' id='vemail' autoComplete='off' placeholder='Email' />
+                        {/* {errorMessage.location && <div className="text-danger">{errorMessage.location}</div>} */}
+                    </div>
+                    <div className='input'>
+                        <label htmlFor='vnic'>Vialator NIC</label>
+                        <input value={vnic} onChange={e => setvnic(e.target.value)} type='number' id='nic' autoComplete='off' placeholder='NIC' />
+                        {/* {errorMessage.location && <div className="text-danger">{errorMessage.location}</div>} */}
+                    </div>
+
+                    <div className='input'>
+                        <label htmlFor='vcno'>Vialator Contact-no</label>
+                        <input value={vcno} onChange={e => setvcno(e.target.value)} type='text' id='vcno' autoComplete='off' placeholder='Contact No' />
+                        {/* {errorMessage.location && <div className="text-danger">{errorMessage.location}</div>} */}
+                    </div>
+                    <div className='input'>
+                        <label htmlFor='vtype'>Vialation type</label>
+                        <select value={vtype} onChange={e => setvtype(e.target.value)}>
+                            <option>Food </option>
+                            <option>Dengue </option>
+                        </select>
+                    </div>
                     <div className='input'>
                         <label htmlFor='location'>Location</label>
                         <input value={location} onChange={e => setLocation(e.target.value)} type='text' id='location' autoComplete='off' placeholder='Location' />
