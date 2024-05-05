@@ -114,7 +114,7 @@ const Home = () => {
                 <br />
                 <h2>Give a complain</h2>
                 <p className='fs-5 text-center'>Is there any problem in your area to affect our health ? Click below button to add complains of unhealthy foods or dengue affected places</p>
-                <Button onClick={() => navigate(`/Complains`)}>Complains </Button>
+                <Button onClick={() => navigate(`/ComplainsHome`)}>Complains </Button>
               </div>
               <br />
 
