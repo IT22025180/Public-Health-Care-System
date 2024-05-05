@@ -9,6 +9,7 @@ const DengueCampaigns = ({ submitted, data }) => {
     const [venue, setvenue] = useState('');
     const [date, setdate] = useState('');
     const [time, settime] = useState('');
+    const [etime, setetime] = useState('');
     const [drName, setdrName] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
 
@@ -16,6 +17,7 @@ const DengueCampaigns = ({ submitted, data }) => {
         venue: Yup.string().required('Report ID is Required').matches(/^[A-Za-z\s]+$/, 'Name must contain only letters'),
         date: Yup.string().required('Date is Required'),
         time: Yup.string().required('Time is Required'),
+        etime: Yup.string().required('Time is Required'),
         drName: Yup.string().required('Name is Required').matches(/^[A-Za-z\s]+$/, 'Name must contain only letters'),
       });
 
@@ -27,6 +29,7 @@ const DengueCampaigns = ({ submitted, data }) => {
                 venue,
                 date,
                 time,
+                etime,
                 drName, 
                 },
                 { abortEarly: false }
@@ -36,6 +39,7 @@ const DengueCampaigns = ({ submitted, data }) => {
                 venue: venue,
                 date: date,
                 time: time,
+                etime: etime,
                 drName: drName,
             });
 
@@ -74,7 +78,7 @@ const DengueCampaigns = ({ submitted, data }) => {
                     {errorMessage.time && <div className="text-danger">{errorMessage.time}</div>}
                     <div className="input">
                         <label className='stime' htmlFor="etime">End Time</label>
-                        <input onChange={e => settime(e.target.value)} type="time" id="etime" name="etime" autoComplete='off' placeholder='End Time' />
+                        <input onChange={e => setetime(e.target.value)} type="time" id="etime" name="etime" autoComplete='off' placeholder='End Time' />
                     </div>
                     {errorMessage.etime && <div className="text-danger">{errorMessage.etime}</div>}
                     <div className="input">

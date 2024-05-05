@@ -8,6 +8,7 @@ import logo1 from '../webImages/logo1.png';
 import DengueCampaigns from './DengueCampaignSchedule';
 import { Alert, Button, Card, Col, Container, Form, Row } from 'react-bootstrap';
 import denimg3 from '../webImages/dengueimg3.jpeg';
+import Layout from '../components/Layout';
 
 
 const DengCampTab = () => {
@@ -49,17 +50,15 @@ const filteredcampdata = campdata.filter(camp=> {
 
 });
 
-const generateReport = () => {
-    if (filteredcampdata.length === 0) {
-        console.log("No camp data to generate report.");
-        return;
-    }
-
+const generateReport = (camp) => {
     const doc = new jsPDF();
+
+    // Add Sri Lankan national logo
     const logo = new Image();
     logo.src = logo1; // Use the imported logo image
     doc.addImage(logo, 'PNG', 6, 7, 20, 20); // Adjust the position and dimensions as needed
 
+   
     // Add Public Health Information System as the letterhead
     doc.setFontSize(12);
     doc.text('Public Health Information System', 70, 15); // Adjust the position as needed
@@ -76,23 +75,45 @@ const generateReport = () => {
     doc.setLineWidth(0.5);
     doc.line(5, 45, 205, 45);
 
-    // Leave summary topic
+    // Vaccine registration summary topic
     doc.setFontSize(18);
     doc.setTextColor(0, 0, 0); // Set text color to black
-    doc.text('Dengue Campaign Summary', 60, 60); // Adjust the position as needed
-    let y = 75;
+    doc.text('Notice-Dengue Campaign', 70, 60); // Adjust the position as needed
 
-    filteredcampdata.forEach((camp, index) => {
-        const campText = `Venue: ${camp.venue}\nDate: ${camp.date}\nStarting Time: ${camp.time}\nEnd Time: ${camp.etime}\nConducted By: ${camp.drName}\n\n`;
-        doc.text(campText, 10, y);
-        y += 30;
-    });
+    //appointment description
 
-    doc.save("camp_report.pdf");
-};
+    const campaignDescription =`
+    We are inform you to our upcoming dengue campaign on ${camp.date}.Please join us at 
+    ${camp.venue} from ${camp.time} to ${camp.etime}.This Dengue campaign conducted by
+    ${camp.drName}.Engage in activities such as eliminating breeding sites, educating 
+    others about dengue prevention, and helping with clean-up efforts.Please listen to 
+    instructions from our organizers and health professionals to ensure everyone's
+     safety and effectiveness. Feel free to ask any questions you may have about 
+     dengue prevention and control measures.We work together to combat the spread 
+    of dengue in our community.Let's work together to protect our community from dengue.
+    We look forward to seeing you there.
+    `;
 
+    doc.setFontSize(13);
+    doc.text(campaignDescription, 10, 75);
+
+    // Date and signature
+    const currentDate = new Date().toLocaleDateString('en-US');
+    doc.setFontSize(12);
+    doc.text(`Date: ${currentDate}`, 15, 170); 
+    doc.text('Signature:', 15, 180); 
+
+    // Save the PDF with a filename based on leave name
+    doc.save(`Dengue Campaign_${camp.drName}.pdf`);
+
+
+
+
+  
+   };
   return (
-    <div className='Dcamptable'>
+   <Layout>
+     <div className='Dcamptable'>
          <form className= "campsearch_bar">
          <input  placeholder="Search by date" type='text' value={searchQuery} onChange={e => setSearchQuery(e.target.value)} />
          </form>
@@ -127,7 +148,7 @@ const generateReport = () => {
                         <button onClick={()=> campDelete(camp._id)}>Delete</button>
                     </td>
                     <td className='reportButtons'>
-                    <button onClick={generateReport}>Generate Report</button>
+                    <button onClick={() => generateReport(camp)}>Generate Report</button>
                     </td>
                 </tr>))
             ):(
@@ -140,6 +161,7 @@ const generateReport = () => {
         </table>
 
         </div>
+   </Layout>
   )
 }
 

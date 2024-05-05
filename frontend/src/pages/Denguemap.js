@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
+import '../styles/denguemap.css';
+import Layout from '../components/Layout';
+
+
 
 const containerStyle = {
   width: '400px',
@@ -58,26 +62,31 @@ function MyComponent() {
   }, []);
 
   return isLoaded ? (
-    <GoogleMap
-      mapContainerStyle={containerStyle}
-      center={center}
-      zoom={8}
-      onLoad={onLoad}
-      onUnmount={onUnmount}
-      onClick={addMarker}
+    <Layout>
+    <div className="map-container"> {/* Apply the map-container CSS class here */}
+        <GoogleMap
+            mapContainerStyle={containerStyle}
+            center={center}
+            zoom={8}
+            onLoad={onLoad}
+            onUnmount={onUnmount}
+            onClick={addMarker}
+        >
+            {markers.map((marker) => (
+                <Marker
+                    key={marker.id}
+                    position={{ lat: marker.lat, lng: marker.lng }}
+                    onClick={() => toggleMarker(marker.id)}
+                    visible={marker.visible !== undefined ? marker.visible : true}
+                />
+            ))}
+            <></>
+        </GoogleMap>
+    </div>
+    </Layout>
+) : <></>;
 
-    >
-      {markers.map((marker) => (
-        <Marker
-          key={marker.id}
-          position={{ lat: marker.lat, lng: marker.lng }}
-          onClick={() => toggleMarker(marker.id)}
-          visible={marker.visible !== undefined ? marker.visible : true}
-        />
-      ))}
-      <></>
-    </GoogleMap>
-  ) : <></>
 }
 
 export default MyComponent;
+
