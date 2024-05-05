@@ -21,6 +21,7 @@ const routerDS = require('./Yethmi/AssignDengueRoute');
 const routerVS = require('./Yethmi_va/AssignVaccineRoute');
 const routerL = require('./Login/LoginRoute');
 const routerRA = require('./Yethmi_rad/AssignRaidsRoute');
+const routerRO = require('./Yasara_Raidofficer/RaidofficerRoute');
 
 dotenv.config();
 
@@ -96,3 +97,4 @@ app.use('/api', routerDS);
 app.use('/api', routerVS);
 app.use('/api', routerL);
 app.use('/api', routerRA);
+app.use('/api', routerRO); 
