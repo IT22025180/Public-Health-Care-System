@@ -1,13 +1,40 @@
 import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
-import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from '@mui/material';
+import { Button, Dialog, DialogTitle, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from '@mui/material';
 import { Link } from 'react-router-dom';
 import Layout from '../components/Layout';
+import '../styles/Complainstable.css';
+import Swal from 'sweetalert2';
+import { FaTimes } from 'react-icons/fa';
 
 const RaidOfficerAssign = () => {
   const [officerData, setOfficerData] = useState([]);
   const [complaintData, setComplaintData] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
+  const [openstaff, setopenStaff] = useState(false);
+  const [open, setopen] = useState(false);
+  const [compstaff, setcompstaff] = useState([]);
+  const [officer, setOfficer] = useState('');
+  const [selectedComplainID, setSelectedComplainId] = useState(null);
+
+
+  const popupstaffs = (compid) => {
+    setopenStaff(true);
+    setSelectedComplainId(compid);
+  }
+
+  const closepopupstaffs = () => {
+    setopenStaff(false);
+  }
+
+  const setStaff = (Complains) => {
+    setopen(true);
+    setcompstaff(Complains);
+  }
+
+  const closesetstaff = () => {
+    setopen(false);
+  }
 
   useEffect(() => {
     getOfficerData();
@@ -25,6 +52,34 @@ const RaidOfficerAssign = () => {
       });
   };
 
+  const selectedOfficers = officerData.filter(officer => officer.compID === selectedComplainID);
+
+  const addRaidOfficer = async () => {
+    try {
+      const response = await Axios.post("http://localhost:4000/api/addraidofficer", {
+        Name: compstaff.fname,
+        Type: compstaff.yaddress,
+        Address: compstaff.ctype,
+        officer: officer,
+        compID: compstaff._id,
+      });
+      console.log("Successfully", response.data);
+      setopen(false);
+      setOfficer('');
+
+      Swal.fire({
+        title: "Success!",
+        text: "Officer added successfully!",
+        icon: "success",
+        showConfirmButton: false,
+        timer: 1500
+      });
+
+    } catch (error) {
+      console.error("error", error);
+    }
+  }
+
   const getComplaintData = () => {
     Axios.get('http://localhost:4000/api/Complain')
       .then(response => {
@@ -40,8 +95,8 @@ const RaidOfficerAssign = () => {
     setSearchQuery(e.target.value);
   };
 
-  const filteredData = officerData.filter(officer => {
-    const fullName = `${officer.Name} ${officer.Type} ${officer.Address}`.toLowerCase();
+  const filteredData = selectedOfficers.filter(officer => {
+    const fullName = `${officer.officer}`.toLowerCase();
     return fullName.includes(searchQuery.toLowerCase());
   });
 
@@ -49,8 +104,79 @@ const RaidOfficerAssign = () => {
     <Layout>
       <div className='OfficerAssignTable'>
         <h2>Assign Officer</h2>
+
+        <TableContainer component={Paper}>
+          <Table border={1} cellPadding={10} cellSpacing={0}>
+            <TableHead>
+              <TableRow>
+                <TableCell>First name</TableCell>
+                <TableCell>Last Name</TableCell>
+                <TableCell>Mobile</TableCell>
+                <TableCell>Email</TableCell>
+                <TableCell>NIC</TableCell>
+                <TableCell>Address</TableCell>
+                <TableCell>Complain Type</TableCell>
+                <TableCell>Description</TableCell>
+                <TableCell>Area</TableCell>
+                <TableCell>Images</TableCell>
+                <TableCell>Actions</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {complaintData && complaintData.length > 0 ? (
+                complaintData.map((Complains) => (
+                  <TableRow key={Complains._id}>
+                    <TableCell className="fname-column">{Complains.fname}</TableCell>
+                    <TableCell className="lname-column">{Complains.lname} </TableCell>
+                    <TableCell>{Complains.mobile} </TableCell>
+                    <TableCell className="email-column">{Complains.email}</TableCell>
+                    <TableCell>{Complains.NIC}</TableCell>
+                    <TableCell className="yaddress-column">{Complains.yaddress}</TableCell>
+                    <TableCell>{Complains.ctype}</TableCell>
+                    <TableCell className="cdesc-column">{Complains.cdesc}</TableCell>
+                    <TableCell className="area-column">{Complains.area}</TableCell>
+                    <TableCell>
+                      {Array.isArray(Complains.images) ? (
+                        Complains.images.map((image, index) => (
+                          <div className="imge" key={index} style={{ width: "50px", height: "100px" }}>
+                            <img src={`data:${image.contentType};base64,${image.data}`} alt={`Image`} width={50} height={50} />
+                          </div>
+                        ))
+                      ) : (
+                        <div>No images available</div>
+                      )}
+                    </TableCell>
+
+
+                    <TableCell >
+                      <Button onClick={() => popupstaffs(Complains._id)}>View assign staffs</Button>
+                      <Button className="pdfButton" onClick={() => setStaff(Complains)}>Assign staff</Button>
+                    </TableCell>
+                  </TableRow>
+                ))
+              ) : (
+                <TableRow>
+                  <TableCell>You have no Complains data to assign staff</TableCell>
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </div>
+      <Dialog open={open}>
+        <p>First name : {compstaff.fname}</p>
+        <p>Addr : {compstaff.yaddress}</p>
+        <p>Type : {compstaff.ctype}</p>
+        <input type='text' value={officer} onChange={(e) => setOfficer(e.target.value)}
+        ></input>
+        <Button onClick={addRaidOfficer}>Submit</Button>
+        <Button onClick={closesetstaff}>Close</Button>
+      </Dialog>
+      <Dialog open={openstaff}>
+
+        <DialogTitle>Appointed officers <FaTimes onClick={closepopupstaffs} /></DialogTitle>
         <TextField
-          label="Search"
+          label="Search officer"
           variant="outlined"
           value={searchQuery}
           onChange={handleSearch}
@@ -77,34 +203,7 @@ const RaidOfficerAssign = () => {
             </TableBody>
           </Table>
         </TableContainer>
-        <TableContainer component={Paper}>
-          <Table border={1} cellPadding={10} cellSpacing={0}>
-            <TableHead>
-              <TableRow>
-                <TableCell>Complaint Details</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {complaintData.map((complaint) => (
-                <TableRow key={complaint._id}>
-                  <TableCell>{complaint.Name}</TableCell>
-                  <TableCell>{complaint.Address}</TableCell>
-                  <TableCell>{complaint.Type}</TableCell>
-                  <TableCell>{complaint.officer}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <Link to="/Raidoffersforcomplain">
-          <Button
-            variant="contained"
-            style={{ backgroundColor: '#ff5722', color: '#fff', marginTop: '10px' }}
-          >
-            Assign Staff
-          </Button>
-        </Link>
-      </div>
+      </Dialog>
     </Layout>
   );
 };
