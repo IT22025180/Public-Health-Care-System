@@ -87,30 +87,37 @@ function App() {
         <Route path='/' element={<Home />} />
 
         {/* Yethmi */}
-        <Route path='/staff' element={<Staff />} />
-        <Route path='/Leave' element={<Leave />} />
-        <Route path='/Dengueschedules' element={<Dengueschedules />} />
-        <Route path='/Vaccineschedules' element={<Vaccineschedules />} />
-        <Route path='/Raidsschedules' element={<Raidsschedules />} />
-        <Route path='/LeaveTable' element={<LeaveTable />} />
-        <Route path='/StaffLogin' element={<StaffLogin />} />
-        <Route path="/EditLeave/:id" element={<EditLeave />} />
-        <Route path='/DengueAssignTable' element={<DengueAssignTable />} />
-        <Route path='/VaccineAssignTable' element={<VaccineAssignTable />} />
-        <Route path='/RaidsAssign' element={<RaidsAssign />} />
-        <Route path='/EditLeave/:_id/:name/:staffid/:email/:position/:doleave/:leavestrt/:leaveend/:leaveType' element={<EditLeave />} />
+        {isLoggedIn && (
+          <>
+            <Route path='/staff' element={<Staff />} />
+            <Route path='/Leave' element={<Leave />} />
+            <Route path='/Dengueschedules' element={<Dengueschedules />} />
+            <Route path='/Vaccineschedules' element={<Vaccineschedules />} />
+            <Route path='/Raidsschedules' element={<Raidsschedules />} />
+            <Route path='/LeaveTable' element={<LeaveTable />} />
+            <Route path='/StaffLogin' element={<StaffLogin />} />
+            <Route path="/EditLeave/:id" element={<EditLeave />} />
+            <Route path='/DengueAssignTable' element={<DengueAssignTable />} />
+            <Route path='/VaccineAssignTable' element={<VaccineAssignTable />} />
+            <Route path='/RaidsAssign' element={<RaidsAssign />} />
+            <Route path='/EditLeave/:_id/:name/:staffid/:email/:position/:doleave/:leavestrt/:leaveend/:leaveType' element={<EditLeave />} />
+          </>
+        )}
 
         {/* Hima */}
-        <Route path='/vaccines' element={<Vaccines />} />
-        <Route path='/vaccinereg' element={<VaccineReg />} />
-        <Route path='/VaccineApp' element={<VaccineApp />} />
-        <Route path='/VaccineRequest' element={<VaccineRequest />} />
-        <Route path='/VaccineRegTab' element={<VaccineRegTab />} />
-        <Route path='/vaccineapptab' element={<VaccineAppTab />} />
-        <Route path='/VaccineRequestTab' element={<VaccineRequestTab />} />
-        <Route path='/EditVReg/:_id/:vname/:manf_date/:expi_Date/:quantity/:notes' element={<EditVReg />} />
-        <Route path='/EditVApp/:_id/:v_name/:quantity/:date/:location' element={<EditVApp />} />
-
+        {isLoggedIn && (
+          <>
+            <Route path='/vaccines' element={<Vaccines />} />
+            <Route path='/vaccinereg' element={<VaccineReg />} />
+            <Route path='/VaccineApp' element={<VaccineApp />} />
+            <Route path='/VaccineRequest' element={<VaccineRequest />} />
+            <Route path='/VaccineRegTab' element={<VaccineRegTab />} />
+            <Route path='/vaccineapptab' element={<VaccineAppTab />} />
+            <Route path='/VaccineRequestTab' element={<VaccineRequestTab />} />
+            <Route path='/EditVReg/:_id/:vname/:manf_date/:expi_Date/:quantity/:notes' element={<EditVReg />} />
+            <Route path='/EditVApp/:_id/:v_name/:quantity/:date/:location' element={<EditVApp />} />
+          </>
+        )}
         {/* Vanuja */}
         <Route path='/addpatients/:_id/:date/:venue/:ctype' element={<AddPatients />} />
         <Route path='/clinics' element={<Clinics />} />
@@ -134,17 +141,21 @@ function App() {
         <Route path='/Complainstable' element={<Complainstable />} />
 
         {/* Maleesha */}
-        <Route path='/Fine-And-court' element={<FineAndCourt />} />
-        <Route path='/Fine-And-court-Submit-Reports/:vname/:vemail/:vcno/:vnic/:vtype/:location/:details' element={<FCReportForm />} />
-        <Route path='/Fine-And-court-Document-Management' element={<FCDocManage />} />
-        <Route path='/F&CDocumentManagementTabe' element={<FCDMTable />} />
-        <Route path='/Fine-And-court-Analyse' element={<FCAnalyse />} />
-        <Route path='/FCDMEdit/:_id/:r_id/:ro_name/:date/:v_name/:v_type' element={<FCDMEdit />} />
-        <Route path='/FCRS' element={<FCRS />} />
-        <Route path='/FCNotify' element={<FCNotify />} />
-        <Route path="/FCRVEdit/:_id/:ro_name/:ro_email/:ro_mobile/:date/:v_location/:v_type/:v_description/:v_name/:v_nic/:v_mobile/:v_email" element={<FCRFEdit />} />
-        <Route path='/F&CDReportViolationTable' element={<FCRVTable />} />
-        <Route path='/FCSendEvi' element={<FCSendEvi />} />
+        {isLoggedIn && (
+          <>
+            <Route path='/Fine-And-court' element={<FineAndCourt />} />
+            <Route path='/Fine-And-court-Submit-Reports/:vname/:vemail/:vcno/:vnic/:vtype/:location/:details' element={<FCReportForm />} />
+            <Route path='/Fine-And-court-Document-Management' element={<FCDocManage />} />
+            <Route path='/F&CDocumentManagementTabe' element={<FCDMTable />} />
+            <Route path='/Fine-And-court-Analyse' element={<FCAnalyse />} />
+            <Route path='/FCDMEdit/:_id/:r_id/:ro_name/:date/:v_name/:v_type' element={<FCDMEdit />} />
+            <Route path='/FCRS' element={<FCRS />} />
+            <Route path='/FCNotify' element={<FCNotify />} />
+            <Route path="/FCRVEdit/:_id/:ro_name/:ro_email/:ro_mobile/:date/:v_location/:v_type/:v_description/:v_name/:v_nic/:v_mobile/:v_email" element={<FCRFEdit />} />
+            <Route path='/F&CDReportViolationTable' element={<FCRVTable />} />
+            <Route path='/FCSendEvi' element={<FCSendEvi />} />
+          </>
+        )}
 
         {/* Yasara */}
         <Route path='/raids' element={<Raids />} />
@@ -175,17 +186,20 @@ function App() {
 
 
         {/* Kaveesha */}
-        <Route path='/mainMidwife' element={<MainMidwife />} />
-        <Route path='/babyDetails' element={<BabyDetails />} />
-        <Route path='/babyVaccination' element={<BabyVaccination />} />
-        <Route path='/thriposha' element={<Thriposha />} />
-        <Route path='/Babytable' element={<Babytable />} />
-        <Route path='/Bvaccinetable' element={<Bvaccinetable />} />
-        <Route path='/Thriposhatable' element={<Thriposhatable />} />
-        <Route path='/Editbabydetails/:_id/:bname/:age/:weight/:co_no/:notes/:BDate/:Gname' element={<Editbabydetails />} />
-        <Route path='/Editbabyvaccination/:_id/:type/:esti_Date/:quantity' element={<Editbabyvaccination />} />
-        <Route path='/Edittriposha/:_id/:type/:esti_Date/:quantity' element={<Edittriposha />} />
-
+        {isLoggedIn && (
+          <>
+            <Route path='/mainMidwife' element={<MainMidwife />} />
+            <Route path='/babyDetails' element={<BabyDetails />} />
+            <Route path='/babyVaccination' element={<BabyVaccination />} />
+            <Route path='/thriposha' element={<Thriposha />} />
+            <Route path='/Babytable' element={<Babytable />} />
+            <Route path='/Bvaccinetable' element={<Bvaccinetable />} />
+            <Route path='/Thriposhatable' element={<Thriposhatable />} />
+            <Route path='/Editbabydetails/:_id/:bname/:age/:weight/:co_no/:notes/:BDate/:Gname' element={<Editbabydetails />} />
+            <Route path='/Editbabyvaccination/:_id/:type/:esti_Date/:quantity' element={<Editbabyvaccination />} />
+            <Route path='/Edittriposha/:_id/:type/:esti_Date/:quantity' element={<Edittriposha />} />
+          </>
+        )}
 
         <Route path='/login' element={<Lgportal />} />
         <Route path='/popup' element={<ModelPopup />} />
