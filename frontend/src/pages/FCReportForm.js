@@ -24,7 +24,6 @@ const FCReportForm = () => {
         ROcontact,
         date,
         description,
-
         evidence
       }, { abortEarly: false });
 
