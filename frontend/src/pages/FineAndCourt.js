@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import '../styles/FineAndCourt.css';
 import Layout from '../components/Layout';
 import { Link } from 'react-router-dom';
+import Aos from 'aos';
+import 'aos/dist/aos.css';
 
-import img1 from '../webImages/Reportimg.jpg';
 import img2 from '../webImages/AnalyseImg.png';
 import img3 from '../webImages/documentImg.jpg';
 import fnc from '../webImages/fnc.jpeg';
@@ -11,30 +12,34 @@ import fnc from '../webImages/fnc.jpeg';
 const FineAndCourt = () => {
   const cards = [
     {
-      id: 1,
-      title: 'Report Submit',
-      image: img1,
-      buttonText: 'Submit Report',
-      buttonLink: '/Fine-And-court-Submit-Reports'
-    },
-    {
       id: 2,
       title: 'Analyse Reports',
       image: img2,
       buttonText: 'Analyse Now',
-      buttonLink: '/Fine-And-court-Analyse'
+      buttonLink: '/Fine-And-court-Analyse',
+      aosAnimation: 'fade-right'
     },
     {
       id: 3,
       title: 'Manage Documents',
       image: img3,
       buttonText: 'Manage Documents',
-      buttonLink: '/Fine-And-court-Document-Management'
+      buttonLink: '/Fine-And-court-Document-Management',
+      aosAnimation: 'fade-left'
+
     }
   ];
 
+  const user = localStorage.getItem('token');
+
+  useEffect(() => {
+    Aos.init({ duration: 1000 }); // Initialize AOS with your desired options //anim
+  }, []);
+
   return (
     <Layout>
+      <div data-aos="fade-up" //anim
+        data-aos-anchor-placement="center-bottom">
       <div className="FCdis">
         <div className="FCabt">
         <h1>Welcome to the Fine and Court system</h1>
@@ -66,6 +71,8 @@ const FineAndCourt = () => {
         <Link to='/FCRS'><button>Report Status</button></Link>
         <Link to='/F&CDocumentManagementTabe'><button>Documents Table</button></Link>
       </div>
+      </div>
+      
     </Layout>
   );
 };

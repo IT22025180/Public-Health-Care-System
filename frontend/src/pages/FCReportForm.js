@@ -1,18 +1,19 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Layout from '../components/Layout';
 import Axios from 'axios';
 import Swal from "sweetalert2";
 import * as Yup from 'yup';
 import { useParams } from 'react-router-dom';
+import Aos from 'aos';
+import 'aos/dist/aos.css';
 
 const FCReportForm = () => {
 
-  const { vname, vemail, vcno, vnic, vtype, location } = useParams();
+  const { vname, vemail, vcno, vnic, vtype, location, details } = useParams();
   const [ROname, setROname] = useState('');
   const [Roemail, setRoemail] = useState('');
   const [ROcontact, setROcontact] = useState('');
   const [date, setdate] = useState('');
-  const [description, setdescription] = useState('');
   const [evidence, setEvidence] = useState([]);
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -23,8 +24,7 @@ const FCReportForm = () => {
         Roemail,
         ROcontact,
         date,
-        description,
-        evidence
+        evidence,
       }, { abortEarly: false });
 
       const formData = new FormData();
@@ -34,7 +34,7 @@ const FCReportForm = () => {
       formData.append('date', date);
       formData.append('v_location', location);
       formData.append('v_type', vtype);
-      formData.append('v_description', description);
+      formData.append('v_description', details);
       formData.append('v_name', vname);
       formData.append('v_email', vemail);
       formData.append('v_mobile', vcno);
@@ -93,11 +93,10 @@ const FCReportForm = () => {
         return selectedDate <= currentDate;
       }),
 
-    description: Yup.string().required('Description is Required').matches(/^[A-Za-z\s,.0-9]+$/, 'Description must contain only letters'),
-    evidence: Yup.array()
+    evidence: Yup.mixed()
+      .required('Evidence is required')
       .test('file-size', 'Please upload at most 4 files', (files) => files.length <= 4)
       .test('file-type', 'Only image files are allowed', (files) => files.every((file) => file.type.match(/^image\/(png|jpeg|jpg)$/)))
-      .required('Evidence is required'),
   });
 
 
@@ -145,86 +144,92 @@ const FCReportForm = () => {
     }
   };
 
+  useEffect(() => {
+    Aos.init({ duration: 1000 });
+  }, []);
+
   return (
     <Layout>
-      <div className="form-container">
-        <form className='form'>
-          <h2>Report Violation</h2>
-          <h4>Raid Officer Information</h4>
+      <div data-aos="zoom-in" //anim
+        data-aos-anchor-placement="center-bottom">
+        <div className="form-container">
+          <form className='form'>
+            <h2>Report Violation</h2>
+            <h4>Raid Officer Information</h4>
 
-          <div className='ROinfo'>
-            <div>
-              <label>Name:</label>
-              <input type="text" name="name" value={ROname} onChange={(e) => setROname(e.target.value)}
-                onKeyDown={handleKeyPress} />
-              {errorMessage.ROname && <div className="errorMessage">{errorMessage.ROname}</div>}
+            <div className='ROinfo'>
+              <div>
+                <label>Name:</label>
+                <input type="text" name="name" value={ROname} onChange={(e) => setROname(e.target.value)}
+                  onKeyDown={handleKeyPress} />
+                {errorMessage.ROname && <div className="errorMessage">{errorMessage.ROname}</div>}
+              </div>
+              <div>
+                <label>Email:</label>
+                <input type="email" name="email" value={Roemail} onChange={(e) => setRoemail(e.target.value)}
+                  onKeyDown={Email} />
+                {errorMessage.Roemail && <div className="errorMessage">{errorMessage.Roemail}</div>}
+              </div>
+              <div>
+                <label>Contact Number:</label>
+                <input type="text" name="contactNumber" value={ROcontact} onChange={(e) => setROcontact(e.target.value)}
+                  onKeyDown={contact} />
+                {errorMessage.ROcontact && <div className="errorMessage">{errorMessage.ROcontact}</div>}
+              </div>
+              <div>
+                <label>Date:</label>
+                <input type="date" name="date" value={date} onChange={(e) => setdate(e.target.value)} />
+                {errorMessage.date && <div className="errorMessage">{errorMessage.date}</div>}
+              </div>
             </div>
-            <div>
-              <label>Email:</label>
-              <input type="email" name="email" value={Roemail} onChange={(e) => setRoemail(e.target.value)}
-                onKeyDown={Email} />
-              {errorMessage.Roemail && <div className="errorMessage">{errorMessage.Roemail}</div>}
-            </div>
-            <div>
-              <label>Contact Number:</label>
-              <input type="text" name="contactNumber" value={ROcontact} onChange={(e) => setROcontact(e.target.value)}
-                onKeyDown={contact} />
-              {errorMessage.ROcontact && <div className="errorMessage">{errorMessage.ROcontact}</div>}
-            </div>
-            <div>
-              <label>Date:</label>
-              <input type="date" name="date" value={date} onChange={(e) => setdate(e.target.value)} />
-              {errorMessage.date && <div className="errorMessage">{errorMessage.date}</div>}
-            </div>
-          </div>
 
-          <h4>Violation Details</h4>
-          <div className='Vdetails'>
-            <div>
-              <label>Location:</label>
-              <input type="text" name="name" value={location}  readOnly/>
+            <h4>Violation Details</h4>
+            <div className='Vdetails'>
+              <div>
+                <label>Location:</label>
+                <input type="text" name="name" value={location} readOnly />
+              </div>
+              <div>
+                <label>Violation Type:</label>
+                <input type="text" name="name" value={vtype} readOnly />
+              </div>
+              <div>
+                <label>Violation Description:</label>
+                <input type="text" name="name" value={details} readOnly />
+                {errorMessage.description && <div className="errorMessage">{errorMessage.description}</div>}
+              </div>
             </div>
-            <div>
-              <label>Violation Type:</label>
-              <input type="text" name="name" value={vtype}  readOnly/>
-            </div>
-            <div>
-              <label>Violation Description:</label>
-              <textarea name="description" value={description} onChange={(e) => setdescription(e.target.value)}
-                onKeyDown={Address} />
-              {errorMessage.description && <div className="errorMessage">{errorMessage.description}</div>}
-            </div>
-          </div>
 
-          <h4>Violator Information</h4>
-          <div className='Vinfo'>
-            <div>
-              <label>Name:</label>
-              <input type="text" name="name" value={vname}  readOnly/>
+            <h4>Violator Information</h4>
+            <div className='Vinfo'>
+              <div>
+                <label>Name:</label>
+                <input type="text" name="name" value={vname} readOnly />
+              </div>
+              <div>
+                <label>Email:</label>
+                <input type="text" name="name" value={vemail} readOnly />
+              </div>
+              <div>
+                <label>Contact Number:</label>
+                <input type="text" name="name" value={vcno} readOnly />
+              </div>
+              <div>
+                <label>NIC Number:</label>
+                <input type="text" name="name" value={vnic} readOnly />
+              </div>
             </div>
-            <div>
-              <label>Email:</label>
-              <input type="text" name="name" value={vemail}  readOnly/>
-            </div>
-            <div>
-              <label>Contact Number:</label>
-              <input type="text" name="name" value={vcno}  readOnly/>
-            </div>
-            <div>
-              <label>NIC Number:</label>
-              <input type="text" name="name" value={vnic}  readOnly/>
-            </div>
-          </div>
 
-          <h4>Upload Evidence</h4>
-          <div>
-            <input type="file" name="photo" onChange={handleImageChange} multiple />
-            {errorMessage.evidence && <div className="errorMessage">{errorMessage.evidence}</div>}
-          </div>
-          <button className="button" type="button" onClick={addFCReport}>
-            Submit Report
-          </button>
-        </form>
+            <h4>Upload Evidence</h4>
+            <div>
+              <input type="file" name="photo" onChange={handleImageChange} multiple />
+              {errorMessage.evidence && <div className="errorMessage">{errorMessage.evidence}</div>}
+            </div>
+            <button className="button" type="button" onClick={addFCReport}>
+              Submit Report
+            </button>
+          </form>
+        </div>
       </div>
     </Layout>
   );
