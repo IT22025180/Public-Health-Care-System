@@ -138,7 +138,7 @@ function App() {
 
         {/* Maleesha */}
         <Route path='/Fine-And-court' element={<FineAndCourt />} />
-        <Route path='/Fine-And-court-Submit-Reports/:vname/:vemail/:vcno/:vnic/:vtype/:location' element={<FCReportForm />} />
+        <Route path='/Fine-And-court-Submit-Reports/:vname/:vemail/:vcno/:vnic/:vtype/:location/:details' element={<FCReportForm />} />
         <Route path='/Fine-And-court-Document-Management' element={<FCDocManage />} />
         <Route path='/F&CDocumentManagementTabe' element={<FCDMTable />} />
         <Route path='/Fine-And-court-Analyse' element={<FCAnalyse />} />

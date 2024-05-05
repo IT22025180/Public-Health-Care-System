@@ -182,11 +182,11 @@ const FCReportForm = () => {
           <div className='Vdetails'>
             <div>
               <label>Location:</label>
-              <p>{location}</p>
+              <input type="text" name="name" value={location}  readOnly/>
             </div>
             <div>
               <label>Violation Type:</label>
-              <p>{vtype}</p>
+              <input type="text" name="name" value={vtype}  readOnly/>
             </div>
             <div>
               <label>Violation Description:</label>
@@ -200,19 +200,19 @@ const FCReportForm = () => {
           <div className='Vinfo'>
             <div>
               <label>Name:</label>
-              <p>{vname}</p>
+              <input type="text" name="name" value={vname}  readOnly/>
             </div>
             <div>
               <label>Email:</label>
-              <p>{vemail}</p>
+              <input type="text" name="name" value={vemail}  readOnly/>
             </div>
             <div>
               <label>Contact Number:</label>
-              <p>{vcno}</p>
+              <input type="text" name="name" value={vcno}  readOnly/>
             </div>
             <div>
               <label>NIC Number:</label>
-              <p>{vnic}</p>
+              <input type="text" name="name" value={vnic}  readOnly/>
             </div>
           </div>
 

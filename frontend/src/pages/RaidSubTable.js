@@ -90,7 +90,6 @@ const RaidSubTable = () => {
                             <th>Vialation type</th>
                             <th>Location</th>
                             <th>Details</th>
-                            <th>Special Notes</th>
                             <th>Edit</th>
                             <th>Delete</th>
                             <th>Generate PDF</th>
@@ -108,7 +107,6 @@ const RaidSubTable = () => {
                                     <th>{submission.vtype}</th>
                                     <th>{submission.location}</th>
                                     <th>{submission.details}</th>
-                                    <th>{submission.specialNotes}</th>
                                     <tbody className='actionButtons'>
 
                                         <Link to={`/RaidSubFormEdit/${submission._id}/${submission.location}/${submission.details}/${submission.specialNotes}`}>
@@ -124,7 +122,7 @@ const RaidSubTable = () => {
                                     </tbody>
                                     <td>
                                         <button className="btn-primary" onClick={() => navigate(`/Fine-And-court-Submit-Reports/${submission.vname}/${submission.vemail}/${submission.vcno}
-                                        /${submission.vnic}/${submission.vtype}/${submission.location}`)}>FineAndCourt</button>
+                                        /${submission.vnic}/${submission.vtype}/${submission.location}/${submission.details}`)}>FineAndCourt</button>
                                     </td>
                                 </tr>
                             ))
