@@ -171,7 +171,6 @@ function App() {
           </>
         )}
 
-
         {/* Manuji */}
         <Route path='/DengCampTab' element={<DengCampTab />} />
         <Route path='/DengueHomePage' element={<DengueHomePage />} />
