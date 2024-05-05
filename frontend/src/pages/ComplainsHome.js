@@ -15,14 +15,16 @@ const ComplainsHome = () => {
       title: 'Complains Form',
       image: img1,
       buttonText: 'View',
-      buttonLink: '/Complains'
+      buttonLink: '/Complains',
+      aosAnimation: 'fade-right'
     }, 
     {
       id: 2,
       title: 'Complains report',
       image: img2,
       buttonText: 'View',
-      buttonLink: '/Complainstable'
+      buttonLink: '/Complainstable',
+      aosAnimation: 'fade-left'
     }
   ];
 
@@ -46,7 +48,7 @@ const ComplainsHome = () => {
             </div>
               <div className="Cccard-container">
                 {cards.map((card) => (
-                  <div key={card.id} className="Cccard">
+                  <div key={card.id} className="Cccard" data-aos={card.aosAnimation}>
                     <img src={card.image} alt={card.title} className="Cccard-image" />
                     <div className="Cccard-body">
                       <h2 className="Cccard-title">{card.title}</h2>

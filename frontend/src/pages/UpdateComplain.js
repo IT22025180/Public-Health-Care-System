@@ -85,7 +85,7 @@ const Upcomp = () => {
        
         {errorMessage && <Alert variant='danger'>{errorMessage}</Alert>}
 
-        <Form>
+        <Form className="comform">
           <Row>
             <Col>
               <Form.Group controlId="firstName">
