@@ -8,6 +8,8 @@ import { useNavigate } from 'react-router-dom';
 import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
 import * as Yup from 'yup';
 import { motion, useScroll } from 'framer-motion'
+import Aos from 'aos';
+import 'aos/dist/aos.css'; //anim
 
 const mapStyle = {
   height: "300px",
@@ -266,6 +268,19 @@ const ComplaintForm = () => {
     }
   }
 
+  const handleKeyPress3 = (e) => {
+    if (e.key === "Backspace") {
+      return;
+    }
+    if (/[!@#$%^&*()_+\=\[\]{};':"\\|<>\/?]/.test(e.key)) {
+      e.preventDefault();
+    }
+  }
+
+  useEffect(() => {
+    Aos.init({ duration: 1000 }); // Initialize AOS with your desired options //anim
+  }, []);
+
   return (
     <Layout>
       <motion.div className=""
@@ -275,10 +290,14 @@ const ComplaintForm = () => {
         transition={{ duration: 0.5 }}
 
       >
+
+<div data-aos="zoom-in" //anim
+        data-aos-anchor-placement="center-bottom">
+
         <Container>
           <h1>Public Health Complaint Form</h1>
 
-          <Form>
+          <Form className="comform">
             <Row>
               <Col>
                 <Form.Group controlId="firstName">
@@ -373,6 +392,7 @@ const ComplaintForm = () => {
                     type="text"
                     name="address"
                     value={formData.yaddress}
+                    onKeyDown={handleKeyPress3}
                     onChange={(e) =>
                       setFormData({ ...formData, yaddress: e.target.value })
                     }
@@ -498,6 +518,7 @@ const ComplaintForm = () => {
             </div>
           </Form>
         </Container>
+        </div>
       </motion.div>
     </Layout>
   );

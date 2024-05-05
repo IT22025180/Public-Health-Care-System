@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import '../styles/ComplainsHome.css';
 import Layout from '../components/Layout';
 
 import img1 from '../webImages/Reportimg.jpg';
 import img2 from '../webImages/documentImg.jpg';
+
+import Aos from 'aos';
+import 'aos/dist/aos.css'; //anim
 
 const ComplainsHome = () => {
   const cards = [
@@ -23,8 +26,16 @@ const ComplainsHome = () => {
     }
   ];
 
+  useEffect(() => {
+    Aos.init({ duration: 1000 }); // Initialize AOS with your desired options //anim
+  }, []);
+
   return (
       <Layout>  
+
+<div data-aos="fade-up" //anim
+        data-aos-anchor-placement="center-bottom">
+
             <div className="Cchome-page">
               <h1><b>Complains Management</b></h1>
               <div className="Cchome">
@@ -52,6 +63,7 @@ const ComplainsHome = () => {
           
 
 
+    </div>
     </div>
         </Layout>  
 

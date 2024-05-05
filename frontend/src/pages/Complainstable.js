@@ -8,6 +8,8 @@ import logo1 from '../webImages/logo1.png';
 import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import { FaEdit, FaTrash,FaFilePdf } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
+import Aos from 'aos';
+import 'aos/dist/aos.css'; //anim
 
 const Complainstable = () => {
     const navigate = useNavigate();
@@ -136,9 +138,17 @@ const Complainstable = () => {
         doc.save(`Complain_Summary_${Complains.fname}.pdf`);
     };
 
+    useEffect(() => {
+        Aos.init({ duration: 1000 }); // Initialize AOS with your desired options //anim
+      }, []);
+
     console.log(complainsdata.length);
     return (
         <Layout>
+
+            <div data-aos="zoom-in" //anim
+                data-aos-anchor-placement="center-bottom">
+
             <div className='Complainstable'>
 
 
@@ -203,6 +213,7 @@ const Complainstable = () => {
                         </TableBody>
                     </Table>
                 </TableContainer>
+            </div>
             </div>
         </Layout>
     )
