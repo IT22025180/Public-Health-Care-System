@@ -266,15 +266,29 @@ prev_a::before,
 }
 
 /* Styles for page containers a, b, and c */
-.page-container_a,
-.page-container_b,
+.page-container_a {
+  background-color: #f0f0f0;
+  padding: 200px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  background: #ffffff url(../webImages/new.jpg) center center/cover no-repeat;
+}
+.page-container_b{
+  background-color: #f0f0f0;
+  padding: 200px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  background: #ffffff url(../webImages/L2.jpg) center center/cover no-repeat;
+}
 .page-container_c {
   background-color: #f0f0f0;
   padding: 200px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
-  background: #ffffff url(../webImages/stback4.jpg) center center/cover no-repeat;
+  background: #ffffff url(../webImages/L3.jpg) center center/cover no-repeat;
 }
 
 /* Styles for vaccination content */

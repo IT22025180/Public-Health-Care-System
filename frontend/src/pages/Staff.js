@@ -56,6 +56,7 @@ const Staff = () => {
       <Layout>
         <div className="home-page">
           <h1>Staff Schedules</h1>
+
           <div className="Scard-container">
             {cards.map((card) => (
               <div key={card.id} className="Scard" data-aos={card.aosAnimation}>
@@ -69,6 +70,10 @@ const Staff = () => {
             ))}
           </div>
           <hr className="horizontal-line" data-aos="fade-up" />
+
+       
+          
+
 
           <div className="slider-container" data-aos="fade-up" >
             <div className="page-container_a">
