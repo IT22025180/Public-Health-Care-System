@@ -3,24 +3,18 @@ import Layout from '../components/Layout';
 import Axios from 'axios';
 import Swal from "sweetalert2";
 import * as Yup from 'yup';
+import { useParams } from 'react-router-dom';
 
-const FCReportForm = ({ submitted, data }) => {
+const FCReportForm = () => {
 
+  const { vname, vemail, vcno, vnic, vtype, location } = useParams();
   const [ROname, setROname] = useState('');
   const [Roemail, setRoemail] = useState('');
   const [ROcontact, setROcontact] = useState('');
   const [date, setdate] = useState('');
-  const [location, setlocation] = useState('');
-  const [foodViolation, setFoodViolation] = useState(false);
-  const [dengueViolation, setDengueViolation] = useState(false);
   const [description, setdescription] = useState('');
-  const [vName, setvName] = useState('');
-  const [vEmail, setvEmail] = useState('');
-  const [vContact, setvContact] = useState('');
-  const [vId, setvId] = useState('');
   const [evidence, setEvidence] = useState([]);
   const [errorMessage, setErrorMessage] = useState('');
-  const [violationType, setViolationType] = useState('');
 
   const addFCReport = async () => {
     try {
@@ -28,14 +22,9 @@ const FCReportForm = ({ submitted, data }) => {
         ROname,
         Roemail,
         ROcontact,
-        location,
         date,
-        violationType,
         description,
-        vName,
-        vEmail,
-        vContact,
-        vId,
+
         evidence
       }, { abortEarly: false });
 
@@ -45,12 +34,12 @@ const FCReportForm = ({ submitted, data }) => {
       formData.append('ro_mobile', ROcontact);
       formData.append('date', date);
       formData.append('v_location', location);
-      formData.append('v_type', foodViolation ? 'Food Violation' : 'Dengue Violation');
+      formData.append('v_type', vtype);
       formData.append('v_description', description);
-      formData.append('v_name', vName);
-      formData.append('v_email', vEmail);
-      formData.append('v_mobile', vContact);
-      formData.append('v_nic', vId);
+      formData.append('v_name', vname);
+      formData.append('v_email', vemail);
+      formData.append('v_mobile', vcno);
+      formData.append('v_nic', vnic);
 
       for (let i = 0; i < evidence.length; i++) {
         formData.append("images", evidence[i]);
@@ -104,13 +93,8 @@ const FCReportForm = ({ submitted, data }) => {
         const currentDate = new Date();
         return selectedDate <= currentDate;
       }),
-    location: Yup.string().required('Location is Required').matches(/^[A-Za-z\s,.0-9]+$/, 'Location must contain only letters and numbers'),
+
     description: Yup.string().required('Description is Required').matches(/^[A-Za-z\s,.0-9]+$/, 'Description must contain only letters'),
-    vName: Yup.string().required('Name is Required').matches(/^[A-Za-z\s]+$/, 'Name must contain only letters'),
-    vEmail: Yup.string().matches(/^[a-zA-Z0-9._%+-]+@gmail\.com$/, 'Invalid Email address').required('Email is Required'),
-    vContact: Yup.string().matches(/^0\d{9}$/, 'Invalid Contact Number').required('Contact Number is Required'),
-    vId: Yup.string().required('NIC is required').matches(/^\d{11}(V|v|\d)$/, 'Invalid NIC Number'),
-    violationType: Yup.string().required('Violation Type is required'),
     evidence: Yup.array()
       .test('file-size', 'Please upload at most 4 files', (files) => files.length <= 4)
       .test('file-type', 'Only image files are allowed', (files) => files.every((file) => file.type.match(/^image\/(png|jpeg|jpg)$/)))
@@ -142,20 +126,7 @@ const FCReportForm = ({ submitted, data }) => {
     }
   }
 
-  const NIC = (e) => {
-    if (e.key === "Backspace") {
-      return;
-    }
-    if (/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(e.key)) {
-      e.preventDefault();
-    }
-    if (!/[Vv0-9]/.test(e.key)) {
-      e.preventDefault();
-    }
-    if (e.target.value.length >= 12 && e.key !== "Backspace") {
-      e.preventDefault();
-    }
-  }
+
 
   const Address = (e) => {
     if (e.key === "Backspace") {
@@ -212,23 +183,16 @@ const FCReportForm = ({ submitted, data }) => {
           <div className='Vdetails'>
             <div>
               <label>Location:</label>
-              <input type="text" name="location" value={location} onChange={(e) => setlocation(e.target.value)}
-               onKeyDown={Address} />
-              {errorMessage.location && <div className="errorMessage">{errorMessage.location}</div>}
+              <p>{location}</p>
             </div>
             <div>
               <label>Violation Type:</label>
-              <input type="radio" id="foodViolation" name="violationType" value="foodViolation" checked={violationType === 'foodViolation'} onChange={() => { setFoodViolation(true); setDengueViolation(false); setViolationType('foodViolation'); }} />
-              Food Violation
-              <span style={{ marginRight: '40px' }}></span>
-              <input type="radio" id="dengueViolation" name="violationType" value="dengueViolation" checked={violationType === 'dengueViolation'} onChange={() => { setDengueViolation(true); setFoodViolation(false); setViolationType('dengueViolation'); }} />
-              Dengue Violation
-              {errorMessage.violationType && <div className="errorMessage">{errorMessage.violationType}</div>}
+              <p>{vtype}</p>
             </div>
             <div>
               <label>Violation Description:</label>
               <textarea name="description" value={description} onChange={(e) => setdescription(e.target.value)}
-               onKeyDown={Address} />
+                onKeyDown={Address} />
               {errorMessage.description && <div className="errorMessage">{errorMessage.description}</div>}
             </div>
           </div>
@@ -237,27 +201,19 @@ const FCReportForm = ({ submitted, data }) => {
           <div className='Vinfo'>
             <div>
               <label>Name:</label>
-              <input type="text" name="name" value={vName} onChange={(e) => setvName(e.target.value)}
-               onKeyDown={handleKeyPress} />
-              {errorMessage.vName && <div className="errorMessage">{errorMessage.vName}</div>}
+              <p>{vname}</p>
             </div>
             <div>
               <label>Email:</label>
-              <input type="email" name="email" value={vEmail} onChange={(e) => setvEmail(e.target.value)}
-                onKeyDown={Email} />
-              {errorMessage.vEmail && <div className="errorMessage">{errorMessage.vEmail}</div>}
+              <p>{vemail}</p>
             </div>
             <div>
               <label>Contact Number:</label>
-              <input type="text" name="contactNumber" value={vContact} onChange={(e) => setvContact(e.target.value)}
-                onKeyDown={contact} />
-              {errorMessage.vContact && <div className="errorMessage">{errorMessage.vContact}</div>}
+              <p>{vcno}</p>
             </div>
             <div>
               <label>NIC Number:</label>
-              <input type="text" name="idNumber" value={vId} onChange={(e) => setvId(e.target.value)}
-                onKeyDown={NIC} />
-              {errorMessage.vId && <div className="errorMessage">{errorMessage.vId}</div>}
+              <p>{vnic}</p>
             </div>
           </div>
 

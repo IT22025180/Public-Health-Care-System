@@ -94,6 +94,7 @@ const RaidSubTable = () => {
                             <th>Edit</th>
                             <th>Delete</th>
                             <th>Generate PDF</th>
+                            <th>FineAndCourt</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -121,6 +122,10 @@ const RaidSubTable = () => {
                                     <tbody>
                                         <button className="pdfButton" onClick={() => generatePDF(RaidSubTable)}>generatePDF</button>
                                     </tbody>
+                                    <td>
+                                        <button className="btn-primary" onClick={() => navigate(`/Fine-And-court-Submit-Reports/${submission.vname}/${submission.vemail}/${submission.vcno}
+                                        /${submission.vnic}/${submission.vtype}/${submission.location}`)}>FineAndCourt</button>
+                                    </td>
                                 </tr>
                             ))
                         ) : (
