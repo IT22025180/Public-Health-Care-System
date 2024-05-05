@@ -57,18 +57,7 @@ const Staff = () => {
         <div className="home-page">
           <h1>Staff Schedules</h1>
 
-          <div className="Scard-container">
-            {cards.map((card) => (
-              <div key={card.id} className="Scard" data-aos={card.aosAnimation}>
-                <img src={card.image} alt={card.title} className="Scard-image" />
-                <div className="Scard-body">
-                  <h2 className="Scard-title">{card.title}</h2>
-                  <p className="Scard-text">{card.description}</p>
-                  <a href={card.buttonLink} className="btnview">{card.buttonText}</a>
-                </div>
-              </div>
-            ))}
-          </div>
+         
           <hr className="horizontal-line" data-aos="fade-up" />
 
        
@@ -136,6 +125,19 @@ const Staff = () => {
                 </p>
               </div>
             </div>
+          </div>
+
+          <div className="Scard-container">
+            {cards.map((card) => (
+              <div key={card.id} className="Scard" data-aos={card.aosAnimation}>
+                <img src={card.image} alt={card.title} className="Scard-image" />
+                <div className="Scard-body">
+                  <h2 className="Scard-title">{card.title}</h2>
+                  <p className="Scard-text">{card.description}</p>
+                  <a href={card.buttonLink} className="btnview">{card.buttonText}</a>
+                </div>
+              </div>
+            ))}
           </div>
 
           <div className="apply-leave-box" data-aos="fade-up">
