@@ -27,7 +27,8 @@ const BabyDetails = ({ submitted, data }) => {
         weight: Yup.number().required('weight is required'),
         contactnumber: Yup.string().matches(/^0\d{9}$/, 'Invalid Contact Number').required('Contact Number is Required'),
         specialnotes: Yup.string().required('Special notes is Required').matches(/^[A-Za-z\s,.0-9]+$/, 'Special notes must contain only letters'),
-
+        BirthDate:Yup.date().required('Birth date is required'),
+        GardianName: Yup.string().required('Gardian name is Required').matches(/^[A-Za-z\s]+$/, 'Gardian Name must contain only letters')
     });
 
 
@@ -141,11 +142,13 @@ const BabyDetails = ({ submitted, data }) => {
                         <div className='input'>
                             <label htmlFor='birthdate'>Birth Date</label>
                             <input value={BirthDate} onChange={e => setbbirthdate(e.target.value)} type='date' id='birthdate' autoComplete='off' placeholder='Birthdate' />
+                            {errorMessage.BirthDate && <div className="text-danger">{errorMessage.BirthDate}</div>}
                         </div>
 
                         <div>
                             <label htmlFor='gardian name'>Gardian name</label>
                             <input value={GardianName} onChange={e => setGardian(e.target.value)} type='text' id='Gardian name' autoComplete='off' placeholder='gardian name' />
+                            {errorMessage.GardianName && <div className="text-danger">{errorMessage.GardianName}</div>}
                         </div>
 
                         <button onClick={addbaby} className='bddsave' >Save</button>
