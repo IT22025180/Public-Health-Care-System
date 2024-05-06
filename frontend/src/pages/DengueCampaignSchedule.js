@@ -5,7 +5,7 @@ import Axios from 'axios';
 import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
 
-const DengueCampaigns = ({ submitted, data }) => {
+const DengueCampaigns = () => {
     const [venue, setvenue] = useState('');
     const [date, setdate] = useState('');
     const [time, settime] = useState('');
@@ -21,7 +21,10 @@ const DengueCampaigns = ({ submitted, data }) => {
         drName: Yup.string().required('Name is Required').matches(/^[A-Za-z\s]+$/, 'Name must contain only letters'),
       });
 
-    const addcamp = async () => {
+    const addcamp = async (e) => {
+
+        e.preventDefault();
+
         try {
 
             await validateSchema.validate(
