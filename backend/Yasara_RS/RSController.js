@@ -41,9 +41,15 @@ const updateRSub = async (req, res) => {
 
     try {
 
-        const { _id, location, details, specialNotes } = req.body;
+        const { _id, vname, vemail, vcno, vnic, vtype, location, details, specialNotes } = req.body;
 
         const updatedRS = await RS.findOneAndUpdate({ _id }, {
+            _id,
+            vname,
+            vemail,
+            vcno,
+            vnic,
+            vtype,
             location,
             details,
             specialNotes

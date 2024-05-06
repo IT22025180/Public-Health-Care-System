@@ -165,7 +165,7 @@ function App() {
           <>
             <Route path='/raidsubform' element={< RaidSubForm />} />
             <Route path='/raidsubtable' element={< RaidSubTable />} />
-            <Route path='/RaidSubFormEdit/:_id/:location/:details/:sNote' element={<RaidSubFormEdit />} />
+            <Route path='/RaidSubFormEdit/:_id/:vname/:vemail/:vcno/:vnic/:vtype/:location/:details' element={<RaidSubFormEdit />} />
             <Route path='/RaidsAssign' element={<RaidsAssign />} />
             <Route path='/RaidOfficerAssign' element={<RaidOfficerAssign />} />
           </>

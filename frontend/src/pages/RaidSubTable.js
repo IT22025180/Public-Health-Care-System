@@ -109,7 +109,8 @@ const RaidSubTable = () => {
                                     <th>{submission.details}</th>
                                     <tbody className='actionButtons'>
 
-                                        <Link to={`/RaidSubFormEdit/${submission._id}/${submission.location}/${submission.details}/${submission.specialNotes}`}>
+                                        <Link to={`/RaidSubFormEdit/${submission._id}/${submission.vname}/${submission.vemail}/${submission.vcno}
+                                        /${submission.vnic}/${submission.vtype}/${submission.location}/${submission.details}`}>
                                             <button>Edit</button>
                                         </Link>
 
