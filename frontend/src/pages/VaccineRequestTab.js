@@ -25,6 +25,41 @@ const VaccineRequestTab = () => {
           })
       };
 
+
+      //delete
+
+    const deletevaccinereqdata = (id) => {
+        // Display SweetAlert confirmation dialog
+   Swal.fire({
+       title: "Are you sure?",
+       text: "You won't be able to revert this!",
+       icon: "warning",
+       showCancelButton: true,
+       confirmButtonColor: "#3085d6",
+       cancelButtonColor: "#d33",
+       confirmButtonText: "Yes, delete it!"
+   }).then((result) => {
+       if (result.isConfirmed) {
+           // If confirmed, proceed with deletion
+       Axios.post('http://localhost:4000/api/deleteVacRq',{_id: id})
+       .then(response =>{
+           console.log('Vaccine Data deleted successfully');
+           setvacreqData(prevData => prevData.filter(vacreqData => vacreqData._id !== id));
+           // Display success message
+           Swal.fire({
+               title: "Deleted!",
+               text: "Your file has been deleted.",
+               icon: "success"
+       });
+   })
+   
+       .catch(error =>{
+           console.error('Error deleting vaccinereqdata:',error);
+       });
+   }
+   });
+};
+
   return (
    <Layout>
      <div className='VaccineReqTab'>
@@ -39,6 +74,7 @@ const VaccineRequestTab = () => {
                     <th>Estimated date</th>
                     <th>qunatity</th>
                     <th>status</th>
+                    <th>Delete</th>
                 </tr>
             </thead>
             <tbody>
@@ -51,9 +87,13 @@ const VaccineRequestTab = () => {
                             <td>{vacreqData.notification}</td>
 
 
-                       
+                            <td onClick={() => deletevaccinereqdata(vacreqData._id)} className='deleteButtons'>
+                            <button >Delete</button>
+                        </td>
     
                     </tr>
+
+                    
 
                     ))
 

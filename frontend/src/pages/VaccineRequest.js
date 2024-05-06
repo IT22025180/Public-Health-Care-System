@@ -84,6 +84,7 @@ const VaccineRequest = () => {
                                 <th>Estimated Date</th>
                                 <th>Quantity</th>
                                 <th>Status</th>
+                                
 
                             </tr>
                         </thead>
@@ -97,6 +98,7 @@ const VaccineRequest = () => {
                                         <td className='actionButtons'>
                                             <button onClick={() => functionPopup(bvaccine)}>Status</button>
                                         </td>
+                                       
                                     </tr>
                                 ))
                             ) : (
