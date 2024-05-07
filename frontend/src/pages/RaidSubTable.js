@@ -4,6 +4,9 @@ import Layout from '../components/Layout';
 import Axios from 'axios';
 import jsPDF from 'jspdf';
 import { Link, useNavigate } from 'react-router-dom';
+import logo1 from '../webImages/logo1.png'; 
+import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
+import { FaEdit, FaFilePdf, FaTrash } from 'react-icons/fa';
 
 
 const RaidSubTable = () => {
@@ -42,32 +45,77 @@ const RaidSubTable = () => {
             });
     };
 
+//pdf generation  
 
-    const generatePDF = () => {
-        const doc = new jsPDF();
-        let yPos = 20;
+const generatePDF = (RaidSubForm) => {
+    const doc = new jsPDF();
 
-        doc.text("Raid Submission Report", 20, 10);
+    // Add Sri Lankan national logo
+    const logo = new Image();
+    logo.src = logo1; // Use the imported logo image
+    doc.addImage(logo, 'PNG', 6, 7, 20, 20); // Adjust the position and dimensions as needed
 
-        submissiondata.forEach((submission, index) => {
-            yPos = yPos + 10;
-            doc.text(`Location: ${submission.location}`, 20, yPos);
-            yPos = yPos + 10;
-            doc.text(`Details: ${submission.details}`, 20, yPos);
-            yPos = yPos + 10;
-            doc.text(`Special Notes: ${submission.specialNotes}`, 20, yPos);
-            yPos = yPos + 10;
+   
+    // Add Public Health Information System as the letterhead
+    doc.setFontSize(12);
+    doc.text('Public Health Information System', 70, 15); // Adjust the position as needed
+    doc.text('Suwasiripaya, No. 385, Rev. Baddegama Wimalawansa Thero Mawatha,', 70, 20);
+    doc.text('Colombo 10, Sri Lanka.', 70, 25);
+    doc.text('Tel: 112 694033, 112 675011, 112 675449, 112 693493', 70, 30);
 
-            if (index !== submissiondata.length - 1 && yPos > 250) {
-                doc.addPage();
-                yPos = 20;
-            }
-        });
+    // Add page border
+    doc.setDrawColor(0);
+    doc.setLineWidth(0.5);
+    doc.rect(0, 0, doc.internal.pageSize.width, doc.internal.pageSize.height, 'S');
 
-        doc.save("RaidSubmissionReport.pdf");
-        // Reset the submission data back to original after generating PDF
-        getsubmissiondata();
-    };
+    // Add horizontal line
+    doc.setLineWidth(0.5);
+    doc.line(5, 45, 205, 45);
+
+    // Raid submission  summary topic
+    doc.setFontSize(18);
+    doc.setTextColor(0, 0, 0); // Set text color to black
+    doc.text('Raid Submission Summery', 70, 60); // Adjust the position as needed
+
+    //submission description
+
+    const SubDescription =`
+    
+     A raid submission form is a structured document utilized by law enforcement agencies, 
+     regulatory bodies, or authorized entities to record and document details related to raids or
+     enforcement actions conducted. It serves as a comprehensive record of the raid, providing 
+     essential information for review, analysis, and potential legal proceedings. Here's a 
+     description of the key components typically found in a raid submission form:
+
+     Vialator Name: ${RaidSubForm.vname}
+     Vialator Email: ${RaidSubForm.vemail}
+     Vialator NIC (National Identity Card): ${RaidSubForm.vnic}
+     Vialator Contact Number:${RaidSubForm.vcno}
+     Violation Type:${RaidSubForm.vtype}
+     Location:${RaidSubForm.location}
+     Details:${RaidSubForm.details}
+     
+
+     In summary, a raid submission form is a vital tool for documenting and reporting raids or
+     enforcement actions conducted by authorities. It helps ensure that all relevant details of the 
+     operation are recorded accurately, facilitating accountability, analysis, and follow-up 
+     actions as necessary. The form serves as an essential part of the documentation and legal 
+     process surrounding law enforcement activities.
+    
+    `;
+
+    doc.setFontSize(12);
+    doc.text(SubDescription, 15, 75);
+
+    // Date and signature
+    const currentDate = new Date().toLocaleDateString('en-US');
+    doc.setFontSize(12);
+    doc.text(`Date: ${currentDate}`, 15, 170); 
+    doc.text('Signature:', 15, 180); 
+
+    // Save the PDF with a filename based on leave name
+    doc.save(`RaidSubmission_${RaidSubForm.vname}.pdf`);
+};
     // Filter submission data based on search query
     const filteredsubmissiondata = submissiondata.filter(Location => {
         return Location.vname.toLowerCase().includes(searchQuery.toLowerCase());
@@ -75,65 +123,65 @@ const RaidSubTable = () => {
 
     return (
         <Layout>
-            <div className='RaidSubmissionTable'>
+            <div className='adminClinic'>
                 <div className="search">
                     <input placeholder="Search name" type='text' value={searchQuery} onChange={e => setSearchQuery(e.target.value)} />
                 </div>
 
-                <table border={1} cellPadding={10} cellSpacing={0}>
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Contact No</th>
-                            <th>Vialator NIC</th>
-                            <th>Vialation type</th>
-                            <th>Location</th>
-                            <th>Details</th>
-                            <th>Edit</th>
-                            <th>Delete</th>
-                            <th>Generate PDF</th>
-                            <th>FineAndCourt</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+                <Table border={1} cellPadding={10} cellSpacing={0}>
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>Name</TableCell>
+                            <TableCell>Email</TableCell>
+                            <TableCell>Contact No</TableCell>
+                            <TableCell>Vialator NIC</TableCell>
+                            <TableCell>Vialation type</TableCell>
+                            <TableCell>Location</TableCell>
+                            <TableCell>Details</TableCell>
+                            <TableCell>Edit</TableCell>
+                            <TableCell>Delete</TableCell>
+                            <TableCell>Generate PDF</TableCell>
+                            <TableCell>FineAndCourt</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
                         {filteredsubmissiondata && filteredsubmissiondata.length > 0 ? (
                             filteredsubmissiondata.map(submission => (
-                                <tr key={submission._id}>
-                                    <th>{submission.vname}</th>
-                                    <th>{submission.vemail}</th>
-                                    <th>{submission.vcno}</th>
-                                    <th>{submission.vnic}</th>
-                                    <th>{submission.vtype}</th>
-                                    <th>{submission.location}</th>
-                                    <th>{submission.details}</th>
-                                    <tbody className='actionButtons'>
+                                <TableRow key={submission._id}>
+                                    <TableCell>{submission.vname}</TableCell>
+                                    <TableCell>{submission.vemail}</TableCell>
+                                    <TableCell>{submission.vcno}</TableCell>
+                                    <TableCell>{submission.vnic}</TableCell>
+                                    <TableCell>{submission.vtype}</TableCell>
+                                    <TableCell>{submission.location}</TableCell>
+                                    <TableCell>{submission.details}</TableCell>
+                                    <TableCell className='actionButtons'>
 
                                         <Link to={`/RaidSubFormEdit/${submission._id}/${submission.vname}/${submission.vemail}/${submission.vcno}
                                         /${submission.vnic}/${submission.vtype}/${submission.location}/${submission.details}`}>
-                                            <button>Edit</button>
+                                            <button><FaEdit/></button>
                                         </Link>
 
-                                    </tbody>
-                                    <th className='deleteButtons'>
-                                        <button onClick={() => submissionDelete(submission._id)}>Delete</button>
-                                    </th>
-                                    <tbody>
-                                        <button className="pdfButton" onClick={() => generatePDF(RaidSubTable)}>generatePDF</button>
-                                    </tbody>
-                                    <td>
+                                    </TableCell>
+                                    <TableCell className='deleteButtons'>
+                                        <button onClick={() => submissionDelete(submission._id)}><FaTrash/></button>
+                                    </TableCell>
+                                    <TableCell>
+                                        <button className="pdfButton" onClick={() => generatePDF(RaidSubTable)}><FaFilePdf/></button>
+                                    </TableCell>
+                                    <TableCell>
                                         <button className="btn-primary" onClick={() => navigate(`/Fine-And-court-Submit-Reports/${submission.vname}/${submission.vemail}/${submission.vcno}
                                         /${submission.vnic}/${submission.vtype}/${submission.location}/${submission.details}`)}>FineAndCourt</button>
-                                    </td>
-                                </tr>
+                                    </TableCell>
+                                </TableRow>
                             ))
                         ) : (
-                            <tr>
+                            <TableRow>
                                 <th colSpan="5"><center>You have no submission data.</center></th>
-                            </tr>
+                            </TableRow>
                         )}
-                    </tbody>
-                </table>
+                    </TableBody>
+                </Table>
 
             </div>
         </Layout>
