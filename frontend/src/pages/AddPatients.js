@@ -10,6 +10,7 @@ import jspdf from 'jspdf';
 import { motion } from 'framer-motion';
 import * as Yup from 'yup';
 import logo1 from '../webImages/logo1.png';
+import { FaFilePdf } from 'react-icons/fa';
 
 const AddPatients = () => {
 
@@ -249,7 +250,7 @@ const AddPatients = () => {
 
             <div className='btns'>
               <Button className='btnaddp' onClick={addPatient}>Confirm appointment</Button>
-              <Button className='btnaddp' onClick={confirmWithGetPDF}>Confirm with get pdf</Button>
+              <Button className='btnaddp' onClick={confirmWithGetPDF}>Confirm with get pdf <FaFilePdf /></Button>
               <Button className='btnaddp' onClick={closepopup}>Decline</Button>
             </div>
           </Form>
