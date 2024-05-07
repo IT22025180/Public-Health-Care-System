@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Layout from '../components/Layout';
 import Axios from 'axios';
 import { motion } from 'framer-motion';
+import '../styles/AdminClinic.css';
 
 const Dengue = () => {
     const [dgClinics, setDgClinics] = useState([]);

@@ -139,7 +139,7 @@ const VaccineAppTab = () => {
     };
     return (
         <Layout>
-            <div className='VaccineAppTab'>
+            <div className='adminClinic'>
 
 
                 <Table border={1} cellPadding={10} cellSpacing={0}>

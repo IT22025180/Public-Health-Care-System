@@ -5,6 +5,7 @@ import Layout from '../components/Layout';
 import { useNavigate } from 'react-router-dom';
 import Aos from 'aos';
 import 'aos/dist/aos.css';
+import '../styles/AdminClinic.css';
 
 
 const Dental = () => {
