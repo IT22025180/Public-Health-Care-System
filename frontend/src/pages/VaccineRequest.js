@@ -3,7 +3,7 @@ import Layout from "../components/Layout";
 import '../styles/VaccineRequest.css'
 import Axios from 'axios';
 import Swal from 'sweetalert2';
-import { Dialog, DialogTitle, DialogContent } from '@mui/material';
+import { Dialog, DialogTitle, DialogContent, Table, TableHead, TableRow, TableBody, TableCell } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 const VaccineRequest = () => {
@@ -76,38 +76,38 @@ const VaccineRequest = () => {
     return (
         <>
             <Layout>
-                <div className='Bvaccinetable'>
-                    <table border={1} cellPadding={10} cellSpacing={0}>
-                        <thead>
-                            <tr>
-                                <th>Vaccine Type</th>
-                                <th>Estimated Date</th>
-                                <th>Quantity</th>
-                                <th>Status</th>
+                <div className='adminClinic'>
+                    <Table border={1} cellPadding={10} cellSpacing={0}>
+                        <TableHead>
+                            <TableRow>
+                                <TableCell>Vaccine Type</TableCell>
+                                <TableCell>Estimated Date</TableCell>
+                                <TableCell>Quantity</TableCell>
+                                <TableCell>Status</TableCell>
                                 
 
-                            </tr>
-                        </thead>
-                        <tbody>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
                             {bvaccinedata && bvaccinedata.length > 0 ? (
                                 bvaccinedata.map((bvaccine) => (
-                                    <tr key={bvaccine._id}>
-                                        <td>{bvaccine.type}</td>
-                                        <td>{bvaccine.esti_Date}</td>
-                                        <td>{bvaccine.quantity}</td>
-                                        <td className='actionButtons'>
+                                    <TableRow key={bvaccine._id}>
+                                        <TableCell>{bvaccine.type}</TableCell>
+                                        <TableCell>{bvaccine.esti_Date}</TableCell>
+                                        <TableCell>{bvaccine.quantity}</TableCell>
+                                        <TableCell className='actionButtons'>
                                             <button onClick={() => functionPopup(bvaccine)}>Status</button>
-                                        </td>
+                                        </TableCell>
                                        
-                                    </tr>
+                                    </TableRow>
                                 ))
                             ) : (
-                                <tr>
-                                    <td colSpan="5">You have no baby vaccine data</td>
-                                </tr>
+                                <TableRow>
+                                    <TableCell colSpan="5">You have no baby vaccine data</TableCell>
+                                </TableRow>
                             )}
-                        </tbody>
-                    </table>
+                        </TableBody>
+                    </Table>
                 </div>
                 <Dialog open={open} onClose={closePopup}>
                     <DialogTitle>Status</DialogTitle>

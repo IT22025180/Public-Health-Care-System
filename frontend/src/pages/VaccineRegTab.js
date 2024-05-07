@@ -8,6 +8,7 @@ import logo1 from '../webImages/logo1.png';
 import '../styles/VaccineRegTab.css'
 import { Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
 import { FaEdit, FaTrash } from 'react-icons/fa';
+import '../styles/AdminClinic.css';
 
 const VaccineRegTab = () => {
   const [vaccinedata, setvaccinedata] = useState([]);
@@ -126,7 +127,7 @@ const VaccineRegTab = () => {
 
   return (
     <Layout>
-      <div className='VaccineRegTab'>
+      <div className='adminClinic'>
         <form>
           <label>Search</label>
           <input type='text' value={searchQuery} onChange={e => setSearchQuery(e.target.value)} />

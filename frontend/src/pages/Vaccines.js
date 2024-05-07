@@ -8,6 +8,8 @@ import image1 from '../webImages/vac1.jpg'
 import image2 from '../webImages/vac2.jpg'
 import image3 from '../webImages/vac3.jpg'
 import vaccmain from '../webImages/vaccmain.png';
+import vac6 from '../webImages/vac6.jpg';
+
 
 const Vaccines = () => {
 
@@ -85,6 +87,23 @@ const Vaccines = () => {
             </center></p>
           </div>
           <img src={vaccmain} alt="Description of the image" className="vaccmain" />
+        </div>
+
+
+        <div className="vachome" data-aos="fade-up">
+        <img src={vac6} alt="Description of the image" className="vaccmain" />
+          <div className="vhome">
+            <h2 data-aos="fade-up">Vaccination Requests </h2>
+            <h3>Check all the vaccination requests and Information</h3>
+            <p data-aos="fade-up"><center>VMedical health professionals play a pivotal role in vaccine administration,
+            starting with the assessment of individuals' eligibility based on various factors.<br></br>
+              TThey educate individuals about the vaccine, address concerns, and obtain informed consent before administering it. 
+              Precise documentation of vaccine details is maintained for monitoring purposes. <br></br>
+              <button onClick={() => navigate('/VaccineRequestTab')} className="view-detail-btn">View requested vaccines</button>
+
+            </center></p>
+          </div>
+          
         </div>
 
 

@@ -8,6 +8,7 @@ import jsPDF from 'jspdf';
 import logo1 from '../webImages/logo1.png';
 import { Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
 import { FaEdit, FaTrash } from 'react-icons/fa';
+import '../styles/AdminClinic.css';
 
 const VaccineAppTab = () => {
     //state variables
