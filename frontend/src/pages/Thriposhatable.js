@@ -125,7 +125,7 @@ const confirmDelete = (id) => {
   return (
     <Layout>
 
-    <div className='thriposhatable'>
+    <div className='adminClinic'>
         <TableContainer component={Paper}>
 
         <Table border ={1} cellPadding={10} cellSpacing={0}>

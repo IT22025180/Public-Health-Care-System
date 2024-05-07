@@ -69,7 +69,7 @@ const filteredBabyData = babydata.filter(baby => {
 
   return (
     <Layout>
-    <div className='babytable'>
+    <div className='adminClinic'>
         
         <form className= "babysearch_bar">
         
