@@ -176,7 +176,7 @@ const LeaveTable = () => {
 
   return (
     <Layout>
-      <div className='adminClinic'>
+      <div className='LeaveTable'>
         <div className="search-container">
           <input
             type="text"
