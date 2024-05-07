@@ -27,6 +27,13 @@ const RaidSubForm = () => {
         location: Yup.string().required('Location is required').matches(/^[A-Za-z\s,.0-9]+$/, 'Location must contain only letters'),
         details: Yup.string().required('Details is required').matches(/^[A-Za-z\s]+$/, 'Details must contain only letters'),
         specialNotes: Yup.string().required('Special Notes is required').matches(/^[A-Za-z\s,.0-9]+$/, 'Special Notes must contain only letters'),
+        vemail: Yup.string().required('Email is Required').matches(/^[a-zA-Z0-9._%+-]+@gmail\.com$/, 'Invalid Gmail address'),
+        vname: Yup.string().required('Vialator name is required').matches(/^[A-Za-z\s,.0-9]+$/, 'Vialator name must contain only letters'),
+        vcno: Yup.string().required('Contact number is Required').matches(/^0\d{9}$/, 'Invalid Contact Number'),
+        vnic: Yup.string().required('NIC is required').matches(/^\d{11}(V|v|\d)$/, 'Invalid NIC Number'),
+        
+
+
     });
 
     const addRS = async () => {
@@ -85,23 +92,23 @@ const RaidSubForm = () => {
                     <div className='input'>
                         <label htmlFor='vname'>Vialator name</label>
                         <input value={vname} onChange={e => setvname(e.target.value)} type='text' id='vname' autoComplete='off' placeholder='Vialator name' />
-                        {/* {errorMessage.location && <div className="text-danger">{errorMessage.location}</div>} */}
+                        {errorMessage.vname && <div className="text-danger">{errorMessage.vname}</div>}
                     </div>
                     <div className='input'>
                         <label htmlFor='vemail'>Vialator email</label>
                         <input value={vemail} onChange={e => setvemail(e.target.value)} type='text' id='vemail' autoComplete='off' placeholder='Email' />
-                        {/* {errorMessage.location && <div className="text-danger">{errorMessage.location}</div>} */}
+                         {errorMessage.vemail && <div className="text-danger">{errorMessage.vemail}</div>}
                     </div>
                     <div className='input'>
                         <label htmlFor='vnic'>Vialator NIC</label>
                         <input value={vnic} onChange={e => setvnic(e.target.value)} type='number' id='nic' autoComplete='off' placeholder='NIC' />
-                        {/* {errorMessage.location && <div className="text-danger">{errorMessage.location}</div>} */}
+                        {errorMessage.vnic && <div className="text-danger">{errorMessage.vnic}</div>} 
                     </div>
 
                     <div className='input'>
                         <label htmlFor='vcno'>Vialator Contact-no</label>
                         <input value={vcno} onChange={e => setvcno(e.target.value)} type='text' id='vcno' autoComplete='off' placeholder='Contact No' />
-                        {/* {errorMessage.location && <div className="text-danger">{errorMessage.location}</div>} */}
+                         {errorMessage.vcno && <div className="text-danger">{errorMessage.vcno}</div> }
                     </div>
                     <div className='input'>
                         <label htmlFor='vtype'>Vialation type</label>

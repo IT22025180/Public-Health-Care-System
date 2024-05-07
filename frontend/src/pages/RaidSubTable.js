@@ -22,15 +22,15 @@ const RaidSubTable = () => {
     const getsubmissiondata = () => {
         Axios.get('http://localhost:4000/api/raidSub')
             .then(response => {
-                console.log('data from sever', response.data);
+                console.log('data from server', response.data);
                 setSubmissionData(response.data.allRS);
             })
             .catch(error => {
-                console.error('Axios error :', error);
-            })
+                console.error('Axios error:', error);
+            });
     }
 
-    //delete
+    // Delete submission
     const submissionDelete = (id) => {
         Axios.post('http://localhost:4000/api/deleteRS', { _id: id })
             .then(response => {
@@ -45,80 +45,75 @@ const RaidSubTable = () => {
             });
     };
 
-//pdf generation  
+    // PDF generation
+    const generatePDF = (submission) => {
+        const doc = new jsPDF();
 
-const generatePDF = (RaidSubForm) => {
-    const doc = new jsPDF();
+        // Add Sri Lankan national logo
+        const logo = new Image();
+        logo.src = logo1; // Use the imported logo image
+        doc.addImage(logo, 'PNG', 6, 7, 20, 20); // Adjust the position and dimensions as needed
 
-    // Add Sri Lankan national logo
-    const logo = new Image();
-    logo.src = logo1; // Use the imported logo image
-    doc.addImage(logo, 'PNG', 6, 7, 20, 20); // Adjust the position and dimensions as needed
+        // Add Public Health Information System as the letterhead
+        doc.setFontSize(12);
+        doc.text('Public Health Information System', 70, 15); // Adjust the position as needed
+        doc.text('Suwasiripaya, No. 385, Rev. Baddegama Wimalawansa Thero Mawatha,', 70, 20);
+        doc.text('Colombo 10, Sri Lanka.', 70, 25);
+        doc.text('Tel: 112 694033, 112 675011, 112 675449, 112 693493', 70, 30);
 
-   
-    // Add Public Health Information System as the letterhead
-    doc.setFontSize(12);
-    doc.text('Public Health Information System', 70, 15); // Adjust the position as needed
-    doc.text('Suwasiripaya, No. 385, Rev. Baddegama Wimalawansa Thero Mawatha,', 70, 20);
-    doc.text('Colombo 10, Sri Lanka.', 70, 25);
-    doc.text('Tel: 112 694033, 112 675011, 112 675449, 112 693493', 70, 30);
+        // Add page border
+        doc.setDrawColor(0);
+        doc.setLineWidth(0.5);
+        doc.rect(0, 0, doc.internal.pageSize.width, doc.internal.pageSize.height, 'S');
 
-    // Add page border
-    doc.setDrawColor(0);
-    doc.setLineWidth(0.5);
-    doc.rect(0, 0, doc.internal.pageSize.width, doc.internal.pageSize.height, 'S');
+        // Add horizontal line
+        doc.setLineWidth(0.5);
+        doc.line(5, 45, 205, 45);
 
-    // Add horizontal line
-    doc.setLineWidth(0.5);
-    doc.line(5, 45, 205, 45);
+        // Raid submission summary topic
+        doc.setFontSize(18);
+        doc.setTextColor(0, 0, 0); // Set text color to black
+        doc.text('Raid Submission Summary', 70, 60); // Adjust the position as needed
 
-    // Raid submission  summary topic
-    doc.setFontSize(18);
-    doc.setTextColor(0, 0, 0); // Set text color to black
-    doc.text('Raid Submission Summery', 70, 60); // Adjust the position as needed
+        // Submission description
+        const SubDescription =`
+            A raid submission form is a structured document utilized by law enforcement agencies,
+            regulatory bodies, or authorized entities to record and document details related to raids or
+            enforcement actions conducted. It serves as a comprehensive record of the raid, providing
+            essential information for review, analysis, and potential legal proceedings. Here's a
+            description of the key components typically found in a raid submission form:
 
-    //submission description
+            Vialator Name: ${submission.vname}
+            Vialator Email: ${submission.vemail}
+            Vialator NIC (National Identity Card): ${submission.vnic}
+            Vialator Contact Number: ${submission.vcno}
+            Violation Type: ${submission.vtype}
+            Location: ${submission.location}
+            Details: ${submission.details}
 
-    const SubDescription =`
-    
-     A raid submission form is a structured document utilized by law enforcement agencies, 
-     regulatory bodies, or authorized entities to record and document details related to raids or
-     enforcement actions conducted. It serves as a comprehensive record of the raid, providing 
-     essential information for review, analysis, and potential legal proceedings. Here's a 
-     description of the key components typically found in a raid submission form:
+            In summary, a raid submission form is a vital tool for documenting and reporting raids or
+            enforcement actions conducted by authorities. It helps ensure that all relevant details of the
+            operation are recorded accurately, facilitating accountability, analysis, and follow-up
+            actions as necessary. The form serves as an essential part of the documentation and legal
+            process surrounding law enforcement activities.
+        `;
 
-     Vialator Name: ${RaidSubForm.vname}
-     Vialator Email: ${RaidSubForm.vemail}
-     Vialator NIC (National Identity Card): ${RaidSubForm.vnic}
-     Vialator Contact Number:${RaidSubForm.vcno}
-     Violation Type:${RaidSubForm.vtype}
-     Location:${RaidSubForm.location}
-     Details:${RaidSubForm.details}
-     
+        doc.setFontSize(12);
+        doc.text(SubDescription, 15, 75);
 
-     In summary, a raid submission form is a vital tool for documenting and reporting raids or
-     enforcement actions conducted by authorities. It helps ensure that all relevant details of the 
-     operation are recorded accurately, facilitating accountability, analysis, and follow-up 
-     actions as necessary. The form serves as an essential part of the documentation and legal 
-     process surrounding law enforcement activities.
-    
-    `;
+        // Date and signature
+        const currentDate = new Date().toLocaleDateString('en-US');
+        doc.setFontSize(12);
+        doc.text(`Date: ${currentDate}`, 15, doc.internal.pageSize.height - 10); // Adjust the position for date
+        doc.text('Signature:', 15, doc.internal.pageSize.height - 5); // Adjust the position for signature
 
-    doc.setFontSize(12);
-    doc.text(SubDescription, 15, 75);
+        // Save the PDF with a filename based on the vialator name
+        doc.save(`RaidSubmission_${submission.vname}.pdf`);
+    };
 
-    // Date and signature
-    const currentDate = new Date().toLocaleDateString('en-US');
-    doc.setFontSize(12);
-    doc.text(`Date: ${currentDate}`, 15, 170); 
-    doc.text('Signature:', 15, 180); 
-
-    // Save the PDF with a filename based on leave name
-    doc.save(`RaidSubmission_${RaidSubForm.vname}.pdf`);
-};
     // Filter submission data based on search query
-    const filteredsubmissiondata = submissiondata.filter(Location => {
-        return Location.vname.toLowerCase().includes(searchQuery.toLowerCase());
+    const filteredsubmissiondata = submissiondata.filter(submission => {
+        return submission.vname.toLowerCase().includes(searchQuery.toLowerCase());
     });
 
     return (
@@ -135,7 +130,7 @@ const generatePDF = (RaidSubForm) => {
                             <TableCell>Email</TableCell>
                             <TableCell>Contact No</TableCell>
                             <TableCell>Vialator NIC</TableCell>
-                            <TableCell>Vialation type</TableCell>
+                            <TableCell>Violation Type</TableCell>
                             <TableCell>Location</TableCell>
                             <TableCell>Details</TableCell>
                             <TableCell>Edit</TableCell>
@@ -145,7 +140,7 @@ const generatePDF = (RaidSubForm) => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {filteredsubmissiondata && filteredsubmissiondata.length > 0 ? (
+                        {filteredsubmissiondata.length > 0 ? (
                             filteredsubmissiondata.map(submission => (
                                 <TableRow key={submission._id}>
                                     <TableCell>{submission.vname}</TableCell>
@@ -156,37 +151,31 @@ const generatePDF = (RaidSubForm) => {
                                     <TableCell>{submission.location}</TableCell>
                                     <TableCell>{submission.details}</TableCell>
                                     <TableCell className='actionButtons'>
-
-                                        <Link to={`/RaidSubFormEdit/${submission._id}/${submission.vname}/${submission.vemail}/${submission.vcno}
-                                        /${submission.vnic}/${submission.vtype}/${submission.location}/${submission.details}`}>
+                                        <Link to={`/RaidSubFormEdit/${submission._id}/${submission.vname}/${submission.vemail}/${submission.vcno}/${submission.vnic}/${submission.vtype}/${submission.location}/${submission.details}`}>
                                             <button><FaEdit/></button>
                                         </Link>
-
                                     </TableCell>
                                     <TableCell className='deleteButtons'>
                                         <button onClick={() => submissionDelete(submission._id)}><FaTrash/></button>
                                     </TableCell>
                                     <TableCell>
-                                        <button className="pdfButton" onClick={() => generatePDF(RaidSubTable)}><FaFilePdf/></button>
+                                        <button className="pdfButton" onClick={() => generatePDF(submission)}><FaFilePdf/></button>
                                     </TableCell>
                                     <TableCell>
-                                        <button className="btn-primary" onClick={() => navigate(`/Fine-And-court-Submit-Reports/${submission.vname}/${submission.vemail}/${submission.vcno}
-                                        /${submission.vnic}/${submission.vtype}/${submission.location}/${submission.details}`)}>FineAndCourt</button>
+                                        <button className="btn-primary" onClick={() => navigate(`/Fine-And-court-Submit-Reports/${submission.vname}/${submission.vemail}/${submission.vcno}/${submission.vnic}/${submission.vtype}/${submission.location}/${submission.details}`)}>FineAndCourt</button>
                                     </TableCell>
                                 </TableRow>
                             ))
                         ) : (
                             <TableRow>
-                                <th colSpan="5"><center>You have no submission data.</center></th>
+                                <th colSpan="11"><center>You have no submission data.</center></th>
                             </TableRow>
                         )}
                     </TableBody>
                 </Table>
-
             </div>
         </Layout>
     );
 };
-
 
 export default RaidSubTable;
