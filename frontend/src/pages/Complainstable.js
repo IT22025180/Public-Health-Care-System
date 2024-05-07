@@ -204,7 +204,7 @@ const Complainstable = () => {
 
                                         <TableCell >
                                             <Button onClick={() => navigate(`/updateComp/${Complains._id}/${Complains.fname}/${Complains.lname}/${Complains.mobile}/${Complains.email}/${Complains.NIC}/${Complains.yaddress}/${Complains.ctype}/${Complains.cdesc}`)}><FaEdit /></Button>
-                                            <Button onClick={() => confirmDelete(Complains._id)}><FaTrash /></Button>
+                                            <Button onClick={() => confirmDelete(Complains._id)} style={{  color: 'red'}}><FaTrash /></Button>
                                             <button className="pdfButton" onClick={() => generatePDF(Complains)}><FaFilePdf/></button>
                                         </TableCell>
                                     </TableRow>
