@@ -54,7 +54,7 @@ const Vaccines = () => {
 
     <Layout>
       <div className="vaccine-page">
-        <h2>Vaccination Management</h2>
+        <h2>Vaccine Information</h2>
         <div className="Card-container">
           {cards.map((card) => (
             <div key={card.id} className="Card" data-aos={card.aosAnimation}>
