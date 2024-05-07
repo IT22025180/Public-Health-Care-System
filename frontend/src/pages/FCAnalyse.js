@@ -92,6 +92,7 @@ const FCRS = () => {
                 v_email: selectedReport.v_email,
                 date: selectedReport.date,
                 v_type: selectedReport.v_type,
+                _id: selectedReport._id,
               }
             });
             window.location.reload();

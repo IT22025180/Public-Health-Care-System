@@ -3,8 +3,9 @@ import emailjs from '@emailjs/browser';
 import Swal from 'sweetalert2';
 import '../styles/FCNotify.css';
 import { useLocation, useNavigate } from 'react-router-dom';
+import Axios from "axios";
 
-const FCSendEvi = () => {
+const FCSendEvi = ({ caseId, caseNumber }) => {
   const [email, setemail] = useState('');
   const [Vname, setName] = useState('');
   const [vdate, setvdate] = useState('');
@@ -21,14 +22,31 @@ const FCSendEvi = () => {
 
   useEffect(() => {
     if (location.state) {
-      const { v_name, v_email, date, v_type, evidence } = location.state;
+      const { v_name, date, v_type } = location.state;
       setName(v_name);
-      setemail(v_email);
       setvdate(date);
       setViolationType(v_type);
-      setEvidence(evidence);
     }
-  }, [location.state]);
+
+    getReportData();
+  }, [location.state, caseId]);
+
+  const getReportData = () => {
+    Axios.get('http://localhost:4000/api/VioReports')
+      .then(response => {
+        console.log('Data from Server', response.data);
+        const allReports = response.data.allVioReports;
+        const report = allReports.find(report => report._id === caseId);
+        if (report) {
+          setEvidence(report.evidence);
+        } else {
+          console.error('Report not found');
+        }
+      })
+      .catch(error => {
+        console.error('Axios Error : ', error);
+      });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -37,13 +55,21 @@ const FCSendEvi = () => {
       setErrors(validationErrors);
       return;
     }
-
+  
     const formattedDate = new Date(date);
-
+  
     const serviceID = 'service_0r9kntj';
-    const templateID = 'template_hrj18ia';
+    const templateID = 'template_y83s7pa';
     const publicKey = 'evKLHFlH0AuDv1opA';
-
+  
+    const evidenceImages = evidence.map((evidenceItem, index) => {
+      return {
+        name: `evidence_${index + 1}`,
+        data: evidenceItem.data, // Assuming evidence data is already base64 encoded
+        contentType: evidenceItem.contentType // Assuming contentType is available
+      };
+    });
+  
     const templateParams = {
       cNumber: cNumber,
       email: email,
@@ -53,30 +79,39 @@ const FCSendEvi = () => {
       panelty: panelty,
       policeStation: policeStation,
       date: formattedDate.toLocaleDateString(),
-      aname: aname
+      aname: aname,
+      evidence: evidenceImages // Include evidence data in template params
     };
-
+  
     emailjs.send(serviceID, templateID, templateParams, publicKey)
-      .then((response) => {
-        console.log('Email Sent Successfully', response);
-        Swal.fire({
-          icon: 'success',
-          title: 'Success',
-          text: 'Email sent successfully!',
-          allowOutsideClick: false,
-          confirmButtonText: 'OK'
-        }).then(() => {
-          if (panelty === "Court Action") {
-            navigate('/FCSendEvi');
-          } else {
-            navigate('/Fine-And-court');
-          }
-        });
-      })
-      .catch((error) => {
-        console.error('Error sending Email', error);
-      });
-  }
+  .then((response) => {
+    console.log('Email Sent Successfully', response);
+    Swal.fire({
+      icon: 'success',
+      title: 'Success',
+      text: 'Email sent successfully!',
+      allowOutsideClick: false,
+      confirmButtonText: 'OK'
+    }).then(() => {
+      if (panelty === "Court Action") {
+        navigate('/FCSendEvi');
+      } else {
+        navigate('/Fine-And-court');
+      }
+    });
+  })
+  .catch((error) => {
+    console.error('Error sending Email', error);
+    Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: 'An error occurred while sending the email. Please try again later.',
+      allowOutsideClick: false,
+      confirmButtonText: 'OK'
+    });
+  });
+}
+  
 
   const validateForm = () => {
     const errors = {};
@@ -112,12 +147,11 @@ const FCSendEvi = () => {
         <h2>Send Evidences</h2>
         <div>
           <label>Case Number:</label>
-          <input type="number" name="cNumber" value={cNumber} onChange={(e) => setcNumber(e.target.value)} />
-          {errors.cNumber && <div className="error">{errors.cNumber}</div>}
+          <input type="text" name="cNumber" value={caseNumber} readOnly />
         </div>
         <div>
           <label>Court Email:</label>
-          <input type="email" name="email" value={email} onChange={(e) => setemail(e.target.value)} readOnly />
+          <input type="email" name="email" value={email} onChange={(e) => setemail(e.target.value)} />
         </div>
         <div>
           <label>Violator Name:</label>
@@ -130,7 +164,7 @@ const FCSendEvi = () => {
             Food Violation
           </div>
           <div>
-            <input type="radio" id="dengueViolation" name="violationType" value="Dengue Violation" checked={violationType === "Dengue Violation"} onChange={(e) => setViolationType(e.target.value)} />
+            <input type="radio" id="dengueViolation" name="violationType" value="Dengue Violation" checked={violationType === "Dengue Violation"} onChange={(e) => setViolationType(e.target.value)} disabled/>
             Dengue Violation
           </div>
         </div>
@@ -146,7 +180,7 @@ const FCSendEvi = () => {
                 key={index}
                 src={`data:${evidenceItem.contentType};base64,${evidenceItem.data}`}
                 alt={`Evidence ${index + 1}`}
-                style={{ maxWidth: '400px', maxHeight: '400px', cursor: 'pointer', margin: '10px' }}
+                className="image-container"
               />
             ))
           ) : (

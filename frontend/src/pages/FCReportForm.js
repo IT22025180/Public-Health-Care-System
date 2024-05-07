@@ -92,7 +92,6 @@ const FCReportForm = () => {
         const currentDate = new Date();
         return selectedDate <= currentDate;
       }),
-
     evidence: Yup.mixed()
       .required('Evidence is required')
       .test('file-size', 'Please upload at most 4 files', (files) => files.length <= 4)
@@ -123,17 +122,6 @@ const FCReportForm = () => {
       e.preventDefault();
     }
   }
-
-
-
-  const Address = (e) => {
-    if (e.key === "Backspace") {
-      return;
-    }
-    if (!/[A-Za-z0-9,.\-\s]/.test(e.key)) {
-      e.preventDefault();
-    }
-  };
 
   const Email = (e) => {
     if (e.key === "Backspace") {

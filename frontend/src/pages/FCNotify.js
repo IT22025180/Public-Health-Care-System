@@ -19,19 +19,20 @@ const FCNotify = () => {
   const [cNumber, setcNumber] = useState('');
   const [errors, setErrors] = useState({});
   const [evidence, setEvidence] = useState([]);
+  const [caseId, setCaseId] = useState('');
   const location = useLocation();
   const navigate = useNavigate();
-
-  console.log('Evidence:', evidence);
   
   useEffect(() => {
     if (location.state) {
-      const { v_name, v_email, date, v_type, evidence  } = location.state;
+      const { _id, v_name, v_email, date, v_type, evidence, c_number  } = location.state;
       setName(v_name);
       setemail(v_email);
       setvdate(date);
       setViolationType(v_type);
       setEvidence(evidence);
+      setCaseId(_id);
+      setcNumber(c_number);
     }
   }, [location.state]);
 
@@ -132,7 +133,7 @@ const FCNotify = () => {
               Food Violation
             </div>
             <div>
-              <input type="radio" id="dengueViolation" name="violationType" value="Dengue Violation" checked={violationType === "Dengue Violation"} onChange={(e) => setViolationType(e.target.value)} />
+              <input type="radio" id="dengueViolation" name="violationType" value="Dengue Violation" checked={violationType === "Dengue Violation"} onChange={(e) => setViolationType(e.target.value)} disabled/>
               Dengue Violation
             </div>
           </div>
@@ -171,7 +172,7 @@ const FCNotify = () => {
         </form>
       </div>
       <div>
-      <FCSendEvi evidence={evidence} />
+      {panelty === "Court Action" && <FCSendEvi caseId={caseId} caseNumber={cNumber} />}
       </div>
     </Layout>
   )

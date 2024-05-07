@@ -30,3 +30,10 @@
 .error {
   color: red;
 }
+
+.image-container {
+  max-width: 200px;
+  max-height: 200px;
+  cursor: pointer;
+  margin: 10px;
+}
