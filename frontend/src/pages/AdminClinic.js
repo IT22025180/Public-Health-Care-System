@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import { FaEdit, FaTimes, FaTrash, FaUser } from 'react-icons/fa';
 import { Alert, Form } from 'react-bootstrap';
+import '../styles/AdminClinic.css';
 
 
 const AdminClinic = () => {
@@ -92,7 +93,7 @@ const AdminClinic = () => {
 
     return (
         <Layout>
-            <div>
+            <div className='adminClinic'>
                 <TableContainer component={Paper}>
                     <Table>
                         <TableHead>

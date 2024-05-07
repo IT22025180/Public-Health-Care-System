@@ -43,7 +43,7 @@ const Dental = () => {
     return (
         <Layout>
             <div data-aos="fade-up">
-                <div className='titles'>
+                <div className='adminClinic'>
                     <h3>Dengue</h3><br />
                     <input placeholder="Search doctor name" type='text' value={searchQuery} onChange={e => setSearchQuery(e.target.value)} /><br />
                     <TableContainer component={Paper}>

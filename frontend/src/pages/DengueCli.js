@@ -39,7 +39,7 @@ const Dengue = () => {
 
             >
                 <div>
-                    <div className='titles'>
+                    <div className='adminClinic'>
                         <br />
                         <h3>Dengue Clinics</h3><br />
                         <input placeholder="Search doctor name" type='text' value={searchQuery} onChange={e => setSearchQuery(e.target.value)} /><br />
