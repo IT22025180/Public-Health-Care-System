@@ -62,7 +62,7 @@ const Staff = () => {
           <div className="slider-container" data-aos="fade-up" >
             <div className="page-container_a">
               <div className='staff1'>
-                <h1 className="stvac">Vaccination Schedules</h1>
+                <h2 className="stvac">Vaccination Schedules</h2>
                 <p>
                   <p className="stvac1" > Dear Team,</p>
                   <p className="stvac1">
@@ -80,7 +80,7 @@ const Staff = () => {
             <div className="page-container_b" data-aos="fade-up">
 
               <div className='staff1'>
-                <h1 className="stvac"> Leave Policy Update</h1>
+                <h2 className="stvac"> Leave Policy Update</h2>
                 <p>
                   <p className="stvac1" > Dear Team,</p>
                   <p className="stvac1" >We're updating our leave policy to better support your needs. Effective immediately:</p>
@@ -102,7 +102,7 @@ const Staff = () => {
 
 
               <div className='staff1'>
-                <h1 className="stvac"> Upcoming Events: Stay Informed!</h1>
+                <h2 className="stvac"> Upcoming Events: Stay Informed!</h2>
                 <p>
                   <p className="stvac1" > Dear Team,</p>
                   <p className="stvac1" >Exciting events are on the horizon in our health sector! Stay tuned for:</p>

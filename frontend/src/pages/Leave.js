@@ -47,8 +47,21 @@ const Leave = ({ submitted, data }) => {
   const validateSchema = Yup.object().shape({
     name: Yup.string().required('Report ID is Required').matches(/^[A-Za-z\s]+$/, 'Name must contain only letters'),
     email: Yup.string().matches(/^[a-zA-Z0-9._%+-]+@gmail\.com$/, 'Invalid Gmail address').required('Email is Required'),
-    leaveStart: Yup.string().required('Date is Required'),
-    leaveEnd: Yup.string().required('Date is Required'),
+    leaveStart: Yup.string()
+    .required('Date is Required')
+    .test('date', 'Date must be the current date or a future date', function (value) {
+      const selectedDate = new Date(value);
+      const currentDate = new Date();
+      return selectedDate >= currentDate; // Change the condition to >= for future dates
+    }),
+    leaveEnd: Yup.string()
+    .required('Date is Required')
+    .test('date', 'Date must be after leave start date', function (value) {
+      const selectedEndDate = new Date(value);
+      const selectedStartDate = new Date(leaveStart); // Convert leaveStart to date object
+      return selectedEndDate > selectedStartDate;
+    }),
+    
     staffId: Yup.string().required('Location is Required').matches(/^[A-Za-z\s,.0-9]+$/, 'Staff ID must contain only letters'),
     position: Yup.string().required('Report ID is Required').matches(/^[A-Za-z\s]+$/, 'Name must contain only letters'),
     leaveFor: Yup.string().required('Leave for is required').oneOf(['Days', 'Hours'], 'Invalid leave '),
