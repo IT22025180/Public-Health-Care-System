@@ -458,6 +458,7 @@ const ComplaintForm = () => {
                 <Form.Group>
                   <Form.Label>Complain Details:</Form.Label>
                   <Form.Control
+                    placeholder="NOTE:Include LOCATION with the DESCRIPTION!"
                     as="textarea"
                     rows={4}
                     name="complainDetails"
@@ -485,7 +486,7 @@ const ComplaintForm = () => {
                     ref={inputRef}
                     onFocus={loadmap}
                   />
-                  <div>
+                  <div >
                     {isLoaded ? (
                       <GoogleMap
                         onLoad={onLoad}
@@ -494,6 +495,7 @@ const ComplaintForm = () => {
                         mapContainerStyle={mapStyle}
                         onClick={handelClickOnMap}
                         onUnmount={onUnmount}
+                        options={{ zoomControl: true }}
                       >
                         <Marker position={markerPosition} />
                       </GoogleMap>
