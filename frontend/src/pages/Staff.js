@@ -57,13 +57,8 @@ const Staff = () => {
         <div className="home-page">
           <h1>Staff Schedules</h1>
 
-         
+
           <hr className="horizontal-line" data-aos="fade-up" />
-
-       
-          
-
-
           <div className="slider-container" data-aos="fade-up" >
             <div className="page-container_a">
               <div className='staff1'>
