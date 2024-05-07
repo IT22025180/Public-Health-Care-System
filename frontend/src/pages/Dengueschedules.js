@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import Layout from '../components/Layout';
 import Axios from 'axios';
-import { Dialog, DialogTitle, DialogContent } from '@mui/material';
+import { Dialog, DialogTitle, DialogContent} from '@mui/material';
 import Swal from 'sweetalert2';
 import Alert from 'react-bootstrap/Alert';
 import { Link } from 'react-router-dom';
+import { Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
+
 
 const Dengueschedules = () => {
   const [campdata, setcampdata] = useState([]);
@@ -64,36 +66,39 @@ const Dengueschedules = () => {
   return (
     <Layout>
       <div className='Dcamptable'>
-        <table border={1} cellPadding={10} cellSpacing={0}>
-          <thead>
-            <tr>
-              <th>Venue</th>
-              <th>Date</th>
-              <th>Starting time</th>
-              <th>Conducted by</th>
-              <th>Assign Staff</th>
-            </tr>
-          </thead>
-          <tbody>
+        <Table border={1} cellPadding={10} cellSpacing={0}>
+          <TableHead>
+            <TableRow>
+              <TableCell>Venue</TableCell>
+              <TableCell>Date</TableCell>
+              <TableCell>Starting time</TableCell>
+              <TableCell>Conducted by</TableCell>
+              <TableCell>Assign Staff</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
             {campdata && campdata.length > 0 ? (
               campdata.map((camp) => (
-                <tr key={camp._id}>
-                  <td>{camp.venue}</td>
-                  <td>{camp.date}</td>
-                  <td>{camp.time}</td>
-                  <td>{camp.drName}</td>
-                  <td className='reportButtons'>
+                <TableRow key={camp._id}>
+                  <TableCell>{camp.venue}</TableCell>
+                  <TableCell>{camp.date}</TableCell>
+                  <TableCell>{camp.time}</TableCell>
+                  <TableCell>{camp.drName}</TableCell>
+                  <TableCell className='reportButtons'>
                     <button onClick={() => functionPopup(camp)}>Assign Staff</button>
-                  </td>
-                </tr>
+                  </TableCell>
+                </TableRow>
               ))
             ) : (
-              <tr>
-                <td>You have no camp data</td>
-              </tr>
+              <TableRow>
+                <TableCell>You have no camp data</TableCell>
+              </TableRow>
             )}
-          </tbody>
-        </table>
+          </TableBody>
+          <Link to="/DengueAssignTable">
+        <button className="denbtn" style={{ backgroundColor: '#2196f3', color: '#fff', padding: '10px 20px', border: 'none', borderRadius: '5px', cursor: 'pointer', marginTop: '20px' }}>View Assigned Staff</button>
+      </Link>
+        </Table>
       </div>
       <Dialog open={open}>
         <DialogTitle>Assign staff</DialogTitle>

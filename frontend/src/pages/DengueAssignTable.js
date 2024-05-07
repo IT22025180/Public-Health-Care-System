@@ -3,6 +3,7 @@ import Axios from 'axios';
 import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from '@mui/material';
 import { Link } from 'react-router-dom';
 import Layout from '../components/Layout';
+import { FaTrash } from 'react-icons/fa';
 
 const DengueAssignTable = () => {
   const [denguedata, setDenguedata] = useState([]);
@@ -48,7 +49,7 @@ const DengueAssignTable = () => {
 
   return (
     <Layout>
-      <div className='DengueAssignTable'>
+      <div className='adminClinic'>
       <h2>Dengue Assignments</h2>
       <TextField
         label="Search by Name"
@@ -77,7 +78,7 @@ const DengueAssignTable = () => {
                   <TableCell>{camp.time}</TableCell>
                   <TableCell>{camp.staffmember}</TableCell>
                   <TableCell>
-                    <Button variant="contained" color="secondary" onClick={() => handleDelete(camp._id)}>Delete</Button>
+                    <Button variant="contained" color="secondary" onClick={() => handleDelete(camp._id)}><FaTrash/></Button>
                   </TableCell>
                 </TableRow>
               ))
@@ -89,9 +90,6 @@ const DengueAssignTable = () => {
           </TableBody>
         </Table>
       </TableContainer>
-      <Link to="/Dengueschedules">
-        <button className="denbtn" style={{ backgroundColor: '#ff5722', color: '#fff', padding: '10px 20px', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>Assign Staff</button>
-      </Link>
     </div>
     </Layout>
   );
