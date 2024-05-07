@@ -46,7 +46,7 @@ const ComplaintForm = () => {
     NIC: Yup.string().required('NIC is required').matches(/^\d{11}(V|v|\d)$/, 'Invalid NIC Number'),
     yaddress: Yup.string().required('Address is Required').matches(/^[A-Za-z\s,-./0-9]+$/, 'Address must contain only letters and numbers'),
     images: Yup.array().min(1, 'img is required').required('At least one document is required'),
-    cdesc: Yup.string().required('Description is Required').matches(/^[A-Za-z\s,.0-9]+$/, 'Description must contain only letters & numbers'),
+    cdesc: Yup.string().required('Description is Required').matches(/^[A-Za-z\s,"".''0-9]+$/, 'Description must contain only letters & numbers'),
     ctype: Yup.string().required('Complain Type is Required'),
     date: Yup.string().required('Date is Required'),
     area: Yup.string().required('Location is Required').matches(/^[A-Za-z\s,.0-9]+$/, 'Location must contain only letters'),

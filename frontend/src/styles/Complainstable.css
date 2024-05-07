@@ -6,7 +6,8 @@
   .Complainstable input[type="text"] {
     padding: 10px;
     margin-bottom: 10px;
-    width: 100px;
+    width: 200px;
+    
   }
   
   .Complainstable .pdfButton {
@@ -106,7 +107,7 @@
   .Complainstable .cdesc-column,
   .Complainstable .area-column
   {
-    max-width: 100px; /* Adjust the value as needed */
+   /* max-width: 100px; /* Adjust the value as needed */
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: normal;

@@ -101,7 +101,7 @@ const Complainstable = () => {
         doc.line(5, 45, 205, 45);
 
         // Leave summary topic
-        doc.setFontSize(18);
+        doc.setFontSize(10);
         doc.setTextColor(0, 0, 0); // Set text color to black
         doc.text('Complain Summery', 78, 60);
 
@@ -123,6 +123,10 @@ const Complainstable = () => {
             doc.text('No images available', 15, 70);
         };
 
+        const descriptionText = `Description: ${Complains.cdesc}`;
+    const descriptionLines = doc.splitTextToSize(descriptionText, 180); // Adjust width as needed
+    doc.text(descriptionLines, 15, 158);
+
         doc.text(`First Name: ${Complains.fname}`, 15, 80);
         doc.text(`Last Name: ${Complains.lname}`, 15, 90);
         doc.text(`Mobile: ${Complains.mobile}`.toString(), 15, 100);
@@ -130,10 +134,10 @@ const Complainstable = () => {
         doc.text(`NIC: ${Complains.NIC}`, 15, 120);
         doc.text(`Date: ${Complains.date}`, 15, 130);
         doc.text(`Address: ${Complains.yaddress}`, 15, 140);
-        doc.text(`Type: ${Complains.ctype}`, 15, 160);
-        doc.text(`Description: ${Complains.cdesc}`, 15, 170);
-        doc.text(`Area: ${Complains.area}`, 15, 180);
-        doc.text('Images:',15,190);
+        doc.text(`Type: ${Complains.ctype}`, 15, 150);
+        /*doc.text(`Description: ${Complains.cdesc}`, 15, 170);*/
+        doc.text(`Area: ${Complains.area}`, 15, 175);
+        doc.text('Images:',15,185);
 
         doc.save(`Complain_Summary_${Complains.fname}.pdf`);
     };
@@ -153,7 +157,7 @@ const Complainstable = () => {
 
 
 
-                {<input placeholder="Search name" type='text' value={searchQuery} onChange={e => setSearchQuery(e.target.value)} />}
+                {<input placeholder="Search Here" type='text' value={searchQuery} onChange={e => setSearchQuery(e.target.value)} style={{ fontWeight: 'bold' }}/>}
 
                 <TableContainer component={Paper}>
                     <Table border={1} cellPadding={10} cellSpacing={0}>
