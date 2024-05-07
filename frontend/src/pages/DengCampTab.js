@@ -9,6 +9,8 @@ import DengueCampaigns from './DengueCampaignSchedule';
 import { Alert, Button, Card, Col, Container, Form, Row } from 'react-bootstrap';
 import denimg3 from '../webImages/dengueimg3.jpeg';
 import Layout from '../components/Layout';
+import { Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
+import { FaEdit, FaFilePdf, FaTrash } from 'react-icons/fa';
 
 
 const DengCampTab = () => {
@@ -117,48 +119,47 @@ const generateReport = (camp) => {
          <form className= "campsearch_bar">
          <input  placeholder="Search by date" type='text' value={searchQuery} onChange={e => setSearchQuery(e.target.value)} />
          </form>
-        <table border ={1} cellPadding={10} cellSpacing={0}>
-            <thead>
-                <tr>
-                    <th>Venue</th>
-                    <th>Date</th>
-                    <th>Starting time</th>
-                    <th>End time</th>
-                    <th>Conducted by</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
-                    <th>Generate PDF</th>
-                </tr>
-            </thead>
-            <tbody>
+        <Table border ={1} cellPadding={10} cellSpacing={0}>
+            <TableHead>
+                <TableRow>
+                    <TableCell>Venue</TableCell>
+                    <TableCell>Date</TableCell>
+                    <TableCell>Starting time</TableCell>
+                    <TableCell>End time</TableCell>
+                    <TableCell>Conducted by</TableCell>
+                    <TableCell>Edit</TableCell>
+                    <TableCell>Delete</TableCell>
+                    <TableCell>Generate PDF</TableCell>
+                </TableRow>
+            </TableHead>
+            <TableBody>
              {filteredcampdata && filteredcampdata.length > 0 ? (
                 filteredcampdata.map((camp)=>(
-                <tr key={camp._id}>
-                    <td>{camp.venue}</td>
-                    <td>{camp.date}</td>
-                    <td>{camp.time}</td>
-                    <td>{camp.etime}</td>
-                    <td>{camp.drName}</td>
-                    <td className='actionButtons'>
-                                    <Link to={`/Editcampdetails/${camp._id}/${camp.venue}/${camp.date}/${camp.time}/${camp.etime}/${camp.drName}`}>
-                                        <button>Edit</button>
+                <TableRow key={camp._id}>
+                    <TableCell>{camp.venue}</TableCell>
+                    <TableCell>{camp.date}</TableCell>
+                    <TableCell>{camp.time}</TableCell>
+                    <TableCell>{camp.etime}</TableCell>
+                    <TableCell>{camp.drName}</TableCell>
+                    <TableCell className='actionButtons'>
+                                    <Link to={`/Editcampdetails/${camp._id}/${camp.venue}/${camp.date}/${camp.time}/${camp.etime}/${camp.drName}`}><FaEdit/>
                                     </Link>
-                                </td>
-                    <td className='deleteButtons'>
-                        <button onClick={()=> campDelete(camp._id)}>Delete</button>
-                    </td>
-                    <td className='reportButtons'>
-                    <button onClick={() => generateReport(camp)}>Generate Report</button>
-                    </td>
-                </tr>))
+                                </TableCell>
+                    <TableCell className='deleteButtons'>
+                        <button onClick={()=> campDelete(camp._id)}><FaTrash/></button>
+                    </TableCell>
+                    <TableCell className='reportButtons'>
+                    <button onClick={() => generateReport(camp)}><FaFilePdf/>Generate Report</button>
+                    </TableCell>
+                </TableRow>))
             ):(
-                <tr>
-                    <td>You have not camp data</td>
-                </tr>
+                <TableRow>
+                    <TableCell>You have not camp data</TableCell>
+                </TableRow>
              )}   
                
-            </tbody>
-        </table>
+            </TableBody>
+        </Table>
 
         </div>
    </Layout>
