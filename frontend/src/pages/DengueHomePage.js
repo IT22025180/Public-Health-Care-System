@@ -61,7 +61,8 @@ const DengueHomePage = () => {
                                 <img src={denimg3} className="card-img-top" alt="image3" />
                                 <div className="card-body">
                                     <h5 className="card-title">Dengue Danger Detectives</h5>
-                                    <p className="card-text">"Dengue Danger Detectives" educates children about the dangers of dengue fever and encourages them to take proactive steps to prevent its spread.</p>
+                                    <p className="card-text">"Dengue Danger Detectives" educates children about the dangers of dengue fever and encourages them to take proactive steps to prevent its spread.
+                                    <br></br>Join the fight against dengue</p>
                                     <a href="/DengCampTab" className="btn btn-primary">More details</a>
                                 </div>
                             </div>
