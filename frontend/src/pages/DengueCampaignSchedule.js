@@ -13,9 +13,22 @@ const DengueCampaigns = () => {
     const [drName, setdrName] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
 
+    // Create the current date and set time to midnight
+    const currentDate = new Date();
+    currentDate.setHours(0, 0, 0, 0);
+
+    // Custom validation function to check if the date is not in the past
+    const isDateValid = (date) => {
+        const selectedDate = new Date(date);
+        // Compare the selected date with the current date
+        return selectedDate >= currentDate;
+    };
+
     const validateSchema = Yup.object().shape({
         venue: Yup.string().required('Report ID is Required').matches(/^[A-Za-z\s]+$/, 'Name must contain only letters'),
-        date: Yup.string().required('Date is Required'),
+        date: Yup.string()
+        .required('Date is required')
+        .test('not-in-past', 'Date cannot be in the past', isDateValid),
         time: Yup.string().required('Time is Required'),
         etime: Yup.string().required('Time is Required'),
         drName: Yup.string().required('Name is Required').matches(/^[A-Za-z\s]+$/, 'Name must contain only letters'),

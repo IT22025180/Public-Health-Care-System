@@ -115,7 +115,7 @@ const generateReport = (camp) => {
    };
   return (
    <Layout>
-     <div className='Dcamptable'>
+     <div className='adminClinic'>
          <form className= "campsearch_bar">
          <input  placeholder="Search by date" type='text' value={searchQuery} onChange={e => setSearchQuery(e.target.value)} />
          </form>
