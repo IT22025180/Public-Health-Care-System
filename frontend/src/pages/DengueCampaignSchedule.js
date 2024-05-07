@@ -29,7 +29,7 @@ const DengueCampaigns = () => {
 
     const addCamp = async (e) => {
         e.preventDefault();
-        setErrorMessage({}); // Clear previous error messages
+        setErrorMessage({}); 
 
         try {
             await validateSchema.validate({
