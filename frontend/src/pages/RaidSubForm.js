@@ -129,7 +129,7 @@ const RaidSubForm = () => {
                         {errorMessage.specialNotes && <div className="text-danger">{errorMessage.specialNotes}</div>}
                     </div>
                     <Link to='/raidsubtable'>
-                        <button className='bsubmit' >View Raids</button>
+                        <button type='button' className='bsubmit' >View Raids</button>
                     </Link>
                     <button onClick={addRS} className='bdsave'>Save</button>
                 </form>
