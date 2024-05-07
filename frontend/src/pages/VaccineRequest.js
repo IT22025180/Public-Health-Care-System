@@ -37,7 +37,7 @@ const VaccineRequest = () => {
     }
 
     const handleDelete = async (id) => {
-        // Perform deletion from the database
+        
         try {
             await Axios.post('http://localhost:4000/api/deleteVacRq', { _id: id });
             setbvaccinedata((prevvaqreq) => prevvaqreq.filter((bvaccine) => bvaccine._id !== id));

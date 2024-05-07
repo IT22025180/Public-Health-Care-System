@@ -37,7 +37,7 @@ const VaccineRegTab = () => {
 
 //delete
   const deletevaccinedata = (id) => {
-    // Display SweetAlert confirmation dialog
+    
     Swal.fire({
         title: "Are you sure?",
         text: "You won't be able to revert this!",
@@ -48,12 +48,12 @@ const VaccineRegTab = () => {
         confirmButtonText: "Yes, delete it!"
     }).then((result) => {
         if (result.isConfirmed) {
-            // If confirmed, proceed with deletion
+            
             Axios.post('http://localhost:4000/api/deleteVac', { _id: id })
                 .then(response => {
                     console.log('Vaccine Data deleted successfully');
                     setvaccinedata(prevData => prevData.filter(vaccine => vaccine._id !== id));
-                    // Display success message
+                    
                     Swal.fire({
                         title: "Deleted!",
                         text: "Your file has been deleted.",
@@ -73,34 +73,34 @@ const VaccineRegTab = () => {
   const generatePDF = () => {
     const doc = new jsPDF();
 
-    // Add Sri Lankan national logo
+    
     const logo = new Image();
-    logo.src = logo1; // Use the imported logo image
-    doc.addImage(logo, 'PNG', 6, 7, 20, 20); // Adjust the position and dimensions as needed
+    logo.src = logo1; 
+    doc.addImage(logo, 'PNG', 6, 7, 20, 20); 
 
    
-    // Add Public Health Information System as the letterhead
+    
     doc.setFontSize(12);
-    doc.text('Public Health Information System', 70, 15); // Adjust the position as needed
+    doc.text('Public Health Information System', 70, 15); 
     doc.text('Suwasiripaya, No. 385, Rev. Baddegama Wimalawansa Thero Mawatha,', 70, 20);
     doc.text('Colombo 10, Sri Lanka.', 70, 25);
     doc.text('Tel: 112 694033, 112 675011, 112 675449, 112 693493', 70, 30);
 
-    // Add page border
+    
     doc.setDrawColor(0);
     doc.setLineWidth(0.5);
     doc.rect(0, 0, doc.internal.pageSize.width, doc.internal.pageSize.height, 'S');
 
-    // Add horizontal line
+    
     doc.setLineWidth(0.5);
     doc.line(5, 45, 205, 45);
 
-    // Vaccine registration summary topic
+    
     doc.setFontSize(18);
-    doc.setTextColor(0, 0, 0); // Set text color to black
-    doc.text('Vaccine Registration Summary', 70, 60); // Adjust the position as needed
+    doc.setTextColor(0, 0, 0); 
+    doc.text('Vaccine Registration Summary', 70, 60); 
 
-    // Vaccine registration summary description
+    
     let summaryDescription = '';
     vaccinedata.forEach((vaccine, index) => {
       summaryDescription += `Vaccine Name: ${vaccine.vname}\n`;
@@ -115,7 +115,7 @@ const VaccineRegTab = () => {
     doc.text(summaryDescription, 15, 75);
 
 
-    // Save the PDF with a filename
+    
     doc.save('vaccine_registration_summary.pdf');
   }
 

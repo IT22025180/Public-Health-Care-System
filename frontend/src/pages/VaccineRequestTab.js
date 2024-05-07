@@ -32,7 +32,7 @@ const VaccineRequestTab = () => {
       //delete
 
     const deletevaccinereqdata = (id) => {
-        // Display SweetAlert confirmation dialog
+        
    Swal.fire({
        title: "Are you sure?",
        text: "You won't be able to revert this!",
@@ -43,12 +43,12 @@ const VaccineRequestTab = () => {
        confirmButtonText: "Yes, delete it!"
    }).then((result) => {
        if (result.isConfirmed) {
-           // If confirmed, proceed with deletion
+          
        Axios.post('http://localhost:4000/api/deleteVacRq',{_id: id})
        .then(response =>{
            console.log('Vaccine Data deleted successfully');
            setvacreqData(prevData => prevData.filter(vacreqData => vacreqData._id !== id));
-           // Display success message
+          
            Swal.fire({
                title: "Deleted!",
                text: "Your file has been deleted.",

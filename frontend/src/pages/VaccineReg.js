@@ -20,7 +20,7 @@ const VaccineReg = () => {
         vname: Yup.string().required('vaccine name is Required').matches(/^[A-Za-z\s]+$/, 'Name must contain only letters'),
         manf_date: Yup.string().required('Manfacture Date is Required'),
         expi_Date: Yup.string().required('Expire Date is Required'),
-        quantity: Yup.number().required('Quantity is Required'),
+        quantity: Yup.string().required('Quantity is Required').matches(/^[.0-9]/,'Quantity must be a number'),
         
         notes: Yup.string().required('Note is Required').matches(/^[A-Za-z\s,.0-9]+$/, 'notes must contain only letters'),
     });
@@ -32,18 +32,17 @@ const VaccineReg = () => {
     }
 
     const addvacc = async () => {
-        // Show SweetAlert confirmation message
+        
         Swal.fire({
             title: "Do you want to save the data?",
             showCancelButton: true,
             confirmButtonText: "Save",
         }).then((result) => {
             if (result.isConfirmed) {
-                // User clicked "Save"
-                // Perform API call or any other action here
-                saveData(); // Assuming saveData is a function to perform the API call
+                
+                saveData(); 
             } else if (result.isDenied) {
-                // User clicked "Don't save", do nothing
+                
             }
         });
     };
@@ -70,7 +69,7 @@ const VaccineReg = () => {
 
             console.log('Successfully', response.data);
 
-            // Show success message
+            
             Swal.fire("Saved!", "", "success");
         } catch (error) {
             if (error instanceof Yup.ValidationError) {
