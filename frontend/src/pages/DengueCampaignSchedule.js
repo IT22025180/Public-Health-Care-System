@@ -40,7 +40,7 @@ const DengueCampaigns = () => {
                 drName,
             }, { abortEarly: false });
 
-            // If validation passes, make the API call
+            
             const response = await Axios.post('http://localhost:4000/api/addCamp', {
                 venue,
                 date,
@@ -50,7 +50,7 @@ const DengueCampaigns = () => {
             });
 
             console.log('Successfully added campaign', response.data);
-            // Add further success handling here (e.g., redirecting, displaying a success message, etc.)
+            
         } catch (error) {
             if (error instanceof Yup.ValidationError) {
                 const errors = {};

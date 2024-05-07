@@ -11,14 +11,14 @@ const containerStyle = {
 };
 
 const center = {
-  lat: 7.8731, // Latitude of Sri Lanka
-  lng: 80.7718 // Longitude of Sri Lanka
+  lat: 7.8731,
+  lng: 80.7718
 };
 
 function MyComponent() {
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
-    googleMapsApiKey: "AIzaSyBrN5oNsyq-P0wZaS9wsHshYFoHuuvnhis" // Replace with your Google Maps API key
+    googleMapsApiKey: "AIzaSyBrN5oNsyq-P0wZaS9wsHshYFoHuuvnhis" 
   });
 
   const [map, setMap] = React.useState(null);
@@ -31,10 +31,10 @@ function MyComponent() {
     const newMarker = {
       lat: event.latLng.lat(),
       lng: event.latLng.lng(),
-      id: markers.length // Assign a unique ID to each marker
+      id: markers.length
     };
 
-    // Update markers state and save to localStorage
+    
     setMarkers((prevMarkers) => {
       const updatedMarkers = [...prevMarkers, newMarker];
       localStorage.setItem('markers', JSON.stringify(updatedMarkers));
