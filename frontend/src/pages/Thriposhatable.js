@@ -7,6 +7,7 @@ import Swal from 'sweetalert2';
 import logo1 from '../webImages/logo1.png';
 import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import Layout from '../components/Layout';
+import { FaEdit, FaFilePdf, FaTrash } from 'react-icons/fa';
 
 
 const Thriposhatable = () => {
@@ -148,14 +149,14 @@ const confirmDelete = (id) => {
 
                     <TableCell className='actionButtons'>
                     {thriposha._id && thriposha.type && thriposha.esti_Date && thriposha.quantity  && (
-                        <Button onClick={() => navigate(`/Edittriposha/${thriposha._id}/${thriposha.type}/${thriposha.esti_Date}/${thriposha.quantity}`)}>Edit</Button>
+                        <Button onClick={() => navigate(`/Edittriposha/${thriposha._id}/${thriposha.type}/${thriposha.esti_Date}/${thriposha.quantity}`)}><FaEdit/></Button>
                     )}
                     </TableCell>
                     <TableCell className='deleteButtons'>
-                        <Button onClick={() => confirmDelete(thriposha._id)} >Delete</Button>
+                        <Button onClick={() => confirmDelete(thriposha._id)} ><FaTrash/></Button>
                     </TableCell>
                     <TableCell >
-                    <button className='generate' onClick={() => generatePDF(thriposha)}>Generate Report</button>
+                    <button className='generate' onClick={() => generatePDF(thriposha)}>Generate PDF</button>
                     </TableCell>
 
                 </TableRow>
