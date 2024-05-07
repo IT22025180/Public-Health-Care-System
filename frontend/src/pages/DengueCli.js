@@ -26,7 +26,7 @@ const Dengue = () => {
     }, []);
 
     const filteredDgClinicData = dgClinics.filter(clinic => {
-        return clinic.venue.toLowerCase().includes(searchQuery.toLowerCase());
+        return clinic.uname.toLowerCase().includes(searchQuery.toLowerCase());
     });
 
     return (

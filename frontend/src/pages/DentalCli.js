@@ -37,7 +37,7 @@ const Dental = () => {
     }, []);
 
     const filteredDTClinicData = dtClinics.filter(clinic => {
-        return clinic.venue.toLowerCase().includes(searchQuery.toLowerCase());
+        return clinic.uname.toLowerCase().includes(searchQuery.toLowerCase());
     })
 
     return (
