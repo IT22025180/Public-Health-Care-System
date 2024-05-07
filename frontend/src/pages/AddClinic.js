@@ -24,7 +24,13 @@ const AddClinic = () => {
 
     const validateSchema = Yup.object().shape({
         ctype: Yup.string().required('Clinic type is required').oneOf(['Dengue', 'Dental'], 'Invalid Clinic Type'),
-        date: Yup.string().required('Date is Required'),
+        date: Yup.string()
+            .required('Date is Required')
+            .test('future-date', 'Clinic date must not be a past date', (value) => {
+                const selectedDate = new Date(value);
+                const currentDate = new Date();
+                return selectedDate > currentDate;
+            }),
         venue: Yup.string().required('Venue is required').matches(/^[A-Za-z\s,./0-9]+$/, 'Name must contain only letters and numbers'),
     })
 
