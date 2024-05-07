@@ -70,7 +70,7 @@ const RaidSubTable = () => {
     };
     // Filter submission data based on search query
     const filteredsubmissiondata = submissiondata.filter(Location => {
-        return Location.location.toLowerCase().includes(searchQuery.toLowerCase());
+        return Location.vname.toLowerCase().includes(searchQuery.toLowerCase());
     });
 
     return (
