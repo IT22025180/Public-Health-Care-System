@@ -6,6 +6,9 @@ import jsPDF from 'jspdf';
 import logo1 from '../webImages/logo1.png';
 import Swal from 'sweetalert2';
 import '../styles/LeaveTable.css';
+import { Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
+import { FaEdit, FaTrash } from 'react-icons/fa';
+
 
 const LeaveTable = () => {
   const navigate = useNavigate();
@@ -181,56 +184,56 @@ const LeaveTable = () => {
             placeholder="Search by name or staff ID..."
           />
         </div>
-        <table border={1} cellPadding={10} cellSpacing={0}>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Staff ID</th>
-              <th>Email</th>
-              <th>Position</th>
-              <th>Leaves For</th>
-              <th>Leave Start</th>
-              <th>Leave End</th>
-              <th>Leave Type</th>
-              <th>Edit</th>
-              <th>Delete</th>
-              <th>Summary</th>
-            </tr>
-          </thead>
-          <tbody>
+        <Table border={1} cellPadding={10} cellSpacing={0}>
+          <TableHead>
+            <TableRow>
+              <TableCell>Name</TableCell>
+              <TableCell>Staff ID</TableCell>
+              <TableCell>Email</TableCell>
+              <TableCell>Position</TableCell>
+              <TableCell>Leaves For</TableCell>
+              <TableCell>Leave Start</TableCell>
+              <TableCell>Leave End</TableCell>
+              <TableCell>Leave Type</TableCell>
+              <TableCell>Edit</TableCell>
+              <TableCell>Delete</TableCell>
+              <TableCell>Summary</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
             {leavedata && leavedata.length > 0 ? (
               leavedata.map((leave) => (
-                <tr key={leave._id}>
-                  <td>{leave.name}</td>
-                  <td>{leave.staffid}</td>
-                  <td>{leave.email}</td>
-                  <td>{leave.position}</td>
-                  <td>{leave.doleave}</td>
-                  <td>{leave.leavestrt}</td>
-                  <td>{leave.leaveend}</td>
-                  <td>{leave.leaveType}</td>
+                <TableRow key={leave._id}>
+                  <TableCell>{leave.name}</TableCell>
+                  <TableCell>{leave.staffid}</TableCell>
+                  <TableCell>{leave.email}</TableCell>
+                  <TableCell>{leave.position}</TableCell>
+                  <TableCell>{leave.doleave}</TableCell>
+                  <TableCell>{leave.leavestrt}</TableCell>
+                  <TableCell>{leave.leaveend}</TableCell>
+                  <TableCell>{leave.leaveType}</TableCell>
 
-                  <td className='actionButtons'>
+                  <TableCell className='actionButtons'>
                     <Link to={`/EditLeave/${leave._id}/${leave.name}/${leave.staffid}/${leave.email}/${leave.position}/${leave.doleave}/${leave.leavestrt}/${leave.leaveend}/${leave.leaveType}`}>
-                      <button className="editButton">Edit</button>
+                      <button className="editButton"><FaEdit/></button>
                     </Link>
-                  </td>
+                  </TableCell>
 
-                  <td className='actionButtons'>
-                    <button className="deleteButton" onClick={() => handleDelete(leave._id)}>Delete</button>
-                  </td>
-                  <td className='actionButtons'>
+                  <TableCell className='actionButtons'>
+                    <button className="deleteButton" onClick={() => handleDelete(leave._id)}><FaTrash/></button>
+                  </TableCell>
+                  <TableCell className='actionButtons'>
                     <button className="pdfButton" onClick={() => generatePDF(leave)}>Generate PDF</button>
-                  </td>
-                </tr>
+                  </TableCell>
+                </TableRow>
               ))
             ) : (
-              <tr>
-                <td colSpan="11">You have no leave data</td>
-              </tr>
+              <TableRow>
+                <TableCell colSpan="11">You have no leave data</TableCell>
+              </TableRow>
             )}
-          </tbody>
-        </table>
+          </TableBody>
+        </Table>
       </div>
     </Layout>
   );
