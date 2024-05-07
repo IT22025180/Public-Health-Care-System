@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 import '../styles/LeaveTable.css';
 import { Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
 import { FaEdit, FaTrash } from 'react-icons/fa';
+import '../styles/AdminClinic.css';
 
 
 const LeaveTable = () => {
@@ -175,7 +176,7 @@ const LeaveTable = () => {
 
   return (
     <Layout>
-      <div className='LeaveTable'>
+      <div className='adminClinic'>
         <div className="search-container">
           <input
             type="text"
