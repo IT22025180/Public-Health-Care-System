@@ -27,11 +27,11 @@ const AdminClinic = () => {
         openPatients(false);
     }
 
-    const getClinics = async (uname) => {
-        Axios.get(`http://localhost:4000/api/DcClinics/${uname}`)
+    const getClinics = async () => {
+        Axios.get(`http://localhost:4000/api/Clinics`)
             .then(response => {
                 console.log('Data from server: ', response.data);
-                setClinics(response.data);
+                setClinics(response.data.allClinics);
             })
             .catch(error => {
                 console.error("Axios error: ", error);
@@ -39,10 +39,8 @@ const AdminClinic = () => {
     };
 
     useEffect(() => {
-        if (uname) {
-            getClinics(uname);
-        }
-    }, [uname]);
+        getClinics();
+    }, []);
 
     const getPatients = async () => {
         try {
@@ -104,6 +102,7 @@ const AdminClinic = () => {
                                 <TableCell>Time</TableCell>
                                 <TableCell>Type</TableCell>
                                 <TableCell>Venue</TableCell>
+                                <TableCell>Doctor name</TableCell>
                                 <TableCell>Actions</TableCell>
                             </TableRow>
                         </TableHead>
@@ -117,6 +116,7 @@ const AdminClinic = () => {
                                         <TableCell>{new Date(clinic.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</TableCell>
                                         <TableCell>{clinic.ctype}</TableCell>
                                         <TableCell>{clinic.venue}</TableCell>
+                                        <TableCell>{clinic.uname}</TableCell>
                                         <TableCell>
                                             <Button onClick={() => navigate(`/updateCli/${clinic._id}/${clinic.date}/${clinic.ctype}/${clinic.venue}`)}><FaEdit /></Button>
                                             <Button variant='danger' color='red' onClick={() => confirmDelete(clinic._id)}><FaTrash /></Button>
