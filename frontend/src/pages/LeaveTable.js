@@ -31,7 +31,7 @@ const LeaveTable = () => {
   };
 
   const handleDelete = (id) => {
-   
+
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -42,12 +42,12 @@ const LeaveTable = () => {
       confirmButtonText: "Yes, delete it!"
     }).then((result) => {
       if (result.isConfirmed) {
-        
+
         Axios.post('http://localhost:4000/api/deleteLeave', { _id: id })
           .then(response => {
             console.log('Leave deleted successfully');
             setLeavedata(prevData => prevData.filter(leave => leave._id !== id));
-            
+
             Swal.fire({
               title: "Deleted!",
               text: "Your leave application has been deleted.",
@@ -56,7 +56,7 @@ const LeaveTable = () => {
           })
           .catch(error => {
             console.error('Error deleting leave:', error);
-           
+
             Swal.fire({
               title: "Error!",
               text: "Failed to delete leave application.",
@@ -66,38 +66,38 @@ const LeaveTable = () => {
       }
     });
   };
-  
+
 
   const generatePDF = (leave) => {
     const doc = new jsPDF();
 
-    
-    const logo = new Image();
-    logo.src = logo1; 
-    doc.addImage(logo, 'PNG', 6, 7, 20, 20); 
 
-   
+    const logo = new Image();
+    logo.src = logo1;
+    doc.addImage(logo, 'PNG', 6, 7, 20, 20);
+
+
     doc.setFontSize(12);
-    doc.text('Public Health Information System', 70, 15); 
+    doc.text('Public Health Information System', 70, 15);
     doc.text('Suwasiripaya, No. 385, Rev. Baddegama Wimalawansa Thero Mawatha,', 70, 20);
     doc.text('Colombo 10, Sri Lanka.', 70, 25);
     doc.text('Tel: 112 694033, 112 675011, 112 675449, 112 693493', 70, 30);
 
-    
+
     doc.setDrawColor(0);
     doc.setLineWidth(0.5);
     doc.rect(0, 0, doc.internal.pageSize.width, doc.internal.pageSize.height, 'S');
 
-    
+
     doc.setLineWidth(0.5);
     doc.line(5, 45, 205, 45);
 
-    
+
     doc.setFontSize(18);
-    doc.setTextColor(0, 0, 0); 
+    doc.setTextColor(0, 0, 0);
     doc.text('Leave Summary', 90, 60);
 
-    
+
     let leaveTypeDescription = '';
     switch (leave.leaveType) {
       case 'Sick':
@@ -149,13 +149,13 @@ const LeaveTable = () => {
     `;
 
     doc.setFontSize(12);
-    doc.text(description, 15, 75); 
+    doc.text(description, 15, 75);
 
-    
+
     const currentDate = new Date().toLocaleDateString('en-US');
     doc.setFontSize(12);
-    doc.text(`Date: ${currentDate}`, 15, 170); 
-    doc.text('Signature:', 15, 180); 
+    doc.text(`Date: ${currentDate}`, 15, 170);
+    doc.text('Signature:', 15, 180);
 
     doc.save(`Leave_Summary_${leave.name}.pdf`);
   };
@@ -163,12 +163,12 @@ const LeaveTable = () => {
   const handleSearch = (e) => {
     const value = e.target.value.toLowerCase();
     setSearchQuery(value);
-    
+
     const filteredData = value
       ? leavedata.filter(leave =>
-          leave.name.toLowerCase().includes(value) ||
-          leave.staffid.toLowerCase().includes(value)
-        )
+        leave.name.toLowerCase().includes(value) ||
+        leave.staffid.toLowerCase().includes(value)
+      )
       : leavedata;
     setLeavedata(filteredData);
   };
@@ -215,12 +215,12 @@ const LeaveTable = () => {
 
                   <TableCell className='actionButtons'>
                     <Link to={`/EditLeave/${leave._id}/${leave.name}/${leave.staffid}/${leave.email}/${leave.position}/${leave.doleave}/${leave.leavestrt}/${leave.leaveend}/${leave.leaveType}`}>
-                      <button className="editButton"><FaEdit/></button>
+                      <button className="editButton"><FaEdit /></button>
                     </Link>
                   </TableCell>
 
                   <TableCell className='actionButtons'>
-                    <button className="deleteButton" onClick={() => handleDelete(leave._id)}><FaTrash/></button>
+                    <button className="deleteButton" onClick={() => handleDelete(leave._id)}><FaTrash /></button>
                   </TableCell>
                   <TableCell className='actionButtons'>
                     <button className="pdfButton" onClick={() => generatePDF(leave)}>Generate PDF</button>

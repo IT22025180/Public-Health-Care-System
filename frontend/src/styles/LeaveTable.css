@@ -1,27 +1,35 @@
 .LeaveTable {
-    width: 1150px;
-    background-color: rgb(225, 217, 241);
-    box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.065);
-    border-radius: 5px;
-    margin: 50px auto;
-    padding: 50px;
+    padding: 20px;
 }
 
-.LeaveTable table {
+.LeaveTable .MuiTable-root {
     width: 100%;
-    margin-top: 30px;
     border-collapse: collapse;
 }
 
-.LeaveTable th,
-.LeaveTable td {
-    border: 1px solid #000;
+.LeaveTable .MuiTableHead-root {
+    background-color: #f2f2f2;
+    border-bottom: 1px solid #ddd;
+}
+
+.LeaveTable .MuiTableCell-head {
+    font-weight: bold;
+    border-right: 1px solid #ddd;
     padding: 10px;
 }
 
-.LeaveTable th {
-    background-color: darkblue;
-    color: white;
+.LeaveTable .MuiTableCell-root {
+    text-align: left;
+    padding: 10px;
+    border-right: 1px solid #ddd;
+}
+
+.LeaveTable .MuiTableRow-root:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.LeaveTable .MuiTableRow-root:hover {
+    background-color: #e0e0e0;
 }
 
 .LeaveTable .actionButtons button {
@@ -46,6 +54,7 @@
 .LeaveTable .generate {
     background-color: rgb(29, 84, 129);
 }
+
 .LeaveTable .searchButton {
     background-color: rgb(199, 199, 230);
 }
