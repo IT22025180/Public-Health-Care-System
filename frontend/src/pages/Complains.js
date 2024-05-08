@@ -255,6 +255,42 @@ const ComplaintForm = () => {
   }
 
   const handleKeyPress2 = (e) => {
+
+    const { key, target } = e;
+    const { selectionStart, value } = target;
+
+    if (e.key === "Backspace") {
+      return;
+    }
+
+    // Check if the entered value starts with '19' or '2'
+    if (
+      (value === '' && (key !== '1' && key !== '2')) ||
+      (value === '1' && key !== '9') ||
+      (value === '2' && key !== '0' && key !== '0' && key !== '0')
+    ) {
+      e.preventDefault();
+      return;
+    }
+
+    // Allow Backspace, Delete, Arrow keys, and Home/End keys
+    if (
+      ['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(key) ||
+      // Allow Ctrl+A (Select All)
+      (e.ctrlKey && key === 'a')
+    ) {
+      return;
+    }
+
+    // Check if the entered key is a digit
+    if (!/\d/.test(key)) {
+      e.preventDefault();
+      return;
+    }
+
+
+
+
     if (e.key === "Backspace") {
       return;
     }
@@ -262,9 +298,6 @@ const ComplaintForm = () => {
       e.preventDefault();
     }
     if (!/[Vv0-9]/.test(e.key)) {
-      e.preventDefault();
-    }
-    if (e.target.value.length >= 12 && e.key !== "Backspace") {
       e.preventDefault();
     }
   }

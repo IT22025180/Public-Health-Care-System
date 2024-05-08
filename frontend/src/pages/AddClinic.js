@@ -140,6 +140,7 @@ const AddClinic = () => {
                                 <Form.Control
                                     type='datetime-local'
                                     value={date}
+                                    min={new Date().toISOString().split('T')[0]}
                                     onChange={e => setDate(e.target.value.toString())} />
                             </Form.Group>
                         </Form>
