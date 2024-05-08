@@ -90,6 +90,16 @@ const AddClinic = () => {
         navigate('/genPatientReport')
     }
 
+    const handleVenuePress = (e) => {
+        // Prevent the default behavior if a number key is pressed
+        if (/\d/.test(e.key)) {
+            e.preventDefault();
+        }
+        if (/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(e.key)) {
+            e.preventDefault();
+        }
+    }
+
     return (
         <div className='contflex' data-aos="fade-up">
             <hr className='hline' />
@@ -144,6 +154,7 @@ const AddClinic = () => {
                                 <Form.Control
                                     type='text'
                                     value={venue}
+                                    onKeyDown={handleVenuePress}
                                     onChange={e => setVenue(e.target.value)}
                                 />
                             </Form.Group>

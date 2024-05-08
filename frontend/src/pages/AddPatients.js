@@ -154,6 +154,15 @@ const AddPatients = () => {
     }
   }
 
+  const handleNamePress = (e) => {
+    // Prevent the default behavior if a number key is pressed
+    if (/\d/.test(e.key)) {
+      e.preventDefault();
+    }
+    if (/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(e.key)) {
+      e.preventDefault();
+    }
+  }
 
 
   return (
@@ -174,6 +183,7 @@ const AddPatients = () => {
                   type='text'
                   size='sm'
                   value={name}
+                  onKeyDown={handleNamePress}
                   onChange={e => setName(e.target.value)}
                 />
               </Form.Group>
