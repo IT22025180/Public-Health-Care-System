@@ -91,4 +91,13 @@
     cursor: pointer;
     background-color: red;
 }
+.view-detail-btn{
+  border: 0;
+    outline: none;
+    padding: 8px 10px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: rgb(19, 181, 24);
+}
   

@@ -6,9 +6,9 @@ import '../styles/addClinics.css'
 import Axios from 'axios'
 import Swal from 'sweetalert2'
 import { useNavigate } from 'react-router-dom';
-import teeth from '../webImages/teeth.jpg'
-import dengue from '../webImages/dengueM.jpg'
 import * as Yup from 'yup';
+import Aos from 'aos';
+import 'aos/dist/aos.css';
 
 const AddClinic = () => {
 
@@ -20,14 +20,23 @@ const AddClinic = () => {
     const [errorMessage, setErrorMessage] = useState('');
 
 
+    const uname = localStorage.getItem('name');
 
     const validateSchema = Yup.object().shape({
         ctype: Yup.string().required('Clinic type is required').oneOf(['Dengue', 'Dental'], 'Invalid Clinic Type'),
-        date: Yup.string().required('Date is Required'),
+        date: Yup.string()
+            .required('Date is Required')
+            .test('future-date', 'Clinic date must not be a past date', (value) => {
+                const selectedDate = new Date(value);
+                const currentDate = new Date();
+                return selectedDate > currentDate;
+            }),
         venue: Yup.string().required('Venue is required').matches(/^[A-Za-z\s,./0-9]+$/, 'Name must contain only letters and numbers'),
     })
 
-
+    useEffect(() => {
+        Aos.init({ duration: 1000 }); // Initialize AOS with your desired options
+    }, []);
 
     const addClnics = async () => {
         try {
@@ -45,6 +54,7 @@ const AddClinic = () => {
                 ctype: ctype,
                 date: date,
                 venue: venue,
+                uname: uname
             });
 
             console.log("Clinic adding is successful", response.data);
@@ -81,15 +91,15 @@ const AddClinic = () => {
     }
 
     return (
-        <div className='contflex'>
+        <div className='contflex' data-aos="fade-up">
             <hr className='hline' />
             <div className='clcontainer'>
-                <div className='cl1'>
+                <div className='cl1' >
                     <FaUser />
-                    <p>Dr. kk</p>
+                    <p><b>Dr {uname}</b></p>
                 </div>
                 <div className='frm'>
-                    <h2>Add a Clinic appointment </h2>
+                    <h2 >Add a Clinic appointment </h2>
                     <br />
                     <div className='rdgrp'>
                         <div className='rdbtn'>

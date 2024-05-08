@@ -1,86 +1,65 @@
-.FCDMTable{
-  position: relative;
-  background-color:rgb(225,217,241);
-  box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.065);
-  border-radius: 5px;
-  margin: 20px;
+.FCDMTable {
+  padding: 20px;
 }
 
-.FCDMTable table{
+.FCDMTable .MuiTable-root {
   width: 100%;
   border-collapse: collapse;
 }
 
-.FCDMTable th, .FCDMTable td {
-  padding: 8px;
-  text-align: center;
-  border: 1px solid #000;
+.FCDMTable .MuiTableHead-root {
+  background-color: #f2f2f2;
+  border-bottom: 1px solid #ddd;
 }
 
-.FCDMTable th {
+.FCDMTable .MuiTableCell-head {
+  font-weight: bold;
+  border-right: 1px solid #ddd;
+  padding: 10px;
+}
+
+.FCDMTable .MuiTableCell-root {
+  text-align: left;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.FCDMTable .MuiTableRow-root:nth-child(even) {
   background-color: #f2f2f2;
 }
 
-.FCDMTable tr:nth-child(even) {
-  background-color: #f2f2f2;
+.FCDMTable .MuiTableRow-root:hover {
+  background-color: #e0e0e0;
 }
 
-.evidence-cellDM {
+.FCDMTable .evidence-cellDM {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-wrap: wrap;
 }
 
-.edtBtn {
-  border: 0;
-  outline: none;
+.FCDMTable .evidence-cellDM .files {
+  margin-right: 10px;
+}
+
+.FCDMTable .evidence-cellDM .files a {
+  text-decoration: none;
+  margin-right: 5px;
+}
+
+.FCDMTable .editButton {
+  margin-right: 10px;
   background-color: #4CAF50;
-  padding: 8px 10px;
-  border-radius: 5px;
-  cursor: pointer;
 }
 
-.deleteBtn {
-  border: 0;
-  outline: none;
+.FCDMTable .deleteButton {
+  margin-left: 10px;
   background-color: #e74c3c;
-  padding: 8px 10px;
-  border-radius: 5px;
-  cursor: pointer;
 }
 
-.edtBtn:hover {
-  background-color: #45a049;
-}
-
-.deleteBtn:hover {
+.FCDMTable .deleteButton:hover {
   background-color: #c0392b;
 }
 
-.genButton {
-  text-align: center;
-}
-
-.genButton button{
-  border: 0;
-  outline: none;
-  background-color: #3498db;
-  padding: 8px 10px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.genButton button:hover{
-  background-color: #2980b9;
-}
-
-.search {
-  width: 100%;
-  text-align: right;
-}
-
-.search input {
-  width: 300px;
-  display: inline-block;
-  margin-right: 20px;
+.FCDMTable .editButton:hover { 
+  background-color: #45a049;
 }

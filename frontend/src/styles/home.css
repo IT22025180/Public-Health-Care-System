@@ -50,9 +50,9 @@
 .Lcontainer {
   width: 100%;
   height: 130%;
-  background-image: linear-gradient(to right, #63D8F1, rgb(207, 214, 69));
+  background-image: linear-gradient(to right, #63D8F1, rgb(227, 228, 196));
   border: 1px solid black;
-  border-radius: 5px;
+  border-radius: 45px;
 }
 
 .Lcontainer:hover {
@@ -66,9 +66,9 @@
 .Rcontainer {
   width: 100%;
   height: 130%;
-  background-image: linear-gradient(to right, rgb(207, 214, 69), #63D8F1);
+  background-image: linear-gradient(to right, rgba(8, 231, 123, 0.792), #e1ecc4);
   border: 1px solid black;
-  border-radius: 5px;
+  border-radius: 45px;
 }
 
 .Rcontainer:hover {

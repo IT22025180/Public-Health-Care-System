@@ -7,6 +7,7 @@ import Swal from 'sweetalert2';
 import logo1 from '../webImages/logo1.png';
 import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import Layout from '../components/Layout';
+import { FaEdit, FaFilePdf, FaTrash } from 'react-icons/fa';
 
 
 const Thriposhatable = () => {
@@ -62,17 +63,15 @@ const confirmDelete = (id) => {
     });
 };
 //generate report
-    const generatePDF = () => {
-        if (thriposhadata.length === 0) {
-            console.log("No data to generate PDF.");
-            return;
-        }
+    const generatePDF = (thriposhaapp) => {
         const doc = new jsPDF();
 
-        const logo = new Image();
+    // Add Sri Lankan national logo
+    const logo = new Image();
     logo.src = logo1; // Use the imported logo image
     doc.addImage(logo, 'PNG', 6, 7, 20, 20); // Adjust the position and dimensions as needed
 
+   
     // Add Public Health Information System as the letterhead
     doc.setFontSize(12);
     doc.text('Public Health Information System', 70, 15); // Adjust the position as needed
@@ -89,23 +88,44 @@ const confirmDelete = (id) => {
     doc.setLineWidth(0.5);
     doc.line(5, 45, 205, 45);
 
-    // Leave summary topic
+    // Vaccine registration summary topic
     doc.setFontSize(18);
     doc.setTextColor(0, 0, 0); // Set text color to black
-    doc.text('Thriposha Destribution Summary', 60, 60); // Adjust the position as needed
-        let y = 75;
-        thriposhadata.forEach((thriposha, index) => {
-            const thriposhaText = `Thriposha Type: ${thriposha.type}\nEstimated Date: ${thriposha.esti_Date}\nQuantity: ${thriposha.quantity}\n\n`;
-            doc.text(thriposhaText, 10, y);
-            y += 30;
-        });
-        doc.save("thriposha_report.pdf");
+    doc.text('Thriposha Destribution', 70, 60); // Adjust the position as needed
+
+    //appointment description
+
+    const AppDescription =`
+    Join us for a crucial thriposha distribution program on ${thriposhaapp.esti_Date}, aimed at 
+    combating malnutrition, particularly among vulnerable groups like children and expectant mothers. 
+    The distribution of ${thriposhaapp.type} thriposha (${thriposhaapp.quantity} units) is vital,
+    serving as a preventive measure against malnutrition-related illnesses and fostering overall 
+    growth and development.We need your collaboration. Volunteers, healthcare workers,
+    and community leaders must work together to ensure a smooth and efficient distribution process.
+    Timely arrival and proper organization are essential, as is adherence to safety protocols and 
+    hygiene standards. Your active participation is invaluable in improving the nutritional status 
+    and overall health outcomes of our community. Together, let's build a healthier future for all.
+    
+    `;
+
+    doc.setFontSize(12);
+    doc.text(AppDescription, 15, 75);
+
+    // Date and signature
+    const currentDate = new Date().toLocaleDateString('en-US');
+    doc.setFontSize(12);
+    doc.text(`Date:  ${currentDate}`, 15, 170); 
+    doc.text('Signature:', 15, 180); 
+
+    // Save the PDF with a filename based on leave name
+    doc.save(`Thriposha Destribution_${thriposhaapp.type}.pdf`);
+
     };
 
   return (
     <Layout>
 
-    <div className='thriposhatable'>
+    <div className='adminClinic'>
         <TableContainer component={Paper}>
 
         <Table border ={1} cellPadding={10} cellSpacing={0}>
@@ -116,6 +136,7 @@ const confirmDelete = (id) => {
                     <TableCell>Quantity</TableCell>
                     <TableCell>Edit</TableCell>
                     <TableCell>Delete</TableCell>
+                    <TableCell>PDF</TableCell>
                 </TableRow>
             </TableHead>
             <TableBody>
@@ -128,12 +149,16 @@ const confirmDelete = (id) => {
 
                     <TableCell className='actionButtons'>
                     {thriposha._id && thriposha.type && thriposha.esti_Date && thriposha.quantity  && (
-                        <Button onClick={() => navigate(`/Edittriposha/${thriposha._id}/${thriposha.type}/${thriposha.esti_Date}/${thriposha.quantity}`)}>Edit</Button>
+                        <Button onClick={() => navigate(`/Edittriposha/${thriposha._id}/${thriposha.type}/${thriposha.esti_Date}/${thriposha.quantity}`)}><FaEdit/></Button>
                     )}
                     </TableCell>
                     <TableCell className='deleteButtons'>
-                        <Button onClick={() => confirmDelete(thriposha._id)} >Delete</Button>
+                        <Button onClick={() => confirmDelete(thriposha._id)} ><FaTrash/></Button>
                     </TableCell>
+                    <TableCell >
+                    <button className='generate' onClick={() => generatePDF(thriposha)}>Generate PDF</button>
+                    </TableCell>
+
                 </TableRow>
                     ))
                     ):(
@@ -145,7 +170,7 @@ const confirmDelete = (id) => {
         </Table>
         </TableContainer>
 
-        <button className='generate' onClick={generatePDF}>Generate Report</button>
+       
     </div>
     </Layout>
 

@@ -4,7 +4,7 @@
   background-color: #ECECEC;
   padding: 20px;
   border-radius: 10px;
-  width: 500px;
+  width: 80%;
   border: 1px solid #000000;
   margin-top: 60px;
   margin-bottom: 20px;
@@ -15,7 +15,7 @@
   display: block;
   margin: auto;
   padding: 5px;
-  margin-top: 15px;
+  margin-top: 25px;
   background-color: #007bff;
   color: #ECECEC;
   border: none;
@@ -25,4 +25,19 @@
 
 .notifyBut:hover {
   background-color: #0056b3;
+}
+
+.error {
+  color: red;
+}
+
+.image-container {
+  max-width: 200px;
+  max-height: 200px;
+  cursor: pointer;
+  margin: 10px;
+}
+
+.row {
+  margin-top: 25px;
 }

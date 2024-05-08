@@ -6,8 +6,10 @@ import Swal from "sweetalert2";
 import jsPDF from 'jspdf';
 import logo1 from '../webImages/logo1.png';
 import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
-import { FaEdit, FaTrash } from 'react-icons/fa';
+import { FaEdit, FaTrash,FaFilePdf } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
+import Aos from 'aos';
+import 'aos/dist/aos.css'; //anim
 
 const Complainstable = () => {
     const navigate = useNavigate();
@@ -70,7 +72,8 @@ const Complainstable = () => {
 
     //search
     const filteredComplainsData = complainsdata.filter(Complains => {
-        return Complains.fname.toLowerCase().includes(searchQuery.toLowerCase());
+        const fullName = `${Complains.fname} ${Complains.lname} ${Complains.email} ${Complains.yaddress} ${Complains.cdesc} ${Complains.area}`.toLowerCase();
+        return fullName.includes(searchQuery.toLowerCase());
     });
 
     const generatePDF = (Complains) => {
@@ -79,14 +82,14 @@ const Complainstable = () => {
         // Add Sri Lankan national logo
         const logo = new Image();
         logo.src = logo1; // Use the imported logo image
-        doc.addImage(logo, 'PNG', 6, 7, 20, 20); // Adjust the position and dimensions as needed
+        doc.addImage(logo, 'PNG', 10, 10, 20, 20); // Adjust the position and dimensions as needed
 
         // Add Public Health Information System as the letterhead
         doc.setFontSize(12);
-        doc.text('Public Health Information System', 70, 15); // Adjust the position as needed
-        doc.text('Suwasiripaya, No. 385, Rev. Baddegama Wimalawansa Thero Mawatha,', 70, 20);
-        doc.text('Colombo 10, Sri Lanka.', 70, 25);
-        doc.text('Tel: 112 694033, 112 675011, 112 675449, 112 693493', 70, 30);
+        doc.text('Public Health Information System', 40, 15); // Adjust the position as needed
+        doc.text('Suwasiripaya, No. 385, Rev. Baddegama Wimalawansa Thero Mawatha,', 40, 20);
+        doc.text('Colombo 10, Sri Lanka.', 40, 25);
+        doc.text('Tel: 112 694033, 112 675011, 112 675449, 112 693493', 40, 30);
 
         // Add page border
         doc.setDrawColor(0);
@@ -98,12 +101,12 @@ const Complainstable = () => {
         doc.line(5, 45, 205, 45);
 
         // Leave summary topic
-        doc.setFontSize(18);
+        doc.setFontSize(10);
         doc.setTextColor(0, 0, 0); // Set text color to black
-        doc.text('Complain Summery', 90, 60);
+        doc.text('Complain Summery', 78, 60);
 
         let xPos = 15;
-        let yPos = 185; // Fixed yPos for all images
+        let yPos = 195; // Fixed yPos for all images
         const verticalSpacing = 10; // Adjust vertical spacing between rows
         if (Array.isArray(Complains.images)) {
             Complains.images.forEach((image, index) => {
@@ -120,29 +123,41 @@ const Complainstable = () => {
             doc.text('No images available', 15, 70);
         };
 
-        doc.text(Complains.fname, 15, 80);
-        doc.text(Complains.lname, 15, 90);
-        doc.text(Complains.mobile.toString(), 15, 100);
-        doc.text(Complains.email, 15, 110);
-        doc.text(Complains.NIC, 15, 120);
-        doc.text(Complains.date, 15, 130);
-        doc.text(Complains.yaddress, 15, 140);
-        //doc.text(Complains.images, 15, 150);
-        doc.text(Complains.ctype, 15, 160);
-        doc.text(Complains.cdesc, 15, 170);
-        doc.text(Complains.area, 15, 180);
+        const descriptionText = `Description: ${Complains.cdesc}`;
+    const descriptionLines = doc.splitTextToSize(descriptionText, 180); // Adjust width as needed
+    doc.text(descriptionLines, 15, 158);
+
+        doc.text(`First Name: ${Complains.fname}`, 15, 80);
+        doc.text(`Last Name: ${Complains.lname}`, 15, 90);
+        doc.text(`Mobile: ${Complains.mobile}`.toString(), 15, 100);
+        doc.text(`Email: ${Complains.email}`, 15, 110);
+        doc.text(`NIC: ${Complains.NIC}`, 15, 120);
+        doc.text(`Date: ${Complains.date}`, 15, 130);
+        doc.text(`Address: ${Complains.yaddress}`, 15, 140);
+        doc.text(`Type: ${Complains.ctype}`, 15, 150);
+        /*doc.text(`Description: ${Complains.cdesc}`, 15, 170);*/
+        doc.text(`Area: ${Complains.area}`, 15, 175);
+        doc.text('Images:',15,185);
 
         doc.save(`Complain_Summary_${Complains.fname}.pdf`);
     };
 
+    useEffect(() => {
+        Aos.init({ duration: 1000 }); // Initialize AOS with your desired options //anim
+      }, []);
+
     console.log(complainsdata.length);
     return (
         <Layout>
+
+            <div data-aos="zoom-in" //anim
+                data-aos-anchor-placement="center-bottom">
+
             <div className='Complainstable'>
 
 
 
-                {<input placeholder="Search name" type='text' value={searchQuery} onChange={e => setSearchQuery(e.target.value)} />}
+                {<input placeholder="Search Here" type='text' value={searchQuery} onChange={e => setSearchQuery(e.target.value)} style={{ fontWeight: 'bold' }}/>}
 
                 <TableContainer component={Paper}>
                     <Table border={1} cellPadding={10} cellSpacing={0}>
@@ -165,15 +180,15 @@ const Complainstable = () => {
                             {filteredComplainsData && filteredComplainsData.length > 0 ? (
                                 filteredComplainsData.map((Complains) => (
                                     <TableRow key={Complains._id}>
-                                        <TableCell>{Complains.fname}</TableCell>
-                                        <TableCell>{Complains.lname} </TableCell>
+                                        <TableCell className="fname-column">{Complains.fname}</TableCell>
+                                        <TableCell className="lname-column">{Complains.lname} </TableCell>
                                         <TableCell>{Complains.mobile} </TableCell>
-                                        <TableCell>{Complains.email}</TableCell>
+                                        <TableCell className="email-column">{Complains.email}</TableCell>
                                         <TableCell>{Complains.NIC}</TableCell>
-                                        <TableCell>{Complains.yaddress}</TableCell>
+                                        <TableCell className="yaddress-column">{Complains.yaddress}</TableCell>
                                         <TableCell>{Complains.ctype}</TableCell>
-                                        <TableCell>{Complains.cdesc}</TableCell>
-                                        <TableCell>{Complains.area}</TableCell>
+                                        <TableCell className="cdesc-column">{Complains.cdesc}</TableCell>
+                                        <TableCell className="area-column">{Complains.area}</TableCell>
                                         <TableCell>
                                             {Array.isArray(Complains.images) ? (
                                                 Complains.images.map((image, index) => (
@@ -189,8 +204,8 @@ const Complainstable = () => {
 
                                         <TableCell >
                                             <Button onClick={() => navigate(`/updateComp/${Complains._id}/${Complains.fname}/${Complains.lname}/${Complains.mobile}/${Complains.email}/${Complains.NIC}/${Complains.yaddress}/${Complains.ctype}/${Complains.cdesc}`)}><FaEdit /></Button>
-                                            <Button onClick={() => confirmDelete(Complains._id)}><FaTrash /></Button>
-                                            <button className="pdfButton" onClick={() => generatePDF(Complains)}>Generate PDF</button>
+                                            <Button onClick={() => confirmDelete(Complains._id)} style={{  color: 'red'}}><FaTrash /></Button>
+                                            <button className="pdfButton" onClick={() => generatePDF(Complains)}><FaFilePdf/></button>
                                         </TableCell>
                                     </TableRow>
                                 ))
@@ -203,9 +218,10 @@ const Complainstable = () => {
                     </Table>
                 </TableContainer>
             </div>
+            </div>
         </Layout>
     )
 }
 
-export default Complainstable
+export default Complainstable;
 

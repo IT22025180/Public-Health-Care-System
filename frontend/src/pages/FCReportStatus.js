@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import '../styles/FCRS.css';
 import Layout from '../components/Layout';
 import Axios from "axios";
+import { Table, TableHead, TableBody, TableRow, TableCell } from '@mui/material';
 import 'jspdf-autotable';
 
 const FCReportStatus = () => {
@@ -23,8 +24,7 @@ const FCReportStatus = () => {
       });
   };
 
-
-  const FilterData = () => {
+  const filterData = () => {
     return RVdata.filter(rvdata => {
       const searchQueryLower = searchQuery.toLowerCase();
       const includesSearchQuery = (value) => {
@@ -54,46 +54,46 @@ const FCReportStatus = () => {
         <input type="text" value={searchQuery} onChange={e => setSearchQuery(e.target.value)} placeholder="Search" />
       </div>
       <div className="stTable">
-        <table border={1} cellPadding={10} cellSpacing={0}>
-          <thead>
-            <tr>
-              <th>Raid Officer Name</th>
-              <th>Date</th>
-              <th>Violation Location</th>
-              <th>Violation Type</th>
-              <th>Violation Description</th>
-              <th>Violator Name</th>
-              <th>Violator Email</th>
-              <th>Violator Contact Number</th>
-              <th>Violator ID</th>
-              <th>Evidences</th>
-              <th>Decision</th>
-            </tr>
-          </thead>
-          <tbody>
-            {FilterData().length > 0 ? (
-              FilterData().map((RVdata) => (
-                <tr key={RVdata._id}>
-                  <td>{RVdata.ro_name}</td>
-                  <td>{RVdata.date}</td>
-                  <td>{RVdata.v_location}</td>
-                  <td>{RVdata.v_type}</td>
-                  <td>{RVdata.v_description}</td>
-                  <td>{RVdata.v_name}</td>
-                  <td>{RVdata.v_email}</td>
-                  <td>{RVdata.v_mobile}</td>
-                  <td>{RVdata.v_nic}</td>
-                  <td>{RVdata.evidence}</td>
-                  <td>{RVdata.decision}</td>
-                </tr>
+        <Table >
+          <TableHead>
+            <TableRow>
+              <TableCell>Raid Officer Name</TableCell>
+              <TableCell>Date</TableCell>
+              <TableCell>Violation Location</TableCell>
+              <TableCell>Violation Type</TableCell>
+              <TableCell>Violation Description</TableCell>
+              <TableCell>Violator Name</TableCell>
+              <TableCell>Violator Email</TableCell>
+              <TableCell>Violator Contact Number</TableCell>
+              <TableCell>Violator ID</TableCell>
+              <TableCell>Evidences</TableCell>
+              <TableCell>Decision</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {filterData().length > 0 ? (
+              filterData().map((RVdata) => (
+                <TableRow key={RVdata._id}>
+                  <TableCell>{RVdata.ro_name}</TableCell>
+                  <TableCell>{RVdata.date}</TableCell>
+                  <TableCell>{RVdata.v_location}</TableCell>
+                  <TableCell>{RVdata.v_type}</TableCell>
+                  <TableCell>{RVdata.v_description}</TableCell>
+                  <TableCell>{RVdata.v_name}</TableCell>
+                  <TableCell>{RVdata.v_email}</TableCell>
+                  <TableCell>{RVdata.v_mobile}</TableCell>
+                  <TableCell>{RVdata.v_nic}</TableCell>
+                  <TableCell >{RVdata.evidence}</TableCell>
+                  <TableCell>{RVdata.decision}</TableCell>
+                </TableRow>
               ))
             ) : (
-              <tr>
-                <td colSpan="11">No Data Available</td>
-              </tr>
+              <TableRow>
+                <TableCell colSpan="11">No Data Available</TableCell>
+              </TableRow>
             )}
-          </tbody>
-        </table>
+          </TableBody>
+        </Table>
       </div>
     </Layout>
   );

@@ -8,6 +8,9 @@ import { useNavigate } from 'react-router-dom';
 import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
 import * as Yup from 'yup';
 import { motion, useScroll } from 'framer-motion'
+import Aos from 'aos';
+import 'aos/dist/aos.css'; //anim
+import Complainstable from "./Complainstable";
 
 const mapStyle = {
   height: "300px",
@@ -41,9 +44,9 @@ const ComplaintForm = () => {
     mobile: Yup.string().matches(/^0\d{9}$/, 'Invalid Contact Number').required('Contact number is Required'),
     email: Yup.string().matches(/^[a-zA-Z0-9._%+-]+@gmail\.com$/, 'Invalid Gmail address').required('Email is Required'),
     NIC: Yup.string().required('NIC is required').matches(/^\d{11}(V|v|\d)$/, 'Invalid NIC Number'),
-    yaddress: Yup.string().required('Address is Required').matches(/^[A-Za-z\s,./0-9]+$/, 'Name must contain only letters and numbers'),
+    yaddress: Yup.string().required('Address is Required').matches(/^[A-Za-z\s,-./0-9]+$/, 'Address must contain only letters and numbers'),
     images: Yup.array().min(1, 'img is required').required('At least one document is required'),
-    cdesc: Yup.string().required('Description is Required').matches(/^[A-Za-z\s,.0-9]+$/, 'Description must contain only letters'),
+    cdesc: Yup.string().required('Description is Required').matches(/^[A-Za-z\s,"".''0-9]+$/, 'Description must contain only letters & numbers'),
     ctype: Yup.string().required('Complain Type is Required'),
     date: Yup.string().required('Date is Required'),
     area: Yup.string().required('Location is Required').matches(/^[A-Za-z\s,.0-9]+$/, 'Location must contain only letters'),
@@ -266,19 +269,30 @@ const ComplaintForm = () => {
     }
   }
 
+  const handleKeyPress3 = (e) => {
+    if (e.key === "Backspace") {
+      return;
+    }
+    if (/[!@#$%^&*()_+\=\[\]{};':"\\|<>\/?]/.test(e.key)) {
+      e.preventDefault();
+    }
+  }
+
+  useEffect(() => {
+    Aos.init({ duration: 1000 }); // Initialize AOS with your desired options //anim
+  }, []);
+
   return (
     <Layout>
-      <motion.div className=""
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -50 }}
-        transition={{ duration: 0.5 }}
 
-      >
+
+<div data-aos="zoom-in" //anim
+        data-aos-anchor-placement="center-bottom">
+
         <Container>
           <h1>Public Health Complaint Form</h1>
 
-          <Form>
+          <Form className="comform">
             <Row>
               <Col>
                 <Form.Group controlId="firstName">
@@ -373,6 +387,7 @@ const ComplaintForm = () => {
                     type="text"
                     name="address"
                     value={formData.yaddress}
+                    onKeyDown={handleKeyPress3}
                     onChange={(e) =>
                       setFormData({ ...formData, yaddress: e.target.value })
                     }
@@ -443,6 +458,7 @@ const ComplaintForm = () => {
                 <Form.Group>
                   <Form.Label>Complain Details:</Form.Label>
                   <Form.Control
+                    placeholder="NOTE:Include LOCATION with the DESCRIPTION!"
                     as="textarea"
                     rows={4}
                     name="complainDetails"
@@ -470,7 +486,7 @@ const ComplaintForm = () => {
                     ref={inputRef}
                     onFocus={loadmap}
                   />
-                  <div>
+                  <div >
                     {isLoaded ? (
                       <GoogleMap
                         onLoad={onLoad}
@@ -479,6 +495,7 @@ const ComplaintForm = () => {
                         mapContainerStyle={mapStyle}
                         onClick={handelClickOnMap}
                         onUnmount={onUnmount}
+                        options={{ zoomControl: true }}
                       >
                         <Marker position={markerPosition} />
                       </GoogleMap>
@@ -494,15 +511,19 @@ const ComplaintForm = () => {
             <Button variant="primary" type="submit" onClick={addComplain}>
               Submit
             </Button>
-            <Button  onClick={navtoComplains}>
-              Complainstable
+            </div>
+            
+          </Form>
+          <div className="bat">
+            <Button variant="primary" type="button" onClick={()=>navigate('/Complainstable')}>
+            View Complains
             </Button>
             </div>
-          </Form>
         </Container>
-      </motion.div>
+        </div>
     </Layout>
   );
 };
 
 export default ComplaintForm;
+

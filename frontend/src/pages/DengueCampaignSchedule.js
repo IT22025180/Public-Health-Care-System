@@ -1,45 +1,56 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import Layout from '../components/Layout';
-import '../styles/denguecampaignschedule.css'
+import '../styles/denguecampaignschedule.css';
 import Axios from 'axios';
 import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
 
-const DengueCampaigns = ({ submitted, data }) => {
-    const [venue, setvenue] = useState('');
-    const [date, setdate] = useState('');
-    const [time, settime] = useState('');
-    const [drName, setdrName] = useState('');
-    const [errorMessage, setErrorMessage] = useState('');
+const DengueCampaigns = () => {
+    const [venue, setVenue] = useState('');
+    const [date, setDate] = useState('');
+    const [time, setTime] = useState('');
+    const [etime, setEtime] = useState('');
+    const [drName, setDrName] = useState('');
+    const [errorMessage, setErrorMessage] = useState({});
 
     const validateSchema = Yup.object().shape({
-        venue: Yup.string().required('Report ID is Required').matches(/^[A-Za-z\s]+$/, 'Name must contain only letters'),
-        date: Yup.string().required('Date is Required'),
-        time: Yup.string().required('Time is Required'),
-        drName: Yup.string().required('Name is Required').matches(/^[A-Za-z\s]+$/, 'Name must contain only letters'),
-      });
+        venue: Yup.string().required('Venue is required').matches(/^[A-Za-z\s]+$/, 'Venue must contain only letters'),
+        date: Yup.date()
+            .required('Date is required')
+            .test('date', 'Date must be the current date or a future date', value => {
+                const selectedDate = new Date(value);
+                const currentDate = new Date();
+                return selectedDate >= currentDate;
+            }),
+        time: Yup.string().required('Starting Time is required'),
+        etime: Yup.string().required('End Time is required'),
+        drName: Yup.string().required('Conducted by is required').matches(/^[A-Za-z\s]+$/, 'Name must contain only letters'),
+    });
 
-    const addcamp = async () => {
+    const addCamp = async (e) => {
+        e.preventDefault();
+        setErrorMessage({}); 
+
         try {
-
-            await validateSchema.validate(
-                {
+            await validateSchema.validate({
                 venue,
                 date,
                 time,
-                drName, 
-                },
-                { abortEarly: false }
-              );
+                etime,
+                drName,
+            }, { abortEarly: false });
 
+            
             const response = await Axios.post('http://localhost:4000/api/addCamp', {
-                venue: venue,
-                date: date,
-                time: time,
-                drName: drName,
+                venue,
+                date,
+                time,
+                etime,
+                drName,
             });
 
-            console.log('Successfully', response.data);
+            console.log('Successfully added campaign', response.data);
+            
         } catch (error) {
             if (error instanceof Yup.ValidationError) {
                 const errors = {};
@@ -51,46 +62,83 @@ const DengueCampaigns = ({ submitted, data }) => {
                 console.error('Error', error);
             }
         }
-    }
+    };
+
     return (
         <Layout>
             <div className='title2'>
                 <h3 className='h23'>Campaign Details</h3>
-                <form className='campaigndetails'>
+                <form className='campaigndetails' onSubmit={addCamp}>
                     <div className="input">
                         <label className='venue' htmlFor="venue">Venue</label>
-                        <input onChange={e => setvenue(e.target.value)} type="text" id="venue" name="venue" autoComplete='off' placeholder='Venue' />
+                        <input
+                            value={venue}
+                            onChange={e => setVenue(e.target.value)}
+                            type="text"
+                            id="venue"
+                            name="venue"
+                            autoComplete='off'
+                            placeholder='Venue'
+                        />
+                        {errorMessage.venue && <div className="text-danger">{errorMessage.venue}</div>}
                     </div>
-                    {errorMessage.venue && <div className="text-danger">{errorMessage.venue}</div>}
                     <div className="input">
                         <label htmlFor="date">Date</label>
-                        <input onChange={e => setdate(e.target.value.toString())} type="date" id="date" name="date" autoComplete='off' placeholder='Date' />
+                        <input
+                            value={date}
+                            onChange={e => setDate(e.target.value)}
+                            type="date"
+                            id="date"
+                            name="date"
+                            autoComplete='off'
+                            placeholder='Date'
+                        />
+                        {errorMessage.date && <div className="text-danger">{errorMessage.date}</div>}
                     </div>
-                    {errorMessage.date && date === '' && <div className="text-danger">Invalid Date</div>}
                     <div className="input">
-                        <label className='stime' htmlFor="stime">Starting Time</label>
-                        <input onChange={e => settime(e.target.value)} type="time" id="stime" name="stime" autoComplete='off' placeholder='Starting Time' />
+                        <label className='stime' htmlFor="time">Starting Time</label>
+                        <input
+                            value={time}
+                            onChange={e => setTime(e.target.value)}
+                            type="time"
+                            id="time"
+                            name="time"
+                            autoComplete='off'
+                            placeholder='Starting Time'
+                        />
+                        {errorMessage.time && <div className="text-danger">{errorMessage.time}</div>}
                     </div>
-                    {errorMessage.time && <div className="text-danger">{errorMessage.time}</div>}
                     <div className="input">
-                        <label className='stime' htmlFor="etime">End Time</label>
-                        <input onChange={e => settime(e.target.value)} type="time" id="etime" name="etime" autoComplete='off' placeholder='End Time' />
+                        <label className='etime' htmlFor="etime">End Time</label>
+                        <input
+                            value={etime}
+                            onChange={e => setEtime(e.target.value)}
+                            type="time"
+                            id="etime"
+                            name="etime"
+                            autoComplete='off'
+                            placeholder='End Time'
+                        />
+                        {errorMessage.etime && <div className="text-danger">{errorMessage.etime}</div>}
                     </div>
-                    {errorMessage.etime && <div className="text-danger">{errorMessage.etime}</div>}
                     <div className="input">
-                        <label className='drname' htmlFor="conductedby">Conducted by</label>
-                        <input onChange={e => setdrName(e.target.value)} type="conductedby" id="conductedby" name="conductedby" autoComplete='off' placeholder='Conductedby' />
+                        <label className='drname' htmlFor="drName">Conducted by</label>
+                        <input
+                            value={drName}
+                            onChange={e => setDrName(e.target.value)}
+                            type="text"
+                            id="drName"
+                            name="drName"
+                            autoComplete='off'
+                            placeholder='Conducted by'
+                        />
+                        {errorMessage.drName && <div className="text-danger">{errorMessage.drName}</div>}
                     </div>
-                    {errorMessage.drName && <div className="text-danger">{errorMessage.drName}</div>}
                     <div className="input">
-
-                    
-                        <button onClick={addcamp} type='submit' value="Submit">Save</button>
-
+                        <button type='submit'>Save</button>
                         <Link to="/DengCampTab">
-                        <button type='submit' value="Cancel">View Campaign details</button>
+                            <button type='button'>View Campaign Details</button>
                         </Link>
-    
                     </div>
                 </form>
             </div>

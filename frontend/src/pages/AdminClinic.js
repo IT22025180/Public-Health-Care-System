@@ -6,15 +6,16 @@ import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import { FaEdit, FaTimes, FaTrash, FaUser } from 'react-icons/fa';
 import { Alert, Form } from 'react-bootstrap';
+import '../styles/AdminClinic.css';
 
 
 const AdminClinic = () => {
     const [clinics, setClinics] = useState([]);
     const [selectedClinicId, setSelectedClinicId] = useState(null);
     const [joinedPatients, setJoinedPatients] = useState([]);
-    const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate();
 
+    const uname = localStorage.getItem('name');
 
     const [open, openPatients] = useState(false);
 
@@ -28,12 +29,14 @@ const AdminClinic = () => {
     }
 
     const getClinics = async () => {
-        try {
-            const response = await Axios.get('http://localhost:4000/api/Clinics');
-            setClinics(response.data.allClinics);
-        } catch (error) {
-            console.error('Axios error:', error);
-        }
+        Axios.get(`http://localhost:4000/api/Clinics`)
+            .then(response => {
+                console.log('Data from server: ', response.data);
+                setClinics(response.data.allClinics);
+            })
+            .catch(error => {
+                console.error("Axios error: ", error);
+            });
     };
 
     useEffect(() => {
@@ -88,53 +91,9 @@ const AdminClinic = () => {
     //search
     const selectedPatients = joinedPatients.filter(patient => patient.clinicID === selectedClinicId);
 
-    //popup update
-
-
-    const [popupup, setpopupup] = useState(false);
-    const [updatedClinic, setUpdatedClinic] = useState([]);
-    const [ctype, setCtype] = useState(updatedClinic.ctype);
-    const [date, setDate] = useState(updatedClinic.date);
-    const [time, setTime] = useState(updatedClinic.time);
-    const [venue, setVenue] = useState(updatedClinic.venue);
-
-
-    const popupUpdate = (clinic) => {
-
-        setUpdatedClinic(clinic);
-        setpopupup(true);
-    }
-
-    const closeUpdate = () => {
-        setpopupup(false);
-    }
-
-    const updateClnic = async () => {
-
-        try {
-
-            const response = await Axios.post('http://localhost:4000/api/updateClinic', {
-                _id: updatedClinic._id,
-                date: date,
-                time: time,
-                venue: venue,
-                ctype: ctype
-            });
-
-            setpopupup(false)
-            console.log("Clinic update is successful", response.data);
-        } catch (error) {
-            console.error('error', error);
-        }
-    }
-
-
-
-
-
     return (
         <Layout>
-            <div>
+            <div className='adminClinic'>
                 <TableContainer component={Paper}>
                     <Table>
                         <TableHead>
@@ -144,6 +103,7 @@ const AdminClinic = () => {
                                 <TableCell>Time</TableCell>
                                 <TableCell>Type</TableCell>
                                 <TableCell>Venue</TableCell>
+                                <TableCell>Doctor name</TableCell>
                                 <TableCell>Actions</TableCell>
                             </TableRow>
                         </TableHead>
@@ -154,11 +114,12 @@ const AdminClinic = () => {
                                     <TableRow key={clinic._id}>
                                         <TableCell>{index + 1}</TableCell>
                                         <TableCell>{new Date(clinic.date).toLocaleDateString()}</TableCell>
-                                        <TableCell>{new Date(clinic.date).toLocaleTimeString()}</TableCell>
+                                        <TableCell>{new Date(clinic.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</TableCell>
                                         <TableCell>{clinic.ctype}</TableCell>
                                         <TableCell>{clinic.venue}</TableCell>
+                                        <TableCell>{clinic.uname}</TableCell>
                                         <TableCell>
-                                            <Button onClick={() => navigate(`/updateCli/${clinic._id}/${clinic.date}/${clinic.time}/${clinic.ctype}/${clinic.venue}`)}><FaEdit /></Button>
+                                            <Button onClick={() => navigate(`/updateCli/${clinic._id}/${clinic.date}/${clinic.ctype}/${clinic.venue}`)}><FaEdit /></Button>
                                             <Button variant='danger' color='red' onClick={() => confirmDelete(clinic._id)}><FaTrash /></Button>
                                             <Button onClick={() => functionPopup(clinic._id)} >View joined patients</Button>
                                         </TableCell>

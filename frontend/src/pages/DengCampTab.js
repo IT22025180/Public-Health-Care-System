@@ -8,6 +8,9 @@ import logo1 from '../webImages/logo1.png';
 import DengueCampaigns from './DengueCampaignSchedule';
 import { Alert, Button, Card, Col, Container, Form, Row } from 'react-bootstrap';
 import denimg3 from '../webImages/dengueimg3.jpeg';
+import Layout from '../components/Layout';
+import { Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
+import { FaEdit, FaFilePdf, FaTrash } from 'react-icons/fa';
 
 
 const DengCampTab = () => {
@@ -49,97 +52,117 @@ const filteredcampdata = campdata.filter(camp=> {
 
 });
 
-const generateReport = () => {
-    if (filteredcampdata.length === 0) {
-        console.log("No camp data to generate report.");
-        return;
-    }
-
+const generateReport = (camp) => {
     const doc = new jsPDF();
-    const logo = new Image();
-    logo.src = logo1; // Use the imported logo image
-    doc.addImage(logo, 'PNG', 6, 7, 20, 20); // Adjust the position and dimensions as needed
 
-    // Add Public Health Information System as the letterhead
+
+    const logo = new Image();
+    logo.src = logo1;
+    doc.addImage(logo, 'PNG', 6, 7, 20, 20);
+
+   
+    
     doc.setFontSize(12);
-    doc.text('Public Health Information System', 70, 15); // Adjust the position as needed
+    doc.text('Public Health Information System', 70, 15);
     doc.text('Suwasiripaya, No. 385, Rev. Baddegama Wimalawansa Thero Mawatha,', 70, 20);
     doc.text('Colombo 10, Sri Lanka.', 70, 25);
     doc.text('Tel: 112 694033, 112 675011, 112 675449, 112 693493', 70, 30);
 
-    // Add page border
+    
     doc.setDrawColor(0);
     doc.setLineWidth(0.5);
     doc.rect(0, 0, doc.internal.pageSize.width, doc.internal.pageSize.height, 'S');
 
-    // Add horizontal line
+    
     doc.setLineWidth(0.5);
     doc.line(5, 45, 205, 45);
 
-    // Leave summary topic
+    
     doc.setFontSize(18);
-    doc.setTextColor(0, 0, 0); // Set text color to black
-    doc.text('Dengue Campaign Summary', 60, 60); // Adjust the position as needed
-    let y = 75;
+    doc.setTextColor(0, 0, 0);
+    doc.text('Notice-Dengue Campaign', 70, 60);
 
-    filteredcampdata.forEach((camp, index) => {
-        const campText = `Venue: ${camp.venue}\nDate: ${camp.date}\nStarting Time: ${camp.time}\nEnd Time: ${camp.etime}\nConducted By: ${camp.drName}\n\n`;
-        doc.text(campText, 10, y);
-        y += 30;
-    });
+    
 
-    doc.save("camp_report.pdf");
-};
+    const campaignDescription =`
+    We are inform you to our upcoming dengue campaign on ${camp.date}.Please join us at 
+    ${camp.venue} from ${camp.time} to ${camp.etime}.This Dengue campaign conducted by
+    ${camp.drName}.Engage in activities such as eliminating breeding sites, educating 
+    others about dengue prevention, and helping with clean-up efforts.Please listen to 
+    instructions from our organizers and health professionals to ensure everyone's
+     safety and effectiveness. Feel free to ask any questions you may have about 
+     dengue prevention and control measures.We work together to combat the spread 
+    of dengue in our community.Let's work together to protect our community from dengue.
+    We look forward to seeing you there.
+    `;
 
+    doc.setFontSize(13);
+    doc.text(campaignDescription, 10, 75);
+
+    
+    const currentDate = new Date().toLocaleDateString('en-US');
+    doc.setFontSize(12);
+    doc.text(`Date: ${currentDate}`, 15, 170); 
+    doc.text('Signature:', 15, 180); 
+
+    
+    doc.save(`Dengue Campaign_${camp.drName}.pdf`);
+
+
+
+
+  
+   };
   return (
-    <div className='Dcamptable'>
+   <Layout>
+     <div className='adminClinic'>
          <form className= "campsearch_bar">
          <input  placeholder="Search by date" type='text' value={searchQuery} onChange={e => setSearchQuery(e.target.value)} />
          </form>
-        <table border ={1} cellPadding={10} cellSpacing={0}>
-            <thead>
-                <tr>
-                    <th>Venue</th>
-                    <th>Date</th>
-                    <th>Starting time</th>
-                    <th>End time</th>
-                    <th>Conducted by</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
-                    <th>Generate PDF</th>
-                </tr>
-            </thead>
-            <tbody>
+        <Table border ={1} cellPadding={10} cellSpacing={0}>
+            <TableHead>
+                <TableRow>
+                    <TableCell>Venue</TableCell>
+                    <TableCell>Date</TableCell>
+                    <TableCell>Starting time</TableCell>
+                    <TableCell>End time</TableCell>
+                    <TableCell>Conducted by</TableCell>
+                    <TableCell>Edit</TableCell>
+                    <TableCell>Delete</TableCell>
+                    <TableCell>Generate PDF</TableCell>
+                </TableRow>
+            </TableHead>
+            <TableBody>
              {filteredcampdata && filteredcampdata.length > 0 ? (
                 filteredcampdata.map((camp)=>(
-                <tr key={camp._id}>
-                    <td>{camp.venue}</td>
-                    <td>{camp.date}</td>
-                    <td>{camp.time}</td>
-                    <td>{camp.etime}</td>
-                    <td>{camp.drName}</td>
-                    <td className='actionButtons'>
-                                    <Link to={`/Editcampdetails/${camp._id}/${camp.venue}/${camp.date}/${camp.time}/${camp.etime}/${camp.drName}`}>
-                                        <button>Edit</button>
+                <TableRow key={camp._id}>
+                    <TableCell>{camp.venue}</TableCell>
+                    <TableCell>{camp.date}</TableCell>
+                    <TableCell>{camp.time}</TableCell>
+                    <TableCell>{camp.etime}</TableCell>
+                    <TableCell>{camp.drName}</TableCell>
+                    <TableCell className='actionButtons'>
+                                    <Link to={`/Editcampdetails/${camp._id}/${camp.venue}/${camp.date}/${camp.time}/${camp.etime}/${camp.drName}`}><FaEdit/>
                                     </Link>
-                                </td>
-                    <td className='deleteButtons'>
-                        <button onClick={()=> campDelete(camp._id)}>Delete</button>
-                    </td>
-                    <td className='reportButtons'>
-                    <button onClick={generateReport}>Generate Report</button>
-                    </td>
-                </tr>))
+                                </TableCell>
+                    <TableCell className='deleteButtons'>
+                        <button onClick={()=> campDelete(camp._id)}><FaTrash/></button>
+                    </TableCell>
+                    <TableCell className='reportButtons'>
+                    <button onClick={() => generateReport(camp)}><FaFilePdf/>Generate Report</button>
+                    </TableCell>
+                </TableRow>))
             ):(
-                <tr>
-                    <td>You have not camp data</td>
-                </tr>
+                <TableRow>
+                    <TableCell>You have not camp data</TableCell>
+                </TableRow>
              )}   
                
-            </tbody>
-        </table>
+            </TableBody>
+        </Table>
 
         </div>
+   </Layout>
   )
 }
 

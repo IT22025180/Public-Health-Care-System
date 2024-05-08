@@ -22,6 +22,7 @@ const DoctorLogin = () => {
                 password: password
             })
 
+
             console.log('success', response.data);
 
             navigate('/login');

@@ -6,6 +6,10 @@ import jsPDF from 'jspdf';
 import logo1 from '../webImages/logo1.png';
 import Swal from 'sweetalert2';
 import '../styles/LeaveTable.css';
+import { Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
+import { FaEdit, FaTrash } from 'react-icons/fa';
+import '../styles/AdminClinic.css';
+
 
 const LeaveTable = () => {
   const navigate = useNavigate();
@@ -28,7 +32,7 @@ const LeaveTable = () => {
   };
 
   const handleDelete = (id) => {
-   
+
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -39,12 +43,12 @@ const LeaveTable = () => {
       confirmButtonText: "Yes, delete it!"
     }).then((result) => {
       if (result.isConfirmed) {
-        
+
         Axios.post('http://localhost:4000/api/deleteLeave', { _id: id })
           .then(response => {
             console.log('Leave deleted successfully');
             setLeavedata(prevData => prevData.filter(leave => leave._id !== id));
-            
+
             Swal.fire({
               title: "Deleted!",
               text: "Your leave application has been deleted.",
@@ -53,7 +57,7 @@ const LeaveTable = () => {
           })
           .catch(error => {
             console.error('Error deleting leave:', error);
-           
+
             Swal.fire({
               title: "Error!",
               text: "Failed to delete leave application.",
@@ -63,38 +67,38 @@ const LeaveTable = () => {
       }
     });
   };
-  
+
 
   const generatePDF = (leave) => {
     const doc = new jsPDF();
 
-    
-    const logo = new Image();
-    logo.src = logo1; 
-    doc.addImage(logo, 'PNG', 6, 7, 20, 20); 
 
-   
+    const logo = new Image();
+    logo.src = logo1;
+    doc.addImage(logo, 'PNG', 6, 7, 20, 20);
+
+
     doc.setFontSize(12);
-    doc.text('Public Health Information System', 70, 15); 
+    doc.text('Public Health Information System', 70, 15);
     doc.text('Suwasiripaya, No. 385, Rev. Baddegama Wimalawansa Thero Mawatha,', 70, 20);
     doc.text('Colombo 10, Sri Lanka.', 70, 25);
     doc.text('Tel: 112 694033, 112 675011, 112 675449, 112 693493', 70, 30);
 
-    
+
     doc.setDrawColor(0);
     doc.setLineWidth(0.5);
     doc.rect(0, 0, doc.internal.pageSize.width, doc.internal.pageSize.height, 'S');
 
-    
+
     doc.setLineWidth(0.5);
     doc.line(5, 45, 205, 45);
 
-    
+
     doc.setFontSize(18);
-    doc.setTextColor(0, 0, 0); 
+    doc.setTextColor(0, 0, 0);
     doc.text('Leave Summary', 90, 60);
 
-    
+
     let leaveTypeDescription = '';
     switch (leave.leaveType) {
       case 'Sick':
@@ -146,13 +150,13 @@ const LeaveTable = () => {
     `;
 
     doc.setFontSize(12);
-    doc.text(description, 15, 75); 
+    doc.text(description, 15, 75);
 
-    
+
     const currentDate = new Date().toLocaleDateString('en-US');
     doc.setFontSize(12);
-    doc.text(`Date: ${currentDate}`, 15, 170); 
-    doc.text('Signature:', 15, 180); 
+    doc.text(`Date: ${currentDate}`, 15, 170);
+    doc.text('Signature:', 15, 180);
 
     doc.save(`Leave_Summary_${leave.name}.pdf`);
   };
@@ -160,12 +164,12 @@ const LeaveTable = () => {
   const handleSearch = (e) => {
     const value = e.target.value.toLowerCase();
     setSearchQuery(value);
-    
+
     const filteredData = value
       ? leavedata.filter(leave =>
-          leave.name.toLowerCase().includes(value) ||
-          leave.staffid.toLowerCase().includes(value)
-        )
+        leave.name.toLowerCase().includes(value) ||
+        leave.staffid.toLowerCase().includes(value)
+      )
       : leavedata;
     setLeavedata(filteredData);
   };
@@ -181,56 +185,56 @@ const LeaveTable = () => {
             placeholder="Search by name or staff ID..."
           />
         </div>
-        <table border={1} cellPadding={10} cellSpacing={0}>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Staff ID</th>
-              <th>Email</th>
-              <th>Position</th>
-              <th>Leaves For</th>
-              <th>Leave Start</th>
-              <th>Leave End</th>
-              <th>Leave Type</th>
-              <th>Edit</th>
-              <th>Delete</th>
-              <th>Summary</th>
-            </tr>
-          </thead>
-          <tbody>
+        <Table border={1} cellPadding={10} cellSpacing={0}>
+          <TableHead>
+            <TableRow>
+              <TableCell>Name</TableCell>
+              <TableCell>Staff ID</TableCell>
+              <TableCell>Email</TableCell>
+              <TableCell>Position</TableCell>
+              <TableCell>Leaves For</TableCell>
+              <TableCell>Leave Start</TableCell>
+              <TableCell>Leave End</TableCell>
+              <TableCell>Leave Type</TableCell>
+              <TableCell>Edit</TableCell>
+              <TableCell>Delete</TableCell>
+              <TableCell>Summary</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
             {leavedata && leavedata.length > 0 ? (
               leavedata.map((leave) => (
-                <tr key={leave._id}>
-                  <td>{leave.name}</td>
-                  <td>{leave.staffid}</td>
-                  <td>{leave.email}</td>
-                  <td>{leave.position}</td>
-                  <td>{leave.doleave}</td>
-                  <td>{leave.leavestrt}</td>
-                  <td>{leave.leaveend}</td>
-                  <td>{leave.leaveType}</td>
+                <TableRow key={leave._id}>
+                  <TableCell>{leave.name}</TableCell>
+                  <TableCell>{leave.staffid}</TableCell>
+                  <TableCell>{leave.email}</TableCell>
+                  <TableCell>{leave.position}</TableCell>
+                  <TableCell>{leave.doleave}</TableCell>
+                  <TableCell>{leave.leavestrt}</TableCell>
+                  <TableCell>{leave.leaveend}</TableCell>
+                  <TableCell>{leave.leaveType}</TableCell>
 
-                  <td className='actionButtons'>
+                  <TableCell className='actionButtons'>
                     <Link to={`/EditLeave/${leave._id}/${leave.name}/${leave.staffid}/${leave.email}/${leave.position}/${leave.doleave}/${leave.leavestrt}/${leave.leaveend}/${leave.leaveType}`}>
-                      <button className="editButton">Edit</button>
+                      <button className="editButton"><FaEdit /></button>
                     </Link>
-                  </td>
+                  </TableCell>
 
-                  <td className='actionButtons'>
-                    <button className="deleteButton" onClick={() => handleDelete(leave._id)}>Delete</button>
-                  </td>
-                  <td className='actionButtons'>
+                  <TableCell className='actionButtons'>
+                    <button className="deleteButton" onClick={() => handleDelete(leave._id)}><FaTrash /></button>
+                  </TableCell>
+                  <TableCell className='actionButtons'>
                     <button className="pdfButton" onClick={() => generatePDF(leave)}>Generate PDF</button>
-                  </td>
-                </tr>
+                  </TableCell>
+                </TableRow>
               ))
             ) : (
-              <tr>
-                <td colSpan="11">You have no leave data</td>
-              </tr>
+              <TableRow>
+                <TableCell colSpan="11">You have no leave data</TableCell>
+              </TableRow>
             )}
-          </tbody>
-        </table>
+          </TableBody>
+        </Table>
       </div>
     </Layout>
   );

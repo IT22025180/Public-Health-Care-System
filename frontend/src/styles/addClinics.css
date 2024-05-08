@@ -18,6 +18,9 @@
     display: flex;
     justify-content: flex-end;
     flex-direction: column;
+    margin-left: 85%;
+    margin-top: 3%;
+    align-items: center;
 }
 
 .rdgrp {

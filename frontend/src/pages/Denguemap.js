@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
+import '../styles/denguemap.css';
+import Layout from '../components/Layout';
+
+
 
 const containerStyle = {
   width: '400px',
@@ -7,14 +11,14 @@ const containerStyle = {
 };
 
 const center = {
-  lat: 7.8731, // Latitude of Sri Lanka
-  lng: 80.7718 // Longitude of Sri Lanka
+  lat: 7.8731,
+  lng: 80.7718
 };
 
 function MyComponent() {
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
-    googleMapsApiKey: "AIzaSyBrN5oNsyq-P0wZaS9wsHshYFoHuuvnhis" // Replace with your Google Maps API key
+    googleMapsApiKey: "AIzaSyBrN5oNsyq-P0wZaS9wsHshYFoHuuvnhis" 
   });
 
   const [map, setMap] = React.useState(null);
@@ -27,10 +31,10 @@ function MyComponent() {
     const newMarker = {
       lat: event.latLng.lat(),
       lng: event.latLng.lng(),
-      id: markers.length // Assign a unique ID to each marker
+      id: markers.length
     };
 
-    // Update markers state and save to localStorage
+    
     setMarkers((prevMarkers) => {
       const updatedMarkers = [...prevMarkers, newMarker];
       localStorage.setItem('markers', JSON.stringify(updatedMarkers));
@@ -58,26 +62,31 @@ function MyComponent() {
   }, []);
 
   return isLoaded ? (
-    <GoogleMap
-      mapContainerStyle={containerStyle}
-      center={center}
-      zoom={8}
-      onLoad={onLoad}
-      onUnmount={onUnmount}
-      onClick={addMarker}
+    <Layout>
+    <div className="map-container"> {/* Apply the map-container CSS class here */}
+        <GoogleMap
+            mapContainerStyle={containerStyle}
+            center={center}
+            zoom={8}
+            onLoad={onLoad}
+            onUnmount={onUnmount}
+            onClick={addMarker}
+        >
+            {markers.map((marker) => (
+                <Marker
+                    key={marker.id}
+                    position={{ lat: marker.lat, lng: marker.lng }}
+                    onClick={() => toggleMarker(marker.id)}
+                    visible={marker.visible !== undefined ? marker.visible : true}
+                />
+            ))}
+            <></>
+        </GoogleMap>
+    </div>
+    </Layout>
+) : <></>;
 
-    >
-      {markers.map((marker) => (
-        <Marker
-          key={marker.id}
-          position={{ lat: marker.lat, lng: marker.lng }}
-          onClick={() => toggleMarker(marker.id)}
-          visible={marker.visible !== undefined ? marker.visible : true}
-        />
-      ))}
-      <></>
-    </GoogleMap>
-  ) : <></>
 }
 
 export default MyComponent;
+

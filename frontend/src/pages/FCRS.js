@@ -85,7 +85,7 @@ const FCRS = () => {
                   <td className="evidence-cell">
                     {Array.isArray(RVdata.evidence) && RVdata.evidence.length > 0 ? (
                       RVdata.evidence.map((evidence, index) => (
-                        <img key={index} src={`data:${evidence.contentType};base64,${evidence.data}`} alt={`Image ${index + 1}`} />
+                        <img key={index} src={`data:${evidence.contentType};base64,${evidence.data}`} alt={`Image ${index + 1}` } />
                       ))
                     ) : (
                       <span>No evidence</span>

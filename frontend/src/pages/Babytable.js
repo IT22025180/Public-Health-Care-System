@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import Layout from '../components/Layout';
+import { FaEdit, FaTrash } from 'react-icons/fa';
 
 const Babytable = () => {
 
@@ -68,7 +69,7 @@ const filteredBabyData = babydata.filter(baby => {
 
   return (
     <Layout>
-    <div className='babytable'>
+    <div className='adminClinic'>
         
         <form className= "babysearch_bar">
         
@@ -80,8 +81,8 @@ const filteredBabyData = babydata.filter(baby => {
             <TableHead>
                 <TableRow>
                     <TableCell>Baby Name</TableCell>
-                    <TableCell>Age(Year)</TableCell>
-                    <TableCell>Weight(Kg)</TableCell>
+                    <TableCell>Age</TableCell>
+                    <TableCell>Weight</TableCell>
                     <TableCell>Contact Number</TableCell>
                     <TableCell>Special Notes</TableCell>
                     <TableCell>Birth Date</TableCell>
@@ -105,13 +106,13 @@ const filteredBabyData = babydata.filter(baby => {
 
                     <TableCell className='actionButtons'>
                     {baby._id && baby.bname && baby.age && baby.weight  && baby.co_no  && baby.notes  && baby.BDate && baby.Gname &&(
-                        <Button onClick={() => navigate(`/Editbabydetails/${baby._id}/${baby.bname}/${baby.age}/${baby.weight}/${baby.co_no}/${baby.notes}/${baby.BDate}/${baby.Gname}`)}>Edit</Button>
+                        <Button onClick={() => navigate(`/Editbabydetails/${baby._id}/${baby.bname}/${baby.age}/${baby.weight}/${baby.co_no}/${baby.notes}/${baby.BDate}/${baby.Gname}`)}><FaEdit/></Button>
                     )}
                     </TableCell>
                  
                     
                     <TableCell  className='deleteButtons'>
-                        <Button onClick={()=> confirmDelete(baby._id)}>Delete</Button>
+                        <Button onClick={()=> confirmDelete(baby._id)}><FaTrash/></Button>
                     </TableCell>
                 </TableRow>
                     ))

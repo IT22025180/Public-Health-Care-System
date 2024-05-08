@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import Layout from '../components/Layout';
+import { FaEdit, FaTrash } from 'react-icons/fa';
 
 const Bvaccinetable = () => {
 
@@ -61,7 +62,7 @@ const confirmDelete = (id) => {
   return (
     <Layout>
 
-    <div className='Bvaccinetable'>
+    <div className='adminClinic'>
             <TableContainer component={Paper}>
 
         <Table border ={1} cellPadding={10} cellSpacing={0}>
@@ -84,12 +85,12 @@ const confirmDelete = (id) => {
                     
                     <TableCell className='actionButtons'>
                     {bvaccine._id && bvaccine.type && bvaccine.esti_Date && bvaccine.quantity  && (
-                        <Button onClick={() => navigate(`/Editbabyvaccination/${bvaccine._id}/${bvaccine.type}/${bvaccine.esti_Date}/${bvaccine.quantity}`)}>Edit</Button>
+                        <Button onClick={() => navigate(`/Editbabyvaccination/${bvaccine._id}/${bvaccine.type}/${bvaccine.esti_Date}/${bvaccine.quantity}`)}><FaEdit/></Button>
                     )}
                     </TableCell>
                     <TableCell className='deleteButtons'>
                         
-                        <Button onClick={() => confirmDelete(bvaccine._id)} >Delete</Button>
+                        <Button onClick={() => confirmDelete(bvaccine._id)} ><FaTrash/></Button>
 
                     </TableCell>
                 </TableRow>

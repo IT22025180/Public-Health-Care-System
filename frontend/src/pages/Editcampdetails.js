@@ -77,9 +77,9 @@ const Editcampdetails = () => {
         confirmButtonText: "Save",
         denyButtonText: "Don't save"
         }).then((result) => {
-        /* Read more about isConfirmed, isDenied below */
+            
         if (result.isConfirmed) {
-            Swal.fire("Saved!","Clinic updated successfully !! ", "success");
+            Swal.fire("Saved!","Campaign updated successfully !! ", "success");
             update();
         } else if (result.isDenied) {
             Swal.fire("Changes are not saved", "", "info");

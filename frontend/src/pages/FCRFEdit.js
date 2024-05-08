@@ -120,7 +120,7 @@ const FCRFEdit = () => {
         title: 'Success!',
         text: 'Report Update Successfully.',
       }).then(() => {
-        navigate('/F&CReportViolationTabe');
+        navigate('/F&CDReportViolationTable');
       });
     } catch (error) {
       if (error && error.inner) {

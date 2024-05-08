@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Layout from '../components/Layout';
 import Axios from 'axios';
 import { motion } from 'framer-motion';
+import '../styles/AdminClinic.css';
 
 const Dengue = () => {
     const [dgClinics, setDgClinics] = useState([]);
@@ -26,7 +27,7 @@ const Dengue = () => {
     }, []);
 
     const filteredDgClinicData = dgClinics.filter(clinic => {
-        return clinic.venue.toLowerCase().includes(searchQuery.toLowerCase());
+        return clinic.uname.toLowerCase().includes(searchQuery.toLowerCase());
     });
 
     return (
@@ -39,7 +40,7 @@ const Dengue = () => {
 
             >
                 <div>
-                    <div className='titles'>
+                    <div className='adminClinic'>
                         <br />
                         <h3>Dengue Clinics</h3><br />
                         <input placeholder="Search doctor name" type='text' value={searchQuery} onChange={e => setSearchQuery(e.target.value)} /><br />
@@ -49,6 +50,7 @@ const Dengue = () => {
                                     <TableRow>
                                         <TableCell>Date</TableCell>
                                         <TableCell>Time</TableCell>
+                                        <TableCell>Doctor name</TableCell>
                                         <TableCell>Venue</TableCell>
                                         <TableCell>Actions</TableCell>
                                     </TableRow>
@@ -57,11 +59,12 @@ const Dengue = () => {
                                     {filteredDgClinicData && filteredDgClinicData.length > 0 ? (
                                         filteredDgClinicData.map((clinic) => (
                                             <TableRow key={clinic._id}>
-                                                <TableCell>{clinic.date}</TableCell>
-                                                <TableCell>{clinic.time}</TableCell>
+                                                <TableCell>{new Date(clinic.date).toLocaleDateString()}</TableCell>
+                                                <TableCell>{new Date(clinic.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</TableCell>
+                                                <TableCell>Dr .{clinic.uname}</TableCell>
                                                 <TableCell>{clinic.venue}</TableCell>
                                                 <TableCell>
-                                                    <Button onClick={() => navigate(`/addpatients/${clinic._id}/${clinic.date}/${clinic.time}/${clinic.venue}/${clinic.ctype}`)}>Join</Button>
+                                                    <Button onClick={() => navigate(`/addpatients/${clinic._id}/${clinic.date}/${clinic.venue}/${clinic.ctype}`)}>Join</Button>
                                                 </TableCell>
                                             </TableRow>
                                         ))

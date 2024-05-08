@@ -9,7 +9,6 @@
 
 .thriposhatable table{
     width :100%;
-    margin-top: 30px;
     border-collapse: collapse;
 
 }
@@ -57,11 +56,9 @@
 .generate{
     border: 0;
     outline: none;
-    background-color: rgb(29, 84, 129);
-    padding: 8px 10px ;
+    background-color: red;
+    padding: 8px 10px;
     color: white;
-    border-radius: 25px;
+    border-radius: 5px;
     cursor: pointer;
-    margin-top: 25px;
-    
 }

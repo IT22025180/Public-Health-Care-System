@@ -1,5 +1,5 @@
-.title{
-    text-align: center;
+.title {
+  text-align: center;
 }
 
 /* Complains.css */
@@ -11,8 +11,9 @@
     padding: 20px;
   }
   
+  
   /* Form Styles */
-  form {
+  .comform {
     background-color: #f9f9f9;
     padding: 20px;
     border-radius: 8px;
@@ -20,16 +21,16 @@
   }
   
   /* Form Label Styles */
-  form label {
+  .comform label {
     font-weight: bold;
   }
   
   /* Input Field Styles */
-  form input[type="text"],
-  form input[type="number"],
-  form input[type="email"],
-  form textarea,
-  form select {
+  .comform input[type="text"],
+  .comform input[type="number"],
+  .comform input[type="email"],
+  .comform textarea,
+  .comform select {
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
@@ -46,7 +47,7 @@
   }
   
   /* Button Styles */
-  form button {
+  .comform button {
     margin-top: 10px;
     padding: 10px 20px;
     background-color: #007bff;
@@ -54,18 +55,18 @@
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    max-width: min-content;
+    width: auto;
     justify-content: center;
     
   }
-  form .buttons{
+  .comform .buttons{
     display: flex;
-    justify-content: center;
+    justify-content:center;
     gap: 10px;
     
   }
   
-  form button:hover {
+  .comform button:hover {
     background-color: #0056b3;
   }
   
@@ -87,4 +88,29 @@
       width: 100%;
     }
   }
+
+  /* Complains.css */
+
+.bat {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.bat button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 170px;
+}
+
+.bat button:hover {
+  background-color: #0056b3;
+}
+
 

@@ -114,10 +114,10 @@ const FCDocManage = ({ submitted, data }) => {
           </div>
           <div>
             <label>Violation Type:</label>
-            <input type="radio" id="foodViolation" name="type" value='foodViolation' checked={violationType === 'foodViolation'} onChange={() => setViolationType('foodViolation')} />
+            <input type="radio" id="foodViolation" name="type" value='foodViolation' checked={violationType === 'foodViolation'} onChange={() => { setFoodViolation(true); setDengueViolation(false); setViolationType('foodViolation'); }} />
             Food Violation
             <span style={{ marginRight: '40px' }}></span>
-            <input type="radio" id="dengueViolation" name="type" value='dengueViolation' checked={violationType === 'dengueViolation'} onChange={() => setViolationType('dengueViolation')} />
+            <input type="radio" id="dengueViolation" name="type" value='dengueViolation' checked={violationType === 'dengueViolation'} onChange={() => { setDengueViolation(true); setFoodViolation(false); setViolationType('dengueViolation'); }} />
             Dengue Violation
             {errorMessage.violationType && <div className="errorMessage">{errorMessage.violationType}</div>}
           </div>

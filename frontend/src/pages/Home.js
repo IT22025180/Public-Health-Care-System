@@ -15,6 +15,7 @@ import Sdeng from '../webImages/Slidedengue.jpg';
 import Sraid from '../webImages/Slideraids.jpg';
 import { motion } from 'framer-motion';
 import Aos from 'aos';
+import 'aos/dist/aos.css';
 
 
 const Home = () => {
@@ -27,23 +28,17 @@ const Home = () => {
 
 
   useEffect(() => {
-    Aos.init();
+    Aos.init({ duration: 1000 });
   }, []);
 
   const navigate = useNavigate();
 
 
   return (
-    <div>
+    <div >
       <Layout>
-        <motion.div className=''
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          <div className='contain'>
-
+        <div >
+          <div className='contain' data-aos="zoom-in">
             <div className='slider-frame'>
               <div className='slider-img'>
                 <div className='img-container'>
@@ -68,9 +63,9 @@ const Home = () => {
               </div>
             </div>
           </div>
-          <Container id='slideshow-container' className='Lcontainer'
+          <Container id='slideshow-container' className='Lcontainer' data-aos="fade-left"
           >
-            <div className='leftflex' data-aos="fade-left">
+            <div className='leftflex' >
               <div className='clinicsub'>
                 <br />
                 <br />
@@ -111,7 +106,7 @@ const Home = () => {
             </div>
           </Container>
           <br />
-          <Container className='Rcontainer'>
+          <Container className='Rcontainer' data-aos="fade-right">
             <div className='rightflex'>
               <img src={cimg} alt='complains' width={300} height={300} />
               <div className='clinicsub'>
@@ -119,14 +114,14 @@ const Home = () => {
                 <br />
                 <h2>Give a complain</h2>
                 <p className='fs-5 text-center'>Is there any problem in your area to affect our health ? Click below button to add complains of unhealthy foods or dengue affected places</p>
-                <Button onClick={() => navigate(`/Complains`)}>Complains </Button>
+                <Button onClick={() => navigate(`/ComplainsHome`)}>Complains </Button>
               </div>
               <br />
 
             </div>
           </Container>
           <br />
-          <Container className='Lcontainer'>
+          <Container className='Lcontainer' data-aos="fade-left">
             <div className='leftflex'>
               <div className='clinicsub'>
                 <br />
@@ -139,7 +134,7 @@ const Home = () => {
               <img src={rimg} width={300} height={300} alt='raids' />
             </div>
           </Container>
-        </motion.div>
+        </div>
       </Layout>
     </div>
   )

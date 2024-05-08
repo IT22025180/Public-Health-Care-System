@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Layout from '../components/Layout'
 import '../styles/Clinics.css';
 //import { Button } from 'react-bootstrap';
@@ -7,7 +7,9 @@ import '../styles/Clinics.css';
 import imageDgC from '../webImages/dentalC.png';
 import imageDtC from '../webImages/dngC.png';
 import AddClinic from './AddClinic';
-import { motion, useScroll } from 'framer-motion'
+import Aos from 'aos';
+import 'aos/dist/aos.css'; //anim
+
 
 const Clinics = () => {
   //const navigate = useNavigate();
@@ -19,6 +21,7 @@ const Clinics = () => {
       buttonLink: '/dengueCli',
       className: 'dengueC-card',
       image: imageDtC,
+      aosAnimation: 'fade-right'
     },
     {
       id: 2,
@@ -27,25 +30,26 @@ const Clinics = () => {
       buttonLink: '/dentalCli',
       className: 'dentalC-card',
       image: imageDgC,
+      aosAnimation: 'fade-left'
     }
   ];
 
   const user = localStorage.getItem('token');
 
+  useEffect(() => {
+    Aos.init({ duration: 1000 }); // Initialize AOS with your desired options //anim
+  }, []);
   return (
     <Layout>
-      <motion.div className=''
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -50 }}
-        transition={{ duration: 0.5 }}
-      >
-        <br />
+      <br />
+      <div data-aos="fade-up" //anim
+        data-aos-anchor-placement="center-bottom">
+
         <div className="home-page">
           <h1>Select Clinic Type</h1><br /><br />
-          <div className="card-container">
+          <div className="card-container" >
             {cards.map((card) => (
-              <div key={card.id} className="Ccard">
+              <div key={card.id} className="Ccard" data-aos={card.aosAnimation}>
                 <img src={card.image} alt={card.title} className="Ccard-image" />
                 <div className="Ccard-body">
                   <h2 className="Ccard-title">{card.title}</h2>
@@ -58,9 +62,9 @@ const Clinics = () => {
             ))}
           </div>
         </div>
-      </motion.div>
+      </div>
       {user && <AddClinic />}
-    </Layout>
+    </Layout >
   )
 }
 

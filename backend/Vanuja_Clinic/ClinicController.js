@@ -5,13 +5,13 @@ const Clinics = require('./ClinicModel');
 const addClinic = async (req, res) => {
     try {
 
-        const { ctype, date, drName, venue } = req.body;
+        const { ctype, date, uname, venue } = req.body;
 
         formattedDate = Array.isArray(date) ? date.join(', ') : date;
         const newClinic = new Clinics({
             ctype,
             date: formattedDate,
-            drName,
+            uname,
             venue
         });
 
@@ -33,6 +33,23 @@ const getClinic = async (req, res) => {
         res.status(500).json({ success: false, message: 'Internal server error' });
     }
 }
+
+const getDoctorClinic = async (req, res) => {
+
+    const uname = req.params.uname;
+
+    Clinics.find({ uname: uname })
+        .then(clinics => {
+            if (clinics.length == 0) {
+                return res.status(404).json({ message: 'No clinics found for you' });
+            }
+            res.json(clinics);
+        })
+        .catch(error => {
+            console.error('Error fetching clinic:', error);
+            res.status(500).json({ message: 'Internal server error ' });
+        });
+};
 
 const updateClinic = async (req, res) => {
 
@@ -81,3 +98,4 @@ exports.addClinic = addClinic;
 exports.getClinic = getClinic;
 exports.updateClinic = updateClinic;
 exports.deleteClinic = deleteClinic;
+exports.getDoctorClinic = getDoctorClinic;

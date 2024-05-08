@@ -10,13 +10,14 @@ import jspdf from 'jspdf';
 import { motion } from 'framer-motion';
 import * as Yup from 'yup';
 import logo1 from '../webImages/logo1.png';
+import { FaFilePdf } from 'react-icons/fa';
 
 const AddPatients = () => {
 
 
   //const navigate = useNavigate();
 
-  const { _id, date, time, venue, ctype } = useParams();
+  const { _id, date, venue, ctype } = useParams();
 
   const [name, setName] = useState('');
   const [gender, setGender] = useState('');
@@ -104,8 +105,8 @@ const AddPatients = () => {
                       Address : ${address}\n\n\n
                       Clinic details \n\n
                       Type : ${ctype}\n
-                      Date : ${date}\n
-                      Time : ${time}\n
+                      Date : ${new Date(date).toLocaleDateString()}\n
+                      Time : ${new Date(date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}\n
                       Venue : ${venue}\n\n
                       Please be on time\tThank you
                       \n
@@ -243,13 +244,15 @@ const AddPatients = () => {
             <br />
             <h3>Clinic details</h3>
             <p>Type : {ctype}</p>
-            <p>Date : {date}</p>
-            <p>TIme : {time}</p>
+            <p>Date : {new Date(date).toLocaleDateString()}</p>
+            <p>TIme : {new Date(date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>
             <p>Venue : {venue}</p>
 
-            <Button onClick={addPatient}>Confirm appointment</Button>
-            <Button onClick={confirmWithGetPDF}>Confirm with get pdf</Button>
-            <Button onClick={closepopup}>Decline</Button>
+            <div className='btns'>
+              <Button className='btnaddp' onClick={addPatient}>Confirm appointment</Button>
+              <Button className='btnaddp' onClick={confirmWithGetPDF}>Confirm with get pdf <FaFilePdf /></Button>
+              <Button className='btnaddp' onClick={closepopup}>Decline</Button>
+            </div>
           </Form>
         </DialogContent>
       </Dialog>
