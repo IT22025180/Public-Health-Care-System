@@ -38,8 +38,7 @@ const RaidSubForm = () => {
 
     const addRS = async () => {
         try {
-            await validateSchema.validate({ location, details, specialNotes }, { abortEarly: false });
-
+            
             const response = await Axios.post('http://localhost:4000/api/addRS', {
                 vname,
                 vemail,
