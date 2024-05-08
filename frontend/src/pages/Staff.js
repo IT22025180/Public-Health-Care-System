@@ -29,7 +29,6 @@ const Staff = () => {
       className: 'dengue-card',
       image: image1,
       aosAnimation: 'fade-right'
-
     },
     {
       id: 2,
