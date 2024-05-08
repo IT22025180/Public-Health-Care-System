@@ -286,7 +286,7 @@ const ComplaintForm = () => {
     <Layout>
 
 
-<div data-aos="zoom-in" //anim
+      <div data-aos="zoom-in" //anim
         data-aos-anchor-placement="center-bottom">
 
         <Container>
@@ -405,6 +405,8 @@ const ComplaintForm = () => {
                     type="date"
                     name="date"
                     value={formData.date}
+                    min={new Date().toISOString().split('T')[0]}
+                    max={(new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000)).toISOString().split("T")[0]}
                     onChange={(e) =>
                       setFormData({
                         ...formData,
@@ -508,19 +510,19 @@ const ComplaintForm = () => {
               </Col>
             </Row>
             <div className="buttons">
-            <Button variant="primary" type="submit" onClick={addComplain}>
-              Submit
-            </Button>
+              <Button variant="primary" type="submit" onClick={addComplain}>
+                Submit
+              </Button>
             </div>
-            
+
           </Form>
           <div className="bat">
-            <Button variant="primary" type="button" onClick={()=>navigate('/Complainstable')}>
-            View Complains
+            <Button variant="primary" type="button" onClick={() => navigate('/Complainstable')}>
+              View Complains
             </Button>
-            </div>
+          </div>
         </Container>
-        </div>
+      </div>
     </Layout>
   );
 };
