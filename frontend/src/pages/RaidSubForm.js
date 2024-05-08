@@ -8,7 +8,6 @@ import Swal from 'sweetalert2';
 const RaidSubForm = () => {
     const [location, setLocation] = useState('');
     const [details, setDetails] = useState('');
-    const [specialNotes, setSpecialNotes] = useState('');
     const [vname, setvname] = useState('');
     const [vemail, setvemail] = useState('');
     const [vcno, setvcno] = useState(0);
@@ -48,13 +47,11 @@ const RaidSubForm = () => {
                 vtype,
                 location,
                 details,
-                specialNotes,
             });
 
             console.log('Successfully added:', response.data);
             setLocation('');
             setDetails('');
-            setSpecialNotes('');
             setvname('');
             setvemail('');
             setvcno(0);
@@ -125,15 +122,9 @@ const RaidSubForm = () => {
                     </div>
 
                     <div className='input'>
-                        <label htmlFor='details'>Details</label>
-                        <input value={details} onChange={e => setDetails(e.target.value)} type='text' id='details' autoComplete='off' placeholder='Details' />
+                        <label htmlFor='details'>Description</label>
+                        <input value={details} onChange={e => setDetails(e.target.value)} type='text' id='details' autoComplete='off' placeholder='Description' />
                         {errorMessage.details && <div className="text-danger">{errorMessage.details}</div>}
-                    </div>
-
-                    <div className='input'>
-                        <label htmlFor='specialNotes'>Special Notes</label>
-                        <input value={specialNotes} onChange={e => setSpecialNotes(e.target.value)} type='text' id='specialNotes' autoComplete='off' placeholder='Special Notes' />
-                        {errorMessage.specialNotes && <div className="text-danger">{errorMessage.specialNotes}</div>}
                     </div>
                     <Link to='/raidsubtable'>
                         <button type='button' className='bsubmit' >View Raids</button>
