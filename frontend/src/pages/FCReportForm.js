@@ -98,7 +98,7 @@ const FCReportForm = () => {
       .test('file-type', 'Only image files are allowed', (files) => files.every((file) => file.type.match(/^image\/(png|jpeg|jpg)$/)))
   });
 
-
+  //name
   const handleKeyPress = (e) => {
     if (/\d/.test(e.key)) {
       e.preventDefault();
@@ -131,6 +131,25 @@ const FCReportForm = () => {
       e.preventDefault();
     }
   };
+
+  // date validation kalla
+  function getCurrentDate() {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  }
+
+  // date validation kalla
+  function getMaxDate() {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  }
+
 
   useEffect(() => {
     Aos.init({ duration: 1000 });
@@ -166,7 +185,8 @@ const FCReportForm = () => {
               </div>
               <div>
                 <label>Date:</label>
-                <input type="date" name="date" value={date} onChange={(e) => setdate(e.target.value)} />
+                {/*Date validation*/}
+                <input type="date" name="date" min={getCurrentDate()} max={getMaxDate()} value={date} onChange={(e) => setdate(e.target.value)} />
                 {errorMessage.date && <div className="errorMessage">{errorMessage.date}</div>}
               </div>
             </div>
