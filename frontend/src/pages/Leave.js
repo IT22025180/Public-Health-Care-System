@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Axios from "axios";
-import { Link } from "react-router-dom"; // Import Link
 import Layout from "../components/Layout";
-import Swal from "sweetalert2"; // Import SweetAlert
-import Alert from "react-bootstrap/Alert"; // Import Bootstrap Alert component
-import "../styles/Leave.css";
+import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import * as Yup from 'yup';
-
+import "../styles/Leave.css";
 
 const Leave = ({ submitted, data }) => {
   const [name, setName] = useState("");
@@ -19,7 +16,6 @@ const Leave = ({ submitted, data }) => {
   const [leaveStart, setLeaveStart] = useState("");
   const [leaveEnd, setLeaveEnd] = useState("");
   const [errorMessage, setErrorMessage] = useState('');
-  const [validationError, setValidationError] = useState(false); // State for validation error
 
   useEffect(() => {
     if (!submitted) {
@@ -38,35 +34,24 @@ const Leave = ({ submitted, data }) => {
       setLeaveStart(data.leavestrt);
       setLeaveEnd(data.leaveend);
       navigate('/LeaveTable');
-
     }
   }, [data]);
 
   const navigate = useNavigate();
 
   const validateSchema = Yup.object().shape({
-    name: Yup.string().required('Report ID is Required').matches(/^[A-Za-z\s]+$/, 'Name must contain only letters'),
-    email: Yup.string().matches(/^[a-zA-Z0-9._%+-]+@gmail\.com$/, 'Invalid Gmail address').required('Email is Required'),
-    leaveStart: Yup.string()
-    .required('Date is Required')
-    .test('date', 'Date must be the current date or a future date', function (value) {
-      const selectedDate = new Date(value);
-      const currentDate = new Date();
-      return selectedDate >= currentDate; // Change the condition to >= for future dates
-    }),
-    leaveEnd: Yup.string()
-    .required('Date is Required')
-    .test('date', 'Date must be after leave start date', function (value) {
-      const selectedEndDate = new Date(value);
-      const selectedStartDate = new Date(leaveStart); // Convert leaveStart to date object
-      return selectedEndDate > selectedStartDate;
-    }),
-    
-    staffId: Yup.string().required('Location is Required').matches(/^[A-Za-z\s,.0-9]+$/, 'Staff ID must contain only letters'),
-    position: Yup.string().required('Report ID is Required').matches(/^[A-Za-z\s]+$/, 'Name must contain only letters'),
-    leaveFor: Yup.string().required('Leave for is required').oneOf(['Days', 'Hours'], 'Invalid leave '),
-    leaveType: Yup.string().required('Leave type for is required').oneOf(['Sick', 'Vacation', 'Quitting'], 'Invalid leave '),
-
+    name: Yup.string().required('Name is Required').matches(/^[A-Za-z\s]+$/, 'Name must contain only letters'),
+    email: Yup.string().email('Invalid email format').required('Email is Required'),
+    leaveStart: Yup.date()
+      .required('Leave start date is Required')
+      .min(new Date(), 'Leave start date must be today or in the future'),
+    leaveEnd: Yup.date()
+      .required('Leave end date is Required')
+      .min(Yup.ref('leaveStart'), 'Leave end date must be after leave start date'),
+    staffId: Yup.string().required('Staff ID is Required').matches(/^[A-Za-z\s]+$/, 'Staff ID must contain only letters'),
+    position: Yup.string().required('Position is Required').matches(/^[A-Za-z\s]+$/, 'Position must contain only letters'),
+    leaveFor: Yup.string().required('Leave for is Required').oneOf(['Days', 'Hours'], 'Invalid leave duration'),
+    leaveType: Yup.string().required('Leave type is Required').oneOf(['Sick', 'Vacation', 'Quitting'], 'Invalid leave type'),
   });
 
   const clearForm = () => {
@@ -81,37 +66,31 @@ const Leave = ({ submitted, data }) => {
   };
 
   const addLeave = async () => {
-
     try {
-      await validateSchema.validate(
-        {
-          name,
-          staffId,
-          email,
-          position,
-          leaveType,
-          leaveFor,
-          leaveStart,
-          leaveEnd,
-
-        },
-        { abortEarly: false }
-      );
+      await validateSchema.validate({
+        name,
+        staffId,
+        email,
+        position,
+        leaveType,
+        leaveFor,
+        leaveStart,
+        leaveEnd,
+      });
 
       const response = await Axios.post("http://localhost:4000/api/addLeave", {
-        name: name,
+        name,
         staffid: staffId,
-        email: email,
-        position: position,
+        email,
+        position,
         doleave: leaveFor,
         leavestrt: leaveStart,
         leaveend: leaveEnd,
-        leaveType: leaveType,
+        leaveType,
       });
 
       console.log("Successfully", response.data);
 
-      // Display success message
       Swal.fire({
         position: "top-end",
         icon: "success",
@@ -144,7 +123,7 @@ const Leave = ({ submitted, data }) => {
             <div>
               <label>Staff ID:</label>
               <input
-                onChange={(e) => setStaffId(e.target.value)}
+                onChange={(e) => setStaffId(e.target.value.replace(/[^A-Za-z\s]/g, ''))}
                 type="text"
                 name="staffId"
                 value={staffId}
@@ -154,7 +133,7 @@ const Leave = ({ submitted, data }) => {
             <div>
               <label>Name:</label>
               <input
-                onChange={(e) => setName(e.target.value)}
+                onChange={(e) => setName(e.target.value.replace(/[^A-Za-z\s]/g, ''))}
                 type="text"
                 name="name"
                 value={name}
@@ -174,7 +153,7 @@ const Leave = ({ submitted, data }) => {
             <div>
               <label>Position:</label>
               <input
-                onChange={(e) => setPosition(e.target.value)}
+                onChange={(e) => setPosition(e.target.value.replace(/[^A-Za-z\s]/g, ''))}
                 type="text"
                 name="position"
                 value={position}
@@ -260,9 +239,7 @@ const Leave = ({ submitted, data }) => {
                 <label htmlFor="quitting">Quitting</label>
               </div>
               {errorMessage.leaveType && <div className="errorMessage">{errorMessage.leaveType}</div>}
-
             </div>
-
 
             <button onClick={addLeave} className="subBut" type="button">
               Submit
