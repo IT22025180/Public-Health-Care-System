@@ -338,8 +338,6 @@ const ComplaintForm = () => {
                     onChange={(e) =>
                       setFormData({ ...formData, fname: e.target.value })
                     }
-
-
                   />
                 </Form.Group>
                 {errorMessage.fname && <div className="text-danger">{errorMessage.fname}</div>}
@@ -374,7 +372,6 @@ const ComplaintForm = () => {
                     onChange={(e) =>
                       setFormData({ ...formData, mobile: e.target.value })
                     }
-
                   />
                 </Form.Group>
                 {errorMessage.mobile && <div className="text-danger">{errorMessage.mobile}</div>}
@@ -389,7 +386,6 @@ const ComplaintForm = () => {
                     onChange={(e) =>
                       setFormData({ ...formData, email: e.target.value })
                     }
-
                   />
                 </Form.Group>
                 {errorMessage.email && <div className="text-danger">{errorMessage.email}</div>}
