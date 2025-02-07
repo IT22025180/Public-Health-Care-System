@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 import jsPDF from 'jspdf';
 import logo1 from '../webImages/logo1.png';
 import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
-import { FaEdit, FaTrash,FaFilePdf } from 'react-icons/fa';
+import { FaEdit, FaTrash, FaFilePdf } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import Aos from 'aos';
 import 'aos/dist/aos.css'; //anim
@@ -89,7 +89,7 @@ const Complainstable = () => {
         doc.text('Public Health Information System', 40, 15); // Adjust the position as needed
         doc.text('Suwasiripaya, No. 385, Rev. Baddegama Wimalawansa Thero Mawatha,', 40, 20);
         doc.text('Colombo 10, Sri Lanka.', 40, 25);
-        doc.text('Tel: 112 694033, 112 675011, 112 675449, 112 693493', 40, 30);
+        doc.text('Tel: 038-2249772, 077-2855178, 077-2076147', 40, 30);
 
         // Add page border
         doc.setDrawColor(0);
@@ -124,8 +124,8 @@ const Complainstable = () => {
         };
 
         const descriptionText = `Description: ${Complains.cdesc}`;
-    const descriptionLines = doc.splitTextToSize(descriptionText, 180); // Adjust width as needed
-    doc.text(descriptionLines, 15, 158);
+        const descriptionLines = doc.splitTextToSize(descriptionText, 180); // Adjust width as needed
+        doc.text(descriptionLines, 15, 158);
 
         doc.text(`First Name: ${Complains.fname}`, 15, 80);
         doc.text(`Last Name: ${Complains.lname}`, 15, 90);
@@ -137,14 +137,14 @@ const Complainstable = () => {
         doc.text(`Type: ${Complains.ctype}`, 15, 150);
         /*doc.text(`Description: ${Complains.cdesc}`, 15, 170);*/
         doc.text(`Area: ${Complains.area}`, 15, 175);
-        doc.text('Images:',15,185);
+        doc.text('Images:', 15, 185);
 
         doc.save(`Complain_Summary_${Complains.fname}.pdf`);
     };
 
     useEffect(() => {
         Aos.init({ duration: 1000 }); // Initialize AOS with your desired options //anim
-      }, []);
+    }, []);
 
     console.log(complainsdata.length);
     return (
@@ -153,71 +153,71 @@ const Complainstable = () => {
             <div data-aos="zoom-in" //anim
                 data-aos-anchor-placement="center-bottom">
 
-            <div className='Complainstable'>
+                <div className='Complainstable'>
 
 
 
-                {<input placeholder="Search Here" type='text' value={searchQuery} onChange={e => setSearchQuery(e.target.value)} style={{ fontWeight: 'bold' }}/>}
+                    {<input placeholder="Search Here" type='text' value={searchQuery} onChange={e => setSearchQuery(e.target.value)} style={{ fontWeight: 'bold' }} />}
 
-                <TableContainer component={Paper}>
-                    <Table border={1} cellPadding={10} cellSpacing={0}>
-                        <TableHead>
-                            <TableRow>
-                                <TableCell>First name</TableCell>
-                                <TableCell>Last Name</TableCell>
-                                <TableCell>Mobile</TableCell>
-                                <TableCell>Email</TableCell>
-                                <TableCell>NIC</TableCell>
-                                <TableCell>Address</TableCell>
-                                <TableCell>Complain Type</TableCell>
-                                <TableCell>Description</TableCell>
-                                <TableCell>Area</TableCell>
-                                <TableCell>Images</TableCell>
-                                <TableCell>Actions</TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {filteredComplainsData && filteredComplainsData.length > 0 ? (
-                                filteredComplainsData.map((Complains) => (
-                                    <TableRow key={Complains._id}>
-                                        <TableCell className="fname-column">{Complains.fname}</TableCell>
-                                        <TableCell className="lname-column">{Complains.lname} </TableCell>
-                                        <TableCell>{Complains.mobile} </TableCell>
-                                        <TableCell className="email-column">{Complains.email}</TableCell>
-                                        <TableCell>{Complains.NIC}</TableCell>
-                                        <TableCell className="yaddress-column">{Complains.yaddress}</TableCell>
-                                        <TableCell>{Complains.ctype}</TableCell>
-                                        <TableCell className="cdesc-column">{Complains.cdesc}</TableCell>
-                                        <TableCell className="area-column">{Complains.area}</TableCell>
-                                        <TableCell>
-                                            {Array.isArray(Complains.images) ? (
-                                                Complains.images.map((image, index) => (
-                                                    <div className="imge" key={index} style={{ width: "50px", height: "100px" }}>
-                                                        <img src={`data:${image.contentType};base64,${image.data}`} alt={`Image`} width={50} height={50} />
-                                                    </div>
-                                                ))
-                                            ) : (
-                                                <div>No images available</div>
-                                            )}
-                                        </TableCell>
-
-
-                                        <TableCell >
-                                            <Button onClick={() => navigate(`/updateComp/${Complains._id}/${Complains.fname}/${Complains.lname}/${Complains.mobile}/${Complains.email}/${Complains.NIC}/${Complains.yaddress}/${Complains.ctype}/${Complains.cdesc}`)}><FaEdit /></Button>
-                                            <Button onClick={() => confirmDelete(Complains._id)} style={{  color: 'red'}}><FaTrash /></Button>
-                                            <button className="pdfButton" onClick={() => generatePDF(Complains)}><FaFilePdf/></button>
-                                        </TableCell>
-                                    </TableRow>
-                                ))
-                            ) : (
+                    <TableContainer component={Paper}>
+                        <Table border={1} cellPadding={10} cellSpacing={0}>
+                            <TableHead>
                                 <TableRow>
-                                    <TableCell>You have no Complains data</TableCell>
+                                    <TableCell>First name</TableCell>
+                                    <TableCell>Last Name</TableCell>
+                                    <TableCell>Mobile</TableCell>
+                                    <TableCell>Email</TableCell>
+                                    <TableCell>NIC</TableCell>
+                                    <TableCell>Address</TableCell>
+                                    <TableCell>Complain Type</TableCell>
+                                    <TableCell>Description</TableCell>
+                                    <TableCell>Area</TableCell>
+                                    <TableCell>Images</TableCell>
+                                    <TableCell>Actions</TableCell>
                                 </TableRow>
-                            )}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-            </div>
+                            </TableHead>
+                            <TableBody>
+                                {filteredComplainsData && filteredComplainsData.length > 0 ? (
+                                    filteredComplainsData.map((Complains) => (
+                                        <TableRow key={Complains._id}>
+                                            <TableCell className="fname-column">{Complains.fname}</TableCell>
+                                            <TableCell className="lname-column">{Complains.lname} </TableCell>
+                                            <TableCell>{Complains.mobile} </TableCell>
+                                            <TableCell className="email-column">{Complains.email}</TableCell>
+                                            <TableCell>{Complains.NIC}</TableCell>
+                                            <TableCell className="yaddress-column">{Complains.yaddress}</TableCell>
+                                            <TableCell>{Complains.ctype}</TableCell>
+                                            <TableCell className="cdesc-column">{Complains.cdesc}</TableCell>
+                                            <TableCell className="area-column">{Complains.area}</TableCell>
+                                            <TableCell>
+                                                {Array.isArray(Complains.images) ? (
+                                                    Complains.images.map((image, index) => (
+                                                        <div className="imge" key={index} style={{ width: "50px", height: "100px" }}>
+                                                            <img src={`data:${image.contentType};base64,${image.data}`} alt={`Image`} width={50} height={50} />
+                                                        </div>
+                                                    ))
+                                                ) : (
+                                                    <div>No images available</div>
+                                                )}
+                                            </TableCell>
+
+
+                                            <TableCell >
+                                                <Button onClick={() => navigate(`/updateComp/${Complains._id}/${Complains.fname}/${Complains.lname}/${Complains.mobile}/${Complains.email}/${Complains.NIC}/${Complains.yaddress}/${Complains.ctype}/${Complains.cdesc}`)}><FaEdit /></Button>
+                                                <Button onClick={() => confirmDelete(Complains._id)} style={{ color: 'red' }}><FaTrash /></Button>
+                                                <button className="pdfButton" onClick={() => generatePDF(Complains)}><FaFilePdf /></button>
+                                            </TableCell>
+                                        </TableRow>
+                                    ))
+                                ) : (
+                                    <TableRow>
+                                        <TableCell>You have no Complains data</TableCell>
+                                    </TableRow>
+                                )}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                </div>
             </div>
         </Layout>
     )
