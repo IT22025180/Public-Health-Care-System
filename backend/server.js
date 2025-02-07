@@ -18,10 +18,10 @@ const routerVReport = require('./Maleesha_RViolation/RVRoute');
 const routerDocM = require('./Maleesha_DocM/DocMRoute');
 const routerP = require('./Vanuja_AddPatient/AddPRoute');
 const routerDS = require('./Yethmi/AssignDengueRoute');
-const routerVS = require('./Yethmi_va/AssignVaccineRoute');
 const routerL = require('./Login/LoginRoute');
 const routerRA = require('./Yethmi_rad/AssignRaidsRoute');
 const routerRO = require('./Yasara_Raidofficer/RaidofficerRoute');
+const routerVS = require('./Yethmi_va/AssignVaccineRoute');
 
 dotenv.config();
 
